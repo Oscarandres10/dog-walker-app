@@ -1,0 +1,43 @@
+:root {
+  --blanco: #fff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto;
+  width: 800px;
+}
+
+header,
+footer {
+  border: 2px solid red;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.box {
+  margin: 20px 0px;
+  padding: 20px 20px;
+  border: 2px solid green;
+}
+
+#formularioPaseador {
+  /* display: none; */
+  display: block;
+}
+
+#formularioRegistroUsuario {
+  /* display: none; */
+  display: block;
+}
+
+#loginUsuario {
+  /* display: none; */
+  display: block;
+}

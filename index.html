@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="OBLIGATORIO" />
+    <title>OBLIGATORIO</title>
+    <link rel="stylesheet" href="/css/estilo.css" />
+  </head>
+  <body>
+    <header>
+      <a id="btnPaseadorRegistro" href="#">Ser un Paseador</a> <a href="#">Sobre Nosotros</a>
+      <h1>LOGO TITULO</h1>
+      <a id="btnRegistarCliente" href="#">registrar</a><a id="btnLoginCliente" href="#">login</a> o
+      <a id="btnLogoutCliente" href="#">[logout]</a>
+    </header>
+    <main>
+      <div id="formularioPaseador" class="box">Formulario para Registrar Paseador????</div>
+      <div id="formularioRegistroUsuario" class="box columna" display="none">
+        <h2>Registro de Usuario</h2>
+        <br />
+        <label for="txtUsuarioCliente">Usuario: </label><input id="txtUsuarioCliente" type="text" /><br />
+        <label for="txtContraseniaCliente">Contrasenia </label><input id="txtContraseniaCliente" type="text" /><br />
+        <label for="txtNombrePerroCliente">Nombre de Perro: </label
+        ><input id="txtNombrePerroCliente" type="text" /><br />
+        <label for="selTamanioCliente">Tamaño de Perro: </label>
+        <select id="selTamanioCliente">
+          <option selected>Seleccionar Tamaño</option>
+          <option value="chico">Chico</option>
+          <option value="mediano">Mediano</option>
+          <option value="grande">Grande</option>
+        </select>
+        <br />
+      </div>
+      <div id="loginUsuario" class="box" display="none">
+        <label for="txtUsuario">Usuario: </label><input id="txtUsuario" type="" /> <br />
+        <label for="txtContrasenia">Contraseña: </label><input id="txtContrasenia" type="" /><br />
+        <p id="$pLogin"></p>
+      </div>
+      <section id="" class="box">
+        <h2>DESPUES DE LOGIN CLIENTE</h2>
+        <br />
+        <div>
+          Listado de Paseadores: armara apartir de Combo despegable. Solo estaran disponibles los que tienen cupo
+          disponible para trasadar al perro del cliente. Cuneta con boton de Contratar Servicio.
+          <br /><br />
+          <input id="btnContratacion" type="button" value="Contratar" />
+          <br /><br />
+          Cliente podra elegir solo un paseador y si tiene cupo disponible
+          <br />
+          <br />
+          <ul>
+            <li>Perro Grande: 4 cupos</li>
+            <li>Perro Mediano: 2 cupos</li>
+            <li>Perro Chico: 1 cupo</li>
+          </ul>
+          <br />
+          NOTA: un perro chico no puede ir con un perro grande.
+        </div>
+        <br />
+        <div id="listadoPaseadores" class="sideBar">
+          LISTADO DE PASEADORES CON CANTIDAD DE PERROS QUE TIENEN ASIGNADOS
+        </div>
+      </section>
+
+      <section id="" class="box">
+        <h2>DESPUES DE LOGIN PASEADOR</h2>
+        <br />
+        <div>
+          <p>
+            Paseadores Contaron con:
+            <strong
+              ><q>
+                Numero Identificador; Nombre, Nombre de usuario, contraseña; Cupo maximo de espacio (llevara algun
+                calculo).
+              </q></strong
+            >
+          </p>
+          <br />
+          <p>
+            <strong>No controla contrataciones.</strong>
+          </p>
+          <br />
+          Listado de Contrataciones Pendientes...
+          <br />
+          <br />
+          Cada Listado incluye botones.
+          <input id="btnAceptar" type="button" value="Aceptar" />
+          <input id="btnRechazar" type="button" value="Rechazar" />
+          <br />
+          <br />
+          <p>
+            Despues de Aceptar contratacion: Se rechazaran contrataciones pendientes que no se puedan atender, por cupo
+            insuficiente.
+          </p>
+          <br />
+          <p>
+            Un paseador puede tener muchas contrataciones disponibles porque no afecta su nivel de cupo, solo y solo si
+            paseador acepta contratacion afecta cupo.
+          </p>
+          <br />
+          <p>
+            Rechazar automáticamente todas las contrataciones que sean de perros chicos en caso de que se apruebe alguna
+            de perro grande y viceversa
+          </p>
+          <br />
+          <p>
+            Todas estas verificaciones las deberá hacer el sistema, ninguna de estas verificaciones va a ser manual y en
+            todos los escenarios se debe informar al paseador claramente si la contratación se aprobó o rechazó y cuál
+            fue el motivo.
+          </p>
+          <br />
+          <p>
+            Listado con todos los perros asignados actualmente mostrando su nombre y su tamaño
+            <br />
+            se debe mostrar el total de cupos ocupados, el total de cupos máximo del paseador y el porcentaje de cupos
+            que tiene actualmente asignados
+            <br />
+            Si el paseador no tiene perros asignados se mostrará un mensaje de que no hay perros asignados actualmente.
+          </p>
+        </div>
+      </section>
+    </main>
+    <footer>INFO EN EL FOOTER</footer>
+    <script src="codigo.js"></script>
+  </body>
+</html>
