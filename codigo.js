@@ -4,6 +4,8 @@ let login = false;
 
 //-----------------------------------//
 
+document.querySelector("#btnLoginCliente").addEventListener("click", login); // MUESTRO INTERFAZ LOGIN
+document.querySelector("#btnLogin").addEventListener("click", inicioSesion); // LOGIN CLIENTE
 // VERIFICO CONTRASEÑA MAYOR A 5, Al menos una mayuscula, una minuscula, y un numero
 function verificarContrasenia(pass) {
 	let verificacion = true;
@@ -35,8 +37,12 @@ function verificarContrasenia(pass) {
 }
 
 function inicioSesion(user, pass) {
+	let usuario = document.querySelector("#txtUsuario").value;
+	let contrasenia = document.querySelector("#txtContrasenia").value;
 	login = true;
 }
 function cerrarSession() {
 	login = false;
 }
+
+function login() {}
