@@ -45,4 +45,6 @@ function cerrarSession() {
 	login = false;
 }
 
-function login() {}
+function login() {
+	document.querySelector();
+}

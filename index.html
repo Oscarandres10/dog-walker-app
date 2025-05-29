@@ -8,14 +8,55 @@
 		<link rel="stylesheet" href="/css/estilo.css" />
 	</head>
 	<body>
-		<header>
-			<a id="btnPaseadorRegistro" href="#">Ser un Paseador</a> <a href="#">Sobre Nosotros</a>
-			<h1>LOGO TITULO</h1>
-			<a id="btnRegistarCliente" href="#">registrar</a>
-			<a id="btnLoginCliente" href="#">login</a> o
-			<a id="btnLogoutCliente" href="#">[logout]</a>
+		<header class="flex">
+			<div class="flex ancho">
+				<h1>LOGO TITULO</h1>
+				<nav id="navMenu" class="flex">
+					<a href="#">Nosotros</a>
+					<a id="btnPaseadorRegistro" href="#">Ser un Paseador</a>
+					<a href="#">Sobre Nosotros</a>
+					<a id="btnLoginCliente" href="#">login</a>
+					<a id="btnLogoutCliente" href="#" style="display: none">[logout]</a>
+				</nav>
+				<nav id="navLogin" class="flex">
+					<a id="btnRegistarCliente" href="#">registrar</a>
+					<a id="btnLoginCliente" href="#">login</a>
+					<a id="btnLogoutCliente" href="#">[logout]</a>
+				</nav>
+			</div>
 		</header>
 		<main>
+			<section>
+				<article class="nosotros ancho">
+					<h1>🐾 Sobre Nosotros</h1>
+
+					<p><strong>Una vida mejor para tu perro, todos los días</strong></p>
+					<p>
+						En <strong>[Nombre del Servicio]</strong>, somos amantes de los animales con una misión clara: mejorar la
+						calidad de vida de tu perro a través del ejercicio, el cariño y la compañía diaria.
+					</p>
+					<p>
+						Fundado en 2020, nuestro equipo de paseadores profesionales está formado por personas capacitadas,
+						responsables y apasionadas por los animales. Sabemos que cada perro es único, por eso ofrecemos paseos
+						personalizados que se adaptan al ritmo, energía y necesidades de tu mascota.
+					</p>
+
+					<p><strong>¿Por qué elegirnos?</strong></p>
+					<ul>
+						<li>✔️ Paseadores confiables y verificados</li>
+						<li>🐕 Grupos pequeños o paseos individuales</li>
+						<li>⏱️ Flexibilidad horaria y reservas online</li>
+						<li>📍 Seguimiento en tiempo real desde tu celular</li>
+						<li>💬 Reporte con fotos después de cada paseo</li>
+					</ul>
+					<p><strong>Nuestra promesa</strong></p>
+					<p>
+						Tratar a tu perro como si fuera nuestro. Nos importa su seguridad, su felicidad y su bienestar físico y
+						emocional. Ya sea un cachorro lleno de energía o un perro mayor que necesita paseos tranquilos, estamos
+						listos para acompañarlo.
+					</p>
+				</article>
+			</section>
 			<div id="formularioPaseador" class="box">Formulario para Registrar Paseador????</div>
 			<div id="formularioRegistroUsuario" class="box columna" display="none">
 				<h2>Registro de Cliente</h2>

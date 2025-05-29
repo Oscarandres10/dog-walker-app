@@ -1,43 +1,81 @@
 :root {
-  --blanco: #fff;
+	--blanco: #fff;
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0 auto;
-  width: 800px;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 header,
 footer {
-  border: 2px solid red;
-  height: 100px;
-  display: flex;
-  justify-content: space-between;
+	border: 2px solid red;
+}
+
+nav {
+	justify-content: space-around;
+}
+
+/* ///////////////////////////// */
+/* ///   CLASES FIJAS ANCHOS /// */
+/* ///////////////////////////// */
+
+.flex {
+	display: flex;
+}
+
+.ancho {
+	max-width: 1280px;
+	width: 80%;
+	min-width: 800px;
+}
+
+/* ///////////////////////////// */
+/* ///   HEADER              /// */
+/* ///////////////////////////// */
+
+header > div {
+	margin: 20px auto;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#navMenu {
+	width: 50%;
+	font-size: 20px;
+}
+
+#navLogin {
+	width: 20%;
+}
+
+/* ///////////////////////////// */
+/* ///  NOSOTROS             /// */
+/* ///////////////////////////// */
+
+.nosotros {
+	display: block;
+	margin: 0 auto;
 }
 
 .box {
-  margin: 20px 0px;
-  padding: 20px 20px;
-  border: 2px solid green;
+	margin: 20px 0px;
+	padding: 20px 20px;
+	border: 2px solid green;
 }
 
 #formularioPaseador {
-  /* display: none; */
-  display: block;
+	/* display: none; */
+	display: block;
 }
 
 #formularioRegistroUsuario {
-  /* display: none; */
-  display: block;
+	/* display: none; */
+	display: block;
 }
 
 #loginUsuario {
-  /* display: none; */
-  display: block;
+	/* display: none; */
+	display: block;
 }
