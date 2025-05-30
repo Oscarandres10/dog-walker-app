@@ -1,2 +1,17 @@
-a ver si te aparece algo... 
-testing
+
+
+Lista de clientes a precargargar 
+
+
+| Nombre de Usuario | Contraseña | Nombre del Perro | Tamaño del Perro |
+| ----------------- | ---------- | ---------------- | ---------------- |
+| JuanPerez         | JP123!     | Rocky            | Grande           |
+| MariaLopez        | ML123!     | Bella            | Mediano          |
+| CarlosGomez       | CG123!     | Thor             | Grande           |
+| AnaMartinez       | AM123!     | Lola             | Chico            |
+| PedroCastro       | PC123!     | Max              | Mediano          |
+| SofiaRivera       | SR123!     | Nala             | Chico            |
+| TomasRuiz         | TR123!     | Zeus             | Grande           |
+| KarenTorres       | KT123!     | Maya             | Mediano          |
+| FernandoZapata    | FZ123!     | Toby             | Chico            |
+| LauraMendoza      | LM123!     | Simba            | Grande           |
