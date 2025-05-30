@@ -14,14 +14,12 @@
 				<nav id="navMenu" class="flex">
 					<a href="#">Nosotros</a>
 					<a id="btnPaseadorRegistro" href="#">Ser un Paseador</a>
-					<a href="#">Sobre Nosotros</a>
-					<a id="btnLoginCliente" href="#">login</a>
-					<a id="btnLogoutCliente" href="#" style="display: none">[logout]</a>
+					<a href="#">OTRO</a>
 				</nav>
 				<nav id="navLogin" class="flex">
-					<a id="btnRegistarCliente" href="#">registrar</a>
-					<a id="btnLoginCliente" href="#">login</a>
-					<a id="btnLogoutCliente" href="#">[logout]</a>
+					<button id="btnRegistarCliente" href="#">registrar</button>
+					<button id="btnLoginCliente">Login</button>
+					<button id="btnLogoutCliente" href="#">[logout]</button>
 				</nav>
 			</div>
 		</header>
@@ -58,7 +56,7 @@
 				</article>
 			</section>
 			<div id="formularioPaseador" class="box">Formulario para Registrar Paseador????</div>
-			<div id="formularioRegistroUsuario" class="box columna" display="none">
+			<div id="formularioRegistroUsuario" class="box columna" style="display: none">
 				<h2>Registro de Cliente</h2>
 				<br />
 				<label for="txtUsuarioCliente">Usuario: </label><input id="txtUsuarioCliente" type="text" /><br />
@@ -72,9 +70,10 @@
 					<option value="mediano">Mediano</option>
 					<option value="grande">Grande</option>
 				</select>
+				<input id="btnRegistrarme" type="button" value="Registarme" />
 				<br />
 			</div>
-			<div id="loginUsuario" class="box" display="none">
+			<div id="loginUsuario" class="box" style="display: none">
 				<h2>LOGIN USUARIO</h2>
 				<br />
 				<label for="txtUsuario">Usuario: </label><input id="txtUsuario" type="text" /> <br />
@@ -188,6 +187,9 @@
 			</section>
 		</main>
 		<footer>INFO EN EL FOOTER</footer>
+		<script src="ui.js"></script>
+		<script src="sistema.js"></script>
+		<script src="clases.js"></script>
 		<script src="codigo.js"></script>
 	</body>
 </html>
