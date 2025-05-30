@@ -3,10 +3,16 @@ document.querySelector("#btnRegistarCliente").addEventListener("click", registro
 
 function loginInterfaz() {
 	// Interfaz Login VISTO
+
+	//   CAMBIAR PARA USAR CON CLASES
+
 	document.querySelector("#loginUsuario").style.display = `block`;
 }
 
 function registroInterfaz() {
 	// Interfaz Registro VISTO
+
+	//   CAMBIAR PARA USAR CON CLASES
+
 	document.querySelector("#formularioRegistroUsuario").style.display = `block`;
 }
