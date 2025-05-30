@@ -22,6 +22,16 @@ class Paseador {
 
 /* 
 
+PRECARGA DE CLIENTES
+PRECARGA DE PASEADORES
+
+REGISTRO DE CLIENTE
+
+LOGIN 
+
+DISPLAY
+
+
 clases
 
 sistema
