@@ -1,6 +1,7 @@
 // Variables Globales
 ///---------------------------------///
 let login = false;
+let logueado = null;
 
 //-----------------------------------//
 
@@ -41,4 +42,33 @@ function inicioSesion(user, pass) {
 }
 function cerrarSession() {
 	login = false;
+	logueado = null;
+}
+
+// OCULTAR POR CLASE
+function ocultarTodo() {
+	let lasSecciones = document.querySelectorAll(".ocultar"); // cSS class  ocultar
+	for (let unaSeccion of lasSecciones) {
+		unaSeccion.style.display = "none";
+	}
+}
+
+// MOSTRAR LOGIN
+function mostarLogin() {
+	ocultarTodo();
+	document.querySelector("#divLogin").style.display = "block"; // DIV ID
+}
+
+function loginusua(pUsuario, pContra) {
+	let valido = false;
+	let i = 0;
+	while (!valido && i < consumidores.length) {
+		let consumidorX = consumidores[i];
+		if (consumidorX.ususario === pUsuario) {
+			if (consumidorX.clave === pContra) {
+				valido = true;
+				logueado = Consumidor;
+			}
+		}
+	}
 }

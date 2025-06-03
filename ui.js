@@ -16,3 +16,28 @@ function registroInterfaz() {
 
 	document.querySelector("#formularioRegistroUsuario").style.display = `block`;
 }
+
+function loginUI() {
+	let usuario = document.querySelector("USUARIO").value;
+	let contrasenia = document.querySelector("pass").value;
+
+	if (login(usuario, contrasenia)) {
+		ocultarTodo();
+		mostrarPantallaConsumidorUI();
+	} else {
+		mensaje = "ERROR";
+	}
+}
+
+function logoutUI() {
+	ocultarTodo();
+	mostrarLogin();
+}
+
+function mostrarPantallaConsumidorUI() {
+	if (!logueado == null) {
+		document.querySelector("divAlquilarPelicula").style.display = "block";
+	} else {
+		loginUI();
+	}
+}

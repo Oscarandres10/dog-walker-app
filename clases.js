@@ -20,6 +20,15 @@ class Paseador {
 	}
 }
 
+class Contrataciones {
+	static idContratacion = 0;
+	constructor() {
+		this.id = Contrataciones.idContratacion++;
+		this.clinete = Cliente.id;
+		this.Paseador = Paseador.id;
+	}
+}
+
 /* 
 
 PRECARGA DE CLIENTES
