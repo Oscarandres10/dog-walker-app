@@ -37,6 +37,13 @@ function logoutUI() {
 function mostrarPantallaConsumidorUI() {
 	if (!logueado == null) {
 		document.querySelector("divAlquilarPelicula").style.display = "block";
+
+		if (logueado === Consumidor) {
+			mostrarPantallaConsumidorUI;
+		}
+		if (logueado === cliente) {
+			mostrarPantallacliente();
+		}
 	} else {
 		loginUI();
 	}

@@ -6,6 +6,7 @@ class Cliente {
 		this.contrasenia = "";
 		this.perro = "";
 		this.tamanio = "";
+		this.tipo = "cliente";
 	}
 }
 
@@ -17,6 +18,7 @@ class Paseador {
 		this.usuario = "";
 		this.contrasenia = "";
 		this.cupo = -1;
+		this.tipo = "paseador";
 	}
 }
 
