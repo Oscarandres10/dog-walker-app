@@ -2,6 +2,10 @@ let clientes = new Array();
 let paseadores = new Array();
 let contrataciones = new Array();
 
+/* #### CLIENTES ####*/
+
+/* PRECARGA CLIENTES */
+precargaClientes()
 function precargaClientes() {
 	let nom1 = "JuanPerez";
 	let pass1 = "JP123!";
@@ -53,6 +57,12 @@ function precargaClientes() {
 	let perro10 = "Simba";
 	let tamanio10 = "Grande";
 }
+
+
+
+/* #### PASEADORES ####*/
+
+/*PRECARGA PASEADORES*/
 
 function precargaPaseador() {
 	let nom1 = "Facu";

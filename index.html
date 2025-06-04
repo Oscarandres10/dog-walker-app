@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="description" content="OBLIGATORIO" />
-		<title>OBLIGATORIO</title>
-		<link rel="stylesheet" href="css/estilo.css" />
-	</head>
-	<body>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="OBLIGATORIO" />
+	<title>OBLIGATORIO Grupo 8 </title>
+	<link rel="stylesheet" href="css/estilo.css" />
+</head>
+
+<body>
+
+	<!-- SECCION HEADER  -->
+	<section id="sectionHeader" class="seccionesHeader">
 		<header class="flex">
 			<div class="flex ancho">
 				<h1>LOGO TITULO</h1>
 				<nav id="navMenu" class="flex">
-					<a href="#">Nosotros</a>
+					<a id="btnNosotros" href="#">Nosotros</a>
 					<a id="btnPaseadorRegistro" href="#">Ser un Paseador</a>
-					<a href="#">OTRO</a>
+					<a id="btnOtro" href="#">OTRO</a>
 				</nav>
 				<nav id="navLogin" class="flex">
 					<button id="btnRegistarCliente" href="#">registrar</button>
@@ -23,46 +28,84 @@
 				</nav>
 			</div>
 		</header>
-		<main>
-			<section>
-				<article class="nosotros ancho">
-					<h1>🐾 Sobre Nosotros</h1>
+	</section>
+	<!-- SECCION SOBRE NOSOTROS -->
+	<main>
+		<section id="sectionSobreNosotros" class="secciones">
+			<article class="nosotros ancho">
+				<h1>🐾 Sobre Nosotros</h1>
+				<p><strong>Una vida mejor para tu perro, todos los días</strong></p>
+				<p>
+					En <strong>[Nombre del Servicio]</strong>, somos amantes de los animales con una misión clara:
+					mejorar la
+					calidad de vida de tu perro a través del ejercicio, el cariño y la compañía diaria.
+				</p>
+				<p>
+					Fundado en 2020, nuestro equipo de paseadores profesionales está formado por personas capacitadas,
+					responsables y apasionadas por los animales. Sabemos que cada perro es único, por eso ofrecemos
+					paseos
+					personalizados que se adaptan al ritmo, energía y necesidades de tu mascota.
+				</p>
 
-					<p><strong>Una vida mejor para tu perro, todos los días</strong></p>
-					<p>
-						En <strong>[Nombre del Servicio]</strong>, somos amantes de los animales con una misión clara: mejorar la
-						calidad de vida de tu perro a través del ejercicio, el cariño y la compañía diaria.
-					</p>
-					<p>
-						Fundado en 2020, nuestro equipo de paseadores profesionales está formado por personas capacitadas,
-						responsables y apasionadas por los animales. Sabemos que cada perro es único, por eso ofrecemos paseos
-						personalizados que se adaptan al ritmo, energía y necesidades de tu mascota.
-					</p>
+				<p><strong>¿Por qué elegirnos?</strong></p>
+				<ul>
+					<li>✔️ Paseadores confiables y verificados</li>
+					<li>🐕 Grupos pequeños o paseos individuales</li>
+					<li>⏱️ Flexibilidad horaria y reservas online</li>
+					<li>📍 Seguimiento en tiempo real desde tu celular</li>
+					<li>💬 Reporte con fotos después de cada paseo</li>
+				</ul>
+				<p><strong>Nuestra promesa</strong></p>
+				<p>
+					Tratar a tu perro como si fuera nuestro. Nos importa su seguridad, su felicidad y su bienestar
+					físico y
+					emocional. Ya sea un cachorro lleno de energía o un perro mayor que necesita paseos tranquilos,
+					estamos
+					listos para acompañarlo.
+				</p>
+			</article>
+		</section>
+	<!-- SECCION FORMULARIO PASEADOR -->
+		<section id="sectionFormularioPaseador" class="secciones">
+				<div class="box columna ancho">
+					<h2>Formulario para ser Paseador</h2>
+					
+					<label for="txtNombrePaseador">Nombre completo:</label>
+					<input id="txtNombrePaseador" type="text"/>
+					<br>
+					<label for="numCupoMaximo">Cupo máximo de perros:</label>
+					<input id="numCupoMaximo" type="text" />
+					<br>
+					<label for="selTamaniosAceptados">Tamaños de perros que acepta:</label>
+					<select id="selTamaniosAceptados" >
+						<option value="xx">Seleccionar:</option>
+						<option value="chico">Chico</option>
+						<option value="mediano">Mediano</option>
+						<option value="grande">Grande</option>
+					</select>
+					<br>
+					<label for="txtDisponibilidad">Disponibilidad horaria (ej: lunes a viernes, mañanas):</label>
+					<input id="txtDisponibilidad" type="text" required />
+					<br>
+					<label for="txtMail">Mail:</label>
+					<input type="text" id="txtMail">
+					<br />
+					<input id="btnRegistrarsePaseador" type="button" value="Enviar" />
+				</div>
+		</section>
 
-					<p><strong>¿Por qué elegirnos?</strong></p>
-					<ul>
-						<li>✔️ Paseadores confiables y verificados</li>
-						<li>🐕 Grupos pequeños o paseos individuales</li>
-						<li>⏱️ Flexibilidad horaria y reservas online</li>
-						<li>📍 Seguimiento en tiempo real desde tu celular</li>
-						<li>💬 Reporte con fotos después de cada paseo</li>
-					</ul>
-					<p><strong>Nuestra promesa</strong></p>
-					<p>
-						Tratar a tu perro como si fuera nuestro. Nos importa su seguridad, su felicidad y su bienestar físico y
-						emocional. Ya sea un cachorro lleno de energía o un perro mayor que necesita paseos tranquilos, estamos
-						listos para acompañarlo.
-					</p>
-				</article>
-			</section>
-			<div id="formularioPaseador" class="box">Formulario para Registrar Paseador????</div>
-			<div id="formularioRegistroUsuario" class="box columna" style="display: none">
+		
+		</section>
+	<!-- SECCION REGISTRARSE -->
+		<section id="sectionRegistrarse" class="secciones">
 				<h2>Registro de Cliente</h2>
 				<br />
-				<label for="txtUsuarioCliente">Usuario: </label><input id="txtUsuarioCliente" type="text" /><br />
-				<label for="txtContraseniaCliente">Contrasenia </label><input id="txtContraseniaCliente" type="text" /><br />
-				<label for="txtNombrePerroCliente">Nombre de Perro: </label
-				><input id="txtNombrePerroCliente" type="text" /><br />
+				<label for="txtUsuarioCliente">Usuario: </label>
+				<input id="txtUsuarioCliente" type="text" /><br />
+				<label for="txtContraseniaCliente">Contraseñia: </label>
+				<input id="txtContraseniaCliente" type="text" /><br />
+				<label for="txtNombrePerroCliente">Nombre de Perro: </label>
+				<input id="txtNombrePerroCliente" type="text" /><br />
 				<label for="selTamanioCliente">Tamaño de Perro: </label>
 				<select id="selTamanioCliente">
 					<option selected>Seleccionar Tamaño</option>
@@ -70,78 +113,87 @@
 					<option value="mediano">Mediano</option>
 					<option value="grande">Grande</option>
 				</select>
+				<br>
 				<input id="btnRegistrarme" type="button" value="Registarme" />
 				<br />
 			</div>
-			<div id="loginUsuario" class="box" style="display: none">
+		</section>
+
+	<!-- SECCION LOGIN USUARIO  -->
+
+		<section id="sectionloginUsuario" class="secciones">
+			<div class="box">
 				<h2>LOGIN USUARIO</h2>
 				<br />
-				<label for="txtUsuario">Usuario: </label><input id="txtUsuario" type="text" /> <br />
-				<label for="txtContrasenia">Contraseña: </label><input id="txtContrasenia" type="text" /><br />
+				<label for="txtUsuario">Usuario: </label>
+				<input id="txtUsuario" type="text" /><br />
+				<label for="txtContrasenia">Contraseña: </label>
+				<input id="txtContrasenia" type="text" /><br />
 				<input id="btnLogin" type="button" value="Login" />
 				<p id="pLogin"></p>
 			</div>
-			<section id="" class="box">
-				<!-- PASEADORES  
-				 CLIENTES
-				 CONTRATACIONES
-
-				 COMENTARIO EXTRA 
-
-				 
-				 INTERFAZES
-
-				 LOGIN
-
-				 GESTIONAR CONTRATACIONES
-
-
-
-
-				  -->
-				<h2>DESPUES DE LOGIN CLIENTE</h2>
+	<!-- SECCION USUARIO LOGEADO -->
+		<section id="sectionUsuarioLogeado">
+			<section class="box">
+			<!-- PASEADORES  
+				CLIENTES
+				CONTRATACIONES
+				COMENTARIO EXTRA 
+				INTERFAZES
+				LOGIN
+				GESTIONAR CONTRATACIONES
+				-->
+			<h2>DESPUES DE LOGIN CLIENTE</h2>
+			<br />
+			<div>
+				Listado de Paseadores: armara apartir de Combo despegable. Solo estaran disponibles los que tienen
+				cupo
+				disponible para trasadar al perro del cliente. Cuneta con boton de Contratar Servicio.
+				<br /><br />
+				<input id="btnContratacion" type="button" value="Contratar" />
+				<br /><br />
+				Cliente podra elegir solo un paseador (porque tiene un solo perro) y si tiene cupo disponible
 				<br />
-				<div>
-					Listado de Paseadores: armara apartir de Combo despegable. Solo estaran disponibles los que tienen cupo
-					disponible para trasadar al perro del cliente. Cuneta con boton de Contratar Servicio.
-					<br /><br />
-					<input id="btnContratacion" type="button" value="Contratar" />
-					<br /><br />
-					Cliente podra elegir solo un paseador (porque tiene un solo perro) y si tiene cupo disponible
-					<br />
-					<br />
-					<ul>
-						<li>Perro Grande: 4 cupos</li>
-						<li>Perro Mediano: 2 cupos</li>
-						<li>Perro Chico: 1 cupo</li>
-					</ul>
-					<br />
-					NOTA: un perro chico no puede ir con un perro grande.
-				</div>
 				<br />
+				<ul>
+					<li>Perro Grande: 4 cupos</li>
+					<li>Perro Mediano: 2 cupos</li>
+					<li>Perro Chico: 1 cupo</li>
+				</ul>
+				<br />
+				NOTA: un perro chico no puede ir con un perro grande.
+			</div>
+			<br />
 
-				<p>NOTA: Un boton que cancele en otra interfaz.</p>
-				<div id="listadoPaseadores" class="sideBar">
-					LISTADO DE PASEADOR a la espera por aceptacion de la contratacion
-				</div>
+			<p>NOTA: Un boton que cancele en otra interfaz.</p>
+			<div id="listadoPaseadores" class="sideBar">
+				LISTADO DE PASEADOR a la espera por aceptacion de la contratacion
+			</div>
 
-				<div id="listadoPaseadores" class="sideBar">
-					LISTADO DE PASEADORES CON CANTIDAD DE PERROS QUE TIENEN ASIGNADOS 2 medianos 1 chico, 8 perros medianos.
-				</div>
+			<div id="listadoPaseadores" class="sideBar">
+				LISTADO DE PASEADORES CON CANTIDAD DE PERROS QUE TIENEN ASIGNADOS 2 medianos 1 chico, 8 perros
+				medianos.
+			</div>
 			</section>
+		</section>
+	</section>
 
-			<section id="" class="box">
+
+
+	<!-- SECCION PASEADORES  -->
+		
+		<section id="sectionPaseadores" class="secciones">
+			<div class="box">
 				<h2>DESPUES DE LOGIN PASEADOR</h2>
 				<br />
 				<div>
 					<p>
 						Paseadores Contaron con:
-						<strong
-							><q>
-								Numero Identificador; Nombre, Nombre de usuario, contraseña; Cupo maximo de espacio (llevara algun
+						<strong><q>
+								Numero Identificador; Nombre, Nombre de usuario, contraseña; Cupo maximo de espacio (llevara
+								algun
 								calculo).
-							</q></strong
-						>
+							</q></strong>
 					</p>
 					<br />
 					<p>
@@ -157,41 +209,55 @@
 					<br />
 					<br />
 					<p>
-						Despues de Aceptar contratacion: Se rechazaran contrataciones pendientes que no se puedan atender, por cupo
+						Despues de Aceptar contratacion: Se rechazaran contrataciones pendientes que no se puedan atender,
+						por cupo
 						insuficiente.
 					</p>
 					<br />
 					<p>
-						Un paseador puede tener muchas contrataciones disponibles porque no afecta su nivel de cupo, solo y solo si
+						Un paseador puede tener muchas contrataciones disponibles porque no afecta su nivel de cupo, solo y
+						solo si
 						paseador acepta contratacion afecta cupo.
 					</p>
 					<br />
 					<p>
-						Rechazar automáticamente todas las contrataciones que sean de perros chicos en caso de que se apruebe alguna
+						Rechazar automáticamente todas las contrataciones que sean de perros chicos en caso de que se
+						apruebe alguna
 						de perro grande y viceversa
 					</p>
 					<br />
 					<p>
-						Todas estas verificaciones las deberá hacer el sistema, ninguna de estas verificaciones va a ser manual y en
-						todos los escenarios se debe informar al paseador claramente si la contratación se aprobó o rechazó y cuál
+						Todas estas verificaciones las deberá hacer el sistema, ninguna de estas verificaciones va a ser
+						manual y en
+						todos los escenarios se debe informar al paseador claramente si la contratación se aprobó o rechazó
+						y cuál
 						fue el motivo.
 					</p>
 					<br />
 					<p>
 						Listado con todos los perros asignados actualmente mostrando su nombre y su tamaño
 						<br />
-						se debe mostrar el total de cupos ocupados, el total de cupos máximo del paseador y el porcentaje de cupos
+						se debe mostrar el total de cupos ocupados, el total de cupos máximo del paseador y el porcentaje de
+						cupos
 						que tiene actualmente asignados
 						<br />
-						Si el paseador no tiene perros asignados se mostrará un mensaje de que no hay perros asignados actualmente.
+						Si el paseador no tiene perros asignados se mostrará un mensaje de que no hay perros asignados
+						actualmente.
 					</p>
 				</div>
-			</section>
-		</main>
-		<footer>INFO EN EL FOOTER</footer>
-		<script src="ui.js"></script>
-		<script src="sistema.js"></script>
-		<script src="clases.js"></script>
-		<script src="codigo.js"></script>
-	</body>
+			</div>
+		</section>
+	</main>
+
+	<!-- SECCION FOOTER -->
+
+	<section id="sectionFooter" class="seccionesFooter">
+	</section>
+	<footer>INFO EN EL FOOTER</footer>
+	<script src="clases.js"></script>
+	<script src="sistema.js"></script>
+	<script src="codigo.js"></script>
+	<script src="ui.js"></script>
+</body>
+
 </html>
