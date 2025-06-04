@@ -72,3 +72,41 @@ function loginusua(pUsuario, pContra) {
 		}
 	}
 }
+
+function loginUI() {
+	let usuario = document.querySelector("USUARIO").value;
+	let contrasenia = document.querySelector("pass").value;
+
+	if (login(usuario, contrasenia)) {
+		ocultarTodo();
+		mostrarPantallaConsumidorUI();
+	} else {
+		mensaje = "ERROR";
+	}
+}
+
+function logoutUI() {
+	ocultarTodo();
+	mostrarLogin();
+}
+
+function mostrarPantallaConsumidorUI() {
+	if (!logueado == null) {
+		// refrescar actualizar combos tablas y etc etc
+		let opcionesSucursales = "";
+		for (let i = 0; i < sucursales.length; i++) {
+			opcionesSucursales += `<option value="${sucursales[i].id}">${sucurasales[i].nombre}</option> `;
+		}
+		document.querySelector("#selSucursalesAlqPeli").innerHTML = opcionesSucursales;
+		document.querySelector("divAlquilarPelicula").style.display = "block";
+
+		if (logueado === Consumidor) {
+			mostrarPantallaConsumidorUI;
+		}
+		if (logueado === cliente) {
+			mostrarPantallacliente();
+		}
+	} else {
+		loginUI();
+	}
+}

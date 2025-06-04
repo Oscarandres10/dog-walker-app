@@ -1,3 +1,7 @@
+let clientes = new Array();
+let paseadores = new Array();
+let contrataciones = new Array();
+
 function precargaClientes() {
 	let nom1 = "JuanPerez";
 	let pass1 = "JP123!";
