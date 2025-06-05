@@ -3,6 +3,7 @@ class Cliente {
 	constructor() {
 		this.id = Cliente.idClientes++;
 		this.nombre = "";
+		this.usuario = ""; //le agregue esto y se que se nos va a complicar, cualquier cosa lo sacamos 
 		this.contrasenia = "";
 		this.perro = "";
 		this.tamanio = "";
@@ -26,7 +27,7 @@ class Contrataciones {
 	static idContratacion = 0;
 	constructor() {
 		this.id = Contrataciones.idContratacion++;
-		this.clinete = Cliente.id;
+		this.cliente = Cliente.id;
 		this.Paseador = Paseador.id;
 	}
 }

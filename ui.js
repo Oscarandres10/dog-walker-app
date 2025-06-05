@@ -5,6 +5,7 @@ function eventos (){
 	document.querySelector("#btnOtro").addEventListener("click", otro); 
 	document.querySelector("#btnPaseadorRegistro").addEventListener("click", serUnPaseador); 
 	document.querySelector("#btnRegistrarme").addEventListener("click", almacenar); 
+	document.querySelector("#btnLogin").addEventListener("click", loginUI); 
 
 
 }
@@ -66,7 +67,7 @@ function loginUI(){
 		ocultarTodo()
 		if(logueado.tipo === "cliente"){
 			ocultarTodo()
-			document.querySelector("#sectionUsuarioLogeado").style.display = "block";
+			document.querySelector("#sectionUsuarioLogueado").style.display = "block";
 		
 		}
 		if(logueado.tipo === "paseador"){
@@ -78,7 +79,8 @@ function loginUI(){
 		mensaje = "Verifique usuario y contraseña...";
 	}
 	document.querySelector("#pLogin").innerHTML = mensaje;
-
+	console.log("Usuario:", usuario);
+	console.log("Contraseña:", contrasenia);
 }
 
 
@@ -87,7 +89,8 @@ function loginUI(){
 
 function almacenar (){
 	let mensaje = ""
-	let nombre = document.querySelector("#txtUsuarioCliente").value;
+	let nombre = document.querySelector("#txtNombreCliente").value;
+	let usuario = document.querySelector("#txtUsuarioCliente").value;
 	let contrasenia = document.querySelector("#txtContraseniaCliente").value;
 	let nombrePerro = document.querySelector("#txtNombrePerroCliente").value;
 	let tamanio = document.querySelector("#selTamanioCliente").value;
@@ -96,16 +99,16 @@ function almacenar (){
 	if(validaciones){
 		let nuevoCliente = new Cliente();
 		nuevoCliente.nombre = nombre;
+		nuevoCliente.usuario = usuario;
 		nuevoCliente.contrasenia = contrasenia;
 		nuevoCliente.perro = nombrePerro;
 		nuevoCliente.tamanio = tamanio;
 		
 		clientes.push(nuevoCliente);
-		mensaje = `Usuario ${nombre} registro correctamente `
+		mensaje = `Usuario ${nombre} registro correctamente`;
 	}
 
 	document.querySelector("#pRegistrarse").innerHTML = mensaje
-	
 }
 
 
