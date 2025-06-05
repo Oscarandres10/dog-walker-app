@@ -79,8 +79,7 @@ function loginUI(){
 		mensaje = "Verifique usuario y contraseña...";
 	}
 	document.querySelector("#pLogin").innerHTML = mensaje;
-	console.log("Usuario:", usuario);
-	console.log("Contraseña:", contrasenia);
+	
 }
 
 

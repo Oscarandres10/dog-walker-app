@@ -102,15 +102,15 @@ function precargaUnCliente(pNom, pUsuario, pPass, pPerro, pTamanio){
 	
 }
 
-function login(pNom, pPass){
+function login(pUsuario, pPass){
 	let valido = false
 	let i = 0
 	while (!valido && i < clientes.length){
 		let clienteX = clientes[i];
-		if(clienteX.nombre === pNom){
+		if(clienteX.usuario === pUsuario){
 			if(clienteX.contrasenia === pPass){
 				valido = true;
-				logueado = clienteX
+				logueado = clienteX;
 			}
 		}
 		i++
@@ -118,15 +118,19 @@ function login(pNom, pPass){
 	let x = 0;
 	while (!valido && x < paseadores.length){
 		let paseadorX = paseadores[x];
-		if(paseadorX.nombre === pNom){
+		if(paseadorX.usuario === pUsuario){
+			
 			if(paseadorX.contrasenia === pPass){
-				valido = true
-				logueado = paseadorX
+				valido = true;
+				logueado = paseadorX;
 			}
 		}
-		x++
+		x++;
+		
+		
 	}
-	return valido
+	console.log(logueado)
+	return valido;
 }
 
 
