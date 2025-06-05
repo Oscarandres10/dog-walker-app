@@ -1,9 +1,10 @@
 function eventos (){
 	document.querySelector("#btnRegistarCliente").addEventListener("click", registroInterfaz); // Registrarse
-	document.querySelector("#btnLoginCliente").addEventListener("click", loginInterfaz); // MUESTRO INTERFAZ LOGIN
-	document.querySelector("#btnNosotros").addEventListener("click", mostrarSobreNosotros); // MUESTRO INTERFAZ LOGIN
-	document.querySelector("#btnOtro").addEventListener("click", otro); // MUESTRO INTERFAZ LOGIN
-	document.querySelector("#btnPaseadorRegistro").addEventListener("click", serUnPaseador); // MUESTRO INTERFAZ LOGIN
+	document.querySelector("#btnLoginCliente").addEventListener("click", loginInterfaz); 
+	document.querySelector("#btnNosotros").addEventListener("click", mostrarSobreNosotros); 
+	document.querySelector("#btnOtro").addEventListener("click", otro); 
+	document.querySelector("#btnPaseadorRegistro").addEventListener("click", serUnPaseador); 
+	document.querySelector("#btnRegistrarme").addEventListener("click", almacenar); 
 
 
 }
@@ -64,17 +65,48 @@ function loginUI(){
 	if(login(usuario, contrasenia)){
 		ocultarTodo()
 		if(logueado.tipo === "cliente"){
-			//mostrar seccion cliente
+			ocultarTodo()
+			document.querySelector("#sectionUsuarioLogeado").style.display = "block";
+		
 		}
 		if(logueado.tipo === "paseador"){
-			//mostrar seccion paseador
+			ocultarTodo()
+			document.querySelector("#sectionPaseadores").style.display = "block";
+
 		}
 	}else{
 		mensaje = "Verifique usuario y contraseña...";
 	}
 	document.querySelector("#pLogin").innerHTML = mensaje;
 
-
-
-
 }
+
+
+
+/* #### ALMACENADO DE DATOS ####*/
+
+function almacenar (){
+	let mensaje = ""
+	let nombre = document.querySelector("#txtUsuarioCliente").value;
+	let contrasenia = document.querySelector("#txtContraseniaCliente").value;
+	let nombrePerro = document.querySelector("#txtNombrePerroCliente").value;
+	let tamanio = document.querySelector("#selTamanioCliente").value;
+	let validaciones = true
+	//agregar validaciones 
+	if(validaciones){
+		let nuevoCliente = new Cliente();
+		nuevoCliente.nombre = nombre;
+		nuevoCliente.contrasenia = contrasenia;
+		nuevoCliente.perro = nombrePerro;
+		nuevoCliente.tamanio = tamanio;
+		
+		clientes.push(nuevoCliente);
+		mensaje = `Usuario ${nombre} registro correctamente `
+	}
+
+	document.querySelector("#pRegistrarse").innerHTML = mensaje
+	
+}
+
+
+

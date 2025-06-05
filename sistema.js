@@ -7,62 +7,95 @@ let contrataciones = new Array();
 /* PRECARGA CLIENTES */
 precargaClientes()
 function precargaClientes() {
-	let nom1 = "JuanPerez";
-	let pass1 = "JP123!";
-	let perro1 = "Rocky";
-	let tamanio1 = "Grande";
+	let cliente1 = new Cliente();
+	cliente1.nombre = "JuanPerez";
+	cliente1.contrasenia = "JP123!";
+	cliente1.perro = "Rocky";
+	cliente1.tamanio = "Grande";
+	clientes.push(cliente1);
 
-	let nom2 = "MariaLopez";
-	let pass2 = "ML123!";
-	let perro2 = "Bella";
-	let tamanio2 = "Mediano";
+	let cliente2 = new Cliente();
+	cliente2.nombre = "MariaLopez";
+	cliente2.contrasenia = "ML123!";
+	cliente2.perro = "Bella";
+	cliente2.tamanio = "Mediano";
+	clientes.push(cliente2);
 
-	let nom3 = "CarlosGomez";
-	let pass3 = "CG123!";
-	let perro3 = "Thor";
-	let tamanio3 = "Grande";
+	let cliente3 = new Cliente();
+	cliente3.nombre = "CarlosGomez";
+	cliente3.contrasenia = "CG123!";
+	cliente3.perro = "Thor";
+	cliente3.tamanio = "Grande";
+	clientes.push(cliente3);
 
-	let nom4 = "AnaMartinez";
-	let pass4 = "AM123!";
-	let perro4 = "Lola";
-	let tamanio4 = "Chico";
+	let cliente4 = new Cliente();
+	cliente4.nombre = "AnaMartinez";
+	cliente4.contrasenia = "AM123!";
+	cliente4.perro = "Lola";
+	cliente4.tamanio = "Chico";
+	clientes.push(cliente4);
 
-	let nom5 = "PedroCastro";
-	let pass5 = "PC123!";
-	let perro5 = "Max";
-	let tamanio5 = "Mediano";
+	let cliente5 = new Cliente();
+	cliente5.nombre = "PedroCastro";
+	cliente5.contrasenia = "PC123!";
+	cliente5.perro = "Max";
+	cliente5.tamanio = "Mediano";
+	clientes.push(cliente5);
 
-	let nom6 = "SofiaRivera";
-	let pass6 = "SR123!";
-	let perro6 = "Nala";
-	let tamanio6 = "Chico";
+	let cliente6 = new Cliente();
+	cliente6.nombre = "SofiaRivera";
+	cliente6.contrasenia = "SR123!";
+	cliente6.perro = "Nala";
+	cliente6.tamanio = "Chico";
+	clientes.push(cliente6);
 
-	let nom7 = "TomasRuiz";
-	let pass7 = "TR123!";
-	let perro7 = "Zeus";
-	let tamanio7 = "Grande";
+	let cliente7 = new Cliente();
+	cliente7.nombre = "TomasRuiz";
+	cliente7.contrasenia = "TR123!";
+	cliente7.perro = "Zeus";
+	cliente7.tamanio = "Grande";
+	clientes.push(cliente7);
+	
+	let cliente8 = new Cliente();
+	cliente8.nombre = "KarenTorres";
+	cliente8.contrasenia = "KT123!";
+	cliente8.perro = "Maya";
+	cliente8.tamanio = "Mediano";
+	clientes.push(cliente8);
 
-	let nom8 = "KarenTorres";
-	let pass8 = "KT123!";
-	let perro8 = "Maya";
-	let tamanio8 = "Mediano";
+	let cliente9 = new Cliente();
+	cliente9.nombre = "FernandoZapata";
+	cliente9.contrasenia = "FZ123!";
+	cliente9.perro = "Toby";
+	cliente9.tamanio = "Chico";
+	clientes.push(cliente9);
 
-	let nom9 = "FernandoZapata";
-	let pass9 = "FZ123!";
-	let perro9 = "Toby";
-	let tamanio9 = "Chico";
+	let cliente10 = new Cliente();
+	cliente10.nombre = "LauraMendoza";
+	cliente10.contrasenia = "LM123!";
+	cliente10.perro = "Simba";
+	cliente10.tamanio = "Grande";
+	clientes.push(cliente10);
 
-	let nom10 = "LauraMendoza";
-	let pass10 = "LM123!";
-	let perro10 = "Simba";
-	let tamanio10 = "Grande";
+
+}
+
+
+function precargaUnCliente(pNom, pPass, pPerro, pTamanio){
+	let unCliente = new Cliente ();
+		unCliente.nombre = pNom;
+		unCliente.contrasenia = pPass;
+		unCliente.perro = pPerro;
+		unCliente.tamanio = pTamanio;
+		clientes.push(unCliente);
+	
 }
 
 function login(pNom, pPass){
 	let valido = false
 	let i = 0
 	while (!valido && i < cliente.length){
-		let clienteX = cliente[i];
+		let clienteX = clientes[i];
 		if(clienteX.nombre === pNom){
 			if(clienteX.contrasenia === pPass){
 				valido = true;
@@ -73,7 +106,7 @@ function login(pNom, pPass){
 	}
 	let x = 0;
 	while (!valido && x < paseador.length){
-		let paseadorX = paseador[x];
+		let paseadorX = paseadores[x];
 		if(paseadorX.nombre === pNom){
 			if(paseadorX.contrasenia === pPass){
 				valido = true
@@ -91,9 +124,19 @@ function login(pNom, pPass){
 
 /*PRECARGA PASEADORES*/
 
+precargaPaseador()
 function precargaPaseador() {
-	let nom1 = "Facu";
-	let usuario1 = "Facu";
-	let pass1 = "facu";
-	let cupo = 6;
+	let paseador1 = new Paseador();
+	paseador1.nombre = "OscarRodriguez";
+	paseador1.usuario = "OR123!";
+	paseador1.contrasenia = "OR123!";
+	paseador1.cupo = 6;
+	paseadores.push(paseador1);
+
+	let paseador2 = new Paseador();
+	paseador2.nombre = "FacundoPerdomo";
+	paseador2.usuario = "FP123!";
+	paseador2.contrasenia = "FP123!";
+	paseador2.cupo = 6;
+	paseadores.push(paseador2);
 }
