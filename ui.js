@@ -56,3 +56,25 @@ function loginInterfaz() {
 	document.querySelector("#sectionloginUsuario").style.display = "block";
 }
 
+function loginUI(){
+	let mensaje = ""
+	let usuario = document.querySelector("#txtUsuario").value;
+	let contrasenia = document.querySelector("#txtContrasenia").value;
+
+	if(login(usuario, contrasenia)){
+		ocultarTodo()
+		if(logueado.tipo === "cliente"){
+			//mostrar seccion cliente
+		}
+		if(logueado.tipo === "paseador"){
+			//mostrar seccion paseador
+		}
+	}else{
+		mensaje = "Verifique usuario y contraseña...";
+	}
+	document.querySelector("#pLogin").innerHTML = mensaje;
+
+
+
+
+}

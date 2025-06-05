@@ -58,6 +58,33 @@ function precargaClientes() {
 	let tamanio10 = "Grande";
 }
 
+function login(pNom, pPass){
+	let valido = false
+	let i = 0
+	while (!valido && i < cliente.length){
+		let clienteX = cliente[i];
+		if(clienteX.nombre === pNom){
+			if(clienteX.contrasenia === pPass){
+				valido = true;
+				logueado = clienteX
+			}
+		}
+		i++
+	}
+	let x = 0;
+	while (!valido && x < paseador.length){
+		let paseadorX = paseador[x];
+		if(paseadorX.nombre === pNom){
+			if(paseadorX.contrasenia === pPass){
+				valido = true
+				logeado = paseadorX
+			}
+		}
+		x++
+	}
+	return valido
+}
+
 
 
 /* #### PASEADORES ####*/
