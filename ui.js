@@ -86,21 +86,29 @@ function almacenar() {
 	let usuario = document.querySelector("#txtUsuarioCliente").value;
 	let contrasenia = document.querySelector("#txtContraseniaCliente").value;
 	let nombrePerro = document.querySelector("#txtNombrePerroCliente").value;
-	let tamanio = document.querySelector("#selTamanioCliente").value;
-	let validaciones = validacionRegistro(nombre, usuario, contrasenia, perro, tamanio);
+	let tamanioPerro = document.querySelector("#selTamanioCliente").value;
+	let validaciones = validacionRegistro(nombre, usuario, contrasenia, nombrePerro, tamanioPerro);
 	/* ####################################################### */
-	validaciones = true; // BORRAR ESTO PARA USAR VALIDACIONES
+	//validaciones = true; // BORRAR ESTO PARA USAR VALIDACIONES
 	//agregar validaciones
 	if (validaciones) {
 		let nuevoCliente = new Cliente();
 		nuevoCliente.nombre = nombre;
 		nuevoCliente.usuario = usuario;
 		nuevoCliente.contrasenia = contrasenia;
-		nuevoCliente.perro = nombrePerro;
-		nuevoCliente.tamanio = tamanio;
+		nuevoCliente.perroNombre = nombrePerro;
+		nuevoCliente.tamanioPerro = tamanioPerro;
 
 		clientes.push(nuevoCliente);
 		mensaje = `Usuario ${nombre} registro correctamente`;
+	} else {
+		mensaje = `ERROR: Intente nuevamente..<br><br>
+		<strong>Nombre</strong> no pude estar vacio.<br>
+		<strong>Usuario</strong> ya existe<br>
+		<strong>Contraseña</strong> tiene que tener mínimo 5 caracteres, y incluir al menos una mayúscula, una minúscula y un número<br>
+		<strong>Nombre</strong> de Perro No puede estar Vacio.<br>
+		<strong>Tamaño</strong> no puede estar vacio<br>
+		`;
 	}
 
 	document.querySelector("#pRegistrarse").innerHTML = mensaje;

@@ -6,124 +6,107 @@ let logueado = null;
 
 /* PRECARGA CLIENTES */
 precargaClientes();
+
 function precargaClientes() {
-	let cliente1 = new Cliente();
-	cliente1.nombre = "JuanPerez";
-	cliente1.usuario = "JPerez";
-	cliente1.contrasenia = "JP123!";
-	cliente1.perro = "Rocky";
-	cliente1.tamanio = "Grande";
-	clientes.push(cliente1);
+	nombre1 = "JuanPerez";
+	usuario1 = "JPerez";
+	contrasenia1 = "Jp123!";
+	perroNombre1 = "Rocky";
+	tamanioPerro1 = "Grande";
+	if (validacionRegistroCliente(nombre1, usuario1, contrasenia1, perroNombre1, tamanioPerro1)) {
+		cargaUnCliente(nombre1, usuario1, contrasenia1, perroNombre1, tamanioPerro1);
+	}
 
-	let cliente2 = new Cliente();
-	cliente2.nombre = "MariaLopez";
-	cliente2.usuario = "MLopez";
-	cliente2.contrasenia = "ML123!";
-	cliente2.perro = "Bella";
-	cliente2.tamanio = "Mediano";
-	clientes.push(cliente2);
+	nombre2 = "MariaLopez";
+	usuario2 = "MLopez";
+	contrasenia2 = "Ml123!";
+	perroNombre2 = "Bella";
+	tamanioPerro2 = "Mediano";
+	if (validacionRegistroCliente(nombre2, usuario2, contrasenia2, perroNombre2, tamanioPerro2)) {
+		cargaUnCliente(nombre2, usuario2, contrasenia2, perroNombre2, tamanioPerro2);
+	}
 
-	let cliente3 = new Cliente();
-	cliente3.nombre = "CarlosGomez";
-	cliente3.usuario = "CGomez";
-	cliente3.contrasenia = "CG123!";
-	cliente3.perro = "Thor";
-	cliente3.tamanio = "Grande";
-	clientes.push(cliente3);
+	nombre3 = "CarlosGomez";
+	usuario3 = "CGomez";
+	contrasenia3 = "Cg123!";
+	perroNombre3 = "Thor";
+	tamanioPerro3 = "Grande";
+	if (validacionRegistroCliente(nombre3, usuario3, contrasenia3, perroNombre3, tamanioPerro3)) {
+		cargaUnCliente(nombre3, usuario3, contrasenia3, perroNombre3, tamanioPerro3);
+	}
 
-	let cliente4 = new Cliente();
-	cliente4.nombre = "AnaMartinez";
-	cliente4.usuario = "AMartinez";
-	cliente4.contrasenia = "AM123!";
-	cliente4.perro = "Lola";
-	cliente4.tamanio = "Chico";
-	clientes.push(cliente4);
+	nombre4 = "AnaMartinez";
+	usuario4 = "AMartinez";
+	contrasenia4 = "Am123!";
+	perroNombre4 = "Lola";
+	tamanioPerro4 = "Chico";
+	if (validacionRegistroCliente(nombre4, usuario4, contrasenia4, perroNombre4, tamanioPerro4)) {
+		cargaUnCliente(nombre4, usuario4, contrasenia4, perroNombre4, tamanioPerro4);
+	}
 
-	let cliente5 = new Cliente();
-	cliente5.nombre = "PedroCastro";
-	cliente5.usuario = "PCastro";
-	cliente5.contrasenia = "PC123!";
-	cliente5.perro = "Max";
-	cliente5.tamanio = "Mediano";
-	clientes.push(cliente5);
+	nombre5 = "PedroCastro";
+	usuario5 = "PCastro";
+	contrasenia5 = "Pc123!";
+	perroNombre5 = "Max";
+	tamanioPerro5 = "Mediano";
+	if (validacionRegistroCliente(nombre5, usuario5, contrasenia5, perroNombre5, tamanioPerro5)) {
+		cargaUnCliente(nombre5, usuario5, contrasenia5, perroNombre5, tamanioPerro5);
+	}
 
-	let cliente6 = new Cliente();
-	cliente6.nombre = "SofiaRivera";
-	cliente6.usuario = "SRivera";
-	cliente6.contrasenia = "SR123!";
-	cliente6.perro = "Nala";
-	cliente6.tamanio = "Chico";
-	clientes.push(cliente6);
+	nombre6 = "SofiaRivera";
+	usuario6 = "SRivera";
+	contrasenia6 = "Sr123!";
+	perroNombre6 = "Nala";
+	tamanioPerro6 = "Chico";
+	if (validacionRegistroCliente(nombre6, usuario6, contrasenia6, perroNombre6, tamanioPerro6)) {
+		cargaUnCliente(nombre6, usuario6, contrasenia6, perroNombre6, tamanioPerro6);
+	}
 
-	let cliente7 = new Cliente();
-	cliente7.nombre = "TomasRuiz";
-	cliente7.usuario = "TRuiz";
-	cliente7.contrasenia = "TR123!";
-	cliente7.perro = "Zeus";
-	cliente7.tamanio = "Grande";
-	clientes.push(cliente7);
+	nombre7 = "TomasRuiz";
+	usuario7 = "TRuiz";
+	contrasenia7 = "Tr123!";
+	perroNombre7 = "Zeus";
+	tamanioPerro7 = "Grande";
+	if (validacionRegistroCliente(nombre7, usuario7, contrasenia7, perroNombre7, tamanioPerro7)) {
+		cargaUnCliente(nombre7, usuario7, contrasenia7, perroNombre7, tamanioPerro7);
+	}
 
-	let cliente8 = new Cliente();
-	cliente8.nombre = "KarenTorres";
-	cliente8.usuario = "KTorres";
-	cliente8.contrasenia = "KT123!";
-	cliente8.perro = "Maya";
-	cliente8.tamanio = "Mediano";
-	clientes.push(cliente8);
+	nombre8 = "KarenTorres";
+	usuario8 = "KTorres";
+	contrasenia8 = "Kt123!";
+	perroNombre8 = "Maya";
+	tamanioPerro8 = "Mediano";
+	if (validacionRegistroCliente(nombre8, usuario8, contrasenia8, perroNombre8, tamanioPerro8)) {
+		cargaUnCliente(nombre8, usuario8, contrasenia8, perroNombre8, tamanioPerro8);
+	}
 
-	let cliente9 = new Cliente();
-	cliente9.nombre = "FernandoZapata";
-	cliente9.usuario = "FZapata";
-	cliente9.contrasenia = "FZ123!";
-	cliente9.perro = "Toby";
-	cliente9.tamanio = "Chico";
-	clientes.push(cliente9);
+	nombre9 = "FernandoZapata";
+	usuario9 = "FZapata";
+	contrasenia9 = "Fz123!";
+	perroNombre9 = "Toby";
+	tamanioPerro9 = "Chico";
+	if (validacionRegistroCliente(nombre9, usuario9, contrasenia9, perroNombre9, tamanioPerro9)) {
+		cargaUnCliente(nombre9, usuario9, contrasenia9, perroNombre9, tamanioPerro9);
+	}
 
-	let cliente10 = new Cliente();
-	cliente10.nombre = "LauraMendoza";
-	cliente10.usuario = "LMendoza";
-	cliente10.contrasenia = "LM123!";
-	cliente10.perro = "Simba";
-	cliente10.tamanio = "Grande";
-	clientes.push(cliente10);
+	nombre10 = "LauraMendoza";
+	usuario10 = "LMendoza";
+	contrasenia10 = "Lm123!";
+	perroNombre10 = "Simba";
+	tamanioPerro10 = "Grande";
+	if (validacionRegistroCliente(nombre10, usuario10, contrasenia10, perroNombre10, tamanioPerro10)) {
+		cargaUnCliente(nombre10, usuario10, contrasenia10, perroNombre10, tamanioPerro10);
+	}
 }
 
-function precargaUnCliente(pNom, pUsuario, pPass, pPerro, pTamanio) {
+function cargaUnCliente(pNom, pUsuario, pPass, pPerro, pTamanio) {
 	let unCliente = new Cliente();
 	unCliente.nombre = pNom;
 	unCliente.usuario = pUsuario;
 	unCliente.contrasenia = pPass;
-	unCliente.perro = pPerro;
+	unCliente.perroNombre = pPerro;
 	unCliente.tamanio = pTamanio;
 	clientes.push(unCliente);
-}
-
-function login(pUsuario, pPass) {
-	let valido = false;
-	let i = 0;
-	while (!valido && i < clientes.length) {
-		let clienteX = clientes[i];
-		if (clienteX.usuario === pUsuario) {
-			if (clienteX.contrasenia === pPass) {
-				valido = true;
-				logueado = clienteX;
-			}
-		}
-		i++;
-	}
-	let x = 0;
-	while (!valido && x < paseadores.length) {
-		let paseadorX = paseadores[x];
-		if (paseadorX.usuario === pUsuario) {
-			if (paseadorX.contrasenia === pPass) {
-				valido = true;
-				logueado = paseadorX;
-			}
-		}
-		x++;
-	}
-	console.log(logueado);
-	return valido;
 }
 
 /* #### PASEADORES ####*/
@@ -131,21 +114,35 @@ function login(pUsuario, pPass) {
 /*PRECARGA PASEADORES*/
 
 precargaPaseador();
-function precargaPaseador() {
-	let paseador1 = new Paseador();
-	paseador1.nombre = "OscarRodriguez";
-	paseador1.usuario = "ORodriguez";
-	paseador1.contrasenia = "OR123!";
-	paseador1.cupo = 6;
-	paseadores.push(paseador1);
 
-	let paseador2 = new Paseador();
-	paseador2.nombre = "FacundoPerdomo";
-	paseador2.usuario = "FPerdomo";
-	paseador2.contrasenia = "FP123!";
-	paseador2.cupo = 6;
-	paseadores.push(paseador2);
+function precargaPaseador() {
+	nombre1 = "OscarRodriguez";
+	usuario1 = "ORodriguez";
+	contrasenia1 = "Or123!";
+	cupo1 = 6;
+	if (validacionRegistroPaseador(nombre1, usuario1, contrasenia1, cupo1)) {
+		cargaUnPaseador(nombre1, usuario1, contrasenia1, cupo1);
+	}
+	nombre2 = "FacundoPerdomo";
+	usuario2 = "FPerdomo";
+	contrasenia2 = "Fp123!";
+	cupo2 = 6;
+	if (validacionRegistroPaseador(nombre2, usuario2, contrasenia2, cupo2)) {
+		cargaUnPaseador(nombre2, usuario2, contrasenia2, cupo2);
+	}
 }
+
+function cargaUnPaseador(pNom, pUsuario, pPass, pCupo) {
+	let unPaseador = new Paseador();
+	unPaseador.nombre = pNom;
+	unPaseador.usuario = pUsuario;
+	unPaseador.contrasenia = pPass;
+	unPaseador.cupo = pCupo;
+	paseadores.push(unPaseador);
+}
+
+/* =============== */
+/* #### TABLAS ####*/
 
 function armarTablaPaseadores() {
 	let unaTabla = `<table border="1px">
@@ -189,7 +186,35 @@ function mostrarTabla() {
 /* ======================== */
 /* ####  VALIDACIONES  #### */
 
-function validacionRegistro(nombre, usuario, contrasenia, perro, tamanio) {
+function login(pUsuario, pPass) {
+	let valido = false;
+	let i = 0;
+	while (!valido && i < clientes.length) {
+		let clienteX = clientes[i];
+		if (clienteX.usuario === pUsuario) {
+			if (clienteX.contrasenia === pPass) {
+				valido = true;
+				logueado = clienteX;
+			}
+		}
+		i++;
+	}
+	let x = 0;
+	while (!valido && x < paseadores.length) {
+		let paseadorX = paseadores[x];
+		if (paseadorX.usuario === pUsuario) {
+			if (paseadorX.contrasenia === pPass) {
+				valido = true;
+				logueado = paseadorX;
+			}
+		}
+		x++;
+	}
+	console.log(logueado);
+	return valido;
+}
+
+function validacionRegistroCliente(nombre, usuario, contrasenia, perro, tamanio) {
 	let valido = false;
 	if (
 		nombre.length > 0 &&
@@ -207,9 +232,9 @@ function validarUsuario(pUsuario) {
 	let usuario = pUsuario.toLowerCase().trim(); // Convierto texto a lowercase
 	let valido = true;
 	let i = 0;
-	while (i < usuario.length && valido) {
+	while (i < clientes.length && valido) {
 		let unicoUsuario = clientes[i];
-		if (unicoUsuario.usuario === usuario) {
+		if (unicoUsuario.usuario.toLowerCase() === usuario) {
 			valido = false;
 		}
 		i++;
@@ -217,14 +242,16 @@ function validarUsuario(pUsuario) {
 	return valido;
 }
 
-function validarContrasenia(contrasenia) {
+///   NO ESTOY SEGURO SI AGREGAR  IDENTIFICAR CUANDO ES SIMBOL
+// PORQUE TOMA LOS SIMBOLOS COMO MINUSCULAS
+function validarContrasenia(pass) {
 	let verificacion = true;
 	let mayus = 0;
 	let minus = 0;
 	let numero = 0;
 
 	// Verificacion Vacio
-	if (pass.length <= 5) {
+	if (verificacion && pass.length < 5) {
 		verificacion = false;
 	}
 
@@ -234,9 +261,19 @@ function validarContrasenia(contrasenia) {
 			let letra = pass.charAt(x);
 			let letraMinus = pass.toLowerCase().charAt(x);
 			let letraMayus = pass.toUpperCase().charAt(x);
-			if (letra === letraMayus) mayus++;
-			if (letra === letraMinus) minus++;
-			if (!isNaN(letra)) numero++;
+			let encontreLetra = false;
+			if (!isNaN(letra) && !encontreLetra) {
+				numero++;
+				encontreLetra = true;
+			}
+			if (letra === letraMayus && !encontreLetra) {
+				mayus++;
+				encontreLetra = true;
+			}
+			if (letra === letraMinus && !encontreLetra) {
+				minus++;
+				encontreLetra = true;
+			}
 		}
 		// Verifico que mayus minus y numero  tengan por lo menos 1 character
 		if (minus < 1 || mayus < 1 || numero < 1) {
@@ -244,4 +281,12 @@ function validarContrasenia(contrasenia) {
 		}
 	}
 	return verificacion;
+}
+
+function validacionRegistroPaseador(nombre, usuario, contrasenia, cupo) {
+	let valido = false;
+	if (nombre.length > 0 && validarUsuario(usuario) && validarContrasenia(contrasenia) && cupo > 0) {
+		valido = true;
+	}
+	return valido;
 }
