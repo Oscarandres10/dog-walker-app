@@ -6,6 +6,7 @@ function eventos (){
 	document.querySelector("#btnPaseadorRegistro").addEventListener("click", serUnPaseador); 
 	document.querySelector("#btnRegistrarme").addEventListener("click", almacenar); 
 	document.querySelector("#btnLogin").addEventListener("click", loginUI); 
+	document.querySelector("#bntMostrarTabla").addEventListener("click", mostrarTablaPaseadores); 
 
 
 }
@@ -80,6 +81,13 @@ function loginUI(){
 	}
 	document.querySelector("#pLogin").innerHTML = mensaje;
 	
+}
+
+/* #### Tablas #### */
+function mostrarTablaPaseadores(){
+
+	let laTabla = armarTablaPaseadores();
+	document.querySelector("#mostrarTablaPaseadores").innerHTML = laTabla
 }
 
 

@@ -154,4 +154,48 @@ function precargaPaseador() {
 	paseador2.contrasenia = "FP123!";
 	paseador2.cupo = 6;
 	paseadores.push(paseador2);
+
 }
+
+function armarTablaPaseadores(){
+    let unaTabla = `<table border="1px">
+	<tr>
+		<th>id</th>
+		<th>Nombre</th>
+		<th>Usuario</th>
+		<th>Contraseñia</th>
+		<th>Cupo</th>
+		<th>Tipo</th>
+		<th></th>
+
+	</tr>`;
+	for (let i = 0; i< paseadores.length; i++){
+		let unPaseador = paseadores[i];
+		//agregar validaciones. Falta agregar el "data" del boton
+		unaTabla += 
+		`<tr>
+			<td>${unPaseador.id}</td>
+			<td>${unPaseador.nombre}</td>
+			<td>${unPaseador.usuario}</td>
+			<td>${unPaseador.contrasenia}</td>
+			<td>${unPaseador.cupo}</td>
+			<td>${unPaseador.tipo}</td>
+			<td><input type=button value="Solicitar"></td>
+		</tr>`
+		
+	}
+	unaTabla+= `</table>`;
+	return unaTabla
+
+}
+
+
+/* 
+}
+function mostrarTabla() {
+    let laTabla = armarTablaPromedios();
+    document.querySelector("#divParaTabla").innerHTML = laTabla;
+}
+
+
+	*/

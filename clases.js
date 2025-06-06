@@ -27,7 +27,7 @@ class Contrataciones {
 	static idContratacion = 0;
 	constructor() {
 		this.id = Contrataciones.idContratacion++;
-		this.cliente = Cliente.id;
+		this.Cliente = Cliente.id;
 		this.Paseador = Paseador.id;
 	}
 }
