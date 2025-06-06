@@ -1,5 +1,6 @@
 :root {
 	--blanco: #fff;
+	--ahover: red;
 }
 
 * {
@@ -25,15 +26,17 @@ nav {
 	display: flex;
 }
 
+.columna {
+	flex-direction: column;
+}
 .ancho {
 	max-width: 1280px;
 	width: 80%;
 	min-width: 800px;
 }
 
-/* ///////////////////////////// */
-/* ///   HEADER              /// */
-/* ///////////////////////////// */
+/* ============================= */
+/* === Header and Nav Usuario ===*/
 
 header > div {
 	margin: 20px auto;
@@ -41,15 +44,31 @@ header > div {
 	align-items: center;
 }
 
-#navMenu {
-	width: 50%;
-	font-size: 20px;
-}
-
 #navLogin {
 	width: 20%;
 }
 
+/* ============================= */
+/* ========  Navegacion ======== */
+
+#navMenu {
+	margin: 0 auto;
+	justify-content: flex-start;
+	border-top: 1px solid lightgray;
+	padding: 20px 0;
+	font-size: 20px;
+}
+
+#navMenu a {
+	padding: 0 20px;
+	text-decoration: none;
+	border-top: 2px solid transparent;
+}
+
+#navMenu a:hover {
+	border-top: 2px solid var(--ahover);
+	transition: 3s;
+}
 /* ///////////////////////////// */
 /* ///  NOSOTROS             /// */
 /* ///////////////////////////// */
