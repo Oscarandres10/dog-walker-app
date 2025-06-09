@@ -87,7 +87,7 @@ function almacenar() {
 	let contrasenia = document.querySelector("#txtContraseniaCliente").value;
 	let nombrePerro = document.querySelector("#txtNombrePerroCliente").value;
 	let tamanioPerro = document.querySelector("#selTamanioCliente").value;
-	let validaciones = validacionRegistro(nombre, usuario, contrasenia, nombrePerro, tamanioPerro);
+	let validaciones = validacionRegistroCliente(nombre, usuario, contrasenia, nombrePerro, tamanioPerro);
 	/* ####################################################### */
 	//validaciones = true; // BORRAR ESTO PARA USAR VALIDACIONES
 	//agregar validaciones
