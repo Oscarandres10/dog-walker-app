@@ -6,6 +6,7 @@ function eventos() {
 	document.querySelector("#btnPaseadorRegistro").addEventListener("click", serUnPaseador);
 	document.querySelector("#btnRegistrarme").addEventListener("click", almacenar);
 	document.querySelector("#btnLogin").addEventListener("click", loginUI);
+	document.querySelector("#btnLogoutCliente").addEventListener("click", logoutUI);
 	document.querySelector("#bntMostrarTabla").addEventListener("click", mostrarTablaPaseadores);
 }
 eventos();
@@ -17,6 +18,20 @@ function ocultarTodo() {
 	let lasSecciones = document.querySelectorAll(".secciones");
 	for (let unaSeccion of lasSecciones) {
 		unaSeccion.style.display = "none";
+	}
+}
+
+function ocultarNav() {
+	let losNavLinks = document.querySelectorAll(".navOculto");
+	for (let unNavLink of losNavLinks) {
+		unNavLink.style.display = "none";
+	}
+}
+
+function mostrarNav() {
+	let losNavLinks = document.querySelectorAll(".navOculto");
+	for (let unNavLink of losNavLinks) {
+		unNavLink.style.display = "block";
 	}
 }
 
@@ -61,15 +76,36 @@ function loginUI() {
 		if (logueado.tipo === "cliente") {
 			ocultarTodo();
 			document.querySelector("#sectionUsuarioLogueado").style.display = "block";
+			ocultarNav();
+			document.querySelector("#pMostrarlogueado").innerHTML = mostrarLogueado(logueado.id, logueado.tipo);
+			document.querySelector("#btnLogoutCliente").style.display = `block`;
 		}
 		if (logueado.tipo === "paseador") {
 			ocultarTodo();
 			document.querySelector("#sectionPaseadores").style.display = "block";
+			ocultarNav();
+			document.querySelector("#pMostrarlogueado").innerHTML = mostrarLogueado(logueado.id, logueado.tipo);
+			document.querySelector("#btnLogoutCliente").style.display = `block`;
 		}
 	} else {
 		mensaje = "Verifique usuario y contraseña...";
 	}
 	document.querySelector("#pLogin").innerHTML = mensaje;
+}
+
+function mostrarLogueado(id, tipo) {
+	let elCliente = `<p>Bienvenido <strong>${logueado.nombre}</strong></p>`;
+	return elCliente;
+}
+
+/* #### LOGOUT ####*/
+
+function logoutUI() {
+	let mensaje = "";
+	ocultarTodo();
+	mostrarNav();
+	document.querySelector("#pMostrarlogueado").innerHTML = ``;
+	document.querySelector("#btnLogoutCliente").style.display = `none`;
 }
 
 /* #### Tablas #### */
