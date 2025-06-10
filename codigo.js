@@ -110,3 +110,13 @@
 // 		loginUI();
 // 	}
 // }
+
+/* 
+
+function precarga() {
+
+
+}
+
+
+*/

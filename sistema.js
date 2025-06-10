@@ -97,6 +97,96 @@ function precargaClientes() {
 	if (validacionRegistroCliente(nombre10, usuario10, contrasenia10, perroNombre10, tamanioPerro10)) {
 		cargaUnCliente(nombre10, usuario10, contrasenia10, perroNombre10, tamanioPerro10);
 	}
+
+	nombre11 = "LuisSanchez";
+	usuario11 = "LSanchez";
+	contrasenia11 = "Ls123!";
+	perroNombre11 = "Rex";
+	tamanioPerro11 = "Grande";
+	if (validacionRegistroCliente(nombre11, usuario11, contrasenia11, perroNombre11, tamanioPerro11)) {
+		cargaUnCliente(nombre11, usuario11, contrasenia11, perroNombre11, tamanioPerro11);
+	}
+
+	nombre12 = "CarmenVega";
+	usuario12 = "CVega";
+	contrasenia12 = "Cv123!";
+	perroNombre12 = "Luna";
+	tamanioPerro12 = "Mediano";
+	if (validacionRegistroCliente(nombre12, usuario12, contrasenia12, perroNombre12, tamanioPerro12)) {
+		cargaUnCliente(nombre12, usuario12, contrasenia12, perroNombre12, tamanioPerro12);
+	}
+
+	nombre13 = "JorgeRamirez";
+	usuario13 = "JRamirez";
+	contrasenia13 = "Jr123!";
+	perroNombre13 = "Buddy";
+	tamanioPerro13 = "Grande";
+	if (validacionRegistroCliente(nombre13, usuario13, contrasenia13, perroNombre13, tamanioPerro13)) {
+		cargaUnCliente(nombre13, usuario13, contrasenia13, perroNombre13, tamanioPerro13);
+	}
+
+	nombre14 = "PatriciaFlores";
+	usuario14 = "PFlores";
+	contrasenia14 = "Pf123!";
+	perroNombre14 = "Daisy";
+	tamanioPerro14 = "Chico";
+	if (validacionRegistroCliente(nombre14, usuario14, contrasenia14, perroNombre14, tamanioPerro14)) {
+		cargaUnCliente(nombre14, usuario14, contrasenia14, perroNombre14, tamanioPerro14);
+	}
+
+	nombre15 = "RobertoJimenez";
+	usuario15 = "RJimenez";
+	contrasenia15 = "Rj123!";
+	perroNombre15 = "Duke";
+	tamanioPerro15 = "Mediano";
+	if (validacionRegistroCliente(nombre15, usuario15, contrasenia15, perroNombre15, tamanioPerro15)) {
+		cargaUnCliente(nombre15, usuario15, contrasenia15, perroNombre15, tamanioPerro15);
+	}
+
+	nombre16 = "DanielaOrtega";
+	usuario16 = "DOrtega";
+	contrasenia16 = "Do123!";
+	perroNombre16 = "Coco";
+	tamanioPerro16 = "Chico";
+	if (validacionRegistroCliente(nombre16, usuario16, contrasenia16, perroNombre16, tamanioPerro16)) {
+		cargaUnCliente(nombre16, usuario16, contrasenia16, perroNombre16, tamanioPerro16);
+	}
+
+	nombre17 = "AndresHerrera";
+	usuario17 = "AHerrera";
+	contrasenia17 = "Ah123!";
+	perroNombre17 = "Bruno";
+	tamanioPerro17 = "Grande";
+	if (validacionRegistroCliente(nombre17, usuario17, contrasenia17, perroNombre17, tamanioPerro17)) {
+		cargaUnCliente(nombre17, usuario17, contrasenia17, perroNombre17, tamanioPerro17);
+	}
+
+	nombre18 = "MonicaSilva";
+	usuario18 = "MSilva";
+	contrasenia18 = "Ms123!";
+	perroNombre18 = "Lucy";
+	tamanioPerro18 = "Mediano";
+	if (validacionRegistroCliente(nombre18, usuario18, contrasenia18, perroNombre18, tamanioPerro18)) {
+		cargaUnCliente(nombre18, usuario18, contrasenia18, perroNombre18, tamanioPerro18);
+	}
+
+	nombre19 = "GabrielRojas";
+	usuario19 = "GRojas";
+	contrasenia19 = "Gr123!";
+	perroNombre19 = "Oreo";
+	tamanioPerro19 = "Chico";
+	if (validacionRegistroCliente(nombre19, usuario19, contrasenia19, perroNombre19, tamanioPerro19)) {
+		cargaUnCliente(nombre19, usuario19, contrasenia19, perroNombre19, tamanioPerro19);
+	}
+
+	nombre20 = "BeatrizMedina";
+	usuario20 = "BMedina";
+	contrasenia20 = "Bm123!";
+	perroNombre20 = "Stella";
+	tamanioPerro20 = "Grande";
+	if (validacionRegistroCliente(nombre20, usuario20, contrasenia20, perroNombre20, tamanioPerro20)) {
+		cargaUnCliente(nombre20, usuario20, contrasenia20, perroNombre20, tamanioPerro20);
+	}
 }
 
 function cargaUnCliente(pNom, pUsuario, pPass, pPerro, pTamanio) {
@@ -129,6 +219,27 @@ function precargaPaseador() {
 	cupo2 = 6;
 	if (validacionRegistroPaseador(nombre2, usuario2, contrasenia2, cupo2)) {
 		cargaUnPaseador(nombre2, usuario2, contrasenia2, cupo2);
+	}
+	nombre3 = "GonzaloGentile";
+	usuario3 = "GGentile";
+	contrasenia3 = "Gg123!";
+	cupo3 = 6;
+	if (validacionRegistroPaseador(nombre3, usuario3, contrasenia3, cupo3)) {
+		cargaUnPaseador(nombre3, usuario3, contrasenia3, cupo3);
+	}
+	nombre4 = "MatiasFarias";
+	usuario4 = "MFarias";
+	contrasenia4 = "Mf123!";
+	cupo4 = 6;
+	if (validacionRegistroPaseador(nombre4, usuario4, contrasenia4, cupo4)) {
+		cargaUnPaseador(nombre4, usuario4, contrasenia4, cupo4);
+	}
+	nombre5 = "MarceloBielsa";
+	usuario5 = "MBielsa";
+	contrasenia5 = "Mb123!";
+	cupo5 = 6;
+	if (validacionRegistroPaseador(nombre5, usuario5, contrasenia5, cupo5)) {
+		cargaUnPaseador(nombre5, usuario5, contrasenia5, cupo5);
 	}
 }
 
