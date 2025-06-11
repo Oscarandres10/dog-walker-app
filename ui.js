@@ -1,34 +1,37 @@
 function eventos() {
-	document.querySelector("#btnRegistarCliente").addEventListener("click", registroInterfaz); // Registrarse
-	document.querySelector("#btnLoginCliente").addEventListener("click", loginInterfaz);
-	document.querySelector("#btnNosotros").addEventListener("click", mostrarSobreNosotros);
-	document.querySelector("#btnOtro").addEventListener("click", otro);
-	document.querySelector("#btnPaseadorRegistro").addEventListener("click", serUnPaseador);
-	document.querySelector("#btnRegistrarme").addEventListener("click", almacenar);
+	document.querySelector("#btnRegistarCliente").addEventListener("click", registroInterfazUI); // Registrarse
+	document.querySelector("#btnLoginCliente").addEventListener("click", loginInterfazUI);
+	document.querySelector("#btnNosotros").addEventListener("click", mostrarSobreNosotrosUI);
+	document.querySelector("#btnOtro").addEventListener("click", otroUI);
+	document.querySelector("#btnPaseadorRegistro").addEventListener("click", serUnPaseadorUI);
+	document.querySelector("#btnRegistrarme").addEventListener("click", almacenarUI);
 	document.querySelector("#btnLogin").addEventListener("click", loginUI);
 	document.querySelector("#btnLogoutCliente").addEventListener("click", logoutUI);
-	document.querySelector("#bntMostrarTabla").addEventListener("click", mostrarTablaPaseadores);
+	document.querySelector("#bntMostrarTabla").addEventListener("click", mostrarTablaPaseadoresUI);
 }
+let miSistema = new Sistema();
+miSistema.precargarTodo();
+
 eventos();
-ocultarTodo();
-mostrarSobreNosotros();
+ocultarTodoUI();
+mostrarSobreNosotrosUI();
 
 //primero oculto todo (dejando unicamente el navegador y el footer). Navegador y footer tiene seccionesNavegador y seccionesFooter como class para cuando las querramos ocultar
-function ocultarTodo() {
+function ocultarTodoUI() {
 	let lasSecciones = document.querySelectorAll(".secciones");
 	for (let unaSeccion of lasSecciones) {
 		unaSeccion.style.display = "none";
 	}
 }
 
-function ocultarNav() {
+function ocultarNavUI() {
 	let losNavLinks = document.querySelectorAll(".navOculto");
 	for (let unNavLink of losNavLinks) {
 		unNavLink.style.display = "none";
 	}
 }
 
-function mostrarNav() {
+function mostrarNavUI() {
 	let losNavLinks = document.querySelectorAll(".navOculto");
 	for (let unNavLink of losNavLinks) {
 		unNavLink.style.display = "block";
@@ -37,32 +40,34 @@ function mostrarNav() {
 
 //luego muestro el sobre nostros y los botones para log in y registrarse
 
-function mostrarSobreNosotros() {
-	ocultarTodo();
+function mostrarSobreNosotrosUI() {
+	ocultarTodoUI();
 	document.querySelector("#sectionSobreNosotros").style.display = "block";
 }
 
 /* #### BOTONES NAVEGADOR ####*/
 
-function serUnPaseador() {
-	ocultarTodo();
+function serUnPaseadorUI() {
+	ocultarTodoUI();
 	document.querySelector("#sectionFormularioPaseador").style.display = "block";
 }
-function otro() {
-	ocultarTodo();
+function otroUI() {
+	ocultarTodoUI();
 	//si quisieramos mostrar algo mas....
 }
 
 /* #### REGISTRO ####*/
-function registroInterfaz() {
-	ocultarTodo();
+function registroInterfazUI() {
+	mostrarNavUI();
+	ocultarTodoUI();
 	document.querySelector("#sectionRegistrarse").style.display = "block";
 }
 
 /* #### LOGIN ####*/
 
-function loginInterfaz() {
-	ocultarTodo();
+function loginInterfazUI() {
+	ocultarTodoUI();
+	document.querySelector("#btnLoginCliente").style.display = "none";
 	document.querySelector("#sectionloginUsuario").style.display = "block";
 }
 
@@ -71,20 +76,26 @@ function loginUI() {
 	let usuario = document.querySelector("#txtUsuario").value;
 	let contrasenia = document.querySelector("#txtContrasenia").value;
 
-	if (login(usuario, contrasenia)) {
-		ocultarTodo();
-		if (logueado.tipo === "cliente") {
-			ocultarTodo();
+	if (miSistema.login(usuario, contrasenia)) {
+		ocultarTodoUI();
+		if (miSistema.logueado.tipo === "cliente") {
+			ocultarTodoUI();
 			document.querySelector("#sectionUsuarioLogueado").style.display = "block";
-			ocultarNav();
-			document.querySelector("#pMostrarlogueado").innerHTML = mostrarLogueado(logueado.id, logueado.tipo);
+			ocultarNavUI();
+			document.querySelector("#pMostrarlogueado").innerHTML = mostrarLogueadoUI(
+				miSistema.logueado.id,
+				miSistema.logueado.tipo
+			);
 			document.querySelector("#btnLogoutCliente").style.display = `block`;
 		}
-		if (logueado.tipo === "paseador") {
-			ocultarTodo();
+		if (miSistema.logueado.tipo === "paseador") {
+			ocultarTodoUI();
 			document.querySelector("#sectionPaseadores").style.display = "block";
-			ocultarNav();
-			document.querySelector("#pMostrarlogueado").innerHTML = mostrarLogueado(logueado.id, logueado.tipo);
+			ocultarNavUI();
+			document.querySelector("#pMostrarlogueado").innerHTML = mostrarLogueadoUI(
+				miSistema.logueado.id,
+				miSistema.logueado.tipo
+			);
 			document.querySelector("#btnLogoutCliente").style.display = `block`;
 		}
 	} else {
@@ -93,8 +104,8 @@ function loginUI() {
 	document.querySelector("#pLogin").innerHTML = mensaje;
 }
 
-function mostrarLogueado(id, tipo) {
-	let elCliente = `<p>Bienvenido <strong>${logueado.nombre}</strong></p>`;
+function mostrarLogueadoUI(id, tipo) {
+	let elCliente = `<p>Bienvenido <strong>${miSistema.logueado.nombre}</strong></p>`;
 	return elCliente;
 }
 
@@ -102,28 +113,28 @@ function mostrarLogueado(id, tipo) {
 
 function logoutUI() {
 	let mensaje = "";
-	ocultarTodo();
-	mostrarNav();
+	ocultarTodoUI();
+	mostrarNavUI();
 	document.querySelector("#pMostrarlogueado").innerHTML = ``;
 	document.querySelector("#btnLogoutCliente").style.display = `none`;
 }
 
 /* #### Tablas #### */
-function mostrarTablaPaseadores() {
+function mostrarTablaPaseadoresUI() {
 	let laTabla = armarTablaPaseadores();
 	document.querySelector("#mostrarTablaPaseadores").innerHTML = laTabla;
 }
 
 /* #### ALMACENADO DE DATOS ####*/
 
-function almacenar() {
+function almacenarUI() {
 	let mensaje = "";
 	let nombre = document.querySelector("#txtNombreCliente").value;
 	let usuario = document.querySelector("#txtUsuarioCliente").value;
 	let contrasenia = document.querySelector("#txtContraseniaCliente").value;
 	let nombrePerro = document.querySelector("#txtNombrePerroCliente").value;
 	let tamanioPerro = document.querySelector("#selTamanioCliente").value;
-	let validaciones = validacionRegistroCliente(nombre, usuario, contrasenia, nombrePerro, tamanioPerro);
+	let validaciones = miSistema.validacionRegistroCliente(nombre, usuario, contrasenia, nombrePerro, tamanioPerro);
 	/* ####################################################### */
 	//validaciones = true; // BORRAR ESTO PARA USAR VALIDACIONES
 	//agregar validaciones
@@ -135,7 +146,7 @@ function almacenar() {
 		nuevoCliente.perroNombre = nombrePerro;
 		nuevoCliente.tamanioPerro = tamanioPerro;
 
-		clientes.push(nuevoCliente);
+		miSistema.clientes.push(nuevoCliente);
 		mensaje = `Usuario ${nombre} registro correctamente`;
 	} else {
 		mensaje = `ERROR: Intente nuevamente..<br><br>

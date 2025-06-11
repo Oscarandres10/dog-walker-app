@@ -5,7 +5,9 @@ let logueado = null;
 /* #### CLIENTES ####*/
 
 /* PRECARGA CLIENTES */
+
 precargaClientes();
+precargaPaseador();
 
 function precargaClientes() {
 	nombre1 = "JuanPerez";
@@ -196,27 +198,25 @@ function cargaUnCliente(pNom, pUsuario, pPass, pPerro, pTamanio) {
 	unCliente.contrasenia = pPass;
 	unCliente.perroNombre = pPerro;
 	unCliente.tamanio = pTamanio;
-	clientes.push(unCliente);
+	this.clientes.push(unCliente);
 }
 
 /* #### PASEADORES ####*/
 
 /*PRECARGA PASEADORES*/
 
-precargaPaseador();
-
 function precargaPaseador() {
 	nombre1 = "OscarRodriguez";
 	usuario1 = "ORodriguez";
 	contrasenia1 = "Or123!";
-	cupo1 = 6;
+	cupo1 = 5;
 	if (validacionRegistroPaseador(nombre1, usuario1, contrasenia1, cupo1)) {
 		cargaUnPaseador(nombre1, usuario1, contrasenia1, cupo1);
 	}
 	nombre2 = "FacundoPerdomo";
 	usuario2 = "FPerdomo";
 	contrasenia2 = "Fp123!";
-	cupo2 = 6;
+	cupo2 = 8;
 	if (validacionRegistroPaseador(nombre2, usuario2, contrasenia2, cupo2)) {
 		cargaUnPaseador(nombre2, usuario2, contrasenia2, cupo2);
 	}
@@ -230,14 +230,14 @@ function precargaPaseador() {
 	nombre4 = "MatiasFarias";
 	usuario4 = "MFarias";
 	contrasenia4 = "Mf123!";
-	cupo4 = 6;
+	cupo4 = 12;
 	if (validacionRegistroPaseador(nombre4, usuario4, contrasenia4, cupo4)) {
 		cargaUnPaseador(nombre4, usuario4, contrasenia4, cupo4);
 	}
 	nombre5 = "MarceloBielsa";
 	usuario5 = "MBielsa";
 	contrasenia5 = "Mb123!";
-	cupo5 = 6;
+	cupo5 = 10;
 	if (validacionRegistroPaseador(nombre5, usuario5, contrasenia5, cupo5)) {
 		cargaUnPaseador(nombre5, usuario5, contrasenia5, cupo5);
 	}
@@ -249,7 +249,7 @@ function cargaUnPaseador(pNom, pUsuario, pPass, pCupo) {
 	unPaseador.usuario = pUsuario;
 	unPaseador.contrasenia = pPass;
 	unPaseador.cupo = pCupo;
-	paseadores.push(unPaseador);
+	this.paseadores.push(unPaseador);
 }
 
 /* =============== */
@@ -321,7 +321,7 @@ function login(pUsuario, pPass) {
 		}
 		x++;
 	}
-	console.log(logueado);
+	//console.log(logueado);
 	return valido;
 }
 
