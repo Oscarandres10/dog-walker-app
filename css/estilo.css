@@ -9,6 +9,33 @@
 	box-sizing: border-box;
 }
 
+/* DESKTOP FIRST */
+
+body {
+	background-color: red;
+}
+
+.contenedor {
+	width: 1200px;
+}
+
+@media screen and (max-width: 1200px) {
+	body {
+		background-color: lightgreen;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	body {
+		background-color: rgb(30, 173, 30);
+	}
+}
+
+/*  */
+/*  */
+/*  */
+/*  */
+
 header,
 footer {
 	border: 2px solid red;

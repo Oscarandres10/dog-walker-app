@@ -20,6 +20,7 @@ class Paseador {
 		this.contrasenia = "";
 		this.cupo = -1;
 		this.tipo = "paseador";
+		this.cupoActual = 0;
 	}
 }
 

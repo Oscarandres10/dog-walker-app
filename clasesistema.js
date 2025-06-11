@@ -203,7 +203,7 @@ class Sistema {
 		unCliente.usuario = pUsuario;
 		unCliente.contrasenia = pPass;
 		unCliente.perroNombre = pPerro;
-		unCliente.tamanio = pTamanio;
+		unCliente.tamanioPerro = pTamanio;
 		this.clientes.push(unCliente);
 	}
 
@@ -255,6 +255,7 @@ class Sistema {
 		unPaseador.usuario = pUsuario;
 		unPaseador.contrasenia = pPass;
 		unPaseador.cupo = pCupo;
+		unPaseador.cupoActual = pCupo;
 		this.paseadores.push(unPaseador);
 	}
 
@@ -262,6 +263,7 @@ class Sistema {
 	/* #### TABLAS ####*/
 
 	armarTablaPaseadores() {
+		let listaPaseadores = this.paseadoresFiltradosParaCliente(); //estoy probando
 		let unaTabla = `<table border="1px">
 	<tr>
 		
@@ -271,13 +273,15 @@ class Sistema {
 		<th></th>
 
 	</tr>`;
-		for (let i = 0; i < this.paseadores.length; i++) {
-			let unPaseador = this.paseadores[i];
+		/* for (let i = 0; i < this.paseadores.length; i++) {
+                  let unPaseador = this.paseadores[i]; */
+		for (let i = 0; i < listaPaseadores.length; i++) {
+			let unPaseador = listaPaseadores[i];
 			//agregar validaciones. Falta agregar el "data" del boton
 			unaTabla += `<tr>
 			
 			<td>${unPaseador.nombre}</td>
-			<td>${unPaseador.cupo}</td>
+			<td>${unPaseador.cupoActual}</td>
 			<td><input type=button data="paseadorID-${unPaseador.id}" value="Solicitar"></td>
 		</tr>`;
 		}
@@ -402,4 +406,23 @@ function mostrarTabla() {
 		}
 		return valido;
 	}
+
+	paseadoresFiltradosParaCliente() {
+		let paseadorArrayfiltrados = new Array();
+		console.log(`Logueado: ${this.logueado.tamanioPerro}`);
+		console.log(`Tamaño del Perro del Logueado:  ${this.logueado.tamanioPerro}`);
+		for (let i = 0; i < this.paseadores.length; i++) {
+			let paseador = this.paseadores[i];
+			paseadorArrayfiltrados.push(paseador);
+			/* if (paseador.id === pSucursalID) {
+				paseadorArrayfiltrados.push(paseador);
+			} */
+		}
+		console.log(paseadorArrayfiltrados);
+		return paseadorArrayfiltrados;
+	}
+
+	/*  */
+	/*  */
+	/* FIN de MI SISTEMA */
 }
