@@ -264,12 +264,10 @@ class Sistema {
 	armarTablaPaseadores() {
 		let unaTabla = `<table border="1px">
 	<tr>
-		<th>id</th>
+		
 		<th>Nombre</th>
-		<th>Usuario</th>
-		<th>Contraseñia</th>
+		
 		<th>Cupo</th>
-		<th>Tipo</th>
 		<th></th>
 
 	</tr>`;
@@ -277,13 +275,10 @@ class Sistema {
 			let unPaseador = this.paseadores[i];
 			//agregar validaciones. Falta agregar el "data" del boton
 			unaTabla += `<tr>
-			<td>${unPaseador.id}</td>
+			
 			<td>${unPaseador.nombre}</td>
-			<td>${unPaseador.usuario}</td>
-			<td>${unPaseador.contrasenia}</td>
 			<td>${unPaseador.cupo}</td>
-			<td>${unPaseador.tipo}</td>
-			<td><input type=button value="Solicitar"></td>
+			<td><input type=button data="paseadorID-${unPaseador.id}" value="Solicitar"></td>
 		</tr>`;
 		}
 		unaTabla += `</table>`;

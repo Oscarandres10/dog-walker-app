@@ -80,7 +80,8 @@ function loginUI() {
 		ocultarTodoUI();
 		if (miSistema.logueado.tipo === "cliente") {
 			ocultarTodoUI();
-			document.querySelector("#sectionUsuarioLogueado").style.display = "block";
+			/* document.querySelector("#sectionUsuarioLogueado").style.display = "block"; */
+			mostrarSeccionClienteUI();
 			ocultarNavUI();
 			document.querySelector("#pMostrarlogueado").innerHTML = mostrarLogueadoUI(
 				miSistema.logueado.id,
@@ -92,6 +93,7 @@ function loginUI() {
 			ocultarTodoUI();
 			document.querySelector("#sectionPaseadores").style.display = "block";
 			ocultarNavUI();
+
 			document.querySelector("#pMostrarlogueado").innerHTML = mostrarLogueadoUI(
 				miSistema.logueado.id,
 				miSistema.logueado.tipo
@@ -109,6 +111,26 @@ function mostrarLogueadoUI(id, tipo) {
 	return elCliente;
 }
 
+function mostrarSeccionClienteUI() {
+	if (miSistema.logueado !== null) {
+		//refrescar actualizar combos y tablas y etc etc
+		/* actualizarComboSucursalesAlquilerPeliculasUI(); */
+		//darle vida al combo, es cargar los eventos en el select reci'en mostrado.
+		/* document.querySelector("#selSucursalesAlqPeli").addEventListener("change", filtrarTablaPeliculasAlquilerUI); */
+		//armar tabla peliculas
+		/* mostrarTablaPeliculasAlquilerUI(); */
+		//debo darle VIDA  alos botones
+		/* darVidaBotonesTablaPeliculasParaAlquilerUI(); */
+
+		/* document.querySelector("#divAlquilarPelicula").style.display = "block";
+		document.querySelector("#divEstadisticas").style.display = "block";
+		document.querySelector("#divMostrarAlquiler").style.display = "block"; */
+		document.querySelector("#sectionUsuarioLogueado").style.display = "block";
+	} else {
+		loginUI();
+	}
+}
+
 /* #### LOGOUT ####*/
 
 function logoutUI() {
@@ -122,6 +144,7 @@ function logoutUI() {
 /* #### Tablas #### */
 function mostrarTablaPaseadoresUI() {
 	let laTabla = miSistema.armarTablaPaseadores();
+	[];
 	document.querySelector("#mostrarTablaPaseadores").innerHTML = laTabla;
 }
 
@@ -135,9 +158,6 @@ function almacenarUI() {
 	let nombrePerro = document.querySelector("#txtNombrePerroCliente").value;
 	let tamanioPerro = document.querySelector("#selTamanioCliente").value;
 	let validaciones = miSistema.validacionRegistroCliente(nombre, usuario, contrasenia, nombrePerro, tamanioPerro);
-	/* ####################################################### */
-	//validaciones = true; // BORRAR ESTO PARA USAR VALIDACIONES
-	//agregar validaciones
 	if (validaciones) {
 		let nuevoCliente = new Cliente();
 		nuevoCliente.nombre = nombre;
