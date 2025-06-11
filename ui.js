@@ -121,7 +121,7 @@ function logoutUI() {
 
 /* #### Tablas #### */
 function mostrarTablaPaseadoresUI() {
-	let laTabla = armarTablaPaseadores();
+	let laTabla = miSistema.armarTablaPaseadores();
 	document.querySelector("#mostrarTablaPaseadores").innerHTML = laTabla;
 }
 
