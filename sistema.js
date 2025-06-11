@@ -270,29 +270,23 @@ function armarTablaPaseadores() {
 	for (let i = 0; i < paseadores.length; i++) {
 		let unPaseador = paseadores[i];
 		//agregar validaciones. Falta agregar el "data" del boton
-		unaTabla += `<tr>
+		unaTabla += 
+		`<tr>
 			<td>${unPaseador.id}</td>
 			<td>${unPaseador.nombre}</td>
 			<td>${unPaseador.usuario}</td>
 			<td>${unPaseador.contrasenia}</td>
 			<td>${unPaseador.cupo}</td>
 			<td>${unPaseador.tipo}</td>
-			<td><input type=button value="Solicitar"></td>
+			<td><td> <input type="button" value="Alquilar" miData="PaseadorId-${unPaseador.id}" class="botonesPaseadores"></td>
 		</tr>`;
 	}
 	unaTabla += `</table>`;
 	return unaTabla;
 }
 
-/* 
-}
-function mostrarTabla() {
-    let laTabla = armarTablaPromedios();
-    document.querySelector("#divParaTabla").innerHTML = laTabla;
-}
 
 
-	*/
 
 /* ======================== */
 /* ####  VALIDACIONES  #### */
