@@ -495,19 +495,21 @@ function mostrarTabla() {
 	paseadoresFiltradosParaCliente() {
 		let paseadorArrayfiltrados = new Array();
 		let cliente = this.logueado;
-		let cupoNecesario = PaseadorCalculoCupoTamanio(cliente.tamanioPerro);
+		let cupoNecesario = this.PaseadorCalculoCupoTamanio(cliente.tamanioPerro);
 
 		for (let i = 0; i < this.paseadores.length; i++) {
 			let paseador = this.paseadores[i];
-			let tieneCupo = paseadorConCupo(paseador, cupoNecesario);
-
+			let tieneCupo = this.paseadorConCupo(paseador, cupoNecesario);
+			console.log(cupoNecesario);
+			console.log(paseador);
+			console.log(tieneCupo);
 			if (tieneCupo) {
 				paseadorArrayfiltrados.push(paseador);
 			}
-
+			console.log(paseador);
 			console.log(paseadorArrayfiltrados);
-			return paseadorArrayfiltrados;
 		}
+		return paseadorArrayfiltrados;
 	}
 
 	PaseadorCalculoCupoTamanio(pTamanio) {
