@@ -7,14 +7,13 @@ class Sistema {
 		this.logueado = null;
 	}
 
-	/* #### CLIENTES ####*/
-	/* PRECARGA CLIENTES */
-
 	precargarTodo() {
 		this.precargaClientes();
 		this.precargaPaseador();
+		this.precargaContrataciones();
 	}
 
+	// #region ## PRECARGA CLIENTES
 	precargaClientes() {
 		let nombre1 = "JuanPerez";
 		let usuario1 = "JPerez";
@@ -207,15 +206,14 @@ class Sistema {
 		this.clientes.push(unCliente);
 	}
 
-	/* #### PASEADORES ####*/
-
-	/*PRECARGA PASEADORES*/
+	//#endregion
+	// #region ## PRECARGA PASEADOR
 
 	precargaPaseador() {
 		let nombre1 = "OscarRodriguez";
 		let usuario1 = "ORodriguez";
 		let contrasenia1 = "Or123!";
-		let cupo1 = 5;
+		let cupo1 = 3;
 		if (this.validacionRegistroPaseador(nombre1, usuario1, contrasenia1, cupo1)) {
 			this.cargaUnPaseador(nombre1, usuario1, contrasenia1, cupo1);
 		}
@@ -258,6 +256,93 @@ class Sistema {
 		unPaseador.cupoActual = pCupo;
 		this.paseadores.push(unPaseador);
 	}
+	//#endregion
+	// #region ## PRECARGA CONTRATACIONES
+
+	/*  !!!!!!!!!!  ATENCION !!!!!!!!!!!!! */
+	/* FALTA VALIDACIONES */
+	precargaContrataciones() {
+		let cliente1 = this.clientes[4]; // cliente 5
+		let paseador1 = this.paseadores[2]; // paseador 3
+		let estado1 = "pendiente";
+		if (true) {
+			this.cargaUnaContratacion(cliente1, paseador1, estado1);
+		}
+
+		let cliente2 = this.clientes[17]; // cliente 18
+		let paseador2 = this.paseadores[4]; // paseador 5
+		let estado2 = "denegada";
+		if (true) {
+			this.cargaUnaContratacion(cliente2, paseador2, estado2);
+		}
+
+		let cliente3 = this.clientes[0]; // cliente 1
+		let paseador3 = this.paseadores[1]; // paseador 2
+		let estado3 = "aceptada";
+		if (true) {
+			this.cargaUnaContratacion(cliente3, paseador3, estado3);
+		}
+
+		let cliente4 = this.clientes[12]; // cliente 13
+		let paseador4 = this.paseadores[3]; // paseador 4
+		let estado4 = "aceptada";
+		if (true) {
+			this.cargaUnaContratacion(cliente4, paseador4, estado4);
+		}
+
+		let cliente5 = this.clientes[6]; // cliente 7
+		let paseador5 = this.paseadores[1]; // paseador 2
+		let estado5 = "pendiente";
+		if (true) {
+			this.cargaUnaContratacion(cliente5, paseador5, estado5);
+		}
+
+		let cliente6 = this.clientes[10]; // cliente 11
+		let paseador6 = this.paseadores[0]; // paseador 1
+		let estado6 = "aceptada";
+		if (true) {
+			this.cargaUnaContratacion(cliente6, paseador6, estado6);
+		}
+
+		let cliente7 = this.clientes[15]; // cliente 16
+		let paseador7 = this.paseadores[3]; // paseador 4
+		let estado7 = "pendiente";
+		if (true) {
+			this.cargaUnaContratacion(cliente7, paseador7, estado7);
+		}
+
+		let cliente8 = this.clientes[9]; // cliente 10
+		let paseador8 = this.paseadores[2]; // paseador 3
+		let estado8 = "denegada";
+		if (true) {
+			this.cargaUnaContratacion(cliente8, paseador8, estado8);
+		}
+
+		let cliente9 = this.clientes[1]; // cliente 2
+		let paseador9 = this.paseadores[0]; // paseador 1
+		let estado9 = "pendiente";
+		if (true) {
+			this.cargaUnaContratacion(cliente9, paseador9, estado9);
+		}
+
+		let cliente10 = this.clientes[7]; // cliente 8
+		let paseador10 = this.paseadores[4]; // paseador 5
+		let estado10 = "aceptada";
+		if (true) {
+			this.cargaUnaContratacion(cliente10, paseador10, estado10);
+		}
+	}
+
+	cargaUnaContratacion(pCliente, pPaseador, pEstado) {
+		let unaContratacion = new Contrataciones();
+		unaContratacion.Cliente = pCliente;
+		unaContratacion.Paseador = pPaseador;
+		unaContratacion.estado = pEstado;
+
+		this.contrataciones.push(unaContratacion);
+	}
+
+	//#endregion
 
 	/* =============== */
 	/* #### TABLAS ####*/
@@ -409,14 +494,36 @@ function mostrarTabla() {
 
 	paseadoresFiltradosParaCliente() {
 		let paseadorArrayfiltrados = new Array();
-		console.log(`Logueado: ${this.logueado.tamanioPerro}`);
-		console.log(`Tamaño del Perro del Logueado:  ${this.logueado.tamanioPerro}`);
+		let cliente = this.logueado;
+		let perroTamanio = cliente.tamanioPerro;
+		let cupoCliente = 0;
+		if (perroTamanio === "Chico") cupoCliente = 1;
+		if (perroTamanio === "Mediano") cupoCliente = 2;
+		if (perroTamanio === "Grande") cupoCliente = 4;
+
+		//  For loop para Lista de Paseadores
 		for (let i = 0; i < this.paseadores.length; i++) {
 			let paseador = this.paseadores[i];
-			paseadorArrayfiltrados.push(paseador);
-			/* if (paseador.id === pSucursalID) {
+
+			let cupoValido = false; // asumo que cupo no es valido
+
+			// compruebo que haya cupo disponible
+			if (paseador.cupoActual >= cupoCliente) {
+				cupoValido = true;
+			}
+
+			// Si Cupo es sufficiente  continuo con validaciones.
+			if (cupoValido) {
+				// recorro Contrataciones
+				for (let i = 0; i < this.contrataciones.length; i++) {
+					let contrato = this.contrataciones[i];
+
+					// confirmo si contracion es de paseador y si el estado fue aceptado.
+					if (contrato.Paseador === paseador && contrato.estado === "aceptada") {
+					}
+				}
 				paseadorArrayfiltrados.push(paseador);
-			} */
+			}
 		}
 		console.log(paseadorArrayfiltrados);
 		return paseadorArrayfiltrados;

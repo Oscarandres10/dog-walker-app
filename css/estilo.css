@@ -12,7 +12,7 @@
 /* DESKTOP FIRST */
 
 body {
-	background-color: red;
+	background-color: rgb(253, 253, 253);
 }
 
 .contenedor {
@@ -21,13 +21,13 @@ body {
 
 @media screen and (max-width: 1200px) {
 	body {
-		background-color: lightgreen;
+		background-color: rgb(223, 221, 221);
 	}
 }
 
 @media screen and (max-width: 768px) {
 	body {
-		background-color: rgb(30, 173, 30);
+		background-color: rgb(202, 202, 202);
 	}
 }
 
