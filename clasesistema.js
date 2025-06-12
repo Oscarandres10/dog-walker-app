@@ -492,6 +492,8 @@ function mostrarTabla() {
 		return valido;
 	}
 
+	//#region ## PASEADORES FILTRADOS PARA CLIENTES
+
 	paseadoresFiltradosParaCliente() {
 		let paseadorArrayfiltrados = new Array();
 		let cliente = this.logueado;
@@ -552,6 +554,7 @@ function mostrarTabla() {
 		return tamanioValido;
 	}
 
+	//#endregion
 	/*  */
 	/*  */
 	/* FIN de MI SISTEMA */
