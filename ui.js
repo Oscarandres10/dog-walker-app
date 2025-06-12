@@ -122,9 +122,6 @@ function mostrarSeccionClienteUI() {
 		//debo darle VIDA  alos botones
 		/* darVidaBotonesTablaPeliculasParaAlquilerUI(); */
 
-		/* document.querySelector("#divAlquilarPelicula").style.display = "block";
-		document.querySelector("#divEstadisticas").style.display = "block";
-		document.querySelector("#divMostrarAlquiler").style.display = "block"; */
 		document.querySelector("#sectionUsuarioLogueado").style.display = "block";
 	} else {
 		loginUI();
