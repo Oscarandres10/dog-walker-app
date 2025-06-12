@@ -495,38 +495,32 @@ function mostrarTabla() {
 	paseadoresFiltradosParaCliente() {
 		let paseadorArrayfiltrados = new Array();
 		let cliente = this.logueado;
-		let perroTamanio = cliente.tamanioPerro;
-		let cupoCliente = 0;
-		if (perroTamanio === "Chico") cupoCliente = 1;
-		if (perroTamanio === "Mediano") cupoCliente = 2;
-		if (perroTamanio === "Grande") cupoCliente = 4;
+		let cupoNecesario = PaseadorCalculoCupoTamanio(cliente.tamanioPerro);
 
-		//  For loop para Lista de Paseadores
 		for (let i = 0; i < this.paseadores.length; i++) {
 			let paseador = this.paseadores[i];
+			let tieneCupo = paseadorConCupo(paseador, cupoNecesario);
 
-			let cupoValido = false; // asumo que cupo no es valido
-
-			// compruebo que haya cupo disponible
-			if (paseador.cupoActual >= cupoCliente) {
-				cupoValido = true;
-			}
-
-			// Si Cupo es sufficiente  continuo con validaciones.
-			if (cupoValido) {
-				// recorro Contrataciones
-				for (let i = 0; i < this.contrataciones.length; i++) {
-					let contrato = this.contrataciones[i];
-
-					// confirmo si contracion es de paseador y si el estado fue aceptado.
-					if (contrato.Paseador === paseador && contrato.estado === "aceptada") {
-					}
-				}
+			if (tieneCupo) {
 				paseadorArrayfiltrados.push(paseador);
 			}
+
+			console.log(paseadorArrayfiltrados);
+			return paseadorArrayfiltrados;
 		}
-		console.log(paseadorArrayfiltrados);
-		return paseadorArrayfiltrados;
+	}
+
+	PaseadorCalculoCupoTamanio(pTamanio) {
+		let cupoCliente = 0;
+		if (pTamanio === "Chico") cupoCliente = 1;
+		if (pTamanio === "Mediano") cupoCliente = 2;
+		if (pTamanio === "Grande") cupoCliente = 4;
+
+		return cupoCliente;
+	}
+
+	paseadorConCupo(paseador, cupo) {
+		return paseador.cupoActual >= cupo;
 	}
 
 	/*  */
