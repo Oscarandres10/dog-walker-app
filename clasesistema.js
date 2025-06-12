@@ -500,14 +500,16 @@ function mostrarTabla() {
 		for (let i = 0; i < this.paseadores.length; i++) {
 			let paseador = this.paseadores[i];
 			let tieneCupo = this.paseadorConCupo(paseador, cupoNecesario);
-			console.log(cupoNecesario);
-			console.log(paseador);
-			console.log(tieneCupo);
-			if (tieneCupo) {
+			//console.log(cupoNecesario);
+			//console.log(paseador);
+			//console.log(tieneCupo);
+			let verificacionTamanio = this.paseadorComparoTamanio(paseador, cliente.tamanioPerro);
+
+			if (tieneCupo && verificacionTamanio) {
 				paseadorArrayfiltrados.push(paseador);
 			}
-			console.log(paseador);
-			console.log(paseadorArrayfiltrados);
+			//console.log(paseador);
+			//console.log(paseadorArrayfiltrados);
 		}
 		return paseadorArrayfiltrados;
 	}
@@ -523,6 +525,31 @@ function mostrarTabla() {
 
 	paseadorConCupo(paseador, cupo) {
 		return paseador.cupoActual >= cupo;
+	}
+
+	paseadorComparoTamanio(paseador, tamanio) {
+		let tamanioValido = true; // Comienzo variable como verdadero
+		let i = 0;
+		// Paso por Contrataciones y me salgo en cuanto tamanio sea falso.
+		while (i < this.contrataciones.length && tamanioValido) {
+			let contratacion = this.contrataciones[i];
+			//mi Interes es solo las del paseador en curso y si contratacion
+			// es aceptada.
+			if (contratacion.Paseador === paseador && contratacion.estado === "aceptada") {
+				let contratacionCliente = contratacion.Cliente;
+
+				// Si la contratacion aceptada, tiene un perro chico o grande,
+				// opuesto al actual convierto a false
+				if (
+					(tamanio === "Grande" && contratacionCliente.tamanioPerro === "Chico") ||
+					(tamanio === "Chico" && contratacionCliente.tamanioPerro === "Grande")
+				) {
+					tamanioValido = false;
+				}
+			}
+			i++;
+		}
+		return tamanioValido;
 	}
 
 	/*  */
