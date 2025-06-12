@@ -306,7 +306,7 @@ class Sistema {
 
 		let cliente7 = this.clientes[15]; // cliente 16
 		let paseador7 = this.paseadores[3]; // paseador 4
-		let estado7 = "pendiente";
+		let estado7 = "aceptada";
 		if (true) {
 			this.cargaUnaContratacion(cliente7, paseador7, estado7);
 		}
