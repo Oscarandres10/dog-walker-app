@@ -367,22 +367,27 @@ class Sistema {
 			
 			<td>${unPaseador.nombre}</td>
 			<td>${unPaseador.cupoActual}</td>
-			<td><input type=button data="paseadorID-${unPaseador.id}" value="Solicitar"></td>
+			<td><input type=button data-id="paseadorID-${unPaseador.id}" class="botonesTablaPaseadores" value="Solicitar"></td>
 		</tr>`;
 		}
 		unaTabla += `</table>`;
 		return unaTabla;
 	}
+	
 
-	/* 
+	obtenerPaseador(pId) {
+	let elPaseador = null;
+	let i = 0;
+	while (elPaseador === null && i < this.paseadores.length) {
+		let paseadorX = this.paseadores[i];
+		if(paseadorX.id === pId){
+			elPaseador = paseadorX;
+		}
+		i++;
+	}		
+	return elPaseador;
 }
-function mostrarTabla() {
-    let laTabla = armarTablaPromedios();
-    document.querySelector("#divParaTabla").innerHTML = laTabla;
-}
 
-
-	*/
 
 	/* ======================== */
 	/* ####  VALIDACIONES  #### */
