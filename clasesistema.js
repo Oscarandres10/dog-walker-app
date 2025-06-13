@@ -373,21 +373,71 @@ class Sistema {
 		unaTabla += `</table>`;
 		return unaTabla;
 	}
-	
+
+	armarTablaContrataciones() {
+		//let listaPaseadores = this.contratacionesFiltradas(); //estoy probando
+		let unaTabla = `<table border="1px">
+	<tr>
+		
+		<th>Nombre Perro</th>
+		<th></th>
+		<th></th>
+	</tr>`;
+
+		for (let i = 0; i < this.contrataciones.length; i++) {
+			let unaContratacion = this.contrataciones[i];
+			let paseador = this.logueado;
+			if (unaContratacion.Paseador === paseador && unaContratacion.estado === "pendiente") {
+				unaTabla += `<tr>
+			
+						<td>${unaContratacion.Cliente.perroNombre}</td>
+						<td><input id="btn" type=button data="paseadorID-${unaContratacion.id}" value="Aceptar"></td>
+						<td><input id="btnRechazarContratacion" type=button data="paseadorID-${unaContratacion.id}" value="Rechazar"></td>
+						</tr>`;
+			}
+		}
+		unaTabla += `</table>`;
+
+		return unaTabla;
+	}
+
+	armarTablaContratacionesAceptadas() {
+		//let listaPaseadores = this.contratacionesFiltradas(); //estoy probando
+		let unaTabla = `<table border="1px">
+	<tr>
+		
+		<th>Nombre Perro</th>
+		<th></th>
+		<th></th>
+
+	</tr>`;
+
+		for (let i = 0; i < this.contrataciones.length; i++) {
+			let unaContratacion = this.contrataciones[i];
+			let paseador = this.logueado;
+			if (unaContratacion.Paseador === paseador && unaContratacion.estado === "aceptada") {
+				unaTabla += `<tr>
+			
+						<td>${unaContratacion.Cliente.perroNombre}</td>
+						</tr>`;
+			}
+		}
+		unaTabla += `</table>`;
+		return unaTabla;
+	}
 
 	obtenerPaseador(pId) {
-	let elPaseador = null;
-	let i = 0;
-	while (elPaseador === null && i < this.paseadores.length) {
-		let paseadorX = this.paseadores[i];
-		if(paseadorX.id === pId){
-			elPaseador = paseadorX;
+		let elPaseador = null;
+		let i = 0;
+		while (elPaseador === null && i < this.paseadores.length) {
+			let paseadorX = this.paseadores[i];
+			if (paseadorX.id === pId) {
+				elPaseador = paseadorX;
+			}
+			i++;
 		}
-		i++;
-	}		
-	return elPaseador;
-}
-
+		return elPaseador;
+	}
 
 	/* ======================== */
 	/* ####  VALIDACIONES  #### */

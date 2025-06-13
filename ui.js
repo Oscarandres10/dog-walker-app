@@ -38,6 +38,13 @@ function mostrarNavUI() {
 	}
 }
 
+function ocultarTablasUI() {
+	let lasTablas = document.querySelectorAll(".tablas");
+	for (let unaTabla of lasTablas) {
+		unaTabla.innerHTML = ``;
+	}
+}
+
 //luego muestro el sobre nostros y los botones para log in y registrarse
 
 function mostrarSobreNosotrosUI() {
@@ -134,46 +141,42 @@ function logoutUI() {
 	let mensaje = "";
 	ocultarTodoUI();
 	mostrarNavUI();
+	ocultarTablasUI();
 	document.querySelector("#pMostrarlogueado").innerHTML = ``;
 	document.querySelector("#btnLogoutCliente").style.display = `none`;
 }
 
 /* #### Tablas #### */
 
-
 function mostrarTablaPaseadoresUI() {
 	let laTabla = miSistema.armarTablaPaseadores();
 	document.querySelector("#mostrarTablaPaseadores").innerHTML = laTabla;
 	darVidaBotonesTablaPaseadores();
-
-
 }
 function darVidaBotonesTablaPaseadores() {
 	let losBotones = document.querySelectorAll(".botonesTablaPaseadores");
-	for (let unBoton of losBotones){
+	for (let unBoton of losBotones) {
 		unBoton.addEventListener("click", clickEnSolicitar);
 	}
 }
 
 function clickEnSolicitar() {
 	let valorData = this.getAttribute("data-id");
-	let idPaseadorTxt = valorData.substr(11,valorData.length);
+	let idPaseadorTxt = valorData.substr(11, valorData.length);
 	let paseador = miSistema.obtenerPaseador(idPaseadorTxt);
-	if (paseador !=null){
+	if (paseador != null) {
 		gestionPaseadores(paseador);
-		
 	}
-	console.log(valorData)
+	console.log(valorData);
 	return valorData;
 }
 
-
-function obtenerListaPaseadores(pId){
+function obtenerListaPaseadores(pId) {
 	let lista = new Array();
-	for(let i = 0; i<paseadores.length; i++) {
-		let unPaseador = paseadores[i]
-		//aca se puede filtar con un if 
-		lista.push(unPaseador)
+	for (let i = 0; i < paseadores.length; i++) {
+		let unPaseador = paseadores[i];
+		//aca se puede filtar con un if
+		lista.push(unPaseador);
 	}
 	return lista;
 }
@@ -187,7 +190,6 @@ function paseadoresFiltradosParaCliente() {
 	}
 	return listaFiltrada;
 }
-
 
 /* #### ALMACENADO DE DATOS ####*/
 
@@ -221,3 +223,17 @@ function almacenarUI() {
 
 	document.querySelector("#pRegistrarse").innerHTML = mensaje;
 }
+
+//#region  ##  PASEADOR INTERFAZ
+
+function mostrarTablaContratacionesPendientesUI() {
+	let laTabla = miSistema.armarTablaContrataciones();
+	document.querySelector("#mostrarTablaContratacionesPendientes").innerHTML = laTabla;
+}
+
+function mostrarTablaContratacionesAceptadasUI() {
+	let laTabla = miSistema.armarTablaContratacionesAceptadas();
+	document.querySelector("#mostrarTablaContratacionesAceptadas").innerHTML = laTabla;
+}
+
+//#endregion
