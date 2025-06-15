@@ -120,15 +120,6 @@ function mostrarLogueadoUI(id, tipo) {
 
 function mostrarSeccionClienteUI() {
 	if (miSistema.logueado !== null) {
-		//refrescar actualizar combos y tablas y etc etc
-		/* actualizarComboSucursalesAlquilerPeliculasUI(); */
-		//darle vida al combo, es cargar los eventos en el select reci'en mostrado.
-		/* document.querySelector("#selSucursalesAlqPeli").addEventListener("change", filtrarTablaPeliculasAlquilerUI); */
-		//armar tabla peliculas
-		/* mostrarTablaPeliculasAlquilerUI(); */
-		//debo darle VIDA  alos botones
-		/* darVidaBotonesTablaPeliculasParaAlquilerUI(); */
-
 		document.querySelector("#sectionUsuarioLogueado").style.display = "block";
 	} else {
 		loginUI();
