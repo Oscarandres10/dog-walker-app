@@ -87,13 +87,9 @@ function loginUI() {
 		ocultarTodoUI();
 		if (miSistema.logueado.tipo === "cliente") {
 			ocultarTodoUI();
-			/* document.querySelector("#sectionUsuarioLogueado").style.display = "block"; */
 			mostrarSeccionClienteUI();
 			ocultarNavUI();
-			document.querySelector("#pMostrarlogueado").innerHTML = mostrarLogueadoUI(
-				miSistema.logueado.id,
-				miSistema.logueado.tipo
-			);
+			document.querySelector("#pMostrarlogueado").innerHTML = mostrarLogueadoUI();
 			document.querySelector("#btnLogoutCliente").style.display = `block`;
 		}
 		if (miSistema.logueado.tipo === "paseador") {
@@ -101,10 +97,7 @@ function loginUI() {
 			document.querySelector("#sectionPaseadores").style.display = "block";
 			ocultarNavUI();
 
-			document.querySelector("#pMostrarlogueado").innerHTML = mostrarLogueadoUI(
-				miSistema.logueado.id,
-				miSistema.logueado.tipo
-			);
+			document.querySelector("#pMostrarlogueado").innerHTML = mostrarLogueadoUI();
 			document.querySelector("#btnLogoutCliente").style.display = `block`;
 		}
 	} else {
@@ -113,7 +106,7 @@ function loginUI() {
 	document.querySelector("#pLogin").innerHTML = mensaje;
 }
 
-function mostrarLogueadoUI(id, tipo) {
+function mostrarLogueadoUI() {
 	let elCliente = `<p>Bienvenido <strong>${miSistema.logueado.nombre}</strong></p>`;
 	return elCliente;
 }

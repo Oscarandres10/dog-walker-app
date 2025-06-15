@@ -476,7 +476,7 @@ class Sistema {
 			nombre.length > 0 &&
 			this.validarUsuario(usuario) &&
 			this.validarContrasenia(contrasenia) &&
-			perro.length > 0 &&
+			validarperro(perro) &&
 			tamanio !== ""
 		) {
 			valido = true;
@@ -537,6 +537,27 @@ class Sistema {
 			}
 		}
 		return verificacion;
+	}
+
+	// Valido Nombre de Perro que sea Unico y no este vacio.
+	validarperro(nombre) {
+		let validar = true;
+		let x = 0;
+		let perroNombre = nombre.toLowerCase();
+		let perroNombreBaseDatos = this.clientes.perroNombre.toLowerCase();
+		if (nombre !== "") {
+			while (x < this.clientes.length && validar) {
+				if (perroNombre === perroNombreBaseDatos) {
+					validar = false;
+				}
+
+				x++;
+			}
+		} else {
+			validar = false; // El input esta vacio
+		}
+
+		return validar;
 	}
 
 	validacionRegistroPaseador(nombre, usuario, contrasenia, cupo) {
