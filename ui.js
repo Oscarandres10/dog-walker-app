@@ -178,13 +178,14 @@ function paseadoresFiltradosParaCliente() {
 /* #### ALMACENADO DE DATOS ####*/
 
 function almacenarUI() {
-	let mensaje = "";
+	//let mensaje = ``;
 	let nombre = document.querySelector("#txtNombreCliente").value;
 	let usuario = document.querySelector("#txtUsuarioCliente").value;
 	let contrasenia = document.querySelector("#txtContraseniaCliente").value;
 	let nombrePerro = document.querySelector("#txtNombrePerroCliente").value;
 	let tamanioPerro = document.querySelector("#selTamanioCliente").value;
 	let validaciones = miSistema.validacionRegistroCliente(nombre, usuario, contrasenia, nombrePerro, tamanioPerro);
+
 	if (validaciones) {
 		let nuevoCliente = new Cliente();
 		nuevoCliente.nombre = nombre;
@@ -194,18 +195,11 @@ function almacenarUI() {
 		nuevoCliente.tamanioPerro = tamanioPerro;
 
 		miSistema.clientes.push(nuevoCliente);
-		mensaje = `Usuario ${nombre} registro correctamente`;
-	} else {
-		mensaje = `ERROR: Intente nuevamente..<br><br>
-		<strong>Nombre</strong> no pude estar vacio.<br>
-		<strong>Usuario</strong> ya existe<br>
-		<strong>Contraseña</strong> tiene que tener mínimo 5 caracteres, y incluir al menos una mayúscula, una minúscula y un número<br>
-		<strong>Nombre</strong> de Perro No puede estar Vacio.<br>
-		<strong>Tamaño</strong> no puede estar vacio<br>
-		`;
+		miSistema.mensajeRegistro.push(`Usuario ${nombre} registro correctamente`);
 	}
 
-	document.querySelector("#pRegistrarse").innerHTML = mensaje;
+	document.querySelector("#pRegistrarse").innerHTML = miSistema.mensajeRegistro.join("");
+	miSistema.mensajeRegistro = [];
 }
 
 //#region  ##  PASEADOR INTERFAZ

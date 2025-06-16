@@ -5,6 +5,7 @@ class Sistema {
 		this.paseadores = new Array();
 		this.contrataciones = new Array();
 		this.logueado = null;
+		this.mensajeRegistro = [];
 	}
 
 	precargarTodo() {
@@ -470,16 +471,33 @@ class Sistema {
 		return valido;
 	}
 
+	//#region   ## VALIDACIONES DE REGISTRO DE CLIENTES ##
+
 	validacionRegistroCliente(nombre, usuario, contrasenia, perro, tamanio) {
-		let valido = false;
-		if (
-			nombre.length > 0 &&
-			this.validarUsuario(usuario) &&
-			this.validarContrasenia(contrasenia) &&
-			validarperro(perro) &&
-			tamanio !== ""
-		) {
-			valido = true;
+		this.mensajeRegistro = []; // Pongo el array de mensajes a vacio.
+
+		let valido = true;
+
+		if (!this.validarNombre(nombre)) valido = false;
+		if (!this.validarUsuario(usuario)) valido = false;
+		if (!this.validarContrasenia(contrasenia)) valido = false;
+		if (!this.validarPerro(perro)) valido = false;
+
+		if (tamanio === "") {
+			this.mensajeRegistro.push(`Debe seleccionar un <strong>tamaño</strong> para el perro<br>`);
+			valido = false;
+		}
+
+		return valido;
+	}
+
+	validarNombre(pNombre) {
+		let nombre = pNombre.toLowerCase().trim(); //
+		let valido = true;
+
+		if (nombre === "") {
+			valido = false;
+			this.mensajeRegistro.push(`<strong>Nombre:</strong> No puede estar vacio<br>`);
 		}
 		return valido;
 	}
@@ -488,13 +506,20 @@ class Sistema {
 		let usuario = pUsuario.toLowerCase().trim(); // Convierto texto a lowercase
 		let valido = true;
 		let i = 0;
-		while (i < this.clientes.length && valido) {
-			let unicoUsuario = this.clientes[i];
-			if (unicoUsuario.usuario.toLowerCase() === usuario) {
-				valido = false;
+		if (usuario !== "") {
+			while (i < this.clientes.length && valido) {
+				let unicoUsuario = this.clientes[i];
+				if (unicoUsuario.usuario.toLowerCase() === usuario) {
+					valido = false;
+					this.mensajeRegistro.push(`<strong>Usuario:</strong> Ya existe<br>`);
+				}
+				i++;
 			}
-			i++;
+		} else {
+			valido = false;
+			this.mensajeRegistro.push(`<strong>Usuario:</strong> No puede estar vacio<br>`);
 		}
+
 		return valido;
 	}
 
@@ -509,6 +534,7 @@ class Sistema {
 		// Verificacion Vacio
 		if (verificacion && pass.length < 5) {
 			verificacion = false;
+			this.mensajeRegistro.push(`<strong>Contraseña</strong> tiene que tener mínimo 5 caracteres<br>`);
 		}
 
 		// Verificacion Letras
@@ -534,31 +560,41 @@ class Sistema {
 			// Verifico que mayus minus y numero  tengan por lo menos 1 character
 			if (minus < 1 || mayus < 1 || numero < 1) {
 				verificacion = false;
+				this.mensajeRegistro.push(
+					`<strong>Contraseña</strong> tiene que incluir al menos una mayúscula, una minúscula y un número<br>`
+				);
 			}
 		}
 		return verificacion;
 	}
 
 	// Valido Nombre de Perro que sea Unico y no este vacio.
-	validarperro(nombre) {
+	validarPerro(nombre) {
 		let validar = true;
 		let x = 0;
-		let perroNombre = nombre.toLowerCase();
-		let perroNombreBaseDatos = this.clientes.perroNombre.toLowerCase();
+		let perroNombre = nombre.toLowerCase().trim();
+
 		if (nombre !== "") {
 			while (x < this.clientes.length && validar) {
-				if (perroNombre === perroNombreBaseDatos) {
+				let cliente = this.clientes[x];
+				let perroMinus = cliente.perroNombre.toLowerCase();
+
+				if (perroNombre === perroMinus) {
 					validar = false;
+					this.mensajeRegistro.push(`Nombre de Perro ya existe.<br>`);
 				}
 
 				x++;
 			}
 		} else {
 			validar = false; // El input esta vacio
+			this.mensajeRegistro.push(`Nombre de Perro no puede estar Vacio.<br>`);
 		}
 
 		return validar;
 	}
+
+	//#endregion
 
 	validacionRegistroPaseador(nombre, usuario, contrasenia, cupo) {
 		let valido = false;
