@@ -265,80 +265,80 @@ class Sistema {
 	precargaContrataciones() {
 		let cliente1 = this.clientes[4]; // cliente 5
 		let paseador1 = this.paseadores[2]; // paseador 3
-		let estado1 = "pendiente";
+
 		if (true) {
-			this.cargaUnaContratacion(cliente1, paseador1, estado1);
+			this.cargaUnaContratacion(cliente1, paseador1);
 		}
 
 		let cliente2 = this.clientes[17]; // cliente 18
 		let paseador2 = this.paseadores[4]; // paseador 5
-		let estado2 = "denegada";
+
 		if (true) {
-			this.cargaUnaContratacion(cliente2, paseador2, estado2);
+			this.cargaUnaContratacion(cliente2, paseador2);
 		}
 
 		let cliente3 = this.clientes[0]; // cliente 1
 		let paseador3 = this.paseadores[1]; // paseador 2
-		let estado3 = "denegada";
+
 		if (true) {
-			this.cargaUnaContratacion(cliente3, paseador3, estado3);
+			this.cargaUnaContratacion(cliente3, paseador3);
 		}
 
 		let cliente4 = this.clientes[12]; // cliente 13
 		let paseador4 = this.paseadores[3]; // paseador 4
-		let estado4 = "aceptada";
+
 		if (true) {
-			this.cargaUnaContratacion(cliente4, paseador4, estado4);
+			this.cargaUnaContratacion(cliente4, paseador4);
 		}
 
 		let cliente5 = this.clientes[6]; // cliente 7
 		let paseador5 = this.paseadores[1]; // paseador 2
-		let estado5 = "pendiente";
+
 		if (true) {
-			this.cargaUnaContratacion(cliente5, paseador5, estado5);
+			this.cargaUnaContratacion(cliente5, paseador5);
 		}
 
 		let cliente6 = this.clientes[10]; // cliente 11
 		let paseador6 = this.paseadores[0]; // paseador 1
-		let estado6 = "aceptada";
+
 		if (true) {
-			this.cargaUnaContratacion(cliente6, paseador6, estado6);
+			this.cargaUnaContratacion(cliente6, paseador6);
 		}
 
 		let cliente7 = this.clientes[15]; // cliente 16
 		let paseador7 = this.paseadores[3]; // paseador 4
-		let estado7 = "aceptada";
+
 		if (true) {
-			this.cargaUnaContratacion(cliente7, paseador7, estado7);
+			this.cargaUnaContratacion(cliente7, paseador7);
 		}
 
 		let cliente8 = this.clientes[9]; // cliente 10
 		let paseador8 = this.paseadores[2]; // paseador 3
-		let estado8 = "denegada";
+
 		if (true) {
-			this.cargaUnaContratacion(cliente8, paseador8, estado8);
+			this.cargaUnaContratacion(cliente8, paseador8);
 		}
 
 		let cliente9 = this.clientes[1]; // cliente 2
 		let paseador9 = this.paseadores[0]; // paseador 1
-		let estado9 = "pendiente";
+
 		if (true) {
-			this.cargaUnaContratacion(cliente9, paseador9, estado9);
+			this.cargaUnaContratacion(cliente9, paseador9);
 		}
 
 		let cliente10 = this.clientes[7]; // cliente 8
 		let paseador10 = this.paseadores[4]; // paseador 5
-		let estado10 = "aceptada";
+
 		if (true) {
-			this.cargaUnaContratacion(cliente10, paseador10, estado10);
+			this.cargaUnaContratacion(cliente10, paseador10);
 		}
 	}
 
-	cargaUnaContratacion(pCliente, pPaseador, pEstado) {
+	cargaUnaContratacion(pCliente, pPaseador) {
 		let unaContratacion = new Contrataciones();
 		unaContratacion.Cliente = pCliente;
 		unaContratacion.Paseador = pPaseador;
-		unaContratacion.estado = pEstado;
+		unaContratacion.estado = "pendiente";
 
 		this.contrataciones.push(unaContratacion);
 	}
@@ -380,12 +380,14 @@ class Sistema {
 
 	armarTablaContrataciones() {
 		//let listaPaseadores = this.contratacionesFiltradas(); //estoy probando
-		let unaTabla = `<table border="1px">
+		let unaTabla = `<table border="1px" class="tablaContratacionesPendientes">
+    <caption>Contrataciones Pendientes</caption>
 	<tr>
 		
 		<th>Nombre Perro</th>
 		<th></th>
 		<th></th>
+    <th>Comentario:</th>
 	</tr>`;
 
 		for (let i = 0; i < this.contrataciones.length; i++) {
@@ -397,7 +399,8 @@ class Sistema {
 						<td>${unaContratacion.Cliente.perroNombre}</td>
 						<td><input id="btn" type=button data="paseadorID-${unaContratacion.id}" value="Aceptar"></td>
 						<td><input id="btnRechazarContratacion" type=button data="paseadorID-${unaContratacion.id}" value="Rechazar"></td>
-						</tr>`;
+						<td></td>
+            </tr>`;
 			}
 		}
 		unaTabla += `</table>`;
@@ -406,7 +409,6 @@ class Sistema {
 	}
 
 	armarTablaContratacionesAceptadas() {
-		//let listaPaseadores = this.contratacionesFiltradas(); //estoy probando
 		let unaTabla = `<table border="1px">
 	<tr>
 		
@@ -430,6 +432,57 @@ class Sistema {
 		return unaTabla;
 	}
 
+	armarEstadoPaseador() {
+		let unaTabla = `<table border="1px" class="tablaEstadoPaseador">
+    <tr>
+    <td><h4>CUPO TOTAL</h4></td>
+    </tr>
+    <tr>
+    <td><div class="cupoPrincipal">
+    ${this.logueado.cupo}
+    </div>
+    </td>
+    </tr>
+    <tr><td><br></td></tr>
+    </table>
+    <table border="1px" class="tablaEstadoPaseador">
+    <tr>
+    <td><h4>CUPOS OCUPADOS</h4></td>
+    </tr>
+    <tr>
+    <td><div class="cupoPrincipal">
+    ${this.logueado.cupo}
+    </div>
+    </td>
+    </tr>
+    <tr><td><br></td></tr>
+    </table>
+
+     <table border="1px" class="tablaEstadolistaPerros">
+     `;
+		let estado = true;
+		if (estado) {
+			for (let i = 0; i < this.contrataciones.length; i++) {
+				let unaContratacion = this.contrataciones[i];
+				let paseador = this.logueado;
+				if (unaContratacion.Paseador === paseador && unaContratacion.estado === "aceptada") {
+					unaTabla += `
+          <caption>Contrataciones</caption>
+          <tr>
+          <th>Nombre</th>
+          <th>Tamaño</th>
+          </tr>
+          <tr>
+          <td>${unaContratacion.Cliente.perroNombre}</td><td>${unaContratacion.Cliente.tamanioPerro}</td>
+          </tr>`;
+				}
+			}
+		} else {
+			unaTabla += `<tr><td>No Hay Contrataciones Actuales</td></tr>`;
+		}
+		unaTabla += `</table>`;
+		return unaTabla;
+	}
 	//#endregion
 
 	//#region  ## VALIDACION LOGIN #
@@ -592,24 +645,6 @@ class Sistema {
 	//#region  ## VALIDACIONES PASEADOR ##
 
 	validacionRegistroPaseador(nombre, usuario, contrasenia, cupo) {
-		/* this.mensajeContratacion = []; // Pongo el array de mensajes a vacio.
-
-    let valido = true;
-
-    if (!this.validarNombre(nombre)) valido = false;
-    if (!this.validarUsuario(usuario)) valido = false;
-    if (!this.validarContrasenia(contrasenia)) valido = false;
-    if (!this.validarPerro(perro)) valido = false;
-
-    if (tamanio === "") {
-      this.mensajeRegistro.push(
-        `Debe seleccionar un <strong>tamaño</strong> para el perro<br>`
-      );
-      valido = false;
-    }
-
-    return valido; */
-
 		let valido = false;
 		if (nombre.length > 0 && this.validarUsuario(usuario) && this.validarContrasenia(contrasenia) && cupo > 0) {
 			valido = true;
@@ -744,6 +779,7 @@ class Sistema {
 		return valido;
 	}
 
+	cupoActual() {}
 	//#endregion
 	/* FIN de MI SISTEMA */
 }

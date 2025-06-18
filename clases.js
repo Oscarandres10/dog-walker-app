@@ -31,6 +31,7 @@ class Contrataciones {
 		this.Cliente = Cliente.id;
 		this.Paseador = Paseador.id;
 		this.estado = ""; // opciones  pendiente, acceptado, denegado
+		this.comentario = "";
 	}
 }
 

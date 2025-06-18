@@ -94,9 +94,8 @@ function loginUI() {
 		}
 		if (miSistema.logueado.tipo === "paseador") {
 			ocultarTodoUI();
-			document.querySelector("#sectionPaseadores").style.display = "block";
+			mostrarSeccionPaseadorUI();
 			ocultarNavUI();
-
 			document.querySelector("#pMostrarlogueado").innerHTML = mostrarLogueadoUI();
 			document.querySelector("#btnLogoutCliente").style.display = `block`;
 		}
@@ -137,6 +136,16 @@ function mostrarSeccionClienteUI() {
 			document.querySelector("#divMostrarContratado").style.display = "none";
 			mostrarTablaPaseadoresUI();
 		}
+	} else {
+		loginUI();
+	}
+}
+
+function mostrarSeccionPaseadorUI() {
+	if (miSistema.logueado !== null) {
+		document.querySelector("#sectionPaseadoresLogueado").style.display = "block";
+		mostrarTablaContratacionesPendientesUI(); // Tabla de Contrataciones de Pendientes
+		mostrarEstadoPaseadorUI();
 	} else {
 		loginUI();
 	}
@@ -252,4 +261,8 @@ function mostrarTablaContratacionesAceptadasUI() {
 	document.querySelector("#mostrarTablaContratacionesAceptadas").innerHTML = laTabla;
 }
 
+function mostrarEstadoPaseadorUI() {
+	let laTabla = miSistema.armarEstadoPaseador();
+	document.querySelector("#mostrarEstadoPaseador").innerHTML = laTabla;
+}
 //#endregion

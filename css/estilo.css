@@ -31,11 +31,6 @@ body {
 	}
 }
 
-/*  */
-/*  */
-/*  */
-/*  */
-
 header,
 footer {
 	border: 2px solid red;
@@ -43,6 +38,11 @@ footer {
 
 nav {
 	justify-content: space-around;
+}
+
+h4 {
+	font-size: 20px;
+	font-weight: 700;
 }
 
 /* ///////////////////////////// */
@@ -108,22 +108,73 @@ header > div {
 }
 
 .box {
-	margin: 20px 0px;
-	padding: 20px 20px;
-	border: 2px solid green;
+	margin: 0 auto;
+	padding: 20px;
+	justify-content: space-between;
 }
 
-#formularioPaseador {
-	/* display: none; */
-	display: block;
+.mainbar {
+	border: 2px solid rgb(21, 139, 41);
+	width: 80%;
 }
 
-#formularioRegistroUsuario {
-	/* display: none; */
-	display: block;
+.sidebar {
+	margin: 0 20px;
+	border: 2px solid orange;
+	width: 200px;
 }
 
-#loginUsuario {
-	/* display: none; */
-	display: block;
+.tablaEstadoPaseador {
+	margin: 0 auto;
+	margin-bottom: 20px;
+	border: none;
+	border-collapse: collapse;
+	box-shadow: none;
+}
+
+.tablaEstadoPaseador th,
+.tablaEstadoPaseador td {
+	border: none;
+	background: none;
+	text-align: center;
+}
+
+.tablaEstadolistaPerros {
+	width: 100%;
+	text-align: center;
+	border: none;
+	border-collapse: collapse;
+	box-shadow: none;
+}
+.tablaEstadolistaPerros caption {
+	margin-bottom: 10px;
+	font-size: 20px;
+}
+
+.tablaEstadolistaPerros th,
+.tablaEstadolistaPerros td {
+	width: 50%;
+	border: 2px solid black;
+	background: none;
+	text-align: center;
+}
+
+.cupoPrincipal {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	background-color: rgb(165, 40, 40);
+	font-size: 50px;
+	text-align: center;
+	line-height: 100px;
+	color: white;
+}
+
+.tablaContratacionesPendientes {
+	width: 100%;
+	text-align: center;
+	border: none;
+	border-collapse: collapse;
+	box-shadow: none;
 }

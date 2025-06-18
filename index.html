@@ -124,9 +124,9 @@
 					<h2>LOGIN USUARIO</h2>
 					<br />
 					<label for="txtUsuario">Usuario: </label>
-					<input id="txtUsuario" type="text" value="JPerez" /><br />
+					<input id="txtUsuario" type="text" value="ORodriguez" /><br />
 					<label for="txtContrasenia">Contraseña: </label>
-					<input id="txtContrasenia" type="text" value="Jp123!" /><br />
+					<input id="txtContrasenia" type="text" value="Or123!" /><br />
 					<input id="btnLogin" type="button" value="Login" />
 					<p id="pLogin"></p>
 				</div>
@@ -142,6 +142,19 @@
 				LOGIN
 				GESTIONAR CONTRATACIONES
 				-->
+
+					<div id="divMostrarContratado"></div>
+
+					<!-- <input type="button" id="btnMostrarTabla" value="Mostrar paseadores" /> -->
+					<div id="mostrarTablaPaseadores" class="tablas"></div>
+					<div id="mostrarMensajeContratacion"></div>
+
+					<br />
+					<hr />
+					<br />
+					<hr />
+					<br />
+
 					<h2>DESPUES DE LOGIN CLIENTE</h2>
 					<br />
 					<div>
@@ -171,85 +184,82 @@
 					<div id="listadoPaseadores1" class="sideBar">
 						LISTADO DE PASEADORES CON CANTIDAD DE PERROS QUE TIENEN ASIGNADOS 2 medianos 1 chico, 8 perros medianos.
 					</div>
-					<br />
-					<hr />
-					<br />
-					<hr />
-					<br />
-					<div id="divMostrarContratado"></div>
-
-					<!-- <input type="button" id="btnMostrarTabla" value="Mostrar paseadores" /> -->
-					<div id="mostrarTablaPaseadores" class="tablas"></div>
-					<div id="mostrarMensajeContratacion"></div>
 				</section>
 			</section>
 
 			<!-- SECCION PASEADORES  -->
 
-			<section id="sectionPaseadores" class="secciones">
-				<div class="box">
-					<h2>DESPUES DE LOGIN PASEADOR</h2>
-					<br />
-					<div>
-						<p>
-							Paseadores Contaron con:
-							<strong
-								><q>
-									Numero Identificador; Nombre, Nombre de usuario, contraseña; Cupo maximo de espacio (llevara algun
-									calculo).
-								</q></strong
-							>
-						</p>
+			<section id="sectionPaseadoresLogueado" class="secciones">
+				<div class="box flex ancho">
+					<div class="mainbar">
+						<div id="mostrarTablaContratacionesPendientes" class="tablas"></div>
+						<div id="mostrarTablaContratacionesAceptadas" class="tablas"></div>
 						<br />
-						<p>
-							<strong>No controla contrataciones.</strong>
-						</p>
+						<hr />
 						<br />
-						Listado de Contrataciones Pendientes...
+						<hr />
 						<br />
-						<br />
-						Cada Listado incluye botones.
-						<input id="btnAceptar" type="button" value="Aceptar" />
-						<input id="btnRechazar" type="button" value="Rechazar" />
-						<br />
-						<br />
-						<p>
-							Despues de Aceptar contratacion: Se rechazaran contrataciones pendientes que no se puedan atender, por
-							cupo insuficiente.
-						</p>
-						<br />
-						<p>
-							Un paseador puede tener muchas contrataciones disponibles porque no afecta su nivel de cupo, solo y solo
-							si paseador acepta contratacion afecta cupo.
-						</p>
-						<br />
-						<p>
-							Rechazar automáticamente todas las contrataciones que sean de perros chicos en caso de que se apruebe
-							alguna de perro grande y viceversa
-						</p>
-						<br />
-						<p>
-							Todas estas verificaciones las deberá hacer el sistema, ninguna de estas verificaciones va a ser manual y
-							en todos los escenarios se debe informar al paseador claramente si la contratación se aprobó o rechazó y
-							cuál fue el motivo.
-						</p>
-						<br />
-						<p>
-							Listado con todos los perros asignados actualmente mostrando su nombre y su tamaño
+						<div>
+							<h2>DESPUES DE LOGIN PASEADOR</h2>
 							<br />
-							se debe mostrar el total de cupos ocupados, el total de cupos máximo del paseador y el porcentaje de cupos
-							que tiene actualmente asignados
+
+							<p>
+								Paseadores Contaron con:
+								<strong
+									><q>
+										Numero Identificador; Nombre, Nombre de usuario, contraseña; Cupo maximo de espacio (llevara algun
+										calculo).
+									</q></strong
+								>
+							</p>
 							<br />
-							Si el paseador no tiene perros asignados se mostrará un mensaje de que no hay perros asignados
-							actualmente.
-						</p>
+							<p>
+								<strong>No controla contrataciones.</strong>
+							</p>
+							<br />
+							Listado de Contrataciones Pendientes...
+							<br />
+							<br />
+							Cada Listado incluye botones.
+							<input id="btnAceptar" type="button" value="Aceptar" />
+							<input id="btnRechazar" type="button" value="Rechazar" />
+							<br />
+							<br />
+							<p>
+								Despues de Aceptar contratacion: Se rechazaran contrataciones pendientes que no se puedan atender, por
+								cupo insuficiente.
+							</p>
+							<br />
+							<p>
+								Un paseador puede tener muchas contrataciones disponibles porque no afecta su nivel de cupo, solo y solo
+								si paseador acepta contratacion afecta cupo.
+							</p>
+							<br />
+							<p>
+								Rechazar automáticamente todas las contrataciones que sean de perros chicos en caso de que se apruebe
+								alguna de perro grande y viceversa
+							</p>
+							<br />
+							<p>
+								Todas estas verificaciones las deberá hacer el sistema, ninguna de estas verificaciones va a ser manual
+								y en todos los escenarios se debe informar al paseador claramente si la contratación se aprobó o rechazó
+								y cuál fue el motivo.
+							</p>
+							<br />
+							<p>
+								Listado con todos los perros asignados actualmente mostrando su nombre y su tamaño
+								<br />
+								se debe mostrar el total de cupos ocupados, el total de cupos máximo del paseador y el porcentaje de
+								cupos que tiene actualmente asignados
+								<br />
+								Si el paseador no tiene perros asignados se mostrará un mensaje de que no hay perros asignados
+								actualmente.
+							</p>
+						</div>
 					</div>
-					<h1>LISTADO DE CONTRATACIONES Pendientes</h1>
-					<input type="button" id="btnMostrarTablaContratacionesPendientes" value="Mostrar Contrataciones Pendientes" />
-					<div id="mostrarTablaContratacionesPendientes" class="tablas"></div>
-					<h1>LISTADO DE CONTRATACIONES Aceptadas</h1>
-					<input type="button" id="btnMostrarTablaContratacionesAceptadas" value="Mostrar Contrataciones Aceptadas" />
-					<div id="mostrarTablaContratacionesAceptadas" class="tablas"></div>
+					<div class="sidebar">
+						<div id="mostrarEstadoPaseador" class="tablas"></div>
+					</div>
 				</div>
 			</section>
 		</main>
