@@ -7,7 +7,7 @@ function eventos() {
 	document.querySelector("#btnRegistrarme").addEventListener("click", almacenarUI);
 	document.querySelector("#btnLogin").addEventListener("click", loginUI);
 	document.querySelector("#btnLogoutCliente").addEventListener("click", logoutUI);
-	document.querySelector("#bntMostrarTabla").addEventListener("click", mostrarTablaPaseadoresUI);
+	//document.querySelector("#btnMostrarTabla").addEventListener("click", mostrarTablaPaseadoresUI);
 }
 let miSistema = new Sistema();
 miSistema.precargarTodo();
@@ -114,6 +114,29 @@ function mostrarLogueadoUI() {
 function mostrarSeccionClienteUI() {
 	if (miSistema.logueado !== null) {
 		document.querySelector("#sectionUsuarioLogueado").style.display = "block";
+		let contratado = false;
+		let x = 0;
+		let clienteId = miSistema.logueado.id;
+
+		while (x < miSistema.contrataciones.length && !contratado) {
+			let idClienteContrato = miSistema.contrataciones[x].Cliente.id;
+			let estadoContratacion = miSistema.contrataciones[x].estado;
+			if (idClienteContrato === clienteId && estadoContratacion !== "denegada") {
+				contratado = true;
+			}
+			x++;
+		}
+		if (contratado) {
+			document.querySelector("#divMostrarContratado").style.display = "block";
+			document.querySelector(
+				"#divMostrarContratado"
+			).innerHTML = `<p><strong>${miSistema.logueado.perroNombre}</strong> tiene una contratacion pendiente o Aceptada actualmente..</p>`;
+			document.querySelector("#mostrarTablaPaseadores").style.display = "none";
+		} else {
+			document.querySelector("#mostrarTablaPaseadores").style.display = "block";
+			document.querySelector("#divMostrarContratado").style.display = "none";
+			mostrarTablaPaseadoresUI();
+		}
 	} else {
 		loginUI();
 	}
@@ -135,23 +158,37 @@ function logoutUI() {
 function mostrarTablaPaseadoresUI() {
 	let laTabla = miSistema.armarTablaPaseadores();
 	document.querySelector("#mostrarTablaPaseadores").innerHTML = laTabla;
-	darVidaBotonesTablaPaseadores();
+	darVidaBotonesTablaPaseadoresUI();
 }
-function darVidaBotonesTablaPaseadores() {
+function darVidaBotonesTablaPaseadoresUI() {
 	let losBotones = document.querySelectorAll(".botonesTablaPaseadores");
 	for (let unBoton of losBotones) {
-		unBoton.addEventListener("click", clickEnSolicitar);
+		unBoton.addEventListener("click", clickEnSolicitarUI);
 	}
 }
 
-function clickEnSolicitar() {
+function clickEnSolicitarUI() {
 	let valorData = this.getAttribute("data-id");
 	let idPaseadorTxt = valorData.substr(11, valorData.length);
-	let paseador = miSistema.obtenerPaseador(idPaseadorTxt);
+	let idPaseadorNum = -1;
+
+	if (isNaN) idPaseadorNum = Number(idPaseadorTxt);
+	let paseador = miSistema.obtenerPaseador(idPaseadorNum);
+	let cliente = miSistema.logueado;
+	console.log(`Paseador ${paseador}`);
+	console.log(cliente);
 	if (paseador != null) {
-		gestionPaseadores(paseador);
+		miSistema.cargaUnaContratacion(cliente, paseador, "pendiente");
+		ocultarTablasUI();
+		document.querySelector("#mostrarMensajeContratacion").style.display = "block";
+		document.querySelector(
+			"#mostrarMensajeContratacion"
+		).innerHTML = `<p>Su Contratacion fue realizada Correctamente.</p>`;
+		setTimeout(() => {
+			document.querySelector("#mostrarMensajeContratacion").style.display = "none";
+			mostrarSeccionClienteUI();
+		}, 5000); // 5 segundos
 	}
-	console.log(valorData);
 	return valorData;
 }
 
@@ -164,6 +201,7 @@ function obtenerListaPaseadores(pId) {
 	}
 	return lista;
 }
+
 function paseadoresFiltradosParaCliente() {
 	let listaFiltrada = new Array();
 	for (let i = 0; i < paseadores.length; i++) {

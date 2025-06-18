@@ -279,7 +279,7 @@ class Sistema {
 
 		let cliente3 = this.clientes[0]; // cliente 1
 		let paseador3 = this.paseadores[1]; // paseador 2
-		let estado3 = "aceptada";
+		let estado3 = "denegada";
 		if (true) {
 			this.cargaUnaContratacion(cliente3, paseador3, estado3);
 		}
@@ -345,12 +345,16 @@ class Sistema {
 
 	//#endregion
 
-	/* =============== */
-	/* #### TABLAS ####*/
+	// #region  ## TABLAS
 
 	armarTablaPaseadores() {
 		let listaPaseadores = this.paseadoresFiltradosParaCliente(); //estoy probando
-		let unaTabla = `<table border="1px">
+		let unaTabla = `
+    <p>No tiene Contratacion Pendiente o Aceptada en este momento.</p>
+    <p>Si lo desea, realiza una contratacion nueva.</p>
+    <br><Br>
+    <hr>
+    <table border="1px">
 	<tr>
 		
 		<th>Nombre</th>
@@ -359,8 +363,7 @@ class Sistema {
 		<th></th>
 
 	</tr>`;
-		/* for (let i = 0; i < this.paseadores.length; i++) {
-                  let unPaseador = this.paseadores[i]; */
+
 		for (let i = 0; i < listaPaseadores.length; i++) {
 			let unPaseador = listaPaseadores[i];
 			//agregar validaciones. Falta agregar el "data" del boton
@@ -427,21 +430,9 @@ class Sistema {
 		return unaTabla;
 	}
 
-	obtenerPaseador(pId) {
-		let elPaseador = null;
-		let i = 0;
-		while (elPaseador === null && i < this.paseadores.length) {
-			let paseadorX = this.paseadores[i];
-			if (paseadorX.id === pId) {
-				elPaseador = paseadorX;
-			}
-			i++;
-		}
-		return elPaseador;
-	}
+	//#endregion
 
-	/* ======================== */
-	/* ####  VALIDACIONES  #### */
+	//#region  ## VALIDACION LOGIN #
 
 	login(pUsuario, pPass) {
 		let valido = false;
@@ -470,6 +461,8 @@ class Sistema {
 		//console.log(logueado);
 		return valido;
 	}
+
+	//#endregion
 
 	//#region   ## VALIDACIONES DE REGISTRO DE CLIENTES ##
 
@@ -596,13 +589,67 @@ class Sistema {
 
 	//#endregion
 
+	//#region  ## VALIDACIONES PASEADOR ##
+
 	validacionRegistroPaseador(nombre, usuario, contrasenia, cupo) {
+		/* this.mensajeContratacion = []; // Pongo el array de mensajes a vacio.
+
+    let valido = true;
+
+    if (!this.validarNombre(nombre)) valido = false;
+    if (!this.validarUsuario(usuario)) valido = false;
+    if (!this.validarContrasenia(contrasenia)) valido = false;
+    if (!this.validarPerro(perro)) valido = false;
+
+    if (tamanio === "") {
+      this.mensajeRegistro.push(
+        `Debe seleccionar un <strong>tamaño</strong> para el perro<br>`
+      );
+      valido = false;
+    }
+
+    return valido; */
+
 		let valido = false;
 		if (nombre.length > 0 && this.validarUsuario(usuario) && this.validarContrasenia(contrasenia) && cupo > 0) {
 			valido = true;
 		}
 		return valido;
 	}
+
+	//#endregion
+
+	//#region  ## VALIDACIONES CONTRATACIONES ##
+
+	validacionContratacion(cliente, paseador) {
+		let valido = false;
+		console.log(cliente);
+		console.log(paseador);
+		console.log(this.validarNroPositivo(cliente));
+		console.log(this.validarNroPositivo(paseador));
+		if (this.validarNroPositivo(cliente) && this.validarNroPositivo(paseador)) {
+			console.log(`Valide Numeros Positivos`);
+			valido = true;
+		}
+		console.log(`no se VALIDARON`);
+		/*   if (
+      this.validarNroPositivo(pIdPeliculaTxt) &&
+      this.validarNroPositivo(pSucursalID)
+    ) {
+      let idPeli = Number(pIdPeliculaTxt);
+      let laPeli = this.obtenerPeliculaPorID(idPeli);
+      let idDelaSucursal = Number(pSucursalID);
+      let unaSucursal = this.obtenerObjetoSucursal(idDelaSucursal);
+      if (laPeli !== null && unaSucursal !== null) {
+        valido = true;
+        //faltan validaciones de edad etc.
+        //validar que la peli pertenezca a la sucursal
+      }
+    } */
+		return valido;
+	}
+
+	//#endregion
 
 	//#region ## PASEADORES FILTRADOS PARA CLIENTES
 
@@ -667,7 +714,36 @@ class Sistema {
 	}
 
 	//#endregion
-	/*  */
-	/*  */
+
+	//#region  ## VALIDACION GENERAL
+
+	obtenerPaseador(pId) {
+		let elPaseador = null;
+		let i = 0;
+
+		while (elPaseador === null && i < this.paseadores.length) {
+			let paseadorX = this.paseadores[i];
+			console.log(paseadorX);
+			if (paseadorX.id === pId) {
+				elPaseador = paseadorX;
+				console.log(`El Paseador:  -->  ${elPaseador.nombre}`);
+			}
+			i++;
+		}
+		return elPaseador;
+	}
+
+	validarNroPositivo(pNum) {
+		let valido = false;
+		if (!isNaN(pNum)) {
+			let elNum = Number(pNum);
+			if (elNum >= 0) {
+				valido = true;
+			}
+		}
+		return valido;
+	}
+
+	//#endregion
 	/* FIN de MI SISTEMA */
 }
