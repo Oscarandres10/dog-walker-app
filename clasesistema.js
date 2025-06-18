@@ -385,8 +385,9 @@ class Sistema {
 	<tr>
 		
 		<th>Nombre Perro</th>
+		<th>Tamaño</th>
 		<th></th>
-		<th></th>
+    <th></th>
     <th>Comentario:</th>
 	</tr>`;
 
@@ -397,8 +398,9 @@ class Sistema {
 				unaTabla += `<tr>
 			
 						<td>${unaContratacion.Cliente.perroNombre}</td>
-						<td><input id="btn" type=button data="paseadorID-${unaContratacion.id}" value="Aceptar"></td>
-						<td><input id="btnRechazarContratacion" type=button data="paseadorID-${unaContratacion.id}" value="Rechazar"></td>
+            <td>${unaContratacion.Cliente.tamanioPerro}</td>
+						<td><input id="btn" type=button data-id="contratacionID-${unaContratacion.id}"  class="botonesTablaContratacionesAceptada" value="Aceptar"></td>
+						<td><input type=button data-id="contratacionID-${unaContratacion.id}"  class="botonesTablaContratacionesRechazada" value="Rechazar"></td>
 						<td></td>
             </tr>`;
 			}
@@ -766,6 +768,22 @@ class Sistema {
 			i++;
 		}
 		return elPaseador;
+	}
+
+	obtenerContratacion(cId) {
+		let laContratacion = null;
+		let i = 0;
+
+		while (laContratacion === null && i < this.contrataciones.length) {
+			let contratacionX = this.contrataciones[i];
+			//console.log(contratacionX);
+			if (contratacionX.id === cId) {
+				laContratacion = contratacionX;
+				//console.log(`La Contratacion:  -->  ${laContratacion.Cliente.nombre}`);
+			}
+			i++;
+		}
+		return laContratacion;
 	}
 
 	validarNroPositivo(pNum) {

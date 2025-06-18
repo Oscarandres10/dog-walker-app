@@ -254,12 +254,81 @@ function almacenarUI() {
 function mostrarTablaContratacionesPendientesUI() {
 	let laTabla = miSistema.armarTablaContrataciones();
 	document.querySelector("#mostrarTablaContratacionesPendientes").innerHTML = laTabla;
+	darVidaBotonesTablaContratacionesPendientesUI();
+}
+function darVidaBotonesTablaContratacionesPendientesUI() {
+	let botonAceptar = document.querySelectorAll(".botonesTablaContratacionesAceptada");
+	for (let unBoton of botonAceptar) {
+		unBoton.addEventListener("click", clickEnAceptarUI);
+	}
+	let botonRechazar = document.querySelectorAll(".botonesTablaContratacionesRechazada");
+	for (let unBoton of botonRechazar) {
+		unBoton.addEventListener("click", clickEnRechazarUI);
+	}
 }
 
+function clickEnAceptarUI() {
+	let valorData = this.getAttribute("data-id");
+	let idContratacionTxt = valorData.substr(15, valorData.length);
+	let idContratacionNum = -1;
+	console.log(`Numero: ${idContratacionTxt}`);
+	if (isNaN) idContratacionNum = Number(idContratacionTxt);
+	let contratacion = miSistema.obtenerContratacion(idContratacionNum);
+	let cliente = miSistema.logueado;
+	console.log(`Paseador ${paseador}`);
+	console.log(cliente);
+	if (paseador != null) {
+		miSistema.cargaUnaContratacion(cliente, paseador, "pendiente");
+		ocultarTablasUI();
+		document.querySelector("#mostrarMensajeContratacion").style.display = "block";
+		document.querySelector(
+			"#mostrarMensajeContratacion"
+		).innerHTML = `<p>Su Contratacion fue realizada Correctamente.</p>`;
+		setTimeout(() => {
+			document.querySelector("#mostrarMensajeContratacion").style.display = "none";
+			mostrarSeccionClienteUI();
+		}, 5000); // 5 segundos
+	}
+	return valorData;
+}
+
+function clickEnRechazarUI() {
+	let valorData = this.getAttribute("data-id");
+	let idPaseadorTxt = valorData.substr(11, valorData.length);
+	let idPaseadorNum = -1;
+
+	if (isNaN) idPaseadorNum = Number(idPaseadorTxt);
+	let paseador = miSistema.obtenerPaseador(idPaseadorNum);
+	let cliente = miSistema.logueado;
+	console.log(`Paseador ${paseador}`);
+	console.log(cliente);
+	if (paseador != null) {
+		miSistema.cargaUnaContratacion(cliente, paseador, "pendiente");
+		ocultarTablasUI();
+		document.querySelector("#mostrarMensajeContratacion").style.display = "block";
+		document.querySelector(
+			"#mostrarMensajeContratacion"
+		).innerHTML = `<p>Su Contratacion fue realizada Correctamente.</p>`;
+		setTimeout(() => {
+			document.querySelector("#mostrarMensajeContratacion").style.display = "none";
+			mostrarSeccionClienteUI();
+		}, 5000); // 5 segundos
+	}
+	return valorData;
+}
+
+//
+//   NO SE ESTO  TALVEZ BORREMOS
+//
+//
 function mostrarTablaContratacionesAceptadasUI() {
 	let laTabla = miSistema.armarTablaContratacionesAceptadas();
 	document.querySelector("#mostrarTablaContratacionesAceptadas").innerHTML = laTabla;
 }
+
+//
+//
+//
 
 function mostrarEstadoPaseadorUI() {
 	let laTabla = miSistema.armarEstadoPaseador();
