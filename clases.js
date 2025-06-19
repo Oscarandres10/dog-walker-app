@@ -30,7 +30,7 @@ class Contrataciones {
 		this.id = Contrataciones.idContratacion++;
 		this.Cliente = Cliente.id;
 		this.Paseador = Paseador.id;
-		this.estado = ""; // opciones  pendiente, acceptado, denegado
+		this.estado = ""; // opciones  pendiente, aceptada, denegado
 		this.comentario = "";
 	}
 }

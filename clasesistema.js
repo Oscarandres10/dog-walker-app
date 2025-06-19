@@ -254,7 +254,7 @@ class Sistema {
 		unPaseador.usuario = pUsuario;
 		unPaseador.contrasenia = pPass;
 		unPaseador.cupo = pCupo;
-		unPaseador.cupoActual = pCupo;
+		//unPaseador.cupoActual = pCupo;
 		this.paseadores.push(unPaseador);
 	}
 	//#endregion
@@ -453,7 +453,7 @@ class Sistema {
     </tr>
     <tr>
     <td><div class="cupoPrincipal">
-    ${this.logueado.cupo}
+    ${this.calcularCupoDisponible()}
     </div>
     </td>
     </tr>
@@ -669,20 +669,7 @@ class Sistema {
 			valido = true;
 		}
 		console.log(`no se VALIDARON`);
-		/*   if (
-      this.validarNroPositivo(pIdPeliculaTxt) &&
-      this.validarNroPositivo(pSucursalID)
-    ) {
-      let idPeli = Number(pIdPeliculaTxt);
-      let laPeli = this.obtenerPeliculaPorID(idPeli);
-      let idDelaSucursal = Number(pSucursalID);
-      let unaSucursal = this.obtenerObjetoSucursal(idDelaSucursal);
-      if (laPeli !== null && unaSucursal !== null) {
-        valido = true;
-        //faltan validaciones de edad etc.
-        //validar que la peli pertenezca a la sucursal
-      }
-    } */
+
 		return valido;
 	}
 
@@ -698,16 +685,12 @@ class Sistema {
 		for (let i = 0; i < this.paseadores.length; i++) {
 			let paseador = this.paseadores[i];
 			let tieneCupo = this.paseadorConCupo(paseador, cupoNecesario);
-			//console.log(cupoNecesario);
-			//console.log(paseador);
-			//console.log(tieneCupo);
+
 			let verificacionTamanio = this.paseadorComparoTamanio(paseador, cliente.tamanioPerro);
 
 			if (tieneCupo && verificacionTamanio) {
 				paseadorArrayfiltrados.push(paseador);
 			}
-			//console.log(paseador);
-			//console.log(paseadorArrayfiltrados);
 		}
 		return paseadorArrayfiltrados;
 	}
@@ -752,7 +735,7 @@ class Sistema {
 
 	//#endregion
 
-	//#region  ## VALIDACION GENERAL
+	//#region  ## UTILIDADES
 
 	obtenerPaseador(pId) {
 		let elPaseador = null;
@@ -797,7 +780,22 @@ class Sistema {
 		return valido;
 	}
 
-	cupoActual() {}
+	calcularCupoDisponible() {
+		let cupo = this.logueado.cupoActual;
+		console.log(`Cupo: ${cupo}`);
+		for (let x = 0; x < this.contrataciones.length; x++) {
+			if (this.logueado === this.contrataciones[x].Paseador && this.contrataciones[x].estado === "aceptada") {
+				let perroTamanio = this.contrataciones[x].Cliente.tamanioPerro;
+				let perroCupo = 0;
+				if (perroTamanio === "Grande") perroCupo = 4;
+				if (perroTamanio === "Mediano") perroCupo = 2;
+				if (perroTamanio === "Chico") perroCupo = 1;
+				cupo += perroCupo;
+			}
+		}
+
+		return cupo;
+	}
 	//#endregion
 	/* FIN de MI SISTEMA */
 }
