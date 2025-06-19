@@ -660,10 +660,6 @@ class Sistema {
 
 	validacionContratacion(cliente, paseador) {
 		let valido = false;
-		console.log(cliente);
-		console.log(paseador);
-		console.log(this.validarNroPositivo(cliente));
-		console.log(this.validarNroPositivo(paseador));
 		if (this.validarNroPositivo(cliente) && this.validarNroPositivo(paseador)) {
 			console.log(`Valide Numeros Positivos`);
 			valido = true;
