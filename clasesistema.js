@@ -14,6 +14,7 @@ class Sistema {
 		precargaContrataciones();
 	}
 
+	//#region   ##  CARGA DE DATOS  ###
 	cargaUnCliente(pNom, pUsuario, pPass, pPerro, pTamanio) {
 		let unCliente = new Cliente();
 		unCliente.nombre = pNom;
@@ -30,18 +31,18 @@ class Sistema {
 		unPaseador.usuario = pUsuario;
 		unPaseador.contrasenia = pPass;
 		unPaseador.cupo = pCupo;
-		//unPaseador.cupoActual = pCupo;
 		this.paseadores.push(unPaseador);
 	}
 
-	cargaUnaContratacion(pCliente, pPaseador) {
+	cargaUnaContratacion(idCliente, idPaseador) {
 		let unaContratacion = new Contrataciones();
-		unaContratacion.Cliente = pCliente;
-		unaContratacion.Paseador = pPaseador;
-		unaContratacion.estado = "pendiente";
-
+		unaContratacion.Cliente = this.obtenerCliente(idCliente);
+		unaContratacion.Paseador = this.obtenerPaseador(idPaseador);
 		this.contrataciones.push(unaContratacion);
 	}
+
+	//#endregion
+
 	// #region  ## TABLAS
 
 	armarTablaPaseadores() {
@@ -355,11 +356,26 @@ class Sistema {
 	//#endregion
 
 	//#region  ## VALIDACIONES CONTRATACIONES ##
-	//no contratacion previa
-	//	Cupo Disponible
-	//perro
+
+	// no contratacion previa
+	// no cupo disponible
+
+	// no Perro Opuesto
+
+	validarPrecargaContratacion(idCliente, idPaseador) {
+		let valido = false;
+		let elCliente = miSistema.obtenerCliente(idCliente);
+		let elPaseador = miSistema.obtenerPaseador(idPaseador);
+		if (elCliente !== null && elPaseador !== null) {
+			let cupo = this.cupoDisponible(elPaseador);
+			if (cupo >= this.calcularCupoPerro(elCliente.tamanioPerro)) {
+			}
+		}
+		return valido;
+	}
 
 	//#endregion
+
 	//#region  ## CONTRATACIONES ##
 
 	procesarAceptarContratacion(id) {
@@ -458,6 +474,7 @@ class Sistema {
 		return paseadorArrayfiltrados;
 	}
 
+	// Usar Utilidaddes
 	PaseadorCalculoCupoTamanio(pTamanio) {
 		let cupoCliente = 0;
 		if (pTamanio === "Chico") cupoCliente = 1;
@@ -511,10 +528,28 @@ class Sistema {
 
 	//#region  ## UTILIDADES
 
+	// Busco el Cliente por ID
+	obtenerCliente(cId) {
+		let elCliente = null;
+		let i = 0;
+		// recorro un while las lista de clientes
+		while (elCliente === null && i < this.clientes.length) {
+			let cliente = this.clientes[i];
+			//console.log(paseadorX);
+			if (cliente.id === cId) {
+				elCliente = cliente;
+				//console.log(`El cliente:  -->  ${elCliente.nombre}`);
+			}
+			i++;
+		}
+		return elCliente;
+	}
+
+	// Busco el Paseador por ID
 	obtenerPaseador(pId) {
 		let elPaseador = null;
 		let i = 0;
-
+		// recorro un while las lista de paseadores
 		while (elPaseador === null && i < this.paseadores.length) {
 			let paseadorX = this.paseadores[i];
 			//console.log(paseadorX);
@@ -554,32 +589,31 @@ class Sistema {
 		return valido;
 	}
 
-	calcularCupoDisponible(paseador) {
-		if (!paseador) {
-			console.log("ERROR");
-		} else {
-			//console.log(`Estoy Adentro de Calcular Cupo Disonible`);
-			let cupo = paseador.cupoActual;
+	cupoDisponible(paseador) {
+		//console.log(`Estoy Adentro de Calcular Cupo Disonible`);
+		let cupo = false;
+		let cupoMax = paseador.cupo; // Cupo maximo del Paseador
 
-			for (let x = 0; x < this.contrataciones.length; x++) {
-				if (paseador === this.contrataciones[x].Paseador && this.contrataciones[x].estado === "aceptada") {
-					let perroTamanio = this.contrataciones[x].Cliente.tamanioPerro;
-					let perroCupo = this.calcularTamanioPerro(perroTamanio);
-
-					cupo += perroCupo;
-				}
+		// Recorro contrataciones.
+		for (let x = 0; x < this.contrataciones.length; x++) {
+			if (paseador === this.contrataciones[x].Paseador && this.contrataciones[x].estado === "aceptada") {
+				let perroTamanio = this.contrataciones[x].Cliente.tamanioPerro;
+				let perroCupo = this.calcularCupoPerro(perroTamanio);
+				cupoMax -= perroCupo;
 			}
-			return cupo;
 		}
+
+		return cupo;
 	}
 
-	calcularTamanioPerro(tamanio) {
+	calcularCupoPerro(tamanio) {
 		let cupo = 0;
 		if (tamanio === "Grande") cupo = 4;
 		if (tamanio === "Mediano") cupo = 2;
 		if (tamanio === "Chico") cupo = 1;
 		return cupo;
 	}
+
 	//#endregion
 	/* FIN de MI SISTEMA */
 }
