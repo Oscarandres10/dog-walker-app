@@ -271,16 +271,12 @@ function clickEnAceptarUI() {
 	let valorData = this.getAttribute("data-id");
 	let idContratacionTxt = valorData.substr(15, valorData.length);
 	let idContratacionNum = -1;
-
+	//console.log(idContratacionTxt);
 	if (isNaN) idContratacionNum = Number(idContratacionTxt);
-	let contratacion = miSistema.obtenerContratacion(idContratacionNum);
-	console.log("Entre Esto");
-	console.log(contratacion.Cliente);
-	console.log(contratacion.Paseador);
-	console.log("y Esto");
-
+	let contratacion = miSistema.procesarAceptarContratacion(idContratacionNum);
 	if (this.logueado != null) {
 		contratacion.estado = "aceptada";
+		//console.log(contratacion.estado);
 		contratacion.comentario = "Se acepto correctamente.";
 		validacionContratacion(contratacion.Cliente, contratacion.Paseador);
 		/*  ocultarTablasUI();

@@ -28,8 +28,8 @@ class Contrataciones {
 	static idContratacion = 0;
 	constructor() {
 		this.id = Contrataciones.idContratacion++;
-		this.Cliente = Cliente.id;
-		this.Paseador = Paseador.id;
+		this.Cliente = null;
+		this.Paseador = null;
 		this.estado = ""; // opciones  pendiente, aceptada, denegado
 		this.comentario = "";
 	}
