@@ -184,8 +184,8 @@ function clickEnSolicitarUI() {
 	if (isNaN) idPaseadorNum = Number(idPaseadorTxt);
 	let paseador = miSistema.obtenerPaseador(idPaseadorNum);
 	let cliente = miSistema.logueado;
-	console.log(`Paseador ${paseador}`);
-	console.log(cliente);
+	//console.log(`Paseador ${paseador}`);
+	//console.log(cliente);
 	if (paseador != null) {
 		miSistema.cargaUnaContratacion(cliente, paseador, "pendiente");
 		ocultarTablasUI();
@@ -302,8 +302,8 @@ function clickEnRechazarUI() {
 	if (isNaN) idPaseadorNum = Number(idPaseadorTxt);
 	let paseador = miSistema.obtenerPaseador(idPaseadorNum);
 	let cliente = miSistema.logueado;
-	console.log(`Paseador ${paseador}`);
-	console.log(cliente);
+	//console.log(`Paseador ${paseador}`);
+	//console.log(cliente);
 	if (paseador != null) {
 		miSistema.cargaUnaContratacion(cliente, paseador, "pendiente");
 		ocultarTablasUI();
