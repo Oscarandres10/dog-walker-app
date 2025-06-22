@@ -246,50 +246,7 @@ function clickEnAceptarUI() {
 	let idContratacionNum = -1;
 	//console.log(idContratacionTxt);
 	if (isNaN) idContratacionNum = Number(idContratacionTxt);
-	let contratacion = miSistema.procesarAceptarContratacion(idContratacionNum);
-	if (this.logueado != null) {
-		contratacion.estado = "aceptada";
-		//console.log(contratacion.estado);
-		contratacion.comentario = "Se acepto correctamente.";
-		validacionContratacion(contratacion.Cliente, contratacion.Paseador);
-		/*  ocultarTablasUI();
-    document.querySelector("#mostrarMensajeContratacion").style.display =
-      "block";
-    document.querySelector(
-      "#mostrarMensajeContratacion"
-    ).innerHTML = `<p>Su Contratacion fue realizada Correctamente.</p>`;
-    setTimeout(() => {
-      document.querySelector("#mostrarMensajeContratacion").style.display =
-        "none";
-      mostrarSeccionClienteUI();
-    }, 5000); // 5 segundos */
-	}
-	return valorData;
-}
-
-function clickEnRechazarUI() {
-	let valorData = this.getAttribute("data-id");
-	let idPaseadorTxt = valorData.substr(11, valorData.length);
-	let idPaseadorNum = -1;
-
-	if (isNaN) idPaseadorNum = Number(idPaseadorTxt);
-	let paseador = miSistema.obtenerPaseador(idPaseadorNum);
-	let cliente = miSistema.logueado;
-	//console.log(`Paseador ${paseador}`);
-	//console.log(cliente);
-	if (paseador != null) {
-		miSistema.cargaUnaContratacion(cliente, paseador, "pendiente");
-		ocultarTablasUI();
-		document.querySelector("#mostrarMensajeContratacion").style.display = "block";
-		document.querySelector(
-			"#mostrarMensajeContratacion"
-		).innerHTML = `<p>Su Contratacion fue realizada Correctamente.</p>`;
-		setTimeout(() => {
-			document.querySelector("#mostrarMensajeContratacion").style.display = "none";
-			mostrarSeccionClienteUI();
-		}, 5000); // 5 segundos
-	}
-	return valorData;
+	miSistema.procesarAceptarContratacion(idContratacionNum);
 }
 
 function mostrarTablaContratacionesAceptadasUI() {

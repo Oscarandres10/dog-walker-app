@@ -179,6 +179,21 @@ header > div {
 	box-shadow: none;
 }
 
+.tablaContratacionesPendientes td {
+	text-align: center;
+	/* border: none; */
+	border-collapse: collapse;
+	box-shadow: none;
+}
+
+.tablaContratacionesPendientes td:nth-child(4) {
+	width: 40%;
+	text-align: center;
+	/* border: none; */
+	border-collapse: collapse;
+	box-shadow: none;
+}
+
 .tablaContratacionesPendientes caption {
 	font-size: 20px;
 	font-weight: 700;
