@@ -48,15 +48,14 @@ class Sistema {
 	armarTablaContrataciones() {
 		//let listaPaseadores = this.contratacionesFiltradas(); //estoy probando
 		let unaTabla = `<table border="1px" class="tablaContratacionesPendientes">
-    <caption>Contrataciones Pendientes</caption>
-	<tr>
-		
-		<th>Nombre Perro</th>
-		<th>Tamaño</th>
-		<th></th>
-    <th></th>
-    <th>Comentario:</th>
-	</tr>`;
+    					<caption>Contrataciones Pendientes</caption>
+					<tr>	
+						<th>Nombre Perro</th>
+						<th>Tamaño</th>
+						<th></th>
+						<th></th>
+    						<th>Comentario:</th>
+					</tr>`;
 
 		for (let i = 0; i < this.contrataciones.length; i++) {
 			let unaContratacion = this.contrataciones[i];
@@ -66,8 +65,7 @@ class Sistema {
 			
 						<td>${unaContratacion.Cliente.perroNombre}</td>
             <td>${unaContratacion.Cliente.tamanioPerro}</td>
-						<td><input id="btn" type=button data-id="contratacionID-${unaContratacion.id}"  class="botonesTablaContratacionesAceptada" value="Aceptar"></td>
-						<td><input type=button data-id="contratacionID-${unaContratacion.id}"  class="botonesTablaContratacionesRechazada" value="Rechazar"></td>
+						<td><input id="btn" type=button data-id="contratacionID-${unaContratacion.id}"  class="botonesTablaContratacionesPendiente" value="Aceptar"></td>
 						<td></td>
             </tr>`;
 			}
@@ -120,7 +118,7 @@ class Sistema {
     </tr>
     <tr>
     <td><div class="cupoPrincipal">
-    ${this.calcularCupoDisponible(this.logueado)}
+    ${this.cupoDisponible(this.logueado)}
     </div>
     </td>
     </tr>
@@ -358,7 +356,7 @@ class Sistema {
 		let mensaje = ``;
 		let valido = false;
 		let laContratacion = this.obtenerContratacion(id); // se obtiene la contratacion
-		let perro = this.calcularTamanioPerro(laContratacion.Cliente.tamanioPerro); // Tamaño
+		let perro = this.calcularCupoPerro(laContratacion.Cliente.tamanioPerro); // Tamaño
 		//console.log("Estoy en procesarAceptar");
 
 		// Calculo Tamanio de Perro
@@ -366,16 +364,16 @@ class Sistema {
 		//console.log(`Tamanio: ${tamanioPerro}`);
 
 		// Resto del Cupo Total, el Cupo Ocupado.
-		let cupoResto = this.logueado.cupo - this.calcularCupoDisponible(this.logueado);
+		let cupoResto = this.cupoDisponible(this.logueado);
 		//console.log(`CupoRestante = ${cupoResto}`);
 		//console.log(!this.validoPerroOpuestoExiste(laContratacion.Cliente.tamanioPerro));
 		if (!this.validoPerroOpuestoExiste(laContratacion.Cliente.tamanioPerro)) {
-			// Confirmo si hay Cupo Disponible
-			//console.log(`Perro Opuesto No Existe`);
+			//Confirmo si hay Cupo Disponible
+			console.log(`Perro Opuesto No Existe`);
 			if (cupoResto >= tamanioPerro) {
 				laContratacion.estado = "aceptada";
 				laContratacion.CupoActual += tamanioPerro;
-				//console.log(`Contratacion Aceptada`);
+				console.log(`Contratacion Aceptada`);
 				mensaje = `Contratacion Aceptada`;
 			} else {
 				mensaje = `No hay Cupo disponible.`;
@@ -385,12 +383,13 @@ class Sistema {
 			if (perro === "Grande") perroOpuesto = "Chico";
 			if (perro === "Chico") perroOpuesto = "Grande";
 			mensaje = `Ya hay un Perro ${perroOpuesto}`;
-			//console.log(perroOpuesto);
-			//console.log(`Perro Opuesto  Existe`);
+			console.log(perroOpuesto);
+			console.log(`Perro Opuesto  Existe`);
 		}
 		console.log(mensaje);
 		mostrarTablaContratacionesPendientesUI();
-		this.armarEstadoPaseador();
+		//mostrarTablaContratacionesAceptadasUI();
+		mostrarEstadoPaseadorUI();
 	}
 
 	validoPerroOpuestoExiste(perro) {

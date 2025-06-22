@@ -216,6 +216,8 @@ function mostrarSelectPaseadoresUI() {
 //
 //
 
+//#region  ## SECCION PASEADOR
+
 function mostrarSeccionPaseadorUI() {
 	if (miSistema.logueado !== null) {
 		document.querySelector("#sectionPaseadoresLogueado").style.display = "block";
@@ -226,69 +228,15 @@ function mostrarSeccionPaseadorUI() {
 	}
 }
 
-/* function obtenerListaPaseadores(pId) {
-	let lista = new Array();
-	for (let i = 0; i < paseadores.length; i++) {
-		let unPaseador = paseadores[i];
-		//aca se puede filtar con un if
-		lista.push(unPaseador);
-	}
-	return lista;
-}
-
-function paseadoresFiltradosParaCliente() {
-	let listaFiltrada = new Array();
-	for (let i = 0; i < paseadores.length; i++) {
-		let unPaseador = paseadores[i];
-		if (unPaseador.cupoActual > 0) {
-			lista.push(unPaseador);
-		}
-	}
-	return listaFiltrada;
-} */
-
-/* #### ALMACENADO DE DATOS ####*/
-
-function almacenarUI() {
-	//let mensaje = ``;
-	let nombre = document.querySelector("#txtNombreCliente").value;
-	let usuario = document.querySelector("#txtUsuarioCliente").value;
-	let contrasenia = document.querySelector("#txtContraseniaCliente").value;
-	let nombrePerro = document.querySelector("#txtNombrePerroCliente").value;
-	let tamanioPerro = document.querySelector("#selTamanioCliente").value;
-	let validaciones = miSistema.validacionRegistroCliente(nombre, usuario, contrasenia, nombrePerro, tamanioPerro);
-
-	if (validaciones) {
-		let nuevoCliente = new Cliente();
-		nuevoCliente.nombre = nombre;
-		nuevoCliente.usuario = usuario;
-		nuevoCliente.contrasenia = contrasenia;
-		nuevoCliente.perroNombre = nombrePerro;
-		nuevoCliente.tamanioPerro = tamanioPerro;
-
-		miSistema.clientes.push(nuevoCliente);
-		miSistema.mensajeRegistro.push(`Usuario ${nombre} registro correctamente`);
-	}
-
-	document.querySelector("#pRegistrarse").innerHTML = miSistema.mensajeRegistro.join("");
-	miSistema.mensajeRegistro = [];
-}
-
-//#region  ##  PASEADOR INTERFAZ
-
 function mostrarTablaContratacionesPendientesUI() {
 	let laTabla = miSistema.armarTablaContrataciones();
 	document.querySelector("#mostrarTablaContratacionesPendientes").innerHTML = laTabla;
 	darVidaBotonesTablaContratacionesPendientesUI();
 }
 function darVidaBotonesTablaContratacionesPendientesUI() {
-	let botonAceptar = document.querySelectorAll(".botonesTablaContratacionesAceptada");
+	let botonAceptar = document.querySelectorAll(".botonesTablaContratacionesPendiente");
 	for (let unBoton of botonAceptar) {
 		unBoton.addEventListener("click", clickEnAceptarUI);
-	}
-	let botonRechazar = document.querySelectorAll(".botonesTablaContratacionesRechazada");
-	for (let unBoton of botonRechazar) {
-		unBoton.addEventListener("click", clickEnRechazarUI);
 	}
 }
 
@@ -344,21 +292,41 @@ function clickEnRechazarUI() {
 	return valorData;
 }
 
-//
-//   NO SE ESTO  TALVEZ BORREMOS
-//
-//
 function mostrarTablaContratacionesAceptadasUI() {
 	let laTabla = miSistema.armarTablaContratacionesAceptadas();
 	document.querySelector("#mostrarTablaContratacionesAceptadas").innerHTML = laTabla;
 }
 
-//
-//
-//
-
 function mostrarEstadoPaseadorUI() {
 	let laTabla = miSistema.armarEstadoPaseador();
 	document.querySelector("#mostrarEstadoPaseador").innerHTML = laTabla;
 }
+
 //#endregion
+
+/* #### ALMACENADO DE DATOS ####*/
+
+function almacenarUI() {
+	//let mensaje = ``;
+	let nombre = document.querySelector("#txtNombreCliente").value;
+	let usuario = document.querySelector("#txtUsuarioCliente").value;
+	let contrasenia = document.querySelector("#txtContraseniaCliente").value;
+	let nombrePerro = document.querySelector("#txtNombrePerroCliente").value;
+	let tamanioPerro = document.querySelector("#selTamanioCliente").value;
+	let validaciones = miSistema.validacionRegistroCliente(nombre, usuario, contrasenia, nombrePerro, tamanioPerro);
+
+	if (validaciones) {
+		let nuevoCliente = new Cliente();
+		nuevoCliente.nombre = nombre;
+		nuevoCliente.usuario = usuario;
+		nuevoCliente.contrasenia = contrasenia;
+		nuevoCliente.perroNombre = nombrePerro;
+		nuevoCliente.tamanioPerro = tamanioPerro;
+
+		miSistema.clientes.push(nuevoCliente);
+		miSistema.mensajeRegistro.push(`Usuario ${nombre} registro correctamente`);
+	}
+
+	document.querySelector("#pRegistrarse").innerHTML = miSistema.mensajeRegistro.join("");
+	miSistema.mensajeRegistro = [];
+}
