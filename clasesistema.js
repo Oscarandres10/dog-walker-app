@@ -1,6 +1,5 @@
 class Sistema {
 	constructor() {
-		this.listaGeneros = new Array();
 		this.clientes = new Array();
 		this.paseadores = new Array();
 		this.contrataciones = new Array();
@@ -38,6 +37,7 @@ class Sistema {
 		let unaContratacion = new Contrataciones();
 		unaContratacion.Cliente = this.obtenerCliente(idCliente);
 		unaContratacion.Paseador = this.obtenerPaseador(idPaseador);
+		unaContratacion.estado = "pendiente";
 		this.contrataciones.push(unaContratacion);
 	}
 
@@ -324,11 +324,6 @@ class Sistema {
 	//#endregion
 
 	//#region  ## VALIDACIONES CONTRATACIONES ##
-
-	// no contratacion previa
-	// no cupo disponible
-
-	// no Perro Opuesto
 
 	validarPrecargaContratacion(idCliente, idPaseador) {
 		let mensaje = ``;

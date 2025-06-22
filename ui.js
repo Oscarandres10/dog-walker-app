@@ -120,40 +120,48 @@ function logoutUI() {
 	document.querySelector("#pMostrarlogueado").innerHTML = ``;
 	document.querySelector("#btnLogoutCliente").style.display = `none`;
 	miSistema.logueado = null;
-	document.querySelector("#sectionSobreNosotros").style.display = `block`;
+
+	document.querySelector("#sectionUsuarioLogueado").style.display = "none";
+
+	document.querySelector("#sectionSobreNosotros").style.display = "block";
 }
 
 //#region   ## SECCION CLIENTE
 
 function mostrarSeccionClienteUI() {
-	//console.log(miSistema.logueado);
-	if (miSistema.logueado !== null) {
-		//console.log(miSistema.logueado);
-		document.querySelector("#sectionUsuarioLogueado").style.display = "block";
-		let clienteId = miSistema.logueado.id;
-		//console.log(`clienteId: ${clienteId} --> Adentro de mostrarSeccionClienteUI`);
-		//console.log(`Abajo    seria si tiene contratacion`);
-		//console.log(miSistema.clienteTieneContratacion(clienteId));
-		if (miSistema.clienteTieneContratacion(clienteId)) {
-			//console.log(`Tiene Contratacion`);
-			document.querySelector("#divMostrarContratado").style.display = "block";
-			document.querySelector(
-				"#divMostrarContratado"
-			).innerHTML = `<p><strong>${miSistema.logueado.perroNombre}</strong> tiene una contratacion pendiente o Aceptada actualmente..</p>`;
-			document.querySelector("#mostrarTablaPaseador").style.display = "none";
-		} else {
-			//console.log(`No Tiene Contratacion`);
-			document.querySelector("#sectionUsuarioLogueado").style.display = "block";
-			document.querySelector("#mostrarSelectPaseadores").style.display = "block";
-			document.querySelector("#mostrarTablaPaseador").style.display = "block";
-			document.querySelector("#divMostrarContratado").style.display = "none";
-			mostrarSelectPaseadoresUI();
+	if (!miSistema.logueado) {
+		return loginUI();
+	}
 
-			//Lo siguiente le doy Vida a los select para mostrar la info.
-			document.querySelector("#selPaseadoresParaCliente").addEventListener("change", mostrarPaseadoreUI);
-		}
+	let clienteId = miSistema.logueado.id;
+	let tieneContrato = miSistema.clienteTieneContratacion(clienteId);
+
+	// Muestro la seccion Cliente
+	document.querySelector("#sectionUsuarioLogueado").style.display = "block";
+
+	// Ahora voy a controla si tenia contratacion
+	if (tieneContrato) {
+		let divContratado = document.querySelector("#divMostrarContratado");
+		divContratado.style.display = "block";
+
+		divContratado.innerHTML = `<p><strong>${miSistema.logueado.perroNombre}</strong> tiene una contratación pendiente o aceptada actualmente.</p>`;
+
+		// Como tiene contratacion y aviso, oculto el div de elegir paseador
+		document.querySelector("#mostrarTablaPaseador").style.display = "none";
 	} else {
-		loginUI();
+		// No tiene contratación…
+		//
+		// por las dudas limpio mensajes anteriores.
+		let divContratado = document.querySelector("#divMostrarContratado");
+		divContratado.innerHTML = "";
+		divContratado.style.display = "none";
+
+		// Y Mustro paseadores
+		document.querySelector("#mostrarTablaPaseador").style.display = "block";
+		mostrarSelectPaseadoresUI();
+
+		//Lo siguiente le doy Vida a los select para mostrar la info.
+		document.querySelector("#selPaseadoresParaCliente").addEventListener("change", mostrarPaseadoreUI);
 	}
 }
 
@@ -181,7 +189,7 @@ function clickEnSolicitarUI() {
 		let paseador = miSistema.obtenerPaseador(idPaseadorNum);
 		let cliente = miSistema.logueado.id;
 		if (paseador != null) {
-			miSistema.cargaUnaContratacion(cliente, idPaseadorNum, "pendiente");
+			miSistema.cargaUnaContratacion(cliente, idPaseadorNum);
 			ocultarTablasUI();
 			document.querySelector("#mostrarMensajeContratacion").style.display = "block";
 			document.querySelector(
@@ -218,7 +226,7 @@ function mostrarSeccionPaseadorUI() {
 	}
 }
 
-function obtenerListaPaseadores(pId) {
+/* function obtenerListaPaseadores(pId) {
 	let lista = new Array();
 	for (let i = 0; i < paseadores.length; i++) {
 		let unPaseador = paseadores[i];
@@ -237,7 +245,7 @@ function paseadoresFiltradosParaCliente() {
 		}
 	}
 	return listaFiltrada;
-}
+} */
 
 /* #### ALMACENADO DE DATOS ####*/
 
