@@ -45,38 +45,6 @@ class Sistema {
 
 	// #region  ## TABLAS
 
-	armarTablaPaseadores() {
-		let listaPaseadores = this.paseadoresFiltradosParaCliente(); //estoy probando
-		//console.log(listaPaseadores);
-		let unaTabla = `
-    <p>No tiene Contratacion Pendiente o Aceptada en este momento.</p>
-    <p>Si lo desea, realiza una contratacion nueva.</p>
-    <br><Br>
-    <hr>
-    <table border="1px">
-	<tr>
-		
-		<th>Nombre</th>
-		
-		<th>Cupo</th>
-		<th></th>
-
-	</tr>`;
-
-		for (let i = 0; i < listaPaseadores.length; i++) {
-			let unPaseador = listaPaseadores[i];
-			//agregar validaciones. Falta agregar el "data" del boton
-			unaTabla += `<tr>
-			
-			<td>${unPaseador.nombre}</td>
-			<td>${unPaseador.cupoActual}</td>
-			<td><input type=button data-id="paseadorID-${unPaseador.id}" class="botonesTablaPaseadores" value="Solicitar"></td>
-		</tr>`;
-		}
-		unaTabla += `</table>`;
-		return unaTabla;
-	}
-
 	armarTablaContrataciones() {
 		//let listaPaseadores = this.contratacionesFiltradas(); //estoy probando
 		let unaTabla = `<table border="1px" class="tablaContratacionesPendientes">
@@ -363,12 +331,25 @@ class Sistema {
 	// no Perro Opuesto
 
 	validarPrecargaContratacion(idCliente, idPaseador) {
+		let mensaje = ``;
 		let valido = false;
 		let elCliente = miSistema.obtenerCliente(idCliente);
 		let elPaseador = miSistema.obtenerPaseador(idPaseador);
+
 		if (elCliente !== null && elPaseador !== null) {
 			let cupo = this.cupoDisponible(elPaseador);
+
+			// Me aseguro que hay cupo sufficiente para el cupo del perro.
 			if (cupo >= this.calcularCupoPerro(elCliente.tamanioPerro)) {
+				//console.log(`test estoy en el if si el cupo es mayor que el cupo perro`);
+				if (this.paseadorComparoTamanio(elPaseador, elCliente.tamanioPerro)) {
+					//console.log(`Test Se compara los tamanio de perro`);
+					valido = true;
+				} else {
+					mensaje = `Perro Opuesto ya Exite.`;
+				}
+			} else {
+				mensaje = `No tiene cupo Sufficiente.`;
 			}
 		}
 		return valido;
@@ -448,44 +429,28 @@ class Sistema {
 	paseadoresFiltradosParaCliente() {
 		let paseadorArrayfiltrados = new Array();
 		let cliente = this.logueado;
-		let cupoNecesario = this.PaseadorCalculoCupoTamanio(cliente.tamanioPerro);
+		let cupoNecesario = this.calcularCupoPerro(cliente.tamanioPerro);
 		//console.log(`ESTOY ADENTRO DE FILTRADOS PARA CLIENTE`);
 		//console.log(cupoNecesario);
-		let cupoValido = false;
-		let cupoActual = 0;
+
 		for (let i = 0; i < this.paseadores.length; i++) {
 			let paseador = this.paseadores[i];
-			cupoActual = this.calcularCupoDisponible(paseador);
-			let cupoResto = paseador.cupo - cupoActual;
-			//console.log(cupoResto + ` Cupo Resto`);
-			if (cupoResto >= cupoNecesario) cupoValido = true;
-			//console.log(`Esto cupo Valido`);
-			//console.log(cupoValido);
-			let verificacionTamanio = this.paseadorComparoTamanio(paseador, cliente.tamanioPerro);
+			let cupo = this.cupoDisponible(paseador);
+			let cupoValido = cupo >= cupoNecesario;
+			//console.log(cupo + ` Cupo Resto`);
 
-			//console.log(cupoValido + ` CupoValido`);
-			//console.log(verificacionTamanio + ` Tamanio`);
+			let verificacionTamanio = this.paseadorComparoTamanio(paseador, cliente.tamanioPerro);
+			//verificacionTamanio = false;
+			//console.log(cupoValido);
+			//console.log(verificacionTamanio);
 			if (cupoValido && verificacionTamanio) {
 				//console.log(`test`);
+				//console.log(paseador);
 				paseadorArrayfiltrados.push(paseador);
 			}
 		}
 		//console.log(paseadorArrayfiltrados);
 		return paseadorArrayfiltrados;
-	}
-
-	// Usar Utilidaddes
-	PaseadorCalculoCupoTamanio(pTamanio) {
-		let cupoCliente = 0;
-		if (pTamanio === "Chico") cupoCliente = 1;
-		if (pTamanio === "Mediano") cupoCliente = 2;
-		if (pTamanio === "Grande") cupoCliente = 4;
-
-		return cupoCliente;
-	}
-
-	paseadorConCupo(paseador, cupo) {
-		return paseador.cupoActual >= cupo;
 	}
 
 	paseadorComparoTamanio(paseador, tamanio) {
@@ -494,14 +459,6 @@ class Sistema {
 		// Paso por Contrataciones y me salgo en cuanto tamanio sea falso.
 		while (i < this.contrataciones.length && tamanioValido) {
 			let contratacion = this.contrataciones[i];
-			//mi Interes es solo las del paseador en curso y si contratacion
-			// es aceptada.
-			/* console.log(`paseador`);
-			console.log(contratacion.Paseador);
-			console.log(`===`);
-			console.log(paseador);
-			console.log(`Estado`);
-			console.log(contratacion.estado); */
 
 			if (contratacion.Paseador === paseador && contratacion.estado === "aceptada") {
 				//console.log(`Estoy adentro de if  === Paseador && estado aceptada`);
@@ -526,7 +483,63 @@ class Sistema {
 
 	//#endregion
 
+	//
+	//
+
+	//#region  ## PASEADORES
+	armarTablaPaseador(id) {
+		let paseador = this.obtenerPaseador(id);
+		//console.log(paseador);
+		let unaTabla = `<br><br><table class="tablaPaseador" border="1px">
+					<tr>
+						<th colspan="2">Nombre</th>
+						
+						<th>Comentarios</th>
+					</tr>
+					<tr>
+				   		<td>${paseador.nombre}</td>
+						<td>
+							<input type="button" data-id="paseadorID-${paseador.id}" class="botonesTablaPaseadores" value="Solicitar">
+						</td>
+						<td></td>
+				    </tr></table>`;
+
+		return unaTabla;
+	}
+
+	armadoSelectPaseadores() {
+		let listaPaseadores = this.paseadoresFiltradosParaCliente();
+		let paseadores = '<option value="-1">elija opción</option>`;';
+		for (let i = 0; i < listaPaseadores.length; i++) {
+			paseadores += `<option value="${listaPaseadores[i].id}">${listaPaseadores[i].nombre}</option>`;
+		}
+		return paseadores;
+	}
+
+	//#endregion
+
+	//
+	//
+
 	//#region  ## UTILIDADES
+
+	// BUSCO POR CONTRATACIONES PENDIENTES O ACEPTADAS.
+
+	clienteTieneContratacion(id) {
+		let estado = false;
+		let x = 0;
+		//console.log(`Abajo: numeros cliente ID  adentro de clienteTieneContratacion`);
+		//console.log(miSistema.contrataciones[x].Cliente.id);
+		while (x < miSistema.contrataciones.length && !estado) {
+			let idClienteContrato = miSistema.contrataciones[x].Cliente.id;
+			let estadoContratacion = miSistema.contrataciones[x].estado;
+			if (idClienteContrato === id && estadoContratacion !== "denegada") {
+				estado = true;
+			}
+			x++;
+		}
+		return estado;
+	}
 
 	// Busco el Cliente por ID
 	obtenerCliente(cId) {
@@ -591,7 +604,7 @@ class Sistema {
 
 	cupoDisponible(paseador) {
 		//console.log(`Estoy Adentro de Calcular Cupo Disonible`);
-		let cupo = false;
+		//let cupo = false;
 		let cupoMax = paseador.cupo; // Cupo maximo del Paseador
 
 		// Recorro contrataciones.
@@ -603,7 +616,7 @@ class Sistema {
 			}
 		}
 
-		return cupo;
+		return cupoMax;
 	}
 
 	calcularCupoPerro(tamanio) {

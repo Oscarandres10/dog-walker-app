@@ -41,7 +41,7 @@ function mostrarNavUI() {
 function ocultarTablasUI() {
 	let lasTablas = document.querySelectorAll(".tablas");
 	for (let unaTabla of lasTablas) {
-		unaTabla.innerHTML = ``;
+		unaTabla.style.display = "none";
 	}
 }
 
@@ -110,47 +110,6 @@ function mostrarLogueadoUI() {
 	return elCliente;
 }
 
-function mostrarSeccionClienteUI() {
-	if (miSistema.logueado !== null) {
-		document.querySelector("#sectionUsuarioLogueado").style.display = "block";
-		let contratado = false;
-		let x = 0;
-		let clienteId = miSistema.logueado.id;
-
-		while (x < miSistema.contrataciones.length && !contratado) {
-			let idClienteContrato = miSistema.contrataciones[x].Cliente.id;
-			let estadoContratacion = miSistema.contrataciones[x].estado;
-			if (idClienteContrato === clienteId && estadoContratacion !== "denegada") {
-				contratado = true;
-			}
-			x++;
-		}
-		if (contratado) {
-			document.querySelector("#divMostrarContratado").style.display = "block";
-			document.querySelector(
-				"#divMostrarContratado"
-			).innerHTML = `<p><strong>${miSistema.logueado.perroNombre}</strong> tiene una contratacion pendiente o Aceptada actualmente..</p>`;
-			document.querySelector("#mostrarTablaPaseadores").style.display = "none";
-		} else {
-			document.querySelector("#mostrarTablaPaseadores").style.display = "block";
-			document.querySelector("#divMostrarContratado").style.display = "none";
-			mostrarTablaPaseadoresUI();
-		}
-	} else {
-		loginUI();
-	}
-}
-
-function mostrarSeccionPaseadorUI() {
-	if (miSistema.logueado !== null) {
-		document.querySelector("#sectionPaseadoresLogueado").style.display = "block";
-		mostrarTablaContratacionesPendientesUI(); // Tabla de Contrataciones de Pendientes
-		mostrarEstadoPaseadorUI();
-	} else {
-		loginUI();
-	}
-}
-
 /* #### LOGOUT ####*/
 
 function logoutUI() {
@@ -160,13 +119,49 @@ function logoutUI() {
 	ocultarTablasUI();
 	document.querySelector("#pMostrarlogueado").innerHTML = ``;
 	document.querySelector("#btnLogoutCliente").style.display = `none`;
+	miSistema.logueado = null;
+	document.querySelector("#sectionSobreNosotros").style.display = `block`;
 }
 
-/* #### Tablas #### */
+//#region   ## SECCION CLIENTE
 
-function mostrarTablaPaseadoresUI() {
-	let laTabla = miSistema.armarTablaPaseadores();
-	document.querySelector("#mostrarTablaPaseadores").innerHTML = laTabla;
+function mostrarSeccionClienteUI() {
+	//console.log(miSistema.logueado);
+	if (miSistema.logueado !== null) {
+		//console.log(miSistema.logueado);
+		document.querySelector("#sectionUsuarioLogueado").style.display = "block";
+		let clienteId = miSistema.logueado.id;
+		//console.log(`clienteId: ${clienteId} --> Adentro de mostrarSeccionClienteUI`);
+		//console.log(`Abajo    seria si tiene contratacion`);
+		//console.log(miSistema.clienteTieneContratacion(clienteId));
+		if (miSistema.clienteTieneContratacion(clienteId)) {
+			//console.log(`Tiene Contratacion`);
+			document.querySelector("#divMostrarContratado").style.display = "block";
+			document.querySelector(
+				"#divMostrarContratado"
+			).innerHTML = `<p><strong>${miSistema.logueado.perroNombre}</strong> tiene una contratacion pendiente o Aceptada actualmente..</p>`;
+			document.querySelector("#mostrarTablaPaseador").style.display = "none";
+		} else {
+			//console.log(`No Tiene Contratacion`);
+			document.querySelector("#sectionUsuarioLogueado").style.display = "block";
+			document.querySelector("#mostrarSelectPaseadores").style.display = "block";
+			document.querySelector("#mostrarTablaPaseador").style.display = "block";
+			document.querySelector("#divMostrarContratado").style.display = "none";
+			mostrarSelectPaseadoresUI();
+
+			//Lo siguiente le doy Vida a los select para mostrar la info.
+			document.querySelector("#selPaseadoresParaCliente").addEventListener("change", mostrarPaseadoreUI);
+		}
+	} else {
+		loginUI();
+	}
+}
+
+function mostrarPaseadoreUI() {
+	let paseador = document.querySelector("#selPaseadoresParaCliente").value;
+
+	let laTabla = miSistema.armarTablaPaseador(Number(paseador));
+	document.querySelector("#mostrarTablaPaseador").innerHTML = laTabla;
 	darVidaBotonesTablaPaseadoresUI();
 }
 function darVidaBotonesTablaPaseadoresUI() {
@@ -179,26 +174,48 @@ function darVidaBotonesTablaPaseadoresUI() {
 function clickEnSolicitarUI() {
 	let valorData = this.getAttribute("data-id");
 	let idPaseadorTxt = valorData.substr(11, valorData.length);
-	let idPaseadorNum = -1;
-
-	if (isNaN) idPaseadorNum = Number(idPaseadorTxt);
-	let paseador = miSistema.obtenerPaseador(idPaseadorNum);
-	let cliente = miSistema.logueado;
-	//console.log(`Paseador ${paseador}`);
-	//console.log(cliente);
-	if (paseador != null) {
-		miSistema.cargaUnaContratacion(cliente, paseador, "pendiente");
-		ocultarTablasUI();
-		document.querySelector("#mostrarMensajeContratacion").style.display = "block";
-		document.querySelector(
-			"#mostrarMensajeContratacion"
-		).innerHTML = `<p>Su Contratacion fue realizada Correctamente.</p>`;
-		setTimeout(() => {
-			document.querySelector("#mostrarMensajeContratacion").style.display = "none";
-			mostrarSeccionClienteUI();
-		}, 5000); // 5 segundos
+	let idPaseadorNum;
+	if (!isNaN(idPaseadorTxt)) idPaseadorNum = Number(idPaseadorTxt);
+	//console.log(idPaseadorNum);
+	if (idPaseadorNum !== -1) {
+		let paseador = miSistema.obtenerPaseador(idPaseadorNum);
+		let cliente = miSistema.logueado.id;
+		if (paseador != null) {
+			miSistema.cargaUnaContratacion(cliente, idPaseadorNum, "pendiente");
+			ocultarTablasUI();
+			document.querySelector("#mostrarMensajeContratacion").style.display = "block";
+			document.querySelector(
+				"#mostrarMensajeContratacion"
+			).innerHTML = `<p>Su Contratacion fue realizada Correctamente.</p>`;
+			setTimeout(() => {
+				document.querySelector("#mostrarMensajeContratacion").style.display = "none";
+				mostrarSeccionClienteUI();
+			}, 2000); // 2 segundos
+		}
+	} else {
+		document.querySelector("#mostrarMensajeContratacion").innerHTML = "No se ha Elegido un Paseador";
 	}
 	return valorData;
+}
+
+function mostrarSelectPaseadoresUI() {
+	let selectPaseadores = miSistema.armadoSelectPaseadores();
+	document.querySelector("#selPaseadoresParaCliente").innerHTML = selectPaseadores;
+}
+
+//#endregion
+
+//
+//
+
+function mostrarSeccionPaseadorUI() {
+	if (miSistema.logueado !== null) {
+		document.querySelector("#sectionPaseadoresLogueado").style.display = "block";
+		mostrarTablaContratacionesPendientesUI(); // Tabla de Contrataciones de Pendientes
+		mostrarEstadoPaseadorUI();
+	} else {
+		loginUI();
+	}
 }
 
 function obtenerListaPaseadores(pId) {

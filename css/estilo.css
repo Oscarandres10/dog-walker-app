@@ -183,3 +183,45 @@ header > div {
 	font-size: 20px;
 	font-weight: 700;
 }
+
+/*  */
+/*  */
+/*  */
+
+.tablaPaseador {
+	width: 100%;
+	margin-bottom: 20px;
+	border: none;
+	border-collapse: collapse;
+	box-shadow: none;
+}
+
+.tablaPaseador td:nth-child(1) {
+	width: 30%;
+}
+.tablaPaseador td:nth-child(2) {
+	width: 30%;
+}
+
+.tablaPaseador th,
+.tablaPaseador td {
+	border: 1px solid red;
+	background: none;
+	text-align: center;
+	padding: 20px;
+	font-size: 20px;
+}
+
+.tablaPaseador input[type="button"] {
+	font-size: 16px;
+	padding: 12px 20px;
+	color: #fff;
+	background-color: #20c997;
+	border-radius: 10px;
+	border: none;
+	transition: background-color 0.3s ease;
+}
+
+.tablaPaseador input[type="button"]:hover {
+	background-color: #199d7c;
+}
