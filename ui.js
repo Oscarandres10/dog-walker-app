@@ -79,6 +79,7 @@ function loginInterfazUI() {
 }
 
 function loginUI() {
+	//console.log("loginUI arrancó con usuario:", usuarioInput.value);
 	let mensaje = "";
 	let usuario = document.querySelector("#txtUsuario").value;
 	let contrasenia = document.querySelector("#txtContrasenia").value;
@@ -113,7 +114,6 @@ function mostrarLogueadoUI() {
 /* #### LOGOUT ####*/
 
 function logoutUI() {
-	let mensaje = "";
 	ocultarTodoUI();
 	mostrarNavUI();
 	ocultarTablasUI();
@@ -229,8 +229,10 @@ function mostrarSeccionPaseadorUI() {
 }
 
 function mostrarTablaContratacionesPendientesUI() {
+	let seccionPaseador = document.querySelector("#mostrarTablaContratacionesPendientes");
 	let laTabla = miSistema.armarTablaContrataciones();
-	document.querySelector("#mostrarTablaContratacionesPendientes").innerHTML = laTabla;
+	seccionPaseador.style.display = "block";
+	seccionPaseador.innerHTML = laTabla;
 	darVidaBotonesTablaContratacionesPendientesUI();
 }
 function darVidaBotonesTablaContratacionesPendientesUI() {
@@ -243,20 +245,28 @@ function darVidaBotonesTablaContratacionesPendientesUI() {
 function clickEnAceptarUI() {
 	let valorData = this.getAttribute("data-id");
 	let idContratacionTxt = valorData.substr(15, valorData.length);
-	let idContratacionNum = -1;
-	//console.log(idContratacionTxt);
-	if (isNaN) idContratacionNum = Number(idContratacionTxt);
-	miSistema.procesarAceptarContratacion(idContratacionNum);
-}
+	let idContratacionNum = Number(idContratacionTxt);
 
-function mostrarTablaContratacionesAceptadasUI() {
-	let laTabla = miSistema.armarTablaContratacionesAceptadas();
-	document.querySelector("#mostrarTablaContratacionesAceptadas").innerHTML = laTabla;
+	miSistema.procesarAceptarContratacion(idContratacionNum);
+
+	miSistema.validoContratacionesPendientesDespuesDeAceptar(idContratacionNum);
+
+	gestionContratacionesProcensandoUI();
 }
 
 function mostrarEstadoPaseadorUI() {
+	let seccionPaseadorSideBar = document.querySelector("#mostrarEstadoPaseador");
 	let laTabla = miSistema.armarEstadoPaseador();
-	document.querySelector("#mostrarEstadoPaseador").innerHTML = laTabla;
+	seccionPaseadorSideBar.style.display = "block";
+	seccionPaseadorSideBar.innerHTML = laTabla;
+}
+
+function gestionContratacionesProcensandoUI() {
+	//la primera vez que voy a a procesar los alquileres.
+	let laTabla = miSistema.armarTablaContratacionesProcesando();
+	document.querySelector("#mostrarTablaContratacionesPendientes").innerHTML = laTabla;
+	//tengo que darle vida a los botones
+	darVidaBotonesTablaContratacionesPendientesUI();
 }
 
 //#endregion

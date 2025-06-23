@@ -46,7 +46,6 @@ class Sistema {
 	// #region  ## TABLAS
 
 	armarTablaContrataciones() {
-		//let listaPaseadores = this.contratacionesFiltradas(); //estoy probando
 		let unaTabla = `<table border="1px" class="tablaContratacionesPendientes">
     					<caption>Contrataciones Pendientes</caption>
 					<tr>	
@@ -61,13 +60,11 @@ class Sistema {
 			let unaContratacion = this.contrataciones[i];
 			let paseador = this.logueado;
 			if (unaContratacion.Paseador === paseador && unaContratacion.estado === "pendiente") {
-				unaTabla += `<tr>
-			
-						<td>${unaContratacion.Cliente.perroNombre}</td>
-            <td>${unaContratacion.Cliente.tamanioPerro}</td>
-						<td><input id="btn" type=button data-id="contratacionID-${unaContratacion.id}"  class="botonesTablaContratacionesPendiente" value="Aceptar"></td>
-						<td></td>
-            </tr>`;
+				unaTabla += `<tr>`;
+				unaTabla += `<td>${unaContratacion.Cliente.perroNombre}</td>`;
+				unaTabla += `<td>${unaContratacion.Cliente.tamanioPerro}</td>`;
+				unaTabla += `<td><input id="btn" type=button data-id="contratacionID-${unaContratacion.id}"  class="botonesTablaContratacionesPendiente" value="Aceptar"></td>`;
+				unaTabla += `<td></td></tr>`;
 			}
 		}
 		unaTabla += `</table>`;
@@ -75,27 +72,36 @@ class Sistema {
 		return unaTabla;
 	}
 
-	armarTablaContratacionesAceptadas() {
-		let unaTabla = `<table border="1px">
-	<tr>
-		
-		<th>Nombre Perro</th>
-		<th></th>
-		<th></th>
-
-	</tr>`;
+	armarTablaContratacionesProcesando() {
+		//let listaPaseadores = this.contratacionesFiltradas(); //estoy probando
+		let unaTabla = `<table border="1px" class="tablaContratacionesPendientes">
+    					<caption>Contrataciones Pendientes</caption>
+					<tr>	
+						<th>Nombre Perro</th>
+						<th>Tamaño</th>
+						<th></th>
+						<th>Comentario:</th>
+					</tr>`;
 
 		for (let i = 0; i < this.contrataciones.length; i++) {
 			let unaContratacion = this.contrataciones[i];
 			let paseador = this.logueado;
-			if (unaContratacion.Paseador === paseador && unaContratacion.estado === "aceptada") {
-				unaTabla += `<tr>
-			
-						<td>${unaContratacion.Cliente.perroNombre}</td>
-						</tr>`;
+			if (unaContratacion.Paseador === paseador) {
+				unaTabla += `<tr>`;
+				unaTabla += `<td>${unaContratacion.Cliente.perroNombre}</td>`;
+				unaTabla += `<td>${unaContratacion.Cliente.tamanioPerro}</td>`;
+
+				// SI CONTRATACION SIGUE PENDIENTE DEJO BOTON SINO LO ELIMINO
+				if (unaContratacion.estado === "pendiente") {
+					unaTabla += `<td><input id="btn" type=button data-id="contratacionID-${unaContratacion.id}"  class="botonesTablaContratacionesPendiente" value="Aceptar"></td>`;
+				} else {
+					unaTabla += `<td></td>`;
+				}
+				unaTabla += `<td id="mostrarComentario-${unaContratacion.id}">${unaContratacion.comentario}</td></tr>`;
 			}
 		}
 		unaTabla += `</table>`;
+
 		return unaTabla;
 	}
 
@@ -368,7 +374,7 @@ class Sistema {
 		//console.log(`Arriba es Estado`);
 		//console.log(noTieneContratacion);
 		//console.log(`Arriba es Estado`);
-
+		let noModificado = false;
 		// VALIDO QUE No TENGA CONTRATACION PREVIA
 		if (noTieneContratacion && laContratacion.estado === "pendiente") {
 			console.log(`No tiene Contratacion Previa.`);
@@ -383,43 +389,112 @@ class Sistema {
 					console.log(`Contratacion Aceptada`);
 					laContratacion.estado = "aceptada";
 					laContratacion.comentario = "aceptada";
+					noModificado = true;
 				} else {
 					laContratacion.comentario = `No hay Cupo disponible.`;
 				}
 			} else {
+				let perroTamanio = laContratacion.Cliente.tamanioPerro;
+				console.log(perroTamanio);
 				console.log(`Perro Opuesto  Existe`);
 				let perroOpuesto = ``;
-				if (perro === "Grande") perroOpuesto = "Chico";
-				if (perro === "Chico") perroOpuesto = "Grande";
-				laContratacion.comentario = `Ya hay un Perro ${perroOpuesto}`;
+				if (perroTamanio === "Grande") perroOpuesto = "Chico";
+				if (perroTamanio === "Chico") perroOpuesto = "Grande";
+				laContratacion.comentario = `Ya hay un perro <cite>${perroOpuesto}</cite>`;
 			}
 		} else {
 			laContratacion.comentario = `Ya tiene Contratacion previa.`;
 		}
-
+		if (!noModificado) {
+			// si se modifico
+			laContratacion.estado = "denegado";
+		}
 		mostrarTablaContratacionesPendientesUI();
 		mostrarEstadoPaseadorUI();
+	}
+
+	validoContratacionesPendientesDespuesDeAceptar(id) {
+		let contratacion = this.obtenerContratacion(id); // se obtiene la contratacion
+		let elPaseador = contratacion.Paseador;
+
+		let contracionesPaseador = this.obtenerContratacionesPaseador(elPaseador.id);
+		for (let x = 0; x < contracionesPaseador.length; x++) {
+			let laContratacion = contracionesPaseador[x]; // se obtiene la contratacion
+
+			let noModificado = false;
+			if (laContratacion.estado === "pendiente") {
+				// COMIENZO A VALIDAR PARA CADA CONTRATACION PENDIENTE..
+				let perro = this.calcularCupoPerro(laContratacion.Cliente.tamanioPerro); // Tamaño
+
+				// Resto del Cupo Total, el Cupo Ocupado.
+				let cupo = this.cupoDisponible(this.logueado);
+
+				// Busco si cliente tiene contratacion Previa.
+				let noTieneContratacion = this.clienteTieneContratacion(laContratacion.Cliente.id);
+				let noHayPerroOpuesto = this.validoPerroOpuestoNoExiste(laContratacion.Cliente.tamanioPerro);
+
+				// VALIDO QUE No TENGA CONTRATACION PREVIA
+				if (noTieneContratacion && laContratacion.estado === "pendiente") {
+					console.log(`No tiene Contratacion Previa.`);
+
+					// VALIDO QUE NO HALLA PERRO OPUESTO
+					if (noHayPerroOpuesto && laContratacion.estado === "pendiente") {
+						//Confirmo si hay Cupo Disponible
+						console.log(`No hay Perro Opuesto`);
+
+						// VALIDO QUE HALLA SUFICIENTE LUGAR DE CUPO Para El PERRO
+						if (cupo >= perro) {
+							noModificado = true;
+						} else {
+							laContratacion.comentario = `No hay Cupo disponible.`;
+						}
+					} else {
+						let perroTamanio = laContratacion.Cliente.tamanioPerro;
+						console.log(perroTamanio);
+						console.log(`Perro Opuesto  Existe`);
+						let perroOpuesto = ``;
+						if (perroTamanio === "Grande") perroOpuesto = "Chico";
+						if (perroTamanio === "Chico") perroOpuesto = "Grande";
+						laContratacion.comentario = `Ya hay un perro <cite>${perroOpuesto}</cite>`;
+					}
+				} else {
+					laContratacion.comentario = `Ya tiene Contratacion previa.`;
+				}
+				if (!noModificado) {
+					// si se modifico
+					laContratacion.estado = "denegado";
+				}
+			}
+		}
+	}
+
+	obtenerContratacionesPaseador(pID) {
+		let lista = new Array();
+		for (let x = 0; x < this.contrataciones.length; x++) {
+			if (this.contrataciones[x].Paseador.id === pID) {
+				lista.push(this.contrataciones[x]);
+			}
+		}
+		return lista;
 	}
 
 	validoPerroOpuestoNoExiste(perro) {
 		let valido = true;
 		let x = 0;
-		//console.log(`QUE PERRO ES ESTO  para VALIDAR OPUESTO`);
-		//console.log(perro);
-		while (x < this.contrataciones.length && valido) {
-			if (perro === "Grande") {
-				//console.log(`perro Grande`);
-				if (this.contrataciones[x].Cliente.tamanioPerro === `Chico` && this.contrataciones[x].estado === "aceptada") {
-					valido = true;
-				}
-			}
-			if (perro === "Chico") {
-				//console.log(`perro Chico`);
-				if (this.contrataciones[x].Cliente.tamanioPerro === `Grande` && this.contrataciones[x].estado === "aceptada") {
-					valido = false;
-				}
-			}
 
+		while (x < this.contrataciones.length && valido) {
+			if (this.contrataciones[x].Paseador === this.logueado && this.contrataciones[x].estado === "aceptada") {
+				if (perro === "Grande") {
+					if (this.contrataciones[x].Cliente.tamanioPerro === `Chico`) {
+						valido = false;
+					}
+				}
+				if (perro === "Chico") {
+					if (this.contrataciones[x].Cliente.tamanioPerro === `Grande`) {
+						valido = false;
+					}
+				}
+			}
 			x++;
 		}
 		return valido;
