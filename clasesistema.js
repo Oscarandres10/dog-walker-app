@@ -667,7 +667,7 @@ class Sistema {
 		return laContratacion;
 	}
 
-	validarNroPositivo(pNum) {
+	/* validarNroPositivo(pNum) {
 		let valido = false;
 		if (!isNaN(pNum)) {
 			let elNum = Number(pNum);
@@ -676,7 +676,7 @@ class Sistema {
 			}
 		}
 		return valido;
-	}
+	} */
 
 	cupoDisponible(paseador) {
 		//console.log(`Estoy Adentro de Calcular Cupo Disonible`);
