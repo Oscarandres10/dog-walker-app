@@ -329,7 +329,7 @@ class Sistema {
 	//#endregion
 
 	//#region  ## VALIDACIONES CONTRATACIONES ##
-
+	//  ESTO TENGO QUE MODIFICAR MENSAJES  Y ESTADO. y FALTA 1 validacion.
 	validarPrecargaContratacion(idCliente, idPaseador) {
 		let mensaje = ``;
 		let valido = false;
