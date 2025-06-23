@@ -141,7 +141,7 @@ function mostrarSeccionClienteUI() {
 
 	let clienteId = miSistema.logueado.id;
 	let tieneContrato = miSistema.clienteTieneContratacion(clienteId);
-
+	console.log(miSistema.clienteTieneContratacion(20));
 	// Muestro la seccion Cliente
 	document.querySelector("#sectionUsuarioLogueado").style.display = "block";
 
