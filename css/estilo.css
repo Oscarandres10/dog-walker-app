@@ -240,3 +240,13 @@ header > div {
 .tablaPaseador input[type="button"]:hover {
 	background-color: #199d7c;
 }
+
+.tablaPaseadoresActivos {
+	width: 100%;
+	margin: 20px 10px;
+}
+
+.tablaPaseadoresActivos td {
+	text-align: center;
+	padding: 10px;
+}

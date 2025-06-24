@@ -1,7 +1,11 @@
-//UI - linea 161    --> Hay que modificar y Hacer lo comentado
-//UI linea 147   --> Hay que modificar y Hacer lo comentado.
-//UI Linea 232   -->  Hay que modificar y Hacer lo comentado.
-// CLASESISTEMA.JS    linea 332    ---> falta modificar para los estados, y rechazo.
+// CONSULTAR ::  A efectos meramente informativos el usuario deberá
+// poder visualizar en una interfaz diferente un listado con todos
+// los paseadores y la cantidad de perros (no cupos) que tiene
+// asignados actualmente.
+//  ESTO SE REFIERE A TODOS LOS PENDIENTES Y ACEPTADAS O SOLO ACEPTADAS.
+
+// TENGO QUE REVISAR     clienteTieneContratacion()   POR QUE ME PARECE QUE FALTA PENDIENTES
+
 function eventos() {
 	document.querySelector("#btnRegistarCliente").addEventListener("click", registroInterfazUI); // Registrarse
 	document.querySelector("#btnLoginCliente").addEventListener("click", loginInterfazUI);
@@ -11,7 +15,6 @@ function eventos() {
 	document.querySelector("#btnRegistrarme").addEventListener("click", almacenarUI);
 	document.querySelector("#btnLogin").addEventListener("click", loginUI);
 	document.querySelector("#btnLogoutCliente").addEventListener("click", logoutUI);
-
 }
 let miSistema = new Sistema();
 miSistema.precargarTodo();
@@ -132,9 +135,6 @@ function logoutUI() {
 
 //#region   ## SECCION CLIENTE
 
-/* A efectos meramente informativos el usuario deberá poder visualizar en una interfaz diferente un listado
-con todos los paseadores y la cantidad de perros (no cupos) que tiene asignados actualmente. */
-
 function mostrarSeccionClienteUI() {
 	if (!miSistema.logueado) {
 		return loginUI();
@@ -142,19 +142,19 @@ function mostrarSeccionClienteUI() {
 
 	let clienteId = miSistema.logueado.id;
 	let tieneContrato = miSistema.clienteTieneContratacion(clienteId);
-	console.log(miSistema.clienteTieneContratacion(20));
+	//console.log(miSistema.clienteTieneContratacion(20));
 	// Muestro la seccion Cliente
 	document.querySelector("#sectionUsuarioLogueado").style.display = "block";
 
 	// Ahora voy a controla si tenia contratacion
-	if (!tieneContrato) { 
+	if (!tieneContrato) {
 		let divContratado = document.querySelector("#divMostrarContratado");
 		divContratado.style.display = "block";
 
 		// SE NECESITA AGREGAR CONTRATACION VIGENTE. INFO MAS BOTON DE CANCELACION.
 		divContratado.innerHTML = `<p><strong>${miSistema.logueado.perroNombre}</strong> tiene una contratación pendiente o aceptada actualmente.</p><br>
 		<input type="button" id="btnCancelarContratacion" value="Cancelar Contratacion">`; //agregue el boton de cancelacion
-		document.querySelector("#btnCancelarContratacion").addEventListener("click", cancelarContratacionUI)
+		document.querySelector("#btnCancelarContratacion").addEventListener("click", cancelarContratacionUI);
 
 		// Como tiene contratacion y aviso, oculto el div de elegir paseador
 		document.querySelector("#mostrarTablaPaseador").style.display = "none";
@@ -166,13 +166,17 @@ function mostrarSeccionClienteUI() {
 		divContratado.innerHTML = "";
 		divContratado.style.display = "none";
 
-		// Y Mustro paseadores
+		// Y Muestro paseadores
+		document.querySelector("#mostrarSelectPaseadores").style.display = "block";
 		document.querySelector("#mostrarTablaPaseador").style.display = "block";
+
 		mostrarSelectPaseadoresUI();
 
 		//Lo siguiente le doy Vida a los select para mostrar la info.
 		document.querySelector("#selPaseadoresParaCliente").addEventListener("change", mostrarPaseadoreUI);
 	}
+	document.querySelector("#mostraTablaPaseadoresActivos").style.display = "block";
+	armarTablaPaseadoresActivosUI();
 }
 
 function mostrarPaseadoreUI() {
@@ -182,6 +186,7 @@ function mostrarPaseadoreUI() {
 	document.querySelector("#mostrarTablaPaseador").innerHTML = laTabla;
 	darVidaBotonesTablaPaseadoresUI();
 }
+
 function darVidaBotonesTablaPaseadoresUI() {
 	let losBotones = document.querySelectorAll(".botonesTablaPaseadores");
 	for (let unBoton of losBotones) {
@@ -220,23 +225,30 @@ function mostrarSelectPaseadoresUI() {
 	let selectPaseadores = miSistema.armadoSelectPaseadores();
 	document.querySelector("#selPaseadoresParaCliente").innerHTML = selectPaseadores;
 }
-//agregue esta funcion para tratar de hacer el boton de cancelacion 
+
+function armarTablaPaseadoresActivosUI() {
+	let laTabla = miSistema.armarTablaPaseadoresActivos();
+	document.querySelector("#mostraTablaPaseadoresActivos").style.display = "block";
+	document.querySelector("#mostraTablaPaseadoresActivos").innerHTML = laTabla;
+}
+
+//agregue esta funcion para tratar de hacer el boton de cancelacion
 function cancelarContratacionUI() {
 	let idCliente = miSistema.contrataciones.id;
 	let i = 0;
-	let listaFiltradaContratacion = new Array;
-	while(i < miSistema.contrataciones.length) {
-		let unaContratacion = miSistema.contrataciones[i]
-		if(unaContratacion.Cliente.id !== idCliente ||
-			(unaContratacion.estado !== "pendiente" && unaContratacion.estado !== "aceptada")) {
+	let listaFiltradaContratacion = new Array();
+	while (i < miSistema.contrataciones.length) {
+		let unaContratacion = miSistema.contrataciones[i];
+		if (
+			unaContratacion.Cliente.id !== idCliente ||
+			(unaContratacion.estado !== "pendiente" && unaContratacion.estado !== "aceptada")
+		) {
 			listaFiltradaContratacion.push(unaContratacion);
 		}
-		i++
+		i++;
 	}
 	miSistema.contrataciones = listaFiltradaContratacion;
 	mostrarSeccionClienteUI();
-	
-
 }
 
 //#endregion

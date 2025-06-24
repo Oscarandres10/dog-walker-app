@@ -32,6 +32,19 @@
 		<!-- SECCION SOBRE NOSOTROS -->
 		<main>
 			<section id="sectionSobreNosotros" class="secciones">
+				<article>
+					<p>
+						CONSULTAR :: A efectos meramente informativos el usuario deberá poder visualizar en una interfaz diferente
+						un listado con todos los paseadores y la cantidad de perros (no cupos) que tiene asignados actualmente.
+					</p>
+					<p>ESTO ANTERIOR SE REFIERE A TODOS LOS PENDIENTES Y ACEPTADAS O SOLO ACEPTADAS.</p>
+					<br /><br />
+					<p>TENGO QUE REVISAR clienteTieneContratacion() POR QUE ME PARECE QUE FALTA PENDIENTES</p>
+					<br /><br />
+				</article>
+				<br />
+				<hr />
+				<br />
 				<article class="nosotros ancho">
 					<h1>🐾 Sobre Nosotros</h1>
 					<p><strong>Una vida mejor para tu perro, todos los días</strong></p>
@@ -124,9 +137,9 @@
 					<h2>LOGIN USUARIO</h2>
 					<br />
 					<label for="txtUsuario">Usuario: </label>
-					<input id="txtUsuario" type="text" value="FPerdomo" /><br />
+					<input id="txtUsuario" type="text" value="JPerez" /><br />
 					<label for="txtContrasenia">Contraseña: </label>
-					<input id="txtContrasenia" type="text" value="Fp123!" /><br />
+					<input id="txtContrasenia" type="text" value="Jp123!" /><br />
 					<input id="btnLogin" type="button" value="Login" />
 					<p id="pLogin"></p>
 				</div>
@@ -139,11 +152,12 @@
 					<div id="divMostrarContratado"></div>
 					<p id="pMensajeInicial"></p>
 					<!-- <div id="mostrarSelectPaseadores" class="tablas"> -->
-					<div class="tablas">
+					<div id="mostrarSelectPaseadores" class="tablas">
 						<label for="selPaseadoresParaCliente">Elegir un Paseador:</label>
 						<select id="selPaseadoresParaCliente"></select>
 					</div>
 					<div id="mostrarTablaPaseador" class="tablas"></div>
+					<div id="mostraTablaPaseadoresActivos"></div>
 					<div id="mostrarMensajeContratacion"></div>
 				</section>
 			</section>

@@ -5,6 +5,7 @@ class Sistema {
 		this.contrataciones = new Array();
 		this.logueado = null;
 		this.mensajeRegistro = [];
+		this.perrosCantidad = new Array();
 	}
 
 	precargarTodo() {
@@ -331,27 +332,40 @@ class Sistema {
 	//#region  ## VALIDACIONES CONTRATACIONES ##
 	//  ESTO TENGO QUE MODIFICAR MENSAJES  Y ESTADO. y FALTA 1 validacion.
 	validarPrecargaContratacion(idCliente, idPaseador) {
-		let mensaje = ``;
-		let valido = false;
+		let noModificado = false;
 		let elCliente = miSistema.obtenerCliente(idCliente);
 		let elPaseador = miSistema.obtenerPaseador(idPaseador);
 
 		if (elCliente !== null && elPaseador !== null) {
 			let cupo = this.cupoDisponible(elPaseador);
+			let noTieneContratacion = this.clienteTieneContratacion(idCliente);
 
-			// Me aseguro que hay cupo sufficiente para el cupo del perro.
-			if (cupo >= this.calcularCupoPerro(elCliente.tamanioPerro)) {
-				//console.log(`test estoy en el if si el cupo es mayor que el cupo perro`);
-				if (this.paseadorComparoTamanio(elPaseador, elCliente.tamanioPerro)) {
-					//console.log(`Test Se compara los tamanio de perro`);
-					valido = true;
+			if (noTieneContratacion && laContratacion.estado === "pendiente") {
+				console.log(`No tiene Contratacion Previa.`);
+				// Me aseguro que hay cupo sufficiente para el cupo del perro.
+				if (cupo >= this.calcularCupoPerro(elCliente.tamanioPerro)) {
+					//console.log(`test estoy en el if si el cupo es mayor que el cupo perro`);
+					if (this.paseadorComparoTamanio(elPaseador, elCliente.tamanioPerro)) {
+						//console.log(`Test Se compara los tamanio de perro`);
+						console.log(`Contratacion Aceptada`);
+						laContratacion.estado = "aceptada";
+						laContratacion.comentario = "aceptada";
+						noModificado = true;
+					} else {
+						laContratacion.comentario = `Perro Opuesto ya Exite.`;
+					}
 				} else {
-					mensaje = `Perro Opuesto ya Exite.`;
+					laContratacion.comentario = `No tiene cupo Sufficiente.`;
 				}
 			} else {
-				mensaje = `No tiene cupo Sufficiente.`;
+				laContratacion.comentario = `Ya tiene Contratacion previa.`;
+			}
+			if (!noModificado) {
+				// si se modifico
+				laContratacion.estado = "denegado";
 			}
 		}
+
 		return valido;
 	}
 
@@ -594,6 +608,32 @@ class Sistema {
 		return paseadores;
 	}
 
+	armarTablaPaseadoresActivos() {
+		let unaTabla = `<br><br><table class="tablaPaseadoresActivos" border="1px">`;
+		unaTabla += `<tr><th></th><th colspan="3">Perros</th></tr><tr>`;
+		unaTabla += `<th>Nombre</th><th>Grande</th><th>Mediano</th><th>Chico</th>`;
+		unaTabla += `</tr>`;
+		for (let x = 0; x < this.paseadores.length; x++) {
+			let paseador = this.paseadores[x];
+			let paseadorContrataciones = this.obtenerContratacionesPaseador(paseador.id);
+			if (paseadorContrataciones.estado === "aceptada") {
+				console.log(paseadorContrataciones);
+				let cantPerros = this.obtenerCantPerros(paseadorContrataciones);
+				console.log(cantPerros);
+
+				unaTabla += `<tr>`;
+				unaTabla += `<td>${paseador.nombre}</td>`;
+				unaTabla += `<td>${cantPerros.grande}</td>`;
+				unaTabla += `<td>${cantPerros.mediano}</td>`;
+				unaTabla += `<td>${cantPerros.chico}</td>`;
+				unaTabla += `</tr>`;
+			}
+		}
+
+		unaTabla += `</tabla>`;
+		return unaTabla;
+	}
+
 	//#endregion
 
 	//
@@ -624,10 +664,8 @@ class Sistema {
 		// recorro un while las lista de clientes
 		while (elCliente === null && i < this.clientes.length) {
 			let cliente = this.clientes[i];
-			//console.log(paseadorX);
 			if (cliente.id === cId) {
 				elCliente = cliente;
-				//console.log(`El cliente:  -->  ${elCliente.nombre}`);
 			}
 			i++;
 		}
@@ -641,10 +679,8 @@ class Sistema {
 		// recorro un while las lista de paseadores
 		while (elPaseador === null && i < this.paseadores.length) {
 			let paseadorX = this.paseadores[i];
-			//console.log(paseadorX);
 			if (paseadorX.id === pId) {
 				elPaseador = paseadorX;
-				//console.log(`El Paseador:  -->  ${elPaseador.nombre}`);
 			}
 			i++;
 		}
@@ -657,30 +693,15 @@ class Sistema {
 
 		while (laContratacion === null && i < this.contrataciones.length) {
 			let contratacionX = this.contrataciones[i];
-			//console.log(contratacionX);
 			if (contratacionX.id === cId) {
 				laContratacion = contratacionX;
-				//console.log(`La Contratacion:  -->  ${laContratacion.Cliente.nombre}`);
 			}
 			i++;
 		}
 		return laContratacion;
 	}
 
-	/* validarNroPositivo(pNum) {
-		let valido = false;
-		if (!isNaN(pNum)) {
-			let elNum = Number(pNum);
-			if (elNum >= 0) {
-				valido = true;
-			}
-		}
-		return valido;
-	} */
-
 	cupoDisponible(paseador) {
-		//console.log(`Estoy Adentro de Calcular Cupo Disonible`);
-		//let cupo = false;
 		let cupoMax = paseador.cupo; // Cupo maximo del Paseador
 
 		// Recorro contrataciones.
@@ -701,6 +722,21 @@ class Sistema {
 		if (tamanio === "Mediano") cupo = 2;
 		if (tamanio === "Chico") cupo = 1;
 		return cupo;
+	}
+
+	obtenerCantPerros(array) {
+		let cantPerros = new PerrosCantidad();
+		cantPerros.grande = 0;
+		cantPerros.mediano = 0;
+		cantPerros.chico = 0;
+		for (let x = 0; x < array.length; x++) {
+			let contratacion = array[x];
+			if (contratacion.Cliente.tamanioPerro === "Grande") cantPerros.grande++;
+			if (contratacion.Cliente.tamanioPerro === "Mediano") cantPerros.mediano++;
+			if (contratacion.Cliente.tamanioPerro === "Chico") cantPerros.chico++;
+		}
+		this.perrosCantidad.push(cantPerros);
+		return cantPerros;
 	}
 
 	//#endregion
