@@ -37,7 +37,7 @@ class Sistema {
 		let unaContratacion = new Contrataciones();
 		unaContratacion.Cliente = this.obtenerCliente(idCliente);
 		unaContratacion.Paseador = this.obtenerPaseador(idPaseador);
-		unaContratacion.estado = "pendiente";
+		unaContratacion.estado = "aceptada";
 		this.contrataciones.push(unaContratacion);
 	}
 
@@ -491,6 +491,16 @@ class Sistema {
 		return lista;
 	}
 
+	obtenerContratacionesPaseadorAceptadas(pID) {
+		let lista = new Array();
+		for (let x = 0; x < this.contrataciones.length; x++) {
+			if (this.contrataciones[x].Paseador.id === pID && this.contrataciones[x].estado === "aceptada") {
+				lista.push(this.contrataciones[x]);
+			}
+		}
+		return lista;
+	}
+
 	validoPerroOpuestoNoExiste(perro) {
 		let valido = true;
 		let x = 0;
@@ -608,29 +618,23 @@ class Sistema {
 	}
 
 	armarTablaPaseadoresActivos() {
-		let unaTabla = `<h2>PASEADORES DEL SISTEMAS CON CONTRATACIONES ACTIVAS</h2>
-					<table class="tablaPaseadoresActivos" border="1px">`;
+		let unaTabla = `<h2>PASEADORES DEL SISTEMAS CON CONTRATACIONES ACTIVAS</h2>`;
+		unaTabla += `<table class="tablaPaseadoresActivos" border="1px">`;
 		unaTabla += `<tr><th></th><th colspan="3">Perros</th></tr><tr>`;
 		unaTabla += `<th>Nombre</th><th>Grande</th><th>Mediano</th><th>Chico</th>`;
 		unaTabla += `</tr>`;
+
 		for (let x = 0; x < this.paseadores.length; x++) {
 			let paseador = this.paseadores[x];
-			let paseadorContrataciones = this.obtenerContratacionesPaseador(paseador.id);
+			let paseadorContrataciones = this.obtenerContratacionesPaseadorAceptadas(paseador.id);
 
-			/// SE PUEDE CAMBIAR PARA SOLO ACEPTADAS
-
-			if (paseadorContrataciones.estado !== "denegada") {
-				//console.log(paseadorContrataciones);
-				let cantPerros = this.obtenerCantPerros(paseadorContrataciones);
-				//console.log(cantPerros);
-
-				unaTabla += `<tr>`;
-				unaTabla += `<td>${paseador.nombre}</td>`;
-				unaTabla += `<td>${cantPerros.grande}</td>`;
-				unaTabla += `<td>${cantPerros.mediano}</td>`;
-				unaTabla += `<td>${cantPerros.chico}</td>`;
-				unaTabla += `</tr>`;
-			}
+			let cantPerros = this.obtenerCantPerros(paseadorContrataciones);
+			unaTabla += `<tr>`;
+			unaTabla += `<td>${paseador.nombre}</td>`;
+			unaTabla += `<td>${cantPerros.grande}</td>`;
+			unaTabla += `<td>${cantPerros.mediano}</td>`;
+			unaTabla += `<td>${cantPerros.chico}</td>`;
+			unaTabla += `</tr>`;
 		}
 
 		unaTabla += `</table>`;
