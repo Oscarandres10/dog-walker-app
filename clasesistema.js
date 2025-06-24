@@ -340,7 +340,7 @@ class Sistema {
 			let cupo = this.cupoDisponible(elPaseador);
 			let noTieneContratacion = this.clienteTieneContratacion(idCliente);
 
-			if (noTieneContratacion && laContratacion.estado === "pendiente") {
+			if (noTieneContratacion) {
 				console.log(`No tiene Contratacion Previa.`);
 				// Me aseguro que hay cupo sufficiente para el cupo del perro.
 				if (cupo >= this.calcularCupoPerro(elCliente.tamanioPerro)) {
@@ -348,25 +348,25 @@ class Sistema {
 					if (this.paseadorComparoTamanio(elPaseador, elCliente.tamanioPerro)) {
 						//console.log(`Test Se compara los tamanio de perro`);
 						console.log(`Contratacion Aceptada`);
-						laContratacion.estado = "aceptada";
-						laContratacion.comentario = "aceptada";
+						//laContratacion.estado = "aceptada";
+						//laContratacion.comentario = "aceptada";
 						noModificado = true;
 					} else {
-						laContratacion.comentario = `Perro Opuesto ya Exite.`;
+						//laContratacion.comentario = `Perro Opuesto ya Exite.`;
 					}
 				} else {
-					laContratacion.comentario = `No tiene cupo Sufficiente.`;
+					//laContratacion.comentario = `No tiene cupo Sufficiente.`;
 				}
 			} else {
-				laContratacion.comentario = `Ya tiene Contratacion previa.`;
+				//laContratacion.comentario = `Ya tiene Contratacion previa.`;
 			}
 			if (!noModificado) {
 				// si se modifico
-				laContratacion.estado = "denegado";
+				//laContratacion.estado = "denegado";
 			}
 		}
 
-		return valido;
+		return noModificado;
 	}
 
 	//#endregion
