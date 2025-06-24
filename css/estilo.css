@@ -33,7 +33,7 @@ body {
 
 header,
 footer {
-	border: 2px solid red;
+	background-color: lightgray;
 }
 
 nav {
@@ -66,9 +66,13 @@ h4 {
 /* === Header and Nav Usuario ===*/
 
 header > div {
-	margin: 20px auto;
+	margin: 0 auto;
 	justify-content: space-between;
 	align-items: center;
+}
+
+#mainTitle {
+	background-color: lightgray;
 }
 
 #navLogin {
@@ -239,6 +243,19 @@ header > div {
 
 .tablaPaseador input[type="button"]:hover {
 	background-color: #199d7c;
+}
+
+/* SECCION  PASEADORES CON CONTRATACIONES ACTIVAS */
+
+#mostraTablaPaseadoresActivos {
+	border-top: 2px solid gray;
+	margin: 50px auto;
+	text-align: center;
+}
+
+#mostraTablaPaseadoresActivos h2 {
+	padding: 20px;
+	font-size: 25px;
 }
 
 .tablaPaseadoresActivos {

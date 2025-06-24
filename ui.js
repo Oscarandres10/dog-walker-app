@@ -141,6 +141,8 @@ function mostrarSeccionClienteUI() {
 	}
 
 	let clienteId = miSistema.logueado.id;
+
+	//  ESTA FUNCION TIENE QUE ESTAR CON ACEPTADAS Y PENDIENTES
 	let tieneContrato = miSistema.clienteTieneContratacion(clienteId);
 	//console.log(miSistema.clienteTieneContratacion(20));
 	// Muestro la seccion Cliente
@@ -148,10 +150,11 @@ function mostrarSeccionClienteUI() {
 
 	// Ahora voy a controla si tenia contratacion
 	if (!tieneContrato) {
+		console.log("Estoy ACA");
 		let divContratado = document.querySelector("#divMostrarContratado");
 		divContratado.style.display = "block";
 
-		// SE NECESITA AGREGAR CONTRATACION VIGENTE. INFO MAS BOTON DE CANCELACION.
+		//SE NECESITA AGREGAR CONTRATACION VIGENTE. INFO MAS BOTON DE CANCELACION.
 		divContratado.innerHTML = `<p><strong>${miSistema.logueado.perroNombre}</strong> tiene una contratación pendiente o aceptada actualmente.</p><br>
 		<input type="button" id="btnCancelarContratacion" value="Cancelar Contratacion">`; //agregue el boton de cancelacion
 		document.querySelector("#btnCancelarContratacion").addEventListener("click", cancelarContratacionUI);
@@ -159,6 +162,7 @@ function mostrarSeccionClienteUI() {
 		// Como tiene contratacion y aviso, oculto el div de elegir paseador
 		document.querySelector("#mostrarTablaPaseador").style.display = "none";
 	} else {
+		console.log("NO TENGO CONTRATO");
 		// No tiene contratación…
 		//
 		// por las dudas limpio mensajes anteriores.

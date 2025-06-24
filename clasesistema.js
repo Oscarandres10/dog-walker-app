@@ -337,7 +337,7 @@ class Sistema {
 
 		if (elCliente !== null && elPaseador !== null) {
 			let cupo = this.cupoDisponible(elPaseador);
-			let noTieneContratacion = this.clienteTieneContratacion(idCliente);
+			let noTieneContratacion = this.clienteTieneContratacionAceptada(idCliente);
 
 			if (noTieneContratacion) {
 				console.log(`No tiene Contratacion Previa.`);
@@ -382,7 +382,7 @@ class Sistema {
 		//console.log(laContratacion.Cliente.id);
 
 		// Busco si cliente tiene contratacion Previa.
-		let noTieneContratacion = this.clienteTieneContratacion(laContratacion.Cliente.id);
+		let noTieneContratacion = this.clienteTieneContratacionAceptada(laContratacion.Cliente.id);
 		let noHayPerroOpuesto = this.validoPerroOpuestoNoExiste(laContratacion.Cliente.tamanioPerro);
 		//console.log(`Arriba es Estado`);
 		//console.log(noTieneContratacion);
@@ -443,7 +443,7 @@ class Sistema {
 				let cupo = this.cupoDisponible(this.logueado);
 
 				// Busco si cliente tiene contratacion Previa.
-				let noTieneContratacion = this.clienteTieneContratacion(laContratacion.Cliente.id);
+				let noTieneContratacion = this.clienteTieneContratacionAceptada(laContratacion.Cliente.id);
 				let noHayPerroOpuesto = this.validoPerroOpuestoNoExiste(laContratacion.Cliente.tamanioPerro);
 
 				// VALIDO QUE No TENGA CONTRATACION PREVIA
@@ -608,7 +608,8 @@ class Sistema {
 	}
 
 	armarTablaPaseadoresActivos() {
-		let unaTabla = `<br><br><table class="tablaPaseadoresActivos" border="1px">`;
+		let unaTabla = `<h2>PASEADORES DEL SISTEMAS CON CONTRATACIONES ACTIVAS</h2>
+					<table class="tablaPaseadoresActivos" border="1px">`;
 		unaTabla += `<tr><th></th><th colspan="3">Perros</th></tr><tr>`;
 		unaTabla += `<th>Nombre</th><th>Grande</th><th>Mediano</th><th>Chico</th>`;
 		unaTabla += `</tr>`;
@@ -646,6 +647,20 @@ class Sistema {
 	// BUSCO POR CONTRATACIONES PENDIENTES O ACEPTADAS.
 
 	clienteTieneContratacion(id) {
+		let estado = true;
+		let x = 0;
+		while (x < miSistema.contrataciones.length && estado) {
+			let idClienteContrato = miSistema.contrataciones[x].Cliente.id;
+			let estadoContratacion = miSistema.contrataciones[x].estado;
+			if (idClienteContrato === id && estadoContratacion !== "denegada") {
+				estado = false;
+			}
+			x++;
+		}
+		return estado;
+	}
+	// BUSCO POR CONTRATACIONES ACEPTADAS.
+	clienteTieneContratacionAceptada(id) {
 		let estado = true;
 		let x = 0;
 		while (x < miSistema.contrataciones.length && estado) {
