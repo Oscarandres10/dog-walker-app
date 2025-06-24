@@ -615,10 +615,13 @@ class Sistema {
 		for (let x = 0; x < this.paseadores.length; x++) {
 			let paseador = this.paseadores[x];
 			let paseadorContrataciones = this.obtenerContratacionesPaseador(paseador.id);
-			if (paseadorContrataciones.estado === "aceptada") {
-				console.log(paseadorContrataciones);
+
+			/// SE PUEDE CAMBIAR PARA SOLO ACEPTADAS
+
+			if (paseadorContrataciones.estado !== "denegada") {
+				//console.log(paseadorContrataciones);
 				let cantPerros = this.obtenerCantPerros(paseadorContrataciones);
-				console.log(cantPerros);
+				//console.log(cantPerros);
 
 				unaTabla += `<tr>`;
 				unaTabla += `<td>${paseador.nombre}</td>`;
