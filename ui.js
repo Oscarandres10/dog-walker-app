@@ -11,6 +11,7 @@ function eventos() {
 	document.querySelector("#btnRegistrarme").addEventListener("click", almacenarUI);
 	document.querySelector("#btnLogin").addEventListener("click", loginUI);
 	document.querySelector("#btnLogoutCliente").addEventListener("click", logoutUI);
+
 }
 let miSistema = new Sistema();
 miSistema.precargarTodo();
@@ -146,12 +147,14 @@ function mostrarSeccionClienteUI() {
 	document.querySelector("#sectionUsuarioLogueado").style.display = "block";
 
 	// Ahora voy a controla si tenia contratacion
-	if (tieneContrato) {
+	if (!tieneContrato) { 
 		let divContratado = document.querySelector("#divMostrarContratado");
 		divContratado.style.display = "block";
 
 		// SE NECESITA AGREGAR CONTRATACION VIGENTE. INFO MAS BOTON DE CANCELACION.
-		divContratado.innerHTML = `<p><strong>${miSistema.logueado.perroNombre}</strong> tiene una contratación pendiente o aceptada actualmente.</p>`;
+		divContratado.innerHTML = `<p><strong>${miSistema.logueado.perroNombre}</strong> tiene una contratación pendiente o aceptada actualmente.</p><br>
+		<input type="button" id="btnCancelarContratacion" value="Cancelar Contratacion">`; //agregue el boton de cancelacion
+		document.querySelector("#btnCancelarContratacion").addEventListener("click", cancelarContratacionUI)
 
 		// Como tiene contratacion y aviso, oculto el div de elegir paseador
 		document.querySelector("#mostrarTablaPaseador").style.display = "none";
@@ -216,6 +219,24 @@ function clickEnSolicitarUI() {
 function mostrarSelectPaseadoresUI() {
 	let selectPaseadores = miSistema.armadoSelectPaseadores();
 	document.querySelector("#selPaseadoresParaCliente").innerHTML = selectPaseadores;
+}
+//agregue esta funcion para tratar de hacer el boton de cancelacion 
+function cancelarContratacionUI() {
+	let idCliente = miSistema.contrataciones.id;
+	let i = 0;
+	let listaFiltradaContratacion = new Array;
+	while(i < miSistema.contrataciones.length) {
+		let unaContratacion = miSistema.contrataciones[i]
+		if(unaContratacion.Cliente.id !== idCliente ||
+			(unaContratacion.estado !== "pendiente" && unaContratacion.estado !== "aceptada")) {
+			listaFiltradaContratacion.push(unaContratacion);
+		}
+		i++
+	}
+	miSistema.contrataciones = listaFiltradaContratacion;
+	mostrarSeccionClienteUI();
+	
+
 }
 
 //#endregion
