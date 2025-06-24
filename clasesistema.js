@@ -5,7 +5,6 @@ class Sistema {
 		this.contrataciones = new Array();
 		this.logueado = null;
 		this.mensajeRegistro = [];
-		this.perrosCantidad = new Array();
 	}
 
 	precargarTodo() {
@@ -630,7 +629,7 @@ class Sistema {
 			}
 		}
 
-		unaTabla += `</tabla>`;
+		unaTabla += `</table>`;
 		return unaTabla;
 	}
 
@@ -724,18 +723,19 @@ class Sistema {
 		return cupo;
 	}
 
-	obtenerCantPerros(array) {
-		let cantPerros = new PerrosCantidad();
-		cantPerros.grande = 0;
-		cantPerros.mediano = 0;
-		cantPerros.chico = 0;
-		for (let x = 0; x < array.length; x++) {
-			let contratacion = array[x];
-			if (contratacion.Cliente.tamanioPerro === "Grande") cantPerros.grande++;
-			if (contratacion.Cliente.tamanioPerro === "Mediano") cantPerros.mediano++;
-			if (contratacion.Cliente.tamanioPerro === "Chico") cantPerros.chico++;
+	obtenerCantPerros(contrataciones) {
+		let cantPerros = {
+			grande: 0,
+			mediano: 0,
+			chico: 0,
+		};
+		for (let i = 0; i < contrataciones.length; i++) {
+			let tamanio = contrataciones[i].Cliente.tamanioPerro;
+			if (tamanio === "Grande") cantPerros.grande++;
+			if (tamanio === "Mediano") cantPerros.mediano++;
+			if (tamanio === "Chico") cantPerros.chico++;
 		}
-		this.perrosCantidad.push(cantPerros);
+
 		return cantPerros;
 	}
 

@@ -34,14 +34,6 @@ class Contrataciones {
 	}
 }
 
-class PerrosCantidad {
-	constructor() {
-		this.grande = 0;
-		this.mediano = 0;
-		this.chico = 0;
-	}
-}
-
 /* 
 
 PRECARGA DE CLIENTES
