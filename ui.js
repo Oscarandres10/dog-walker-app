@@ -148,7 +148,8 @@ function logoutUI() {
 	document.querySelector("#pMostrarlogueado").innerHTML = ``;
 	document.querySelector("#btnLogoutCliente").style.display = `none`;
 	miSistema.logueado = null;
-
+	document.querySelector("#menuCliente").style.display = "none";
+	document.querySelector("#menuPaseador").style.display = "none";
 	document.querySelector("#sectionUsuarioLogueado").style.display = "none";
 
 	document.querySelector("#sectionSobreNosotros").style.display = "block";
@@ -341,15 +342,26 @@ function clickEnCancelarUI() {
 
 function mostrarSeccionPaseadorUI() {
 	if (miSistema.logueado !== null) {
+		ocultarTablasUI();
 		document.querySelector("#sectionPaseadoresLogueado").style.display = "block";
+		document.querySelector("#menuPaseador").style.display = "block";
+
+		// Asigno los eventos a los botones del menú
+		document
+			.querySelector("#btnVerContratacionesPendientesPaseador")
+			.addEventListener("click", mostrarTablaContratacionesPendientesUI);
+		document.querySelector("#btnVerEstadoPaseador").addEventListener("click", mostrarEstadoPaseadorUI);
+
+		/* document.querySelector("#sectionPaseadoresLogueado").style.display = "block";
 		mostrarTablaContratacionesPendientesUI(); // Tabla de Contrataciones de Pendientes
-		mostrarEstadoPaseadorUI();
+		mostrarEstadoPaseadorUI(); */
 	} else {
 		loginUI();
 	}
 }
 
 function mostrarTablaContratacionesPendientesUI() {
+	ocultarTablasUI();
 	let seccionPaseador = document.querySelector("#mostrarTablaContratacionesPendientes");
 	let laTabla = miSistema.armarTablaContrataciones();
 	seccionPaseador.style.display = "block";
@@ -376,6 +388,7 @@ function clickEnAceptarUI() {
 }
 
 function mostrarEstadoPaseadorUI() {
+	ocultarTablasUI();
 	let seccionPaseadorSideBar = document.querySelector("#mostrarEstadoPaseador");
 	let laTabla = miSistema.armarEstadoPaseador();
 	seccionPaseadorSideBar.style.display = "block";
@@ -383,7 +396,7 @@ function mostrarEstadoPaseadorUI() {
 }
 
 function gestionContratacionesProcensandoUI() {
-	//la primera vez que voy a a procesar los alquileres.
+	//la primera vez que voy a a procesar las Contrataciones
 	let laTabla = miSistema.armarTablaContratacionesProcesando();
 	document.querySelector("#mostrarTablaContratacionesPendientes").innerHTML = laTabla;
 	//tengo que darle vida a los botones

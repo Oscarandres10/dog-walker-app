@@ -109,67 +109,67 @@ class Sistema {
 		let paseadorCupo = this.logueado.cupo;
 		let cupo = paseadorCupo - this.cupoDisponible(this.logueado);
 		let porcentaje = (cupo * 100) / paseadorCupo;
-		let unaTabla = `<table border="1px" class="tablaEstadoPaseador">
-    <tr>
-    <td><h4>CUPO TOTAL</h4></td>
-    </tr>
-    <tr>
-    <td><div class="cupoPrincipal">
-    ${this.logueado.cupo}
-    </div>
-    </td>
-    </tr>
-    <tr><td><br></td></tr>
-    </table>
-    <table border="1px" class="tablaEstadoPaseador">
-    <tr>
-    <td><h4>CUPOS OCUPADOS</h4></td>
-    </tr>
-    <tr>
-    <td><div class="cupoPrincipal">
-    ${cupo}
-    </div>
-    </td>
-    </tr>
-    <tr><td><br></td></tr>
-    </table>
-    <table border="1px" class="tablaEstadoPaseador">
-    <tr>
-    <td><h4>PORCENTAJE OCUPADOS</h4></td>
-    </tr>
-    <tr>
-    <td><div class="cupoPorcentaje">
-    ${porcentaje} %
-    </div>
-    </td>
-    </tr>
-    <tr><td><br></td></tr>
-    </table>
+		let hayContratacion = this.clienteTieneContratacionAceptada(this.logueado.id, "paseador");
+		let unaTabla = `<div class="flex ancho "><table border="1px" class="tablaEstadoPaseador">
+					<tr>
+					<td><h4>CUPO TOTAL</h4></td>
+					</tr>
+					<tr>
+					<td><p class="cupoPrincipal">
+						${this.logueado.cupo}
+						</p>
+					</td>
+					</tr>
+					<tr><td><br></td></tr>
+					</table>`;
+		unaTabla += `<table border="1px" class="tablaEstadoPaseador">
+					<tr>
+					<td><h4>CUPOS OCUPADOS</h4></td>
+					</tr>
+					<tr>
+					<td><p class="cupoPrincipal">
+					${cupo}
+					</p>
+					</td>
+					</tr>
+					<tr><td><br></td></tr>
+					</table>`;
+		unaTabla += `<table border="1px" class="tablaEstadoPaseador">
+					<tr>
+						<td><h4>PORCENTAJE OCUPADOS</h4></td>
+					</tr>
+					<tr>
+						<td><p class="cupoPorcentaje">
+							${porcentaje} %
+							</p>
+						</td>
+					</tr>
+					<tr><td><br></td></tr>
+				</table></div>`;
 
-     <table border="1px" class="tablaEstadolistaPerros">
-     <caption>Contrataciones</caption>
-     <tr>
-          <th>Nombre</th>
-          <th>Tamaño</th>
-          </tr>`;
-		let estado = true;
-		if (estado) {
+		unaTabla += `<div class="flex ancho"><table border="1px" class="tablaEstadolistaPerros">
+				<caption>Contrataciones</caption>
+				<tr>
+					<th>Nombre</th>
+					<th>Tamaño</th>
+				</tr>`;
+		if (hayContratacion) {
+			unaTabla += `<tr><td colspan = "2">No Hay Contrataciones Actuales</td></tr>`;
+		} else {
 			for (let i = 0; i < this.contrataciones.length; i++) {
 				let unaContratacion = this.contrataciones[i];
 				let paseador = this.logueado;
 				if (unaContratacion.Paseador === paseador && unaContratacion.estado === "aceptada") {
-					unaTabla += `
-          
-          
-          <tr>
-          <td>${unaContratacion.Cliente.perroNombre}</td><td>${unaContratacion.Cliente.tamanioPerro}</td>
-          </tr>`;
+					unaTabla += `<tr>`;
+					unaTabla += `<td>${unaContratacion.Cliente.perroNombre}</td>`;
+					unaTabla += `<td>${unaContratacion.Cliente.tamanioPerro}</td>`;
+					unaTabla += `</tr>`;
+					hayContratacion = true;
 				}
 			}
-		} else {
-			unaTabla += `<tr><td>No Hay Contrataciones Actuales</td></tr>`;
 		}
-		unaTabla += `</table>`;
+
+		unaTabla += `</table></div>`;
 		return unaTabla;
 	}
 
@@ -356,24 +356,15 @@ class Sistema {
 			let noTieneContratacion = this.clienteTieneContratacionAceptada(idCliente);
 
 			if (noTieneContratacion) {
-				//console.log(`No tiene Contratacion Previa.`);
-				// Me aseguro que hay cupo sufficiente para el cupo del perro.
 				if (cupo >= this.calcularCupoPerro(elCliente.tamanioPerro)) {
 					//console.log(`test estoy en el if si el cupo es mayor que el cupo perro`);
 					if (this.paseadorComparoTamanio(elPaseador, elCliente.tamanioPerro)) {
-						//console.log(`Test Se compara los tamanio de perro`);
-						//console.log(`Contratacion Aceptada`);
-						//laContratacion.estado = "aceptada";
-						//laContratacion.comentario = "aceptada";
 						noModificado = true;
 					} else {
-						//laContratacion.comentario = `Perro Opuesto ya Exite.`;
 					}
 				} else {
-					//laContratacion.comentario = `No tiene cupo Sufficiente.`;
 				}
 			} else {
-				//laContratacion.comentario = `Ya tiene Contratacion previa.`;
 			}
 			if (!noModificado) {
 				// si se modifico
@@ -442,7 +433,6 @@ class Sistema {
 		}
 
 		mostrarTablaContratacionesPendientesUI();
-		mostrarEstadoPaseadorUI();
 	}
 
 	validoContratacionesPendientesDespuesDeAceptar(id) {
@@ -467,7 +457,7 @@ class Sistema {
 
 				// VALIDO QUE No TENGA CONTRATACION PREVIA
 				if (noTieneContratacion && laContratacion.estado === "pendiente") {
-					console.log(`No tiene Contratacion Previa.`);
+					//console.log(`No tiene Contratacion Previa.`);
 
 					// VALIDO QUE NO HALLA PERRO OPUESTO
 					if (noHayPerroOpuesto && laContratacion.estado === "pendiente") {
@@ -482,8 +472,8 @@ class Sistema {
 						}
 					} else {
 						let perroTamanio = laContratacion.Cliente.tamanioPerro;
-						console.log(perroTamanio);
-						console.log(`Perro Opuesto  Existe`);
+						//console.log(perroTamanio);
+						//console.log(`Perro Opuesto  Existe`);
 						let perroOpuesto = ``;
 						if (perroTamanio === "Grande") perroOpuesto = "Chico";
 						if (perroTamanio === "Chico") perroOpuesto = "Grande";
@@ -503,7 +493,10 @@ class Sistema {
 	obtenerContratacionesPaseador(pID) {
 		let lista = new Array();
 		for (let x = 0; x < this.contrataciones.length; x++) {
-			if (this.contrataciones[x].Paseador.id === pID) {
+			if (
+				this.contrataciones[x].Paseador.id === pID /*&&
+				 (this.contrataciones[x].estado === "aceptada" || this.contrataciones[x].estado === "aceptada") */
+			) {
 				lista.push(this.contrataciones[x]);
 			}
 		}
@@ -701,17 +694,31 @@ class Sistema {
 		return estado;
 	}
 	// BUSCO POR CONTRATACIONES ACEPTADAS.
-	clienteTieneContratacionAceptada(id) {
+	clienteTieneContratacionAceptada(id, tipo) {
 		let estado = true;
 		let x = 0;
-		while (x < miSistema.contrataciones.length && estado) {
-			let idClienteContrato = miSistema.contrataciones[x].Cliente.id;
-			let estadoContratacion = miSistema.contrataciones[x].estado;
-			if (idClienteContrato === id && estadoContratacion === "aceptada") {
-				estado = false;
+
+		if (tipo === "cliente") {
+			while (x < miSistema.contrataciones.length && estado) {
+				let idClienteContrato = miSistema.contrataciones[x].Cliente.id;
+				let estadoContratacion = miSistema.contrataciones[x].estado;
+				if (idClienteContrato === id && estadoContratacion === "aceptada") {
+					estado = false;
+				}
+				x++;
 			}
-			x++;
 		}
+		if (tipo === "paseador") {
+			while (x < miSistema.contrataciones.length && estado) {
+				let idPaseadorContrato = miSistema.contrataciones[x].Paseador.id;
+				let estadoContratacion = miSistema.contrataciones[x].estado;
+				if (idPaseadorContrato === id && estadoContratacion === "aceptada") {
+					estado = false;
+				}
+				x++;
+			}
+		}
+
 		return estado;
 	}
 
