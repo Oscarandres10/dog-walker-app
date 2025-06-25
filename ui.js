@@ -179,56 +179,6 @@ function mostrarSeccionClienteUI() {
 	document.querySelector("#selPaseadoresParaCliente").addEventListener("change", mostrarPaseadoreUI);
 }
 
-/* function mostrarSeccionClienteUI() {
-	if (!miSistema.logueado) {
-		return loginUI();
-	}
-
-	let clienteId = miSistema.logueado.id;
-
-	//  ESTA FUNCION TIENE QUE ESTAR CON ACEPTADAS Y PENDIENTES
-	let tieneContrato = miSistema.clienteTieneContratacion(clienteId);
-	//console.log(miSistema.clienteTieneContratacion(20));
-	// Muestro la seccion Cliente
-	document.querySelector("#sectionUsuarioLogueado").style.display = "block";
-
-	// Ahora voy a controla si tenia contratacion
-	if (!tieneContrato) {
-		let miContratacion = miSistema.obtengoClienteContratacion(clienteId);
-		console.log("Estoy ACA");
-		let divContratado = document.querySelector("#divMostrarContratado");
-		divContratado.style.display = "block";
-
-		//SE NECESITA AGREGAR CONTRATACION VIGENTE. INFO MAS BOTON DE CANCELACION.
-		divContratado.innerHTML = `<p><strong>${miSistema.logueado.perroNombre}</strong> tiene una contratación pendiente o aceptada actualmente.</p><br>
-		<input type="button" id="btnCancelarContratacion" value="Cancelar Contratacion">`; //agregue el boton de cancelacion
-		document.querySelector("#btnCancelarContratacion").addEventListener("click", cancelarContratacionUI);
-
-		// Como tiene contratacion y aviso, oculto el div de elegir paseador
-		document.querySelector("#mostrarTablaPaseador").style.display = "block";
-		miSistema.armarTablaPaseador(miContratacion.Paseador.id);
-	} else {
-		console.log("NO TENGO CONTRATO");
-		// No tiene contratación…
-		//
-		// por las dudas limpio mensajes anteriores.
-		let divContratado = document.querySelector("#divMostrarContratado");
-		divContratado.innerHTML = "";
-		divContratado.style.display = "none";
-		document.querySelector("#selPaseadoresParaCliente").addEventListener("change", mostrarSelectPaseadoresUI());
-		// Y Muestro paseadores
-		document.querySelector("#mostrarSelectPaseadores").style.display = "block";
-		document.querySelector("#mostrarTablaPaseador").style.display = "block";
-
-		mostrarSelectPaseadoresUI();
-
-		//Lo siguiente le doy Vida a los select para mostrar la info.
-		document.querySelector("#selPaseadoresParaCliente").addEventListener("change", mostrarPaseadoreUI);
-	}
-	document.querySelector("#mostraTablaPaseadoresActivos").style.display = "block";
-	armarTablaPaseadoresActivosUI();
-} */
-
 function mostrarPaseadoreUI() {
 	let paseador = document.querySelector("#selPaseadoresParaCliente").value;
 	console.log(`Paseador Numero: ${paseador} --> ESTOY EN mostrarPaseadorUI`);
@@ -325,9 +275,6 @@ function cancelarContratacionUI() {
 }
 
 //#endregion
-
-//
-//
 
 //#region  ## SECCION PASEADOR
 
