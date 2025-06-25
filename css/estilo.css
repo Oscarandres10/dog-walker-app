@@ -45,6 +45,9 @@ h4 {
 	font-weight: 700;
 }
 
+article {
+	margin: 40px auto;
+}
 /* ///////////////////////////// */
 /* ///   CLASES FIJAS ANCHOS /// */
 /* ///////////////////////////// */
@@ -255,6 +258,12 @@ header > div {
 
 .tablaPaseador input[type="button"]:hover {
 	background-color: #199d7c;
+}
+
+#mostrarMensajeContratacion {
+	margin: 50px auto;
+
+	text-align: center;
 }
 
 .mostrarSelectPaseadores {

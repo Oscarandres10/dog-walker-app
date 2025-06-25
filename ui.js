@@ -162,11 +162,7 @@ function mostrarSeccionClienteUI() {
 	}
 	ocultarTablasUI();
 	eliminoMostrarTablaPaseadorUI();
-	let clienteId = miSistema.logueado.id;
 
-	//  ESTA FUNCION TIENE QUE ESTAR CON ACEPTADAS Y PENDIENTES
-	let tieneContrato = miSistema.clienteTieneContratacion(clienteId);
-	//console.log(miSistema.clienteTieneContratacion(20));
 	// Muestro la seccion Cliente
 	document.querySelector("#sectionUsuarioLogueado").style.display = "block";
 
@@ -193,7 +189,7 @@ function mostrarSeccionClienteUI() {
 
 function mostrarPaseadoreUI() {
 	let paseador = document.querySelector("#selPaseadoresParaCliente").value;
-	console.log(`Paseador Numero: ${paseador} --> ESTOY EN mostrarPaseadorUI`);
+
 	let laTabla = miSistema.armarTablaPaseador(Number(paseador));
 	document.querySelector("#mostrarTablaPaseador").innerHTML = laTabla;
 	darVidaBotonesTablaPaseadoresUI();
@@ -213,8 +209,7 @@ function clickEnSolicitarUI() {
 	let valorData = this.getAttribute("data-id");
 	let idPaseadorTxt = valorData.substr(11, valorData.length);
 	let idPaseadorNum = Number(idPaseadorTxt);
-	console.log(`idPaseadorNum: `);
-	console.log(idPaseadorNum);
+
 	if (idPaseadorNum !== -1) {
 		let paseador = miSistema.obtenerPaseador(idPaseadorNum);
 		let cliente = miSistema.logueado.id;
@@ -227,7 +222,7 @@ function clickEnSolicitarUI() {
 			).innerHTML = `<p>Su Contratacion fue realizada Correctamente.</p>`;
 			setTimeout(() => {
 				document.querySelector("#mostrarMensajeContratacion").style.display = "none";
-				console.log(`ME VOY PARA SECCION CLIENTE`);
+				//console.log(`ME VOY PARA SECCION CLIENTE`);
 				mostrarSelectPaseadoresUI();
 			}, 3000); // 2 segundos
 		}
@@ -248,8 +243,7 @@ function mostrarSelectPaseadoresUI() {
 	// TIENECONTRATO ACA VA A FUNCIONAR AL REVEZ   !tienecontrato == Verdadero
 	let tieneContrato = miSistema.clienteTieneContratacion(clienteId);
 
-	let miContratacion = miSistema.obtengoClienteContratacion(clienteId);
-	console.log("Estoy ACA CON CONTRATO");
+	//console.log("Estoy ACA CON CONTRATO");
 
 	if (!tieneContrato) {
 		let mostrarMensaje = document.querySelector("#mostrarMensajeContratacion");
@@ -289,12 +283,12 @@ function mostrarContratacionUI() {
 	let miContratacion = miSistema.obtengoClienteContratacion(clienteId);
 
 	if (tieneContrato) {
-		console.log(`Estoy Aca en tiene Contrato :  Mustro Mensaje de que no hay contratacion`);
+		//console.log(`Estoy Aca en tiene Contrato :  Mustro Mensaje de que no hay contratacion`);
 		let mostrarMensaje = document.querySelector("#mostrarMensajeContratacion");
 		mostrarMensaje.style.display = "block";
 		mostrarMensaje.innerHTML = `<p><strong><cite>${miSistema.logueado.perroNombre}</cite></strong> no tiene una contratacion pendiente o aceptada.</p>`;
 	} else {
-		console.log(`Estoy Aca en tiene Contrato:  Armo Tabla`);
+		//console.log(`Estoy Aca en tiene Contrato:  Armo Tabla`);
 		let contratacionTabla = miSistema.armarTablaContratoCliente(miContratacion);
 		let mostrarContratacion = document.querySelector("#mostrarContratacion");
 		mostrarContratacion.innerHTML = contratacionTabla;
@@ -324,10 +318,10 @@ function clickEnCancelarUI() {
 			contratacion.estado = "denegada";
 			contratacion.comentario = `Cancelada por Cliente`;
 			ocultarTablasUI();
-			document.querySelector("#mostrarContratacion").innerHTML = "block";
-			document.querySelector(
-				"#mostrarMensajeContratacion"
-			).innerHTML = `la Contratacion de ${cliente.perroNombre} se ha Cancelado Correctamente.`;
+			console.log(`ESTOY CANCELANDO`);
+			let mostrarMensaje = document.querySelector("#mostrarMensajeContratacion");
+			mostrarMensaje.style.display = "block";
+			mostrarMensaje.innerHTML = `la Contratacion de ${cliente.perroNombre} se ha Cancelado Correctamente.`;
 			setTimeout(() => {
 				console.log(`ME VOY PARA SECCION CLIENTE`);
 				document.querySelector("#mostrarMensajeContratacion").innerHTML = ``;
