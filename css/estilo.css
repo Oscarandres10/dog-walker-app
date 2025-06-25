@@ -175,6 +175,18 @@ header > div {
 	color: white;
 }
 
+.cupoPorcentaje {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	background-color: rgb(165, 40, 40);
+	font-size: 40px;
+	text-align: center;
+	line-height: 100px;
+	color: white;
+}
+
 .tablaContratacionesPendientes {
 	width: 100%;
 	text-align: center;

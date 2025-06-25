@@ -3,7 +3,7 @@ class Sistema {
 		this.clientes = new Array();
 		this.paseadores = new Array();
 		this.contrataciones = new Array();
-		this.logueado = null;
+		this.logueado = this.paseadores[1];
 		this.mensajeRegistro = [];
 	}
 
@@ -59,7 +59,7 @@ class Sistema {
 		for (let i = 0; i < this.contrataciones.length; i++) {
 			let unaContratacion = this.contrataciones[i];
 			let paseador = this.logueado;
-			if (unaContratacion.Paseador === paseador && unaContratacion.estado === "pendiente") {
+			if (unaContratacion.Paseador === paseador) {
 				unaTabla += `<tr>`;
 				unaTabla += `<td>${unaContratacion.Cliente.perroNombre}</td>`;
 				unaTabla += `<td>${unaContratacion.Cliente.tamanioPerro}</td>`;
@@ -106,6 +106,9 @@ class Sistema {
 	}
 
 	armarEstadoPaseador() {
+		let paseadorCupo = this.logueado.cupo;
+		let cupo = paseadorCupo - this.cupoDisponible(this.logueado);
+		let porcentaje = (cupo * 100) / paseadorCupo;
 		let unaTabla = `<table border="1px" class="tablaEstadoPaseador">
     <tr>
     <td><h4>CUPO TOTAL</h4></td>
@@ -124,7 +127,19 @@ class Sistema {
     </tr>
     <tr>
     <td><div class="cupoPrincipal">
-    ${this.cupoDisponible(this.logueado)}
+    ${cupo}
+    </div>
+    </td>
+    </tr>
+    <tr><td><br></td></tr>
+    </table>
+    <table border="1px" class="tablaEstadoPaseador">
+    <tr>
+    <td><h4>PORCENTAJE OCUPADOS</h4></td>
+    </tr>
+    <tr>
+    <td><div class="cupoPorcentaje">
+    ${porcentaje} %
     </div>
     </td>
     </tr>
@@ -133,7 +148,10 @@ class Sistema {
 
      <table border="1px" class="tablaEstadolistaPerros">
      <caption>Contrataciones</caption>
-     `;
+     <tr>
+          <th>Nombre</th>
+          <th>Tamaño</th>
+          </tr>`;
 		let estado = true;
 		if (estado) {
 			for (let i = 0; i < this.contrataciones.length; i++) {
@@ -142,10 +160,7 @@ class Sistema {
 				if (unaContratacion.Paseador === paseador && unaContratacion.estado === "aceptada") {
 					unaTabla += `
           
-          <tr>
-          <th>Nombre</th>
-          <th>Tamaño</th>
-          </tr>
+          
           <tr>
           <td>${unaContratacion.Cliente.perroNombre}</td><td>${unaContratacion.Cliente.tamanioPerro}</td>
           </tr>`;
@@ -157,6 +172,7 @@ class Sistema {
 		unaTabla += `</table>`;
 		return unaTabla;
 	}
+
 	//#endregion
 
 	//#region  ## VALIDACION LOGIN #
@@ -389,7 +405,8 @@ class Sistema {
 		//console.log(`Arriba es Estado`);
 		let noModificado = false;
 		// VALIDO QUE No TENGA CONTRATACION PREVIA
-		if (noTieneContratacion && laContratacion.estado === "pendiente") {
+		if (laContratacion.estado === "denegada" || laContratacion.estado === "aceptada") {
+		} else if (noTieneContratacion && laContratacion.estado === "pendiente") {
 			console.log(`No tiene Contratacion Previa.`);
 
 			// VALIDO QUE NO HALLA PERRO OPUESTO
@@ -418,10 +435,12 @@ class Sistema {
 		} else {
 			laContratacion.comentario = `Ya tiene Contratacion previa.`;
 		}
+
 		if (!noModificado) {
 			// si se modifico
 			laContratacion.estado = "denegado";
 		}
+
 		mostrarTablaContratacionesPendientesUI();
 		mostrarEstadoPaseadorUI();
 	}
@@ -607,8 +626,8 @@ class Sistema {
 		return unaTabla;
 	}
 
-	armarTablaContratoCliente(id) {
-		let paseador = this.obtenerPaseador(id);
+	armarTablaContratoCliente(contratacion) {
+		let paseador = contratacion.Paseador;
 
 		let unaTabla = `<br><br><table class="tablaPaseador" border="1px">`;
 		unaTabla += `<tr>`;
@@ -618,9 +637,9 @@ class Sistema {
 		unaTabla += `<tr>`;
 		unaTabla += `<td>${paseador.nombre}</td>`;
 		unaTabla += `<td>`;
-		unaTabla += `<input type="button" data-id="paseadorID-${paseador.id}" class="botonesTablaPaseadoresCancelar" value="Cancelar">`;
+		unaTabla += `<input type="button" data-id="contrataID-${contratacion.id}" class="botonesTablaPaseadoresCancelar" value="Cancelar">`;
 		unaTabla += `</td>`;
-		unaTabla += `<td></td>`;
+		unaTabla += `<td id="contratacionPendientesComentarios"></td>`;
 		unaTabla += `</tr></table>`;
 
 		return unaTabla;

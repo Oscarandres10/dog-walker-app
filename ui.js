@@ -160,7 +160,8 @@ function mostrarSeccionClienteUI() {
 	if (!miSistema.logueado) {
 		return loginUI();
 	}
-
+	ocultarTablasUI();
+	eliminoMostrarTablaPaseadorUI();
 	let clienteId = miSistema.logueado.id;
 
 	//  ESTA FUNCION TIENE QUE ESTAR CON ACEPTADAS Y PENDIENTES
@@ -281,13 +282,11 @@ function mostrarContratacionUI() {
 	ocultarTablasUI();
 	eliminoMostrarTablaPaseadorUI();
 	let clienteId = miSistema.logueado.id;
-	console.log(clienteId);
+
 	// TIENECONTRATO ACA VA A FUNCIONAR AL REVEZ   !tienecontrato == Verdadero
 	let tieneContrato = miSistema.clienteTieneContratacion(clienteId);
 
 	let miContratacion = miSistema.obtengoClienteContratacion(clienteId);
-
-	console.log(miContratacion);
 
 	if (tieneContrato) {
 		console.log(`Estoy Aca en tiene Contrato :  Mustro Mensaje de que no hay contratacion`);
@@ -296,30 +295,50 @@ function mostrarContratacionUI() {
 		mostrarMensaje.innerHTML = `<p><strong><cite>${miSistema.logueado.perroNombre}</cite></strong> no tiene una contratacion pendiente o aceptada.</p>`;
 	} else {
 		console.log(`Estoy Aca en tiene Contrato:  Armo Tabla`);
-		let contratacionTabla = miSistema.armarTablaContratoCliente(miContratacion.Paseador.id);
+		let contratacionTabla = miSistema.armarTablaContratoCliente(miContratacion);
 		let mostrarContratacion = document.querySelector("#mostrarContratacion");
 		mostrarContratacion.innerHTML = contratacionTabla;
+		darVidaBotonesmostrarContratacionUI();
 		mostrarContratacion.style.display = `block`;
 	}
 }
 
-//agregue esta funcion para tratar de hacer el boton de cancelacion
-function cancelarContratacionUI() {
-	let idCliente = miSistema.contrataciones.id;
-	let i = 0;
-	let listaFiltradaContratacion = new Array();
-	while (i < miSistema.contrataciones.length) {
-		let unaContratacion = miSistema.contrataciones[i];
-		if (
-			unaContratacion.Cliente.id !== idCliente ||
-			(unaContratacion.estado !== "pendiente" && unaContratacion.estado !== "aceptada")
-		) {
-			listaFiltradaContratacion.push(unaContratacion);
-		}
-		i++;
+function darVidaBotonesmostrarContratacionUI() {
+	let losBotones = document.querySelectorAll(".botonesTablaPaseadoresCancelar");
+	for (let unBoton of losBotones) {
+		unBoton.addEventListener("click", clickEnCancelarUI);
 	}
-	miSistema.contrataciones = listaFiltradaContratacion;
-	mostrarSeccionClienteUI();
+}
+
+function clickEnCancelarUI() {
+	if (!miSistema.logueado) {
+		return loginUI();
+	}
+	let cliente = miSistema.logueado;
+	let valorData = this.getAttribute("data-id");
+	let idContratacionTxt = valorData.substr(11, valorData.length);
+	let idContratacionNum = Number(idContratacionTxt);
+	let contratacion = miSistema.obtenerContratacion(idContratacionNum);
+	if (idContratacionNum !== -1) {
+		if (contratacion.Cliente === cliente && contratacion.estado === "pendiente") {
+			contratacion.estado = "denegada";
+			contratacion.comentario = `Cancelada por Cliente`;
+			ocultarTablasUI();
+			document.querySelector("#mostrarContratacion").innerHTML = "block";
+			document.querySelector(
+				"#mostrarMensajeContratacion"
+			).innerHTML = `la Contratacion de ${cliente.perroNombre} se ha Cancelado Correctamente.`;
+			setTimeout(() => {
+				console.log(`ME VOY PARA SECCION CLIENTE`);
+				document.querySelector("#mostrarMensajeContratacion").innerHTML = ``;
+				document.querySelector("#mostrarMensajeContratacion").style.display = `none`;
+				mostrarSelectPaseadoresUI();
+			}, 3000); // 2 segundos
+		}
+	} else {
+		document.querySelector("#mostrarMensajeContratacion").innerHTML = "No se ha Elegido un Paseador";
+	}
+	return valorData;
 }
 
 //#endregion
