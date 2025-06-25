@@ -174,12 +174,16 @@ function mostrarSeccionClienteUI() {
 	document.querySelector("#mostrarSelectPaseadores").style.display = "none";
 	document.querySelector("#mostraTablaPaseadoresActivos").style.display = "none";
 
+	// LIMPIO
+	document.querySelector("#mostrarMensajeContratacion").innerHTML = ``;
+
 	document.querySelector("#menuCliente").style.display = "block";
 
 	let divContratado = document.querySelector("#divMostrarContratado");
 	divContratado.innerHTML = "";
 	divContratado.style.display = "none";
 	document.querySelector("#btnVerDisponibles").addEventListener("click", mostrarSelectPaseadoresUI);
+	document.querySelector("#btnVerContratacion").addEventListener("click", mostrarContratacionUI);
 	document.querySelector("#btnVerActivos").addEventListener("click", armarTablaPaseadoresActivosUI);
 
 	//Lo siguiente le doy Vida a los select para mostrar la info.
@@ -247,11 +251,9 @@ function mostrarSelectPaseadoresUI() {
 	console.log("Estoy ACA CON CONTRATO");
 
 	if (!tieneContrato) {
-		console.log(`NO TENGO`);
-
-		let miContrato = miSistema.armarTablaContratoCliente(miContratacion.Paseador.id);
-		document.querySelector("#mostrarContratacion").style.display = "block";
-		document.querySelector("#mostrarContratacion").innerHTML = miContrato;
+		let mostrarMensaje = document.querySelector("#mostrarMensajeContratacion");
+		mostrarMensaje.style.display = "block";
+		mostrarMensaje.innerHTML = `<p><strong><cite>${miSistema.logueado.perroNombre}</cite></strong> ya tiene un contratacion.</p>`;
 	} else {
 		let selectPaseadores = miSistema.armadoSelectPaseadores();
 
@@ -269,6 +271,36 @@ function armarTablaPaseadoresActivosUI() {
 	ocultarTablasUI();
 	document.querySelector("#mostraTablaPaseadoresActivos").style.display = "block";
 	document.querySelector("#mostraTablaPaseadoresActivos").innerHTML = laTabla;
+}
+
+function mostrarContratacionUI() {
+	console.log("Estoy ACA EN MOSTRARCONTRATACION");
+	if (!miSistema.logueado) {
+		return loginUI();
+	}
+	ocultarTablasUI();
+	eliminoMostrarTablaPaseadorUI();
+	let clienteId = miSistema.logueado.id;
+	console.log(clienteId);
+	// TIENECONTRATO ACA VA A FUNCIONAR AL REVEZ   !tienecontrato == Verdadero
+	let tieneContrato = miSistema.clienteTieneContratacion(clienteId);
+
+	let miContratacion = miSistema.obtengoClienteContratacion(clienteId);
+
+	console.log(miContratacion);
+
+	if (tieneContrato) {
+		console.log(`Estoy Aca en tiene Contrato :  Mustro Mensaje de que no hay contratacion`);
+		let mostrarMensaje = document.querySelector("#mostrarMensajeContratacion");
+		mostrarMensaje.style.display = "block";
+		mostrarMensaje.innerHTML = `<p><strong><cite>${miSistema.logueado.perroNombre}</cite></strong> no tiene una contratacion pendiente o aceptada.</p>`;
+	} else {
+		console.log(`Estoy Aca en tiene Contrato:  Armo Tabla`);
+		let contratacionTabla = miSistema.armarTablaContratoCliente(miContratacion.Paseador.id);
+		let mostrarContratacion = document.querySelector("#mostrarContratacion");
+		mostrarContratacion.innerHTML = contratacionTabla;
+		mostrarContratacion.style.display = `block`;
+	}
 }
 
 //agregue esta funcion para tratar de hacer el boton de cancelacion

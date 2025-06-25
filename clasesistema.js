@@ -618,7 +618,7 @@ class Sistema {
 		unaTabla += `<tr>`;
 		unaTabla += `<td>${paseador.nombre}</td>`;
 		unaTabla += `<td>`;
-		unaTabla += `<input type="button" data-id="paseadorID-${paseador.id}" class="botonesTablaPaseadores" value="Cancelar">`;
+		unaTabla += `<input type="button" data-id="paseadorID-${paseador.id}" class="botonesTablaPaseadoresCancelar" value="Cancelar">`;
 		unaTabla += `</td>`;
 		unaTabla += `<td></td>`;
 		unaTabla += `</tr></table>`;
