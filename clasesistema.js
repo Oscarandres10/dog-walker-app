@@ -37,7 +37,7 @@ class Sistema {
 		let unaContratacion = new Contrataciones();
 		unaContratacion.Cliente = this.obtenerCliente(idCliente);
 		unaContratacion.Paseador = this.obtenerPaseador(idPaseador);
-		unaContratacion.estado = "aceptada";
+		unaContratacion.estado = "pendiente";
 		this.contrataciones.push(unaContratacion);
 	}
 
@@ -340,13 +340,13 @@ class Sistema {
 			let noTieneContratacion = this.clienteTieneContratacionAceptada(idCliente);
 
 			if (noTieneContratacion) {
-				console.log(`No tiene Contratacion Previa.`);
+				//console.log(`No tiene Contratacion Previa.`);
 				// Me aseguro que hay cupo sufficiente para el cupo del perro.
 				if (cupo >= this.calcularCupoPerro(elCliente.tamanioPerro)) {
 					//console.log(`test estoy en el if si el cupo es mayor que el cupo perro`);
 					if (this.paseadorComparoTamanio(elPaseador, elCliente.tamanioPerro)) {
 						//console.log(`Test Se compara los tamanio de perro`);
-						console.log(`Contratacion Aceptada`);
+						//console.log(`Contratacion Aceptada`);
 						//laContratacion.estado = "aceptada";
 						//laContratacion.comentario = "aceptada";
 						noModificado = true;
@@ -590,20 +590,38 @@ class Sistema {
 	//#region  ## PASEADORES
 	armarTablaPaseador(id) {
 		let paseador = this.obtenerPaseador(id);
-		//console.log(paseador);
-		let unaTabla = `<br><br><table class="tablaPaseador" border="1px">
-					<tr>
-						<th colspan="2">Nombre</th>
-						
-						<th>Comentarios</th>
-					</tr>
-					<tr>
-				   		<td>${paseador.nombre}</td>
-						<td>
-							<input type="button" data-id="paseadorID-${paseador.id}" class="botonesTablaPaseadores" value="Solicitar">
-						</td>
-						<td></td>
-				    </tr></table>`;
+
+		let unaTabla = `<br><br><table class="tablaPaseador" border="1px">`;
+		unaTabla += `<tr>`;
+		unaTabla += `<th colspan="2">Nombre</th>`;
+		unaTabla += `<th>Comentarios</th>`;
+		unaTabla += `</tr>`;
+		unaTabla += `<tr>`;
+		unaTabla += `<td>${paseador.nombre}</td>`;
+		unaTabla += `<td>`;
+		unaTabla += `<input type="button" data-id="paseadorID-${paseador.id}" class="botonesTablaPaseadores" value="Solicitar">`;
+		unaTabla += `</td>`;
+		unaTabla += `<td></td>`;
+		unaTabla += `</tr></table>`;
+
+		return unaTabla;
+	}
+
+	armarTablaContratoCliente(id) {
+		let paseador = this.obtenerPaseador(id);
+
+		let unaTabla = `<br><br><table class="tablaPaseador" border="1px">`;
+		unaTabla += `<tr>`;
+		unaTabla += `<th colspan="2">Nombre</th>`;
+		unaTabla += `<th>Comentarios</th>`;
+		unaTabla += `</tr>`;
+		unaTabla += `<tr>`;
+		unaTabla += `<td>${paseador.nombre}</td>`;
+		unaTabla += `<td>`;
+		unaTabla += `<input type="button" data-id="paseadorID-${paseador.id}" class="botonesTablaPaseadores" value="Cancelar">`;
+		unaTabla += `</td>`;
+		unaTabla += `<td></td>`;
+		unaTabla += `</tr></table>`;
 
 		return unaTabla;
 	}
@@ -715,6 +733,21 @@ class Sistema {
 		while (laContratacion === null && i < this.contrataciones.length) {
 			let contratacionX = this.contrataciones[i];
 			if (contratacionX.id === cId) {
+				laContratacion = contratacionX;
+			}
+			i++;
+		}
+		return laContratacion;
+	}
+
+	// OBTENGO LA CONTRATACION DEL CLIENTE.
+	obtengoClienteContratacion(clienteId) {
+		let laContratacion = null;
+		let i = 0;
+
+		while (laContratacion === null && i < this.contrataciones.length) {
+			let contratacionX = this.contrataciones[i];
+			if (contratacionX.Cliente.id === clienteId && contratacionX.estado !== "denegada") {
 				laContratacion = contratacionX;
 			}
 			i++;

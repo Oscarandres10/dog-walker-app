@@ -1,11 +1,3 @@
-// CONSULTAR ::  A efectos meramente informativos el usuario deberá
-// poder visualizar en una interfaz diferente un listado con todos
-// los paseadores y la cantidad de perros (no cupos) que tiene
-// asignados actualmente.
-//  ESTO SE REFIERE A TODOS LOS PENDIENTES Y ACEPTADAS O SOLO ACEPTADAS.
-
-// TENGO QUE REVISAR     clienteTieneContratacion()   POR QUE ME PARECE QUE FALTA PENDIENTES
-
 function eventos() {
 	document.querySelector("#btnRegistarCliente").addEventListener("click", registroInterfazUI); // Registrarse
 	document.querySelector("#btnLoginCliente").addEventListener("click", loginInterfazUI);
@@ -118,6 +110,28 @@ function mostrarLogueadoUI() {
 	return elCliente;
 }
 
+/* #### LOGOUT #### */
+
+function logoutUI() {
+	ocultarTodoUI();
+	mostrarNavUI();
+	ocultarTablasUI();
+	document.querySelector("#pMostrarlogueado").innerHTML = ``;
+	document.querySelector("#btnLogoutCliente").style.display = `none`;
+	miSistema.logueado = null;
+
+	document.querySelector("#sectionUsuarioLogueado").style.display = "none";
+
+	document.querySelector("#sectionSobreNosotros").style.display = "block";
+}
+
+//#region   ## SECCION CLIENTE
+
+function mostrarLogueadoUI() {
+	let elCliente = `<p>Bienvenido <strong>${miSistema.logueado.nombre}</strong></p>`;
+	return elCliente;
+}
+
 /* #### LOGOUT ####*/
 
 function logoutUI() {
@@ -148,8 +162,39 @@ function mostrarSeccionClienteUI() {
 	// Muestro la seccion Cliente
 	document.querySelector("#sectionUsuarioLogueado").style.display = "block";
 
+	// OCULTO POR LAS DUDAS
+	document.querySelector("#divMostrarContratado").style.display = "none";
+	document.querySelector("#mostrarSelectPaseadores").style.display = "none";
+	document.querySelector("#mostraTablaPaseadoresActivos").style.display = "none";
+
+	document.querySelector("#menuCliente").style.display = "block";
+
+	let divContratado = document.querySelector("#divMostrarContratado");
+	divContratado.innerHTML = "";
+	divContratado.style.display = "none";
+	document.querySelector("#btnVerDisponibles").addEventListener("click", mostrarSelectPaseadoresUI);
+	document.querySelector("#btnVerActivos").addEventListener("click", armarTablaPaseadoresActivosUI);
+
+	//Lo siguiente le doy Vida a los select para mostrar la info.
+	document.querySelector("#selPaseadoresParaCliente").addEventListener("change", mostrarPaseadoreUI);
+}
+
+/* function mostrarSeccionClienteUI() {
+	if (!miSistema.logueado) {
+		return loginUI();
+	}
+
+	let clienteId = miSistema.logueado.id;
+
+	//  ESTA FUNCION TIENE QUE ESTAR CON ACEPTADAS Y PENDIENTES
+	let tieneContrato = miSistema.clienteTieneContratacion(clienteId);
+	//console.log(miSistema.clienteTieneContratacion(20));
+	// Muestro la seccion Cliente
+	document.querySelector("#sectionUsuarioLogueado").style.display = "block";
+
 	// Ahora voy a controla si tenia contratacion
 	if (!tieneContrato) {
+		let miContratacion = miSistema.obtengoClienteContratacion(clienteId);
 		console.log("Estoy ACA");
 		let divContratado = document.querySelector("#divMostrarContratado");
 		divContratado.style.display = "block";
@@ -160,7 +205,8 @@ function mostrarSeccionClienteUI() {
 		document.querySelector("#btnCancelarContratacion").addEventListener("click", cancelarContratacionUI);
 
 		// Como tiene contratacion y aviso, oculto el div de elegir paseador
-		document.querySelector("#mostrarTablaPaseador").style.display = "none";
+		document.querySelector("#mostrarTablaPaseador").style.display = "block";
+		miSistema.armarTablaPaseador(miContratacion.Paseador.id);
 	} else {
 		console.log("NO TENGO CONTRATO");
 		// No tiene contratación…
@@ -169,7 +215,7 @@ function mostrarSeccionClienteUI() {
 		let divContratado = document.querySelector("#divMostrarContratado");
 		divContratado.innerHTML = "";
 		divContratado.style.display = "none";
-
+		document.querySelector("#selPaseadoresParaCliente").addEventListener("change", mostrarSelectPaseadoresUI());
 		// Y Muestro paseadores
 		document.querySelector("#mostrarSelectPaseadores").style.display = "block";
 		document.querySelector("#mostrarTablaPaseador").style.display = "block";
@@ -181,11 +227,11 @@ function mostrarSeccionClienteUI() {
 	}
 	document.querySelector("#mostraTablaPaseadoresActivos").style.display = "block";
 	armarTablaPaseadoresActivosUI();
-}
+} */
 
 function mostrarPaseadoreUI() {
 	let paseador = document.querySelector("#selPaseadoresParaCliente").value;
-
+	console.log(`Paseador Numero: ${paseador} --> ESTOY EN mostrarPaseadorUI`);
 	let laTabla = miSistema.armarTablaPaseador(Number(paseador));
 	document.querySelector("#mostrarTablaPaseador").innerHTML = laTabla;
 	darVidaBotonesTablaPaseadoresUI();
@@ -201,9 +247,9 @@ function darVidaBotonesTablaPaseadoresUI() {
 function clickEnSolicitarUI() {
 	let valorData = this.getAttribute("data-id");
 	let idPaseadorTxt = valorData.substr(11, valorData.length);
-	let idPaseadorNum;
-	if (!isNaN(idPaseadorTxt)) idPaseadorNum = Number(idPaseadorTxt);
-	//console.log(idPaseadorNum);
+	let idPaseadorNum = Number(idPaseadorTxt);
+	console.log(`idPaseadorNum: `);
+	console.log(idPaseadorNum);
 	if (idPaseadorNum !== -1) {
 		let paseador = miSistema.obtenerPaseador(idPaseadorNum);
 		let cliente = miSistema.logueado.id;
@@ -216,8 +262,9 @@ function clickEnSolicitarUI() {
 			).innerHTML = `<p>Su Contratacion fue realizada Correctamente.</p>`;
 			setTimeout(() => {
 				document.querySelector("#mostrarMensajeContratacion").style.display = "none";
+				console.log(`ME VOY PARA SECCION CLIENTE`);
 				mostrarSeccionClienteUI();
-			}, 2000); // 2 segundos
+			}, 3000); // 2 segundos
 		}
 	} else {
 		document.querySelector("#mostrarMensajeContratacion").innerHTML = "No se ha Elegido un Paseador";
@@ -226,12 +273,34 @@ function clickEnSolicitarUI() {
 }
 
 function mostrarSelectPaseadoresUI() {
-	let selectPaseadores = miSistema.armadoSelectPaseadores();
-	document.querySelector("#selPaseadoresParaCliente").innerHTML = selectPaseadores;
+	ocultarTablasUI();
+
+	let clienteId = miSistema.logueado.id;
+
+	//  ESTA FUNCION TIENE QUE ESTAR CON ACEPTADAS Y PENDIENTES
+	let tieneContrato = miSistema.clienteTieneContratacion(clienteId);
+	let miContratacion = miSistema.obtengoClienteContratacion(clienteId);
+	console.log("Estoy ACA CON CONTRATO");
+
+	if (!tieneContrato) {
+		console.log(`NO TENGO`);
+
+		let miContrato = miSistema.armarTablaContratoCliente(miContratacion.Paseador.id);
+		document.querySelector("#mostrarContratacion").style.display = "block";
+		document.querySelector("#mostrarContratacion").innerHTML = miContrato;
+	} else {
+		let selectPaseadores = miSistema.armadoSelectPaseadores();
+
+		document.querySelector("#mostrarSelectPaseadores").style.display = "block";
+		document.querySelector("#mostrarTablaPaseador").style.display = "block";
+
+		document.querySelector("#selPaseadoresParaCliente").innerHTML = selectPaseadores;
+	}
 }
 
 function armarTablaPaseadoresActivosUI() {
 	let laTabla = miSistema.armarTablaPaseadoresActivos();
+	ocultarTablasUI();
 	document.querySelector("#mostraTablaPaseadoresActivos").style.display = "block";
 	document.querySelector("#mostraTablaPaseadoresActivos").innerHTML = laTabla;
 }
