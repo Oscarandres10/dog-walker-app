@@ -628,7 +628,7 @@ class Sistema {
 
 	armadoSelectPaseadores() {
 		let listaPaseadores = this.paseadoresFiltradosParaCliente();
-		let paseadores = '<option value="-1">elija opción</option>`;';
+		let paseadores = '<option value="-1">Elija un Paseador</option>';
 		for (let i = 0; i < listaPaseadores.length; i++) {
 			paseadores += `<option value="${listaPaseadores[i].id}">${listaPaseadores[i].nombre}</option>`;
 		}

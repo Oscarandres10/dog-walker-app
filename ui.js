@@ -44,6 +44,12 @@ function ocultarTablasUI() {
 	}
 }
 
+function eliminoMostrarTablaPaseadorUI() {
+	let divMostrarTablaPaseador = document.querySelector("#mostrarTablaPaseador");
+	divMostrarTablaPaseador.innerHTML = "";
+	divMostrarTablaPaseador.style.display = "none";
+}
+
 //luego muestro el sobre nostros y los botones para log in y registrarse
 
 function mostrarSobreNosotrosUI() {
@@ -116,6 +122,7 @@ function logoutUI() {
 	ocultarTodoUI();
 	mostrarNavUI();
 	ocultarTablasUI();
+	eliminoMostrarTablaPaseadorUI();
 	document.querySelector("#pMostrarlogueado").innerHTML = ``;
 	document.querySelector("#btnLogoutCliente").style.display = `none`;
 	miSistema.logueado = null;
@@ -195,6 +202,9 @@ function darVidaBotonesTablaPaseadoresUI() {
 }
 
 function clickEnSolicitarUI() {
+	if (!miSistema.logueado) {
+		return loginUI();
+	}
 	let valorData = this.getAttribute("data-id");
 	let idPaseadorTxt = valorData.substr(11, valorData.length);
 	let idPaseadorNum = Number(idPaseadorTxt);
@@ -213,7 +223,7 @@ function clickEnSolicitarUI() {
 			setTimeout(() => {
 				document.querySelector("#mostrarMensajeContratacion").style.display = "none";
 				console.log(`ME VOY PARA SECCION CLIENTE`);
-				mostrarSeccionClienteUI();
+				mostrarSelectPaseadoresUI();
 			}, 3000); // 2 segundos
 		}
 	} else {
@@ -223,12 +233,16 @@ function clickEnSolicitarUI() {
 }
 
 function mostrarSelectPaseadoresUI() {
+	if (!miSistema.logueado) {
+		return loginUI();
+	}
 	ocultarTablasUI();
-
+	eliminoMostrarTablaPaseadorUI();
 	let clienteId = miSistema.logueado.id;
 
-	//  ESTA FUNCION TIENE QUE ESTAR CON ACEPTADAS Y PENDIENTES
+	// TIENECONTRATO ACA VA A FUNCIONAR AL REVEZ   !tienecontrato == Verdadero
 	let tieneContrato = miSistema.clienteTieneContratacion(clienteId);
+
 	let miContratacion = miSistema.obtengoClienteContratacion(clienteId);
 	console.log("Estoy ACA CON CONTRATO");
 
@@ -244,7 +258,9 @@ function mostrarSelectPaseadoresUI() {
 		document.querySelector("#mostrarSelectPaseadores").style.display = "block";
 		document.querySelector("#mostrarTablaPaseador").style.display = "block";
 
-		document.querySelector("#selPaseadoresParaCliente").innerHTML = selectPaseadores;
+		let selPaseador = document.querySelector("#selPaseadoresParaCliente");
+		selPaseador.innerHTML = selectPaseadores;
+		selPaseador.selectedIndex = 0; // Pongo el select en 0 para que no me muestre si ya se habia selecccionado
 	}
 }
 
@@ -282,9 +298,6 @@ function mostrarSeccionPaseadorUI() {
 	if (miSistema.logueado !== null) {
 		document.querySelector("#sectionPaseadoresLogueado").style.display = "block";
 		mostrarTablaContratacionesPendientesUI(); // Tabla de Contrataciones de Pendientes
-		//se debe informar al paseador claramente si la contratación se aprobó o rechazó cuál fue el motivo.
-		//y el porcentaje de cupos que tiene actualment asignados.
-		//Si el paseador no tiene perros asignados se mostrará un mensaje de que no hay perro asignados actualmente.
 		mostrarEstadoPaseadorUI();
 	} else {
 		loginUI();
