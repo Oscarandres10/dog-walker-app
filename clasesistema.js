@@ -624,7 +624,7 @@ class Sistema {
 
 	armarTablaContratoCliente(contratacion) {
 		let paseador = contratacion.Paseador;
-		console.log(contratacion);
+		//console.log(contratacion);
 		let unaTabla = `<br><br><table class="tablaPaseador" border="1px">`;
 		unaTabla += `<tr>`;
 		unaTabla += `<th colspan="2">Nombre</th>`;
