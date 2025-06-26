@@ -233,118 +233,45 @@ function precargaPaseador() {
 
 // #region ## PRECARGA CONTRATACIONES
 function precargaContrataciones() {
-	let cliente1 = 4; // cliente 5
-	let paseador1 = 2; // paseador 3
-	if (miSistema.validarPrecargaContratacion(cliente1, paseador1)) {
-		miSistema.cargaUnaContratacion(cliente1, paseador1);
-	}
+	let infoContratacion = [
+		{ cliente: 4, paseador: 2 },
+		{ cliente: 17, paseador: 4 },
+		{ cliente: 1, paseador: 1 },
+		{ cliente: 12, paseador: 3 },
+		{ cliente: 6, paseador: 1 },
+		{ cliente: 10, paseador: 0 },
+		{ cliente: 15, paseador: 3 },
+		{ cliente: 9, paseador: 2 },
+		{ cliente: 1, paseador: 0 },
+		{ cliente: 7, paseador: 4 },
+		{ cliente: 3, paseador: 1 },
+		{ cliente: 5, paseador: 0 },
+		{ cliente: 8, paseador: 2 },
+		{ cliente: 11, paseador: 4 },
+		{ cliente: 15, paseador: 0 },
+		{ cliente: 2, paseador: 3 },
+		{ cliente: 13, paseador: 2 },
+		{ cliente: 14, paseador: 1 },
+		{ cliente: 16, paseador: 3 },
+		{ cliente: 18, paseador: 0 },
+	];
 
-	let cliente2 = 17;
-	let paseador2 = 4;
-	if (miSistema.validarPrecargaContratacion(cliente2, paseador2)) {
-		miSistema.cargaUnaContratacion(cliente2, paseador2);
-	}
+	for (let i = 0; i < infoContratacion.length; i++) {
+		let cliente = infoContratacion[i].cliente;
+		let paseador = infoContratacion[i].paseador;
 
-	let cliente3 = 1;
-	let paseador3 = 1;
-	if (miSistema.validarPrecargaContratacion(cliente3, paseador3)) {
-		miSistema.cargaUnaContratacion(cliente3, paseador3);
-	}
+		// Aca busco al Cliente y Paseador para Verificar que Existen.
+		let elCliente = miSistema.obtenerCliente(cliente);
+		let elPaseador = miSistema.obtenerPaseador(paseador);
 
-	let cliente4 = 12;
-	let paseador4 = 3;
-	if (miSistema.validarPrecargaContratacion(cliente4, paseador4)) {
-		miSistema.cargaUnaContratacion(cliente4, paseador4);
-	}
-
-	let cliente5 = 6;
-	let paseador5 = 1;
-	if (miSistema.validarPrecargaContratacion(cliente5, paseador5)) {
-		miSistema.cargaUnaContratacion(cliente5, paseador5);
-	}
-
-	let cliente6 = 10;
-	let paseador6 = 0;
-	if (miSistema.validarPrecargaContratacion(cliente6, paseador6)) {
-		miSistema.cargaUnaContratacion(cliente6, paseador6);
-	}
-
-	let cliente7 = 15;
-	let paseador7 = 3;
-	if (miSistema.validarPrecargaContratacion(cliente7, paseador7)) {
-		miSistema.cargaUnaContratacion(cliente7, paseador7);
-	}
-
-	let cliente8 = 9;
-	let paseador8 = 2;
-	if (miSistema.validarPrecargaContratacion(cliente8, paseador8)) {
-		miSistema.cargaUnaContratacion(cliente8, paseador8);
-	}
-
-	let cliente9 = 1;
-	let paseador9 = 0;
-	if (miSistema.validarPrecargaContratacion(cliente9, paseador9)) {
-		miSistema.cargaUnaContratacion(cliente9, paseador9);
-	}
-
-	let cliente10 = 7;
-	let paseador10 = 4;
-	if (miSistema.validarPrecargaContratacion(cliente10, paseador10)) {
-		miSistema.cargaUnaContratacion(cliente10, paseador10);
-	}
-
-	let cliente11 = 3;
-	let paseador11 = 1;
-	if (miSistema.validarPrecargaContratacion(cliente11, paseador11)) {
-		miSistema.cargaUnaContratacion(cliente11, paseador11);
-	}
-
-	let cliente12 = 5;
-	let paseador12 = 0;
-	if (miSistema.validarPrecargaContratacion(cliente12, paseador12)) {
-		miSistema.cargaUnaContratacion(cliente12, paseador12);
-	}
-
-	let cliente13 = 8;
-	let paseador13 = 2;
-	if (miSistema.validarPrecargaContratacion(cliente13, paseador13)) {
-		miSistema.cargaUnaContratacion(cliente13, paseador13);
-	}
-
-	let cliente14 = 11;
-	let paseador14 = 4;
-	if (miSistema.validarPrecargaContratacion(cliente14, paseador14)) {
-		miSistema.cargaUnaContratacion(cliente14, paseador14);
-	}
-
-	let cliente15 = 13;
-	let paseador15 = 3;
-	if (miSistema.validarPrecargaContratacion(cliente15, paseador15)) {
-		miSistema.cargaUnaContratacion(cliente15, paseador15);
-	}
-
-	let cliente16 = 14;
-	let paseador16 = 0;
-	if (miSistema.validarPrecargaContratacion(cliente16, paseador16)) {
-		miSistema.cargaUnaContratacion(cliente16, paseador16);
-	}
-
-	let cliente17 = 16;
-	let paseador17 = 2;
-	if (miSistema.validarPrecargaContratacion(cliente17, paseador17)) {
-		miSistema.cargaUnaContratacion(cliente17, paseador17);
-	}
-
-	let cliente18 = 18;
-	let paseador18 = 1;
-	if (miSistema.validarPrecargaContratacion(cliente18, paseador18)) {
-		miSistema.cargaUnaContratacion(cliente18, paseador18);
-	}
-
-	let cliente19 = 19;
-	let paseador19 = 4;
-	if (miSistema.validarPrecargaContratacion(cliente19, paseador19)) {
-		miSistema.cargaUnaContratacion(cliente19, paseador19);
+		// CARGO Y PROCESO si Cliente y Paseador Existen.
+		if (elCliente !== null && elPaseador !== null) {
+			miSistema.logueado = elPaseador; // Hago un Login para que funcione una funcionalidad
+			let idContratacion = miSistema.cargaUnaContratacion(cliente, paseador);
+			miSistema.procesarAceptarContratacion(idContratacion);
+			miSistema.validoContratacionesPendientesDespuesDeAceptar(idContratacion);
+			miSistema.logueado = null; // Hago un Logout..
+		}
 	}
 }
 

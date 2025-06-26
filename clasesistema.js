@@ -39,6 +39,7 @@ class Sistema {
 		unaContratacion.Paseador = this.obtenerPaseador(idPaseador);
 		unaContratacion.estado = "pendiente";
 		this.contrataciones.push(unaContratacion);
+		return unaContratacion.id; // <--- Agrego Linea para que me retorno el id de la contratacion. cuando la precise
 	}
 
 	//#endregion
@@ -353,9 +354,10 @@ class Sistema {
 
 		if (elCliente !== null && elPaseador !== null) {
 			let cupo = this.cupoDisponible(elPaseador);
-			let noTieneContratacion = this.clienteTieneContratacionAceptada(idCliente);
+			let noTieneContratacion = this.clienteTieneContratacion(idCliente);
 
 			if (noTieneContratacion) {
+				console.log(`VALIDACION PRECARGA  NO TIENE CONTRATACION`);
 				if (cupo >= this.calcularCupoPerro(elCliente.tamanioPerro)) {
 					//console.log(`test estoy en el if si el cupo es mayor que el cupo perro`);
 					if (this.paseadorComparoTamanio(elPaseador, elCliente.tamanioPerro)) {
@@ -380,7 +382,6 @@ class Sistema {
 	//#region  ## CONTRATACIONES ##
 
 	procesarAceptarContratacion(id) {
-		//let valido = false;
 		let laContratacion = this.obtenerContratacion(id); // se obtiene la contratacion
 		let perro = this.calcularCupoPerro(laContratacion.Cliente.tamanioPerro); // Tamaño
 
@@ -596,9 +597,6 @@ class Sistema {
 
 	//#endregion
 
-	//
-	//
-
 	//#region  ## PASEADORES
 	armarTablaPaseador(id) {
 		let paseador = this.obtenerPaseador(id);
@@ -673,13 +671,9 @@ class Sistema {
 
 	//#endregion
 
-	//
-	//
-
 	//#region  ## UTILIDADES
 
 	// BUSCO POR CONTRATACIONES PENDIENTES O ACEPTADAS.
-
 	clienteTieneContratacion(id) {
 		let estado = true;
 		let x = 0;

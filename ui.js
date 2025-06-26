@@ -203,7 +203,7 @@ function darVidaBotonesTablaPaseadoresUI() {
 	}
 }
 
-function clickEnSolicitarUI() {
+function clickEnSolicitarUI(id, idtest) {
 	if (!miSistema.logueado) {
 		return loginUI();
 	}

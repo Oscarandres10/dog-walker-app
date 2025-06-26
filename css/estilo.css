@@ -299,3 +299,16 @@ header > div {
 #mostrarEstadoPaseador {
 	background-color: rgb(211, 211, 211);
 }
+
+.botonesMenu {
+	margin: 10px 10px;
+	padding: 10px;
+	background-color: #20c997;
+	color: white;
+	border-radius: 20px;
+	border: none;
+}
+
+.botonesMenu:hover {
+	background-color: #199d7c;
+}
