@@ -328,14 +328,14 @@ class Sistema {
 
 				if (perroNombre === perroMinus) {
 					validar = false;
-					this.mensajeRegistro.push(`Nombre de Perro ya existe.<br>`);
+					this.mensajeRegistro.push(`<strong>Nombre de Perro</strong> ya existe.<br>`);
 				}
 
 				x++;
 			}
 		} else {
 			validar = false; // El input esta vacio
-			this.mensajeRegistro.push(`Nombre de Perro no puede estar Vacio.<br>`);
+			this.mensajeRegistro.push(`<strong>Nombre de Perro</strong> no puede estar Vacio.<br>`);
 		}
 
 		return validar;
