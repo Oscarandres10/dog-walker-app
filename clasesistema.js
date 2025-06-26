@@ -602,7 +602,7 @@ class Sistema {
 
 	//#endregion
 
-	//#region  ## PASEADORES
+	//#region  ## CLIENTES
 	armarTablaPaseador(id) {
 		let paseador = this.obtenerPaseador(id);
 
@@ -624,7 +624,7 @@ class Sistema {
 
 	armarTablaContratoCliente(contratacion) {
 		let paseador = contratacion.Paseador;
-
+		//console.log(contratacion);
 		let unaTabla = `<br><br><table class="tablaPaseador" border="1px">`;
 		unaTabla += `<tr>`;
 		unaTabla += `<th colspan="2">Nombre</th>`;
@@ -633,9 +633,16 @@ class Sistema {
 		unaTabla += `<tr>`;
 		unaTabla += `<td>${paseador.nombre}</td>`;
 		unaTabla += `<td>`;
-		unaTabla += `<input type="button" data-id="contrataID-${contratacion.id}" class="botonesTablaPaseadoresCancelar" value="Cancelar">`;
-		unaTabla += `</td>`;
-		unaTabla += `<td id="contratacionPendientesComentarios"></td>`;
+		if (contratacion.estado === "aceptada") {
+			unaTabla += ``;
+			unaTabla += `</td>`;
+			unaTabla += `<td id="contratacionPendientesComentarios">${contratacion.comentario}</td>`;
+		} else {
+			unaTabla += `<input type="button" data-id="contrataID-${contratacion.id}" class="botonesTablaPaseadoresCancelar" value="Cancelar">`;
+			unaTabla += `</td>`;
+			unaTabla += `<td id="contratacionPendientesComentarios">Pendiente</td>`;
+		}
+
 		unaTabla += `</tr></table>`;
 
 		return unaTabla;
