@@ -270,7 +270,7 @@ function armarTablaPaseadoresActivosUI() {
 }
 
 function mostrarContratacionUI() {
-	console.log("Estoy ACA EN MOSTRARCONTRATACION");
+	//console.log("Estoy ACA EN MOSTRARCONTRATACION");
 	if (!miSistema.logueado) {
 		return loginUI();
 	}
@@ -319,12 +319,12 @@ function clickEnCancelarUI() {
 			contratacion.estado = "denegada";
 			contratacion.comentario = `Cancelada por Cliente`;
 			ocultarTablasUI();
-			console.log(`ESTOY CANCELANDO`);
+			//console.log(`ESTOY CANCELANDO`);
 			let mostrarMensaje = document.querySelector("#mostrarMensajeContratacion");
 			mostrarMensaje.style.display = "block";
 			mostrarMensaje.innerHTML = `la Contratacion de ${cliente.perroNombre} se ha Cancelado Correctamente.`;
 			setTimeout(() => {
-				console.log(`ME VOY PARA SECCION CLIENTE`);
+				//console.log(`ME VOY PARA SECCION CLIENTE`);
 				document.querySelector("#mostrarMensajeContratacion").innerHTML = ``;
 				document.querySelector("#mostrarMensajeContratacion").style.display = `none`;
 				mostrarSelectPaseadoresUI();

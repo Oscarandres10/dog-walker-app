@@ -345,40 +345,6 @@ class Sistema {
 
 	//#endregion
 
-	//#region  ## VALIDACIONES CONTRATACIONES ##
-	//  ESTO TENGO QUE MODIFICAR MENSAJES  Y ESTADO. y FALTA 1 validacion.
-	validarPrecargaContratacion(idCliente, idPaseador) {
-		let noModificado = false;
-		let elCliente = miSistema.obtenerCliente(idCliente);
-		let elPaseador = miSistema.obtenerPaseador(idPaseador);
-
-		if (elCliente !== null && elPaseador !== null) {
-			let cupo = this.cupoDisponible(elPaseador);
-			let noTieneContratacion = this.clienteTieneContratacion(idCliente);
-
-			if (noTieneContratacion) {
-				console.log(`VALIDACION PRECARGA  NO TIENE CONTRATACION`);
-				if (cupo >= this.calcularCupoPerro(elCliente.tamanioPerro)) {
-					//console.log(`test estoy en el if si el cupo es mayor que el cupo perro`);
-					if (this.paseadorComparoTamanio(elPaseador, elCliente.tamanioPerro)) {
-						noModificado = true;
-					} else {
-					}
-				} else {
-				}
-			} else {
-			}
-			if (!noModificado) {
-				// si se modifico
-				//laContratacion.estado = "denegado";
-			}
-		}
-
-		return noModificado;
-	}
-
-	//#endregion
-
 	//#region  ## CONTRATACIONES ##
 
 	procesarAceptarContratacion(id) {
@@ -463,7 +429,7 @@ class Sistema {
 					// VALIDO QUE NO HALLA PERRO OPUESTO
 					if (noHayPerroOpuesto && laContratacion.estado === "pendiente") {
 						//Confirmo si hay Cupo Disponible
-						console.log(`No hay Perro Opuesto`);
+						//console.log(`No hay Perro Opuesto`);
 
 						// VALIDO QUE HALLA SUFICIENTE LUGAR DE CUPO Para El PERRO
 						if (cupo >= perro) {
