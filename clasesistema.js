@@ -48,6 +48,7 @@ class Sistema {
 	// #region  ## TABLAS
 
 	armarTablaContrataciones() {
+		let hayContrataciones = false;
 		let unaTabla = `<table border="1px" class="tablaContratacionesPendientes">
     					<caption>Contrataciones Pendientes</caption>
 					<tr>	
@@ -67,10 +68,12 @@ class Sistema {
 				unaTabla += `<td>${unaContratacion.Cliente.tamanioPerro}</td>`;
 				unaTabla += `<td><input id="btn" type=button data-id="contratacionID-${unaContratacion.id}"  class="botonesTablaContratacionesPendiente" value="Aceptar"></td>`;
 				unaTabla += `<td></td></tr>`;
-			} else {
-				unaTabla += `<tr>`;
-				unaTabla += `<td colspan="4">No hay Contrataciones Pendientes</td></tr>`;
+				hayContrataciones = true;
 			}
+		}
+		if (!hayContrataciones === true) {
+			unaTabla += `<tr>`;
+			unaTabla += `<td colspan="4">No hay Contrataciones Pendientes</td></tr>`;
 		}
 		unaTabla += `</table>`;
 
