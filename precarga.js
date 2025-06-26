@@ -244,7 +244,7 @@ function precargaContrataciones() {
 		{ cliente: 9, paseador: 2 },
 		{ cliente: 1, paseador: 0 },
 		{ cliente: 7, paseador: 4 },
-		{ cliente: 3, paseador: 1 },
+		/* { cliente: 3, paseador: 1 },
 		{ cliente: 5, paseador: 0 },
 		{ cliente: 8, paseador: 2 },
 		{ cliente: 11, paseador: 4 },
@@ -253,7 +253,7 @@ function precargaContrataciones() {
 		{ cliente: 13, paseador: 2 },
 		{ cliente: 14, paseador: 1 },
 		{ cliente: 16, paseador: 3 },
-		{ cliente: 18, paseador: 0 },
+		{ cliente: 18, paseador: 0 }, */
 	];
 
 	for (let i = 0; i < infoContratacion.length; i++) {

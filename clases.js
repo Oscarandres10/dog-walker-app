@@ -33,23 +33,3 @@ class Contrataciones {
 		this.comentario = "";
 	}
 }
-
-/* 
-
-PRECARGA DE CLIENTES
-PRECARGA DE PASEADORES
-
-REGISTRO DE CLIENTE
-
-LOGIN 
-
-DISPLAY
-
-
-clases
-
-sistema
-
-UI
-
-*/

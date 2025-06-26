@@ -338,6 +338,10 @@ function mostrarSeccionPaseadorUI() {
 		document
 			.querySelector("#btnVerContratacionesPendientesPaseador")
 			.addEventListener("click", mostrarTablaContratacionesPendientesUI);
+
+		/* document
+			.querySelector("#btnVerContratacionesPendientesPaseador")
+			.addEventListener("click", gestionContratacionesProcensandoUI); */
 		document.querySelector("#btnVerEstadoPaseador").addEventListener("click", mostrarEstadoPaseadorUI);
 	} else {
 		loginUI();

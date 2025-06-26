@@ -60,7 +60,7 @@ class Sistema {
 		for (let i = 0; i < this.contrataciones.length; i++) {
 			let unaContratacion = this.contrataciones[i];
 			let paseador = this.logueado;
-			if (unaContratacion.Paseador === paseador) {
+			if (unaContratacion.Paseador === paseador && unaContratacion.comentario === ``) {
 				unaTabla += `<tr>`;
 				unaTabla += `<td>${unaContratacion.Cliente.perroNombre}</td>`;
 				unaTabla += `<td>${unaContratacion.Cliente.tamanioPerro}</td>`;
@@ -74,7 +74,6 @@ class Sistema {
 	}
 
 	armarTablaContratacionesProcesando() {
-		//let listaPaseadores = this.contratacionesFiltradas(); //estoy probando
 		let unaTabla = `<table border="1px" class="tablaContratacionesPendientes">
     					<caption>Contrataciones Pendientes</caption>
 					<tr>	
@@ -701,7 +700,7 @@ class Sistema {
 	obtenerPaseador(pId) {
 		let elPaseador = null;
 		let i = 0;
-		// recorro un while las lista de paseadores
+		// recorro un while la lista de paseadores para detener en cuanto se encuentre
 		while (elPaseador === null && i < this.paseadores.length) {
 			let paseadorX = this.paseadores[i];
 			if (paseadorX.id === pId) {
@@ -715,7 +714,7 @@ class Sistema {
 	obtenerContratacion(cId) {
 		let laContratacion = null;
 		let i = 0;
-
+		// recorro un while la lista de contrataciones para detener en cuanto se encuentre
 		while (laContratacion === null && i < this.contrataciones.length) {
 			let contratacionX = this.contrataciones[i];
 			if (contratacionX.id === cId) {
@@ -749,6 +748,7 @@ class Sistema {
 			if (paseador === this.contrataciones[x].Paseador && this.contrataciones[x].estado === "aceptada") {
 				let perroTamanio = this.contrataciones[x].Cliente.tamanioPerro;
 				let perroCupo = this.calcularCupoPerro(perroTamanio);
+				// Le voy restando al cupo Maximo del Paseador el cupo del perro si la contratacion.estado es Aceptada.
 				cupoMax -= perroCupo;
 			}
 		}
