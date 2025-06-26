@@ -63,10 +63,6 @@ function serUnPaseadorUI() {
 	ocultarTodoUI();
 	document.querySelector("#sectionFormularioPaseador").style.display = "block";
 }
-function otroUI() {
-	ocultarTodoUI();
-	//si quisieramos mostrar algo mas....
-}
 
 /* #### REGISTRO ####*/
 function registroInterfazUI() {
@@ -351,10 +347,6 @@ function mostrarSeccionPaseadorUI() {
 			.querySelector("#btnVerContratacionesPendientesPaseador")
 			.addEventListener("click", mostrarTablaContratacionesPendientesUI);
 		document.querySelector("#btnVerEstadoPaseador").addEventListener("click", mostrarEstadoPaseadorUI);
-
-		/* document.querySelector("#sectionPaseadoresLogueado").style.display = "block";
-		mostrarTablaContratacionesPendientesUI(); // Tabla de Contrataciones de Pendientes
-		mostrarEstadoPaseadorUI(); */
 	} else {
 		loginUI();
 	}
