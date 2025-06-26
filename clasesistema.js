@@ -399,16 +399,16 @@ class Sistema {
 		// VALIDO QUE No TENGA CONTRATACION PREVIA
 		if (laContratacion.estado === "denegada" || laContratacion.estado === "aceptada") {
 		} else if (noTieneContratacion && laContratacion.estado === "pendiente") {
-			console.log(`No tiene Contratacion Previa.`);
+			//console.log(`No tiene Contratacion Previa.`);
 
 			// VALIDO QUE NO HALLA PERRO OPUESTO
 			if (noHayPerroOpuesto && laContratacion.estado === "pendiente") {
 				//Confirmo si hay Cupo Disponible
-				console.log(`No hay Perro Opuesto`);
+				//console.log(`No hay Perro Opuesto`);
 
 				// VALIDO QUE HALLA SUFICIENTE LUGAR DE CUPO Para El PERRO
 				if (cupo >= perro) {
-					console.log(`Contratacion Aceptada`);
+					//console.log(`Contratacion Aceptada`);
 					laContratacion.estado = "aceptada";
 					laContratacion.comentario = "aceptada";
 					noModificado = true;
@@ -417,8 +417,8 @@ class Sistema {
 				}
 			} else {
 				let perroTamanio = laContratacion.Cliente.tamanioPerro;
-				console.log(perroTamanio);
-				console.log(`Perro Opuesto  Existe`);
+				//console.log(perroTamanio);
+				//console.log(`Perro Opuesto  Existe`);
 				let perroOpuesto = ``;
 				if (perroTamanio === "Grande") perroOpuesto = "Chico";
 				if (perroTamanio === "Chico") perroOpuesto = "Grande";
