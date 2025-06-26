@@ -367,7 +367,7 @@ function clickEnAceptarUI() {
 	let valorData = this.getAttribute("data-id");
 	let idContratacionTxt = valorData.substr(15, valorData.length);
 	let idContratacionNum = Number(idContratacionTxt);
-
+	//console.log(idContratacionNum);
 	miSistema.procesarAceptarContratacion(idContratacionNum);
 
 	miSistema.validoContratacionesPendientesDespuesDeAceptar(idContratacionNum);

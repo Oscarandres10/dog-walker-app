@@ -11,6 +11,7 @@ class Sistema {
 		precargaClientes();
 		precargaPaseador();
 		precargaContrataciones();
+		precargarProcesarContrataciones();
 	}
 
 	//#region   ##  CARGA DE DATOS  ###
@@ -60,7 +61,7 @@ class Sistema {
 		for (let i = 0; i < this.contrataciones.length; i++) {
 			let unaContratacion = this.contrataciones[i];
 			let paseador = this.logueado;
-			if (unaContratacion.Paseador === paseador && unaContratacion.comentario === ``) {
+			if (unaContratacion.Paseador === paseador && unaContratacion.estado === `pendiente`) {
 				unaTabla += `<tr>`;
 				unaTabla += `<td>${unaContratacion.Cliente.perroNombre}</td>`;
 				unaTabla += `<td>${unaContratacion.Cliente.tamanioPerro}</td>`;
@@ -85,8 +86,8 @@ class Sistema {
 
 		for (let i = 0; i < this.contrataciones.length; i++) {
 			let unaContratacion = this.contrataciones[i];
-			let paseador = this.logueado;
-			if (unaContratacion.Paseador === paseador) {
+
+			if (this.logueado !== null && unaContratacion.Paseador === this.logueado) {
 				unaTabla += `<tr>`;
 				unaTabla += `<td>${unaContratacion.Cliente.perroNombre}</td>`;
 				unaTabla += `<td>${unaContratacion.Cliente.tamanioPerro}</td>`;
@@ -108,7 +109,11 @@ class Sistema {
 	armarEstadoPaseador() {
 		let paseadorCupo = this.logueado.cupo;
 		let cupo = paseadorCupo - this.cupoDisponible(this.logueado);
-		let porcentaje = (cupo * 100) / paseadorCupo;
+
+		// No me acorddaba como hacer el redondeo y lo busque.
+		//  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round
+		//
+		let porcentaje = Math.round((cupo * 100) / paseadorCupo);
 		let hayContratacion = this.clienteTieneContratacionAceptada(this.logueado.id, "paseador");
 		let unaTabla = `<div class="flex ancho "><table border="1px" class="tablaEstadoPaseador">
 					<tr>
@@ -346,12 +351,46 @@ class Sistema {
 
 	//#region  ## CONTRATACIONES ##
 
+	//#endregion
+
+	//#region  ## VALIDACIONES CONTRATACIONES ##
+
+	validarPrecargaContratacion(idCliente, idPaseador) {
+		let noModificado = false;
+		let elCliente = miSistema.obtenerCliente(idCliente);
+		let elPaseador = miSistema.obtenerPaseador(idPaseador);
+
+		if (elCliente !== null && elPaseador !== null) {
+			let cupo = this.cupoDisponible(elPaseador);
+			let noTieneContratacion = this.clienteTieneContratacion(idCliente);
+
+			if (noTieneContratacion) {
+				//console.log(`VALIDACION PRECARGA  NO TIENE CONTRATACION`);
+				if (cupo >= this.calcularCupoPerro(elCliente.tamanioPerro)) {
+					//console.log(`test estoy en el if si el cupo es mayor que el cupo perro`);
+					if (this.paseadorComparoTamanio(elPaseador, elCliente.tamanioPerro)) {
+						noModificado = true;
+					} else {
+					}
+				} else {
+				}
+			} else {
+			}
+			if (!noModificado) {
+				// si se modifico
+				//laContratacion.estado = "denegado";
+			}
+		}
+
+		return noModificado;
+	}
+
 	procesarAceptarContratacion(id) {
 		let laContratacion = this.obtenerContratacion(id); // se obtiene la contratacion
 		let perro = this.calcularCupoPerro(laContratacion.Cliente.tamanioPerro); // Tamaño
 
 		// Resto del Cupo Total, el Cupo Ocupado.
-		let cupo = this.cupoDisponible(this.logueado);
+		let cupo = this.cupoDisponible(laContratacion.Paseador);
 		//console.log(laContratacion.Cliente.id);
 
 		// Busco si cliente tiene contratacion Previa.
@@ -362,12 +401,11 @@ class Sistema {
 		//console.log(`Arriba es Estado`);
 		let noModificado = false;
 		// VALIDO QUE No TENGA CONTRATACION PREVIA
-		if (laContratacion.estado === "denegada" || laContratacion.estado === "aceptada") {
-		} else if (noTieneContratacion && laContratacion.estado === "pendiente") {
+		if (noTieneContratacion && laContratacion.estado === "pendiente") {
 			//console.log(`No tiene Contratacion Previa.`);
 
 			// VALIDO QUE NO HALLA PERRO OPUESTO
-			if (noHayPerroOpuesto && laContratacion.estado === "pendiente") {
+			if (noHayPerroOpuesto) {
 				//Confirmo si hay Cupo Disponible
 				//console.log(`No hay Perro Opuesto`);
 
@@ -404,8 +442,9 @@ class Sistema {
 	validoContratacionesPendientesDespuesDeAceptar(id) {
 		let contratacion = this.obtenerContratacion(id); // se obtiene la contratacion
 		let elPaseador = contratacion.Paseador;
-
-		let contracionesPaseador = this.obtenerContratacionesPaseador(elPaseador.id);
+		//console.log(`Paseador ID: ${elPaseador.id}`);
+		let contracionesPaseador = this.obtengoPaseadorContrataciones(elPaseador.id);
+		//console.log(contracionesPaseador);
 		for (let x = 0; x < contracionesPaseador.length; x++) {
 			let laContratacion = contracionesPaseador[x]; // se obtiene la contratacion
 
@@ -433,6 +472,7 @@ class Sistema {
 						// VALIDO QUE HALLA SUFICIENTE LUGAR DE CUPO Para El PERRO
 						if (cupo >= perro) {
 							noModificado = true;
+							//console.log(`VALIDO VALIDO EN DESPUES DE PROCESAR`);
 						} else {
 							laContratacion.comentario = `No hay Cupo disponible.`;
 						}
@@ -738,6 +778,20 @@ class Sistema {
 			i++;
 		}
 		return laContratacion;
+	}
+
+	// OBTENGO LA CONTRATACION DEL PASEADOR.
+	obtengoPaseadorContrataciones(pId) {
+		let lasContrataciones = new Array();
+		let i = 0;
+		//console.log(this.contrataciones);
+		for (let x = 0; x < this.contrataciones.length; x++) {
+			let contratacionX = this.contrataciones[x];
+			if (contratacionX.Paseador.id === pId) {
+				lasContrataciones.push(contratacionX);
+			}
+		}
+		return lasContrataciones;
 	}
 
 	cupoDisponible(paseador) {

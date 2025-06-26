@@ -244,7 +244,7 @@ function precargaContrataciones() {
 		{ cliente: 9, paseador: 2 },
 		{ cliente: 1, paseador: 0 },
 		{ cliente: 7, paseador: 4 },
-		/* { cliente: 3, paseador: 1 },
+		{ cliente: 3, paseador: 1 },
 		{ cliente: 5, paseador: 0 },
 		{ cliente: 8, paseador: 2 },
 		{ cliente: 11, paseador: 4 },
@@ -253,7 +253,7 @@ function precargaContrataciones() {
 		{ cliente: 13, paseador: 2 },
 		{ cliente: 14, paseador: 1 },
 		{ cliente: 16, paseador: 3 },
-		{ cliente: 18, paseador: 0 }, */
+		{ cliente: 18, paseador: 0 },
 	];
 
 	for (let i = 0; i < infoContratacion.length; i++) {
@@ -264,15 +264,34 @@ function precargaContrataciones() {
 		let elCliente = miSistema.obtenerCliente(cliente);
 		let elPaseador = miSistema.obtenerPaseador(paseador);
 
-		// CARGO Y PROCESO si Cliente y Paseador Existen.
+		// VALIDO Y CARGO CONTRATACION
+		if (elCliente !== null && elPaseador !== null) {
+			if (miSistema.validarPrecargaContratacion(cliente, paseador)) {
+				miSistema.cargaUnaContratacion(cliente, paseador);
+			}
+		}
+
+		/* // CARGO Y PROCESO si Cliente y Paseador Existen.
 		if (elCliente !== null && elPaseador !== null) {
 			miSistema.logueado = elPaseador; // Hago un Login para que funcione una funcionalidad
 			let idContratacion = miSistema.cargaUnaContratacion(cliente, paseador);
 			miSistema.procesarAceptarContratacion(idContratacion);
 			miSistema.validoContratacionesPendientesDespuesDeAceptar(idContratacion);
 			miSistema.logueado = null; // Hago un Logout..
-		}
+		} */
 	}
+}
+
+function precargarProcesarContrataciones() {
+	miSistema.procesarAceptarContratacion(0);
+	miSistema.procesarAceptarContratacion(2);
+	miSistema.procesarAceptarContratacion(4);
+	miSistema.procesarAceptarContratacion(3);
+	miSistema.procesarAceptarContratacion(5);
+	miSistema.procesarAceptarContratacion(10);
+	miSistema.procesarAceptarContratacion(15);
+	miSistema.procesarAceptarContratacion(11);
+	miSistema.procesarAceptarContratacion(0);
 }
 
 //#endregion
