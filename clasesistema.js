@@ -67,6 +67,9 @@ class Sistema {
 				unaTabla += `<td>${unaContratacion.Cliente.tamanioPerro}</td>`;
 				unaTabla += `<td><input id="btn" type=button data-id="contratacionID-${unaContratacion.id}"  class="botonesTablaContratacionesPendiente" value="Aceptar"></td>`;
 				unaTabla += `<td></td></tr>`;
+			} else {
+				unaTabla += `<tr>`;
+				unaTabla += `<td colspan="4">No hay Contrataciones Pendientes</td></tr>`;
 			}
 		}
 		unaTabla += `</table>`;
@@ -346,10 +349,6 @@ class Sistema {
 		}
 		return valido;
 	}
-
-	//#endregion
-
-	//#region  ## CONTRATACIONES ##
 
 	//#endregion
 
