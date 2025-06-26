@@ -2,7 +2,6 @@ function eventos() {
 	document.querySelector("#btnRegistarCliente").addEventListener("click", registroInterfazUI); // Registrarse
 	document.querySelector("#btnLoginCliente").addEventListener("click", loginInterfazUI);
 	document.querySelector("#btnNosotros").addEventListener("click", mostrarSobreNosotrosUI);
-	document.querySelector("#btnOtro").addEventListener("click", otroUI);
 	document.querySelector("#btnPaseadorRegistro").addEventListener("click", serUnPaseadorUI);
 	document.querySelector("#btnRegistrarme").addEventListener("click", almacenarUI);
 	document.querySelector("#btnLogin").addEventListener("click", loginUI);
@@ -126,13 +125,6 @@ function logoutUI() {
 	document.querySelector("#sectionUsuarioLogueado").style.display = "none";
 
 	document.querySelector("#sectionSobreNosotros").style.display = "block";
-}
-
-//#region   ## SECCION CLIENTE
-
-function mostrarLogueadoUI() {
-	let elCliente = `<p>Bienvenido <strong>${miSistema.logueado.nombre}</strong></p>`;
-	return elCliente;
 }
 
 /* #### LOGOUT ####*/
