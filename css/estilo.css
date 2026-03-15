@@ -311,7 +311,7 @@ article {
 	background-color: rgb(211, 211, 211);
 }
 
-.botonesMenu {
+.btn-light {
 	margin: 10px 10px;
 	padding: 10px;
 	background-color: #20c997;
@@ -320,6 +320,6 @@ article {
 	border: none;
 }
 
-.botonesMenu:hover {
+.btn-light:hover {
 	background-color: #199d7c;
 }

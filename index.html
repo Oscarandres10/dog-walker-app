@@ -1,179 +1,308 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="description" content="OBLIGATORIO Grupo 8 -- ORT Progamacion 1 -- Grupo N1F (Remoto)" />
 		<title>OBLIGATORIO Grupo 8</title>
+		<link rel="stylesheet" href="css/bootstrap.css" />
 		<link rel="stylesheet" href="css/estilo.css" />
 	</head>
 
-	<body>
-		<!-- SECCION HEADER  -->
+	<body class="bg-light">
+				
+		<!-- HEADER -->
+			<header id="sectionHeader" class="seccionesHeader">
 
-		<header id="sectionHeader" class="flex columna seccionesHeader">
-			<div id="mainTitle" class="flex ancho">
-				<img src="Imagenes/logo.png" alt="Logo" width="100px" />
-				<img id="imgTitle" src="Imagenes/slogan.jpg" alt="" />
-				<nav id="navLogin" class="flex">
-					<button id="btnRegistarCliente" href="#" class="navOculto">registrar</button>
-					<button id="btnLoginCliente" class="navOculto">Login</button>
-					<p id="pMostrarlogueado"></p>
-					<button id="btnLogoutCliente" href="#" style="display: none">[logout]</button>
-				</nav>
-			</div>
-			<nav id="navMenu" class="flex ancho">
-				<a id="btnNosotros" href="#">Nosotros</a>
-				<a id="btnPaseadorRegistro" href="#"><!-- Ser un Paseador --></a>
-			</nav>
-		</header>
+<nav class="navbar navbar-dark bg-dark">
 
-		<!-- SECCION SOBRE NOSOTROS -->
-		<main>
-			<section id="sectionSobreNosotros" class="secciones">
-				<article class="nosotros ancho">
-					<h1>🐾 Sobre Nosotros</h1>
-					<p><strong>Una vida mejor para tu perro, todos los días</strong></p>
-					<p>
-						En <strong>[Nombre del Servicio]</strong>, somos amantes de los animales con una misión clara: mejorar la
-						calidad de vida de tu perro a través del ejercicio, el cariño y la compañía diaria.
-					</p>
-					<p>
-						Fundado en 2020, nuestro equipo de paseadores profesionales está formado por personas capacitadas,
-						responsables y apasionadas por los animales. Sabemos que cada perro es único, por eso ofrecemos paseos
-						personalizados que se adaptan al ritmo, energía y necesidades de tu mascota.
-					</p>
+<div class="container-fluid">
 
-					<p><strong>¿Por qué elegirnos?</strong></p>
-					<ul>
-						<li>✔️ Paseadores confiables y verificados</li>
-						<li>🐕 Grupos pequeños o paseos individuales</li>
-						<li>⏱️ Flexibilidad horaria y reservas online</li>
-						<li>📍 Seguimiento en tiempo real desde tu celular</li>
-						<li>💬 Reporte con fotos después de cada paseo</li>
-					</ul>
-					<p><strong>Nuestra promesa</strong></p>
-					<p>
-						Tratar a tu perro como si fuera nuestro. Nos importa su seguridad, su felicidad y su bienestar físico y
-						emocional. Ya sea un cachorro lleno de energía o un perro mayor que necesita paseos tranquilos, estamos
-						listos para acompañarlo.
-					</p>
-				</article>
-			</section>
-			<!-- SECCION FORMULARIO PASEADOR -->
-			<section id="sectionFormularioPaseador" class="secciones">
-				<div class="box columna ancho">
-					<h2>Formulario para ser Paseador</h2>
+<div class="row w-100 align-items-center">
 
-					<label for="txtNombrePaseador">Nombre completo:</label>
-					<input id="txtNombrePaseador" type="text" />
-					<br />
-					<label for="numCupoMaximo">Cupo máximo de perros:</label>
-					<input id="numCupoMaximo" type="text" />
-					<br />
-					<label for="selTamaniosAceptados">Tamaños de perros que acepta:</label>
-					<select id="selTamaniosAceptados">
-						<option value="">Seleccionar:</option>
-						<option value="chico">Chico</option>
-						<option value="mediano">Mediano</option>
-						<option value="grande">Grande</option>
-					</select>
-					<br />
-					<label for="txtDisponibilidad">Disponibilidad horaria (ej: lunes a viernes, mañanas):</label>
-					<input id="txtDisponibilidad" type="text" required />
-					<br />
-					<label for="txtMail">Mail:</label>
-					<input type="text" id="txtMail" />
-					<br />
-					<input id="btnRegistrarsePaseador" type="button" value="Enviar" />
+<!-- LOGO -->
+<div class="col-md-3 col-lg-2 text-center">
+<img src="Imagenes/logo.png" width="50">
+</div>
+
+<!-- CENTER NAV -->
+<div class="col-md-6 col-lg-8 d-flex justify-content-evenly gap-3">
+
+<button id="btnNosotros" class="navOculto btn btn-outline-light btn-lg">
+Nosotros
+</button>
+
+</div>
+
+<!-- RIGHT NAV -->
+<div class="col-md-3 col-lg-2 d-flex justify-content-end align-items-center gap-3">
+
+<button id="btnRegistarCliente" class="navOculto btn btn-outline-light btn-lg">
+Registrar
+</button>
+
+<button id="btnLoginCliente" class="navOculto btn btn-outline-light btn-lg">
+Login
+</button>
+
+<p id="pMostrarlogueado" class="text-white mb-0"></p>
+
+<button id="btnLogoutCliente" style="display:none" class="btn btn-danger btn-lg">
+Logout
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</nav>
+
+</header>
+
+		<!-- MAIN -->
+
+			<main class="container-fluid">
+				<div class="row">
+					<!-- SIDEBAR -->
+
+					<aside class="col-md-3 col-lg-2 bg-white border-end min-vh-100 p-3">
+						<div class="d-grid gap-2">
+							<button id="btnVerDashboard" class="btn btn-light">Dashboard</button>
+							<button id="btnVerDisponibles" class="btn btn-light">Disponibles</button>
+							<button id="btnVerContratacion" class="btn btn-light">Contratación</button>
+							<button id="btnVerActivos" class="btn btn-light">Activos</button>
+							<!-- <button id="btnVerContratacionesPendientesPaseador" class="btn btn-light">Contrataciones Pendientes</button> -->
+							<!-- <button id="btnVerEstadoPaseador" class="btn btn-light">Estado del Paseador</button> -->
+						</div>
+					</aside>
+
+					<!-- CONTENT -->
+
+					<section class="col-md-9 col-lg-10 p-4">
+						<section id="sectionSobreNosotros" class="secciones">
+							<div class="card">
+								<div class="card-body" style="height: 200px"></div>
+							</div>
+						</section>
+
+						<section id="sectionFormularioPaseador" class="secciones">
+							<div class="card">
+								<div class="card-body" style="height: 300px"></div>
+							</div>
+						</section>
+
+						<section id="sectionRegistrarse" class="secciones">
+							<div class="card">
+								<div class="card-body" style="height: 300px"></div>
+							</div>
+						</section>
+
+						<section id="sectionloginUsuario" class="secciones">
+							<div class="card">
+								<div class="card-body" style="height: 250px"></div>
+							</div>
+						</section>
+
+						<section id="sectionUsuarioLogueado" class="secciones">
+							<div class="card mb-3">
+								<div class="card-body" style="height: 150px"></div>
+							</div>
+
+							<div id="mostrarContratacion" class="tablas"></div>
+
+							<div id="mostrarSelectPaseadores" class="tablas"></div>
+
+							<div id="mostrarTablaPaseador" class="tablas"></div>
+
+							<div id="mostrarMensajeContratacion" class="tablas"></div>
+
+							<div id="mostraTablaPaseadoresActivos" class="tablas"></div>
+						</section>
+
+						<section id="sectionPaseadoresLogueado" class="secciones">
+							<div id="mostrarTablaContratacionesPendientes" class="tablas"></div>
+
+							<div id="mostrarEstadoPaseador" class="tablas"></div>
+						</section>
+					</section>
 				</div>
-			</section>
+			</main>
 
-			<!-- SECCION REGISTRARSE -->
-			<section id="sectionRegistrarse" class="secciones">
-				<div class="box">
-					<h2>Registro de Cliente</h2>
-					<br />
-					<label for="txtNombreCliente">Nombre: </label>
-					<input id="txtNombreCliente" type="text" /><br />
-					<label for="txtUsuarioCliente">Usuario: </label>
-					<input id="txtUsuarioCliente" type="text" /><br />
-					<label for="txtContraseniaCliente">Contraseñia: </label>
-					<input id="txtContraseniaCliente" type="text" /><br />
-					<label for="txtNombrePerroCliente">Nombre de Perro: </label>
-					<input id="txtNombrePerroCliente" type="text" /><br />
-					<label for="selTamanioCliente">Tamaño de Perro: </label>
-					<select id="selTamanioCliente">
-						<option value="" selected>Seleccionar Tamaño</option>
-						<option value="Chico">Chico</option>
-						<option value="Mediano">Mediano</option>
-						<option value="Grande">Grande</option>
-					</select>
-					<br />
-					<input id="btnRegistrarme" type="button" value="Registarme" />
-					<br />
-					<p id="pRegistrarse"></p>
-				</div>
-			</section>
+				<br /><br /><br />
+				<hr />
+				<br />
+				<hr />
+				<br /><br />
 
-			<!-- SECCION LOGIN USUARIO  -->
+				<!-- SECCION HEADER  -->
 
-			<section id="sectionloginUsuario" class="secciones">
-				<div class="box">
-					<h2>LOGIN USUARIO</h2>
-					<br />
-					<label for="txtUsuario">Usuario: </label>
-					<input id="txtUsuario" type="text" value="FPerdomo" /><br />
-					<label for="txtContrasenia">Contraseña: </label>
-					<input id="txtContrasenia" type="text" value="Fp123!" /><br />
-					<input id="btnLogin" type="button" value="Login" />
-					<p id="pLogin"></p>
-				</div>
-			</section>
-			<!-- SECCION USUARIO LOGUEADO -->
-			<section id="sectionUsuarioLogueado" class="secciones">
-				<section class="box">
-					<h1>Bienvenido</h1>
-					<br /><br />
-					<!-- <div id="divMostrarContratado"></div>
+				<header id="sectionHeader" class="flex columna seccionesHeader">
+					<div id="mainTitle" class="flex ancho">
+						<img src="Imagenes/logo.png" alt="Logo" width="100px" />
+						<img id="imgTitle" src="Imagenes/slogan.jpg" alt="" />
+						<nav id="navLogin" class="flex">
+							<button id="btnRegistarCliente" href="#" class="navOculto">registrar</button>
+							<button id="btnLoginCliente" class="navOculto">Login</button>
+							<p id="pMostrarlogueado"></p>
+							<button id="btnLogoutCliente" href="#" style="display: none">[logout]</button>
+						</nav>
+					</div>
+					<nav id="navMenu" class="flex ancho">
+						<a id="btnNosotros" href="#">Nosotros</a>
+						<a id="btnPaseadorRegistro" href="#"><!-- Ser un Paseador --></a>
+					</nav>
+				</header>
+
+				<!-- SECCION SOBRE NOSOTROS -->
+				<main>
+					<section id="sectionSobreNosotros" class="secciones">
+						<article class="nosotros ancho">
+							<h1>🐾 Sobre Nosotros</h1>
+							<p><strong>Una vida mejor para tu perro, todos los días</strong></p>
+							<p>
+								En <strong>[Nombre del Servicio]</strong>, somos amantes de los animales con una misión clara: mejorar
+								la calidad de vida de tu perro a través del ejercicio, el cariño y la compañía diaria.
+							</p>
+							<p>
+								Fundado en 2020, nuestro equipo de paseadores profesionales está formado por personas capacitadas,
+								responsables y apasionadas por los animales. Sabemos que cada perro es único, por eso ofrecemos paseos
+								personalizados que se adaptan al ritmo, energía y necesidades de tu mascota.
+							</p>
+
+							<p><strong>¿Por qué elegirnos?</strong></p>
+							<ul>
+								<li>✔️ Paseadores confiables y verificados</li>
+								<li>🐕 Grupos pequeños o paseos individuales</li>
+								<li>⏱️ Flexibilidad horaria y reservas online</li>
+								<li>📍 Seguimiento en tiempo real desde tu celular</li>
+								<li>💬 Reporte con fotos después de cada paseo</li>
+							</ul>
+							<p><strong>Nuestra promesa</strong></p>
+							<p>
+								Tratar a tu perro como si fuera nuestro. Nos importa su seguridad, su felicidad y su bienestar físico y
+								emocional. Ya sea un cachorro lleno de energía o un perro mayor que necesita paseos tranquilos, estamos
+								listos para acompañarlo.
+							</p>
+						</article>
+					</section>
+					<!-- SECCION FORMULARIO PASEADOR -->
+					<section id="sectionFormularioPaseador" class="secciones">
+						<div class="box columna ancho">
+							<h2>Formulario para ser Paseador</h2>
+
+							<label for="txtNombrePaseador">Nombre completo:</label>
+							<input id="txtNombrePaseador" type="text" />
+							<br />
+							<label for="numCupoMaximo">Cupo máximo de perros:</label>
+							<input id="numCupoMaximo" type="text" />
+							<br />
+							<label for="selTamaniosAceptados">Tamaños de perros que acepta:</label>
+							<select id="selTamaniosAceptados">
+								<option value="">Seleccionar:</option>
+								<option value="chico">Chico</option>
+								<option value="mediano">Mediano</option>
+								<option value="grande">Grande</option>
+							</select>
+							<br />
+							<label for="txtDisponibilidad">Disponibilidad horaria (ej: lunes a viernes, mañanas):</label>
+							<input id="txtDisponibilidad" type="text" required />
+							<br />
+							<label for="txtMail">Mail:</label>
+							<input type="text" id="txtMail" />
+							<br />
+							<input id="btnRegistrarsePaseador" type="button" value="Enviar" />
+						</div>
+					</section>
+
+					<!-- SECCION REGISTRARSE -->
+					<section id="sectionRegistrarse" class="secciones">
+						<div class="box">
+							<h2>Registro de Cliente</h2>
+							<br />
+							<label for="txtNombreCliente">Nombre: </label>
+							<input id="txtNombreCliente" type="text" /><br />
+							<label for="txtUsuarioCliente">Usuario: </label>
+							<input id="txtUsuarioCliente" type="text" /><br />
+							<label for="txtContraseniaCliente">Contraseñia: </label>
+							<input id="txtContraseniaCliente" type="text" /><br />
+							<label for="txtNombrePerroCliente">Nombre de Perro: </label>
+							<input id="txtNombrePerroCliente" type="text" /><br />
+							<label for="selTamanioCliente">Tamaño de Perro: </label>
+							<select id="selTamanioCliente">
+								<option value="" selected>Seleccionar Tamaño</option>
+								<option value="Chico">Chico</option>
+								<option value="Mediano">Mediano</option>
+								<option value="Grande">Grande</option>
+							</select>
+							<br />
+							<input id="btnRegistrarme" type="button" value="Registarme" />
+							<br />
+							<p id="pRegistrarse"></p>
+						</div>
+					</section>
+
+					<!-- SECCION LOGIN USUARIO  -->
+
+					<section id="sectionloginUsuario" class="secciones">
+						<div class="box">
+							<h2>LOGIN USUARIO</h2>
+							<br />
+							<label for="txtUsuario">Usuario: </label>
+							<input id="txtUsuario" type="text" value="FPerdomo" /><br />
+							<label for="txtContrasenia">Contraseña: </label>
+							<input id="txtContrasenia" type="text" value="Fp123!" /><br />
+							<input id="btnLogin" type="button" value="Login" />
+							<p id="pLogin"></p>
+						</div>
+					</section>
+					<!-- SECCION USUARIO LOGUEADO -->
+					<section id="sectionUsuarioLogueado" class="secciones">
+						<section class="box">
+							<h1>Bienvenido</h1>
+							<br /><br />
+							<!-- <div id="divMostrarContratado"></div>
 					<p id="pMensajeInicial"></p> -->
-					<div id="menuCliente">
-						<button id="btnVerDisponibles" class="botonesMenu">Paseadores disponibles</button>
-						<button id="btnVerContratacion" class="botonesMenu">Contratacion Pendiente</button>
-						<button id="btnVerActivos" class="botonesMenu">Paseadores activos</button>
-					</div>
-					<div id="mostrarContratacion" class="tablas"></div>
-					<div id="mostrarSelectPaseadores" class="tablas">
-						<div id="divMostrarContratado"></div>
-						<p id="pMensajeInicial"></p>
-						<label for="selPaseadoresParaCliente">Elegir un Paseador:</label>
-						<select id="selPaseadoresParaCliente"></select>
-					</div>
-					<div id="mostrarTablaPaseador" class="tablas"></div>
-					<div id="mostrarMensajeContratacion" class="tablas"></div>
-					<div id="mostraTablaPaseadoresActivos" class="tablas"></div>
-				</section>
-			</section>
+							<div id="menuCliente">
+								<button id="btnVerDisponibles" class="botonesMenu">Paseadores disponibles</button>
+								<button id="btnVerContratacion" class="botonesMenu">Contratacion Pendiente</button>
+								<button id="btnVerActivos" class="botonesMenu">Paseadores activos</button>
+							</div>
+							<div id="mostrarContratacion" class="tablas"></div>
+							<div id="mostrarSelectPaseadores" class="tablas">
+								<div id="divMostrarContratado"></div>
+								<p id="pMensajeInicial"></p>
+								<label for="selPaseadoresParaCliente">Elegir un Paseador:</label>
+								<select id="selPaseadoresParaCliente"></select>
+							</div>
+							<div id="mostrarTablaPaseador" class="tablas"></div>
+							<div id="mostrarMensajeContratacion" class="tablas"></div>
+							<div id="mostraTablaPaseadoresActivos" class="tablas"></div>
+						</section>
+					</section>
 
-			<!-- SECCION PASEADORES  -->
+					<!-- SECCION PASEADORES  -->
 
-			<section id="sectionPaseadoresLogueado" class="secciones">
-				<div id="menuPaseador">
-					<button id="btnVerContratacionesPendientesPaseador" class="botonesMenu">Contrataciones</button>
-					<button id="btnVerEstadoPaseador" class="botonesMenu">Estado</button>
-				</div>
-				<div id="mostrarTablaContratacionesPendientes" class="tablas"></div>
-				<div id="mostrarEstadoPaseador" class="tablas"></div>
-			</section>
-		</main>
+					<section id="sectionPaseadoresLogueado" class="secciones">
+						<div id="menuPaseador">
+							<button id="btnVerContratacionesPendientesPaseador" class="botonesMenu">Contrataciones</button>
+							<button id="btnVerEstadoPaseador" class="botonesMenu">Estado</button>
+						</div>
+						<div id="mostrarTablaContratacionesPendientes" class="tablas"></div>
+						<div id="mostrarEstadoPaseador" class="tablas"></div>
+					</section>
+				</main>
 
-		<!-- SECCION FOOTER -->
+				<!-- SECCION FOOTER -->
 
-		<footer id="sectionFooter" class="seccionesFooter"></footer>
-		<footer>INFO EN EL FOOTER</footer>
-		<script src="clases.js"></script>
-		<script src="clasesistema.js"></script>
-		<script src="precarga.js"></script>
-		<script src="ui.js"></script>
+				<footer id="sectionFooter" class="seccionesFooter"></footer>
+				<footer>INFO EN EL FOOTER</footer>
+				<script src="clases.js"></script>
+				<script src="clasesistema.js"></script>
+				<script src="precarga.js"></script>
+				<script src="ui.js"></script>
+			</body>
+		</html>
 	</body>
 </html>
