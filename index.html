@@ -25,8 +25,8 @@
 
 						<!-- RIGHT NAV -->
 						<div class="col-md-4 col-lg-3 d-flex justify-content-end align-items-center gap-3">
-							<button id="btnRegistarCliente" class="navOculto btn btn-outline-light btn-lg">Registrar</button>
-							<button id="btnLoginCliente" class="navOculto btn btn-outline-light btn-lg">Login</button>
+							<button id="btnRegistarCliente" class="btn btn-outline-light btn-lg">Registrar</button>
+							<button id="btnLoginCliente" class="btn btn-outline-light btn-lg">Login</button>
 							<p id="pMostrarlogueado" class="text-white mb-0"></p>
 							<button id="btnLogoutCliente" style="display: none" class="btn btn-danger btn-lg">Logout</button>
 						</div>
@@ -43,11 +43,11 @@
 
 				<aside class="col-md-4 col-lg-3 bg-white border-end min-vh-100 p-3">
 					<div class="d-grid gap-2">
-						<button id="btnNosotros" class="navOculto btn btn-outline-dark btn-lg">About us</button>
-						<button id="btnVerDashboard" class="navOculto btn btn-light">Dashboard</button>
-						<button id="btnVerDisponibles" class="btn btn-light">Disponibles</button>
-						<button id="btnVerContratacion" class="btn btn-light">Contratación</button>
-						<button id="btnVerActivos" class="btn btn-light">Activos</button>
+						<h2 id="btnVerDashboard" class="navOculto text-center">Dashboard</h2>
+						<button id="btnNosotros" class="btn btn-outline-dark btn-lg">About us</button>
+						<button id="btnVerDisponibles" class="navOculto btn btn-light">Disponibles</button>
+						<button id="btnVerContratacion" class="navOculto btn btn-light">Contratación</button>
+						<button id="btnVerActivos" class="navOculto btn btn-light">Activos</button>
 						<!-- <button id="btnVerContratacionesPendientesPaseador" class="btn btn-light">Contrataciones Pendientes</button> -->
 						<!-- <button id="btnVerEstadoPaseador" class="btn btn-light">Estado del Paseador</button> -->
 					</div>
@@ -216,12 +216,12 @@
 
 										<div class="mb-3">
 											<label for="txtUsuario" class="form-label">Usuario</label>
-											<input id="txtUsuario" type="text" class="form-control" value="Test" />
+											<input id="txtUsuario" type="text" class="form-control" value="Cliente0" />
 										</div>
 
 										<div class="mb-3">
 											<label for="txtContrasenia" class="form-label">Contraseña</label>
-											<input id="txtContrasenia" type="password" class="form-control" value="Test1" />
+											<input id="txtContrasenia" type="password" class="form-control" value="Pass0" />
 										</div>
 
 										<div class="d-grid">
@@ -250,6 +250,24 @@
 
 						<div id="mostraTablaPaseadoresActivos" class="tablas"></div>
 					</section>
+					<section id="sectionSelectPaseadores" class="secciones">
+						<div class="card border-0 shadow-sm">
+							<div class="card-body p-4 p-lg-5">
+								<div class="row justify-content-center">
+									<div id="mostrarContratacion" class="tablas"></div>
+									<div id="mostrarSelectPaseadores" class="tablas">
+										<div id="divMostrarContratado"></div>
+										<p id="pMensajeInicial"></p>
+										<label for="selPaseadoresParaCliente">Elegir un Paseador:</label>
+										<select id="selPaseadoresParaCliente"></select>
+									</div>
+									<div id="mostrarTablaPaseador" class="tablas"></div>
+									<div id="mostrarMensajeContratacion" class="tablas"></div>
+									<div id="mostraTablaPaseadoresActivos" class="tablas"></div>
+								</div>
+							</div>
+						</div>
+					</section>
 
 					<section id="sectionPaseadoresLogueado" class="secciones">
 						<div id="menuPaseador">
@@ -263,92 +281,11 @@
 			</div>
 		</main>
 
-		<br /><br /><br />
-		<hr />
-		<br />
-		<hr />
-		<br /><br />
-
-		<!-- SECCION HEADER  -->
-
-		<header id="sectionHeader" class="flex columna seccionesHeader">
-			<div id="mainTitle" class="flex ancho">
-				<img src="Imagenes/logo.png" alt="Logo" width="100px" />
-				<img id="imgTitle" src="Imagenes/slogan.jpg" alt="" />
-				<nav id="navLogin" class="flex">
-					<button id="btnRegistarCliente" href="#" class="navOculto">registrar</button>
-					<button id="btnLoginCliente" class="navOculto">Login</button>
-					<p id="pMostrarlogueado"></p>
-					<button id="btnLogoutCliente" href="#" style="display: none">[logout]</button>
-				</nav>
-			</div>
-			<nav id="navMenu" class="flex ancho">
-				<a id="btnNosotros" href="#">Nosotros</a>
-				<a id="btnPaseadorRegistro" href="#"><!-- Ser un Paseador --></a>
-			</nav>
-		</header>
-
-		<!-- SECCION SOBRE NOSOTROS -->
-		<main>
-			<!-- SECCION FORMULARIO PASEADOR -->
-
-			<!-- SECCION REGISTRARSE -->
-
-			<!-- SECCION LOGIN USUARIO  -->
-
-			<section id="sectionloginUsuario" class="secciones">
-				<div class="box">
-					<h2>LOGIN USUARIO</h2>
-					<br />
-					<label for="txtUsuario">Usuario: </label>
-					<input id="txtUsuario" type="text" value="FPerdomo" /><br />
-					<label for="txtContrasenia">Contraseña: </label>
-					<input id="txtContrasenia" type="text" value="Fp123!" /><br />
-					<input id="btnLogin" type="button" value="Login" />
-					<p id="pLogin"></p>
-				</div>
-			</section>
-			<!-- SECCION USUARIO LOGUEADO -->
-			<section id="sectionUsuarioLogueado" class="secciones">
-				<section class="box">
-					<h1>Bienvenido</h1>
-					<br /><br />
-					<!-- <div id="divMostrarContratado"></div>
-					<p id="pMensajeInicial"></p> -->
-					<div id="menuCliente">
-						<button id="btnVerDisponibles" class="botonesMenu">Paseadores disponibles</button>
-						<button id="btnVerContratacion" class="botonesMenu">Contratacion Pendiente</button>
-						<button id="btnVerActivos" class="botonesMenu">Paseadores activos</button>
-					</div>
-					<div id="mostrarContratacion" class="tablas"></div>
-					<div id="mostrarSelectPaseadores" class="tablas">
-						<div id="divMostrarContratado"></div>
-						<p id="pMensajeInicial"></p>
-						<label for="selPaseadoresParaCliente">Elegir un Paseador:</label>
-						<select id="selPaseadoresParaCliente"></select>
-					</div>
-					<div id="mostrarTablaPaseador" class="tablas"></div>
-					<div id="mostrarMensajeContratacion" class="tablas"></div>
-					<div id="mostraTablaPaseadoresActivos" class="tablas"></div>
-				</section>
-			</section>
-
-			<!-- SECCION PASEADORES  -->
-
-			<section id="sectionPaseadoresLogueado" class="secciones">
-				<div id="menuPaseador">
-					<button id="btnVerContratacionesPendientesPaseador" class="botonesMenu">Contrataciones</button>
-					<button id="btnVerEstadoPaseador" class="botonesMenu">Estado</button>
-				</div>
-				<div id="mostrarTablaContratacionesPendientes" class="tablas"></div>
-				<div id="mostrarEstadoPaseador" class="tablas"></div>
-			</section>
-		</main>
-
 		<!-- SECCION FOOTER -->
-
 		<footer id="sectionFooter" class="seccionesFooter"></footer>
 		<footer>INFO EN EL FOOTER</footer>
+
+		<!-- SCRIPTS Added -->
 		<script src="clases.js"></script>
 		<script src="clasesistema.js"></script>
 		<script src="precarga.js"></script>

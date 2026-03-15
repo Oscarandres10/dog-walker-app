@@ -20,6 +20,10 @@ function ocultarTodoUI() {
 	for (let unaSeccion of lasSecciones) {
 		unaSeccion.style.display = "none";
 	}
+	ocultarNavUI();
+	if (miSistema.logueado) {
+		mostrarNavUI();
+	}
 }
 
 function ocultarNavUI() {
@@ -53,6 +57,7 @@ function eliminoMostrarTablaPaseadorUI() {
 
 function mostrarSobreNosotrosUI() {
 	ocultarTodoUI();
+
 	document.querySelector("#sectionSobreNosotros").style.display = "block";
 }
 
@@ -89,14 +94,16 @@ function loginUI() {
 		if (miSistema.logueado.tipo === "cliente") {
 			ocultarTodoUI();
 			mostrarSeccionClienteUI();
-			ocultarNavUI();
+			//ocultarNavUI();
+			mostrarNavUI();
 			document.querySelector("#pMostrarlogueado").innerHTML = mostrarLogueadoUI();
 			document.querySelector("#btnLogoutCliente").style.display = `block`;
 		}
 		if (miSistema.logueado.tipo === "paseador") {
 			ocultarTodoUI();
 			mostrarSeccionPaseadorUI();
-			ocultarNavUI();
+			//ocultarNavUI();
+			mostrarNavUI();
 			document.querySelector("#pMostrarlogueado").innerHTML = mostrarLogueadoUI();
 			document.querySelector("#btnLogoutCliente").style.display = `block`;
 		}
@@ -115,7 +122,8 @@ function mostrarLogueadoUI() {
 
 function logoutUI() {
 	ocultarTodoUI();
-	mostrarNavUI();
+	//mostrarNavUI();
+	ocultarNavUI();
 	ocultarTablasUI();
 	eliminoMostrarTablaPaseadorUI();
 	document.querySelector("#pMostrarlogueado").innerHTML = ``;
@@ -206,9 +214,8 @@ function clickEnSolicitarUI(id, idtest) {
 			miSistema.cargaUnaContratacion(cliente, idPaseadorNum);
 			ocultarTablasUI();
 			document.querySelector("#mostrarMensajeContratacion").style.display = "block";
-			document.querySelector(
-				"#mostrarMensajeContratacion"
-			).innerHTML = `<p>Su Contratacion fue realizada Correctamente.</p>`;
+			document.querySelector("#mostrarMensajeContratacion").innerHTML =
+				`<p>Su Contratacion fue realizada Correctamente.</p>`;
 			setTimeout(() => {
 				document.querySelector("#mostrarMensajeContratacion").style.display = "none";
 				//console.log(`ME VOY PARA SECCION CLIENTE`);
