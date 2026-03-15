@@ -258,7 +258,14 @@ class Sistema {
 				let unicoUsuario = this.clientes[i];
 				if (unicoUsuario.usuario.toLowerCase() === usuario) {
 					valido = false;
-					this.mensajeRegistro.push(`<strong>Usuario:</strong> Ya existe<br>`);
+					this.mensajeRegistro.push(
+						`<strong>Usuario:</strong> Ya existe<br><br>
+						<span class="text-primary" style="cursor:pointer;" onclick="loginInterfazUI()">
+    Volver al Login?
+</span>
+						<br><br>
+						`,
+					);
 				}
 				i++;
 			}
@@ -308,7 +315,7 @@ class Sistema {
 			if (minus < 1 || mayus < 1 || numero < 1) {
 				verificacion = false;
 				this.mensajeRegistro.push(
-					`<strong>Contraseña</strong> tiene que incluir al menos una mayúscula, una minúscula y un número<br>`
+					`<strong>Contraseña</strong> tiene que incluir al menos una mayúscula, una minúscula y un número<br>`,
 				);
 			}
 		}

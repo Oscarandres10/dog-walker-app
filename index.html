@@ -10,183 +10,128 @@
 	</head>
 
 	<body class="bg-light">
-				
 		<!-- HEADER -->
-			<header id="sectionHeader" class="seccionesHeader">
+		<header id="sectionHeader" class="seccionesHeader">
+			<nav class="navbar navbar-dark bg-dark">
+				<div class="container-fluid">
+					<div class="row w-100 align-items-center">
+						<!-- LOGO -->
+						<div class="col-md-4 col-lg-3 text-center">
+							<img src="Imagenes/logo.png" width="200" />
+						</div>
 
-<nav class="navbar navbar-dark bg-dark">
+						<!-- CENTER NAV -->
+						<div class="col-md-4 col-lg-6 d-flex justify-content-start gap-3">
+							<button id="btnNosotros" class="navOculto btn btn-outline-light btn-lg">About us</button>
+						</div>
 
-<div class="container-fluid">
-
-<div class="row w-100 align-items-center">
-
-<!-- LOGO -->
-<div class="col-md-3 col-lg-2 text-center">
-<img src="Imagenes/logo.png" width="50">
-</div>
-
-<!-- CENTER NAV -->
-<div class="col-md-6 col-lg-8 d-flex justify-content-evenly gap-3">
-
-<button id="btnNosotros" class="navOculto btn btn-outline-light btn-lg">
-Nosotros
-</button>
-
-</div>
-
-<!-- RIGHT NAV -->
-<div class="col-md-3 col-lg-2 d-flex justify-content-end align-items-center gap-3">
-
-<button id="btnRegistarCliente" class="navOculto btn btn-outline-light btn-lg">
-Registrar
-</button>
-
-<button id="btnLoginCliente" class="navOculto btn btn-outline-light btn-lg">
-Login
-</button>
-
-<p id="pMostrarlogueado" class="text-white mb-0"></p>
-
-<button id="btnLogoutCliente" style="display:none" class="btn btn-danger btn-lg">
-Logout
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</nav>
-
-</header>
+						<!-- RIGHT NAV -->
+						<div class="col-md-4 col-lg-3 d-flex justify-content-end align-items-center gap-3">
+							<button id="btnRegistarCliente" class="navOculto btn btn-outline-light btn-lg">Registrar</button>
+							<button id="btnLoginCliente" class="navOculto btn btn-outline-light btn-lg">Login</button>
+							<p id="pMostrarlogueado" class="text-white mb-0"></p>
+							<button id="btnLogoutCliente" style="display: none" class="btn btn-danger btn-lg">Logout</button>
+						</div>
+					</div>
+				</div>
+			</nav>
+		</header>
 
 		<!-- MAIN -->
 
-			<main class="container-fluid">
-				<div class="row">
-					<!-- SIDEBAR -->
+		<main class="container-fluid">
+			<div class="row">
+				<!-- SIDEBAR -->
 
-					<aside class="col-md-3 col-lg-2 bg-white border-end min-vh-100 p-3">
-						<div class="d-grid gap-2">
-							<button id="btnVerDashboard" class="btn btn-light">Dashboard</button>
-							<button id="btnVerDisponibles" class="btn btn-light">Disponibles</button>
-							<button id="btnVerContratacion" class="btn btn-light">Contratación</button>
-							<button id="btnVerActivos" class="btn btn-light">Activos</button>
-							<!-- <button id="btnVerContratacionesPendientesPaseador" class="btn btn-light">Contrataciones Pendientes</button> -->
-							<!-- <button id="btnVerEstadoPaseador" class="btn btn-light">Estado del Paseador</button> -->
-						</div>
-					</aside>
-
-					<!-- CONTENT -->
-
-					<section class="col-md-9 col-lg-10 p-4">
-						<section id="sectionSobreNosotros" class="secciones">
-							<div class="card">
-								<div class="card-body" style="height: 200px"></div>
-							</div>
-						</section>
-
-						<section id="sectionFormularioPaseador" class="secciones">
-							<div class="card">
-								<div class="card-body" style="height: 300px"></div>
-							</div>
-						</section>
-
-						<section id="sectionRegistrarse" class="secciones">
-							<div class="card">
-								<div class="card-body" style="height: 300px"></div>
-							</div>
-						</section>
-
-						<section id="sectionloginUsuario" class="secciones">
-							<div class="card">
-								<div class="card-body" style="height: 250px"></div>
-							</div>
-						</section>
-
-						<section id="sectionUsuarioLogueado" class="secciones">
-							<div class="card mb-3">
-								<div class="card-body" style="height: 150px"></div>
-							</div>
-
-							<div id="mostrarContratacion" class="tablas"></div>
-
-							<div id="mostrarSelectPaseadores" class="tablas"></div>
-
-							<div id="mostrarTablaPaseador" class="tablas"></div>
-
-							<div id="mostrarMensajeContratacion" class="tablas"></div>
-
-							<div id="mostraTablaPaseadoresActivos" class="tablas"></div>
-						</section>
-
-						<section id="sectionPaseadoresLogueado" class="secciones">
-							<div id="mostrarTablaContratacionesPendientes" class="tablas"></div>
-
-							<div id="mostrarEstadoPaseador" class="tablas"></div>
-						</section>
-					</section>
-				</div>
-			</main>
-
-				<br /><br /><br />
-				<hr />
-				<br />
-				<hr />
-				<br /><br />
-
-				<!-- SECCION HEADER  -->
-
-				<header id="sectionHeader" class="flex columna seccionesHeader">
-					<div id="mainTitle" class="flex ancho">
-						<img src="Imagenes/logo.png" alt="Logo" width="100px" />
-						<img id="imgTitle" src="Imagenes/slogan.jpg" alt="" />
-						<nav id="navLogin" class="flex">
-							<button id="btnRegistarCliente" href="#" class="navOculto">registrar</button>
-							<button id="btnLoginCliente" class="navOculto">Login</button>
-							<p id="pMostrarlogueado"></p>
-							<button id="btnLogoutCliente" href="#" style="display: none">[logout]</button>
-						</nav>
+				<aside class="col-md-4 col-lg-3 bg-white border-end min-vh-100 p-3">
+					<div class="d-grid gap-2">
+						<button id="btnVerDashboard" class="btn btn-light">Dashboard</button>
+						<button id="btnVerDisponibles" class="btn btn-light">Disponibles</button>
+						<button id="btnVerContratacion" class="btn btn-light">Contratación</button>
+						<button id="btnVerActivos" class="btn btn-light">Activos</button>
+						<!-- <button id="btnVerContratacionesPendientesPaseador" class="btn btn-light">Contrataciones Pendientes</button> -->
+						<!-- <button id="btnVerEstadoPaseador" class="btn btn-light">Estado del Paseador</button> -->
 					</div>
-					<nav id="navMenu" class="flex ancho">
-						<a id="btnNosotros" href="#">Nosotros</a>
-						<a id="btnPaseadorRegistro" href="#"><!-- Ser un Paseador --></a>
-					</nav>
-				</header>
+				</aside>
 
-				<!-- SECCION SOBRE NOSOTROS -->
-				<main>
+				<!-- CONTENT -->
+
+				<div class="col-md-8 col-lg-9 p-4">
+					<!-- ABOUT US -->
 					<section id="sectionSobreNosotros" class="secciones">
-						<article class="nosotros ancho">
-							<h1>🐾 Sobre Nosotros</h1>
-							<p><strong>Una vida mejor para tu perro, todos los días</strong></p>
-							<p>
-								En <strong>[Nombre del Servicio]</strong>, somos amantes de los animales con una misión clara: mejorar
-								la calidad de vida de tu perro a través del ejercicio, el cariño y la compañía diaria.
-							</p>
-							<p>
-								Fundado en 2020, nuestro equipo de paseadores profesionales está formado por personas capacitadas,
-								responsables y apasionadas por los animales. Sabemos que cada perro es único, por eso ofrecemos paseos
-								personalizados que se adaptan al ritmo, energía y necesidades de tu mascota.
-							</p>
+						<div class="card shadow-sm border-0">
+							<div class="card-body p-4 p-lg-5">
+								<h1 class="mb-2">🐾 Sobre Nosotros</h1>
+								<p class="text-muted fs-5 mb-4">Paseos seguros, confiables y pensados para tu perro</p>
 
-							<p><strong>¿Por qué elegirnos?</strong></p>
-							<ul>
-								<li>✔️ Paseadores confiables y verificados</li>
-								<li>🐕 Grupos pequeños o paseos individuales</li>
-								<li>⏱️ Flexibilidad horaria y reservas online</li>
-								<li>📍 Seguimiento en tiempo real desde tu celular</li>
-								<li>💬 Reporte con fotos después de cada paseo</li>
-							</ul>
-							<p><strong>Nuestra promesa</strong></p>
-							<p>
-								Tratar a tu perro como si fuera nuestro. Nos importa su seguridad, su felicidad y su bienestar físico y
-								emocional. Ya sea un cachorro lleno de energía o un perro mayor que necesita paseos tranquilos, estamos
-								listos para acompañarlo.
-							</p>
-						</article>
+								<p class="mb-4 fs-5">
+									<strong>Dog Walker App</strong>, conectamos clientes con paseadores responsables para que cada perro
+									reciba la atención, el ejercicio y el cuidado que necesita.
+								</p>
+
+								<div class="row g-4 align-items-center mb-4">
+									<div class="col-lg-6">
+										<img
+											src="Imagenes/perro-paseo.png"
+											class="img-fluid rounded shadow-sm w-100"
+											alt="Paseo de perro"
+										/>
+									</div>
+
+									<div class="col-lg-6">
+										<div class="p-4 border rounded bg-light h-100 d-flex flex-column justify-content-center">
+											<h4 class="mb-3">✔️ Verificados</h4>
+											<p class="mb-0 fs-5">Paseadores confiables y responsables.</p>
+										</div>
+										<div class="p-4 border rounded bg-light h-100 d-flex flex-column justify-content-center">
+											<h5 class="mb-3">🐕 Paseos personalizados</h5>
+											<p class="mb-0">Según el tamaño y la necesidad del perro.</p>
+										</div>
+
+										<div class="p-4 border rounded bg-light h-100 d-flex flex-column justify-content-center">
+											<h5 class="mb-3">⏱ Gestión rápida</h5>
+											<p class="mb-0">Solicitudes y contrataciones desde la app.</p>
+										</div>
+
+										<div class="p-4 border rounded bg-light h-100 d-flex flex-column justify-content-center">
+											<h5 class="mb-3">💬 Experiencia clara</h5>
+											<p class="mb-0">Información organizada para todos.</p>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col">
+										<div class="bg-dark text-white rounded p-4">
+											<div class="row text-center gy-3">
+												<div class="col-md-4">
+													<div>
+														<div class="fs-4">🐾 <strong>+250</strong></div>
+														<div>perros paseados</div>
+													</div>
+												</div>
+
+												<div class="col-md-4">
+													<div>
+														<div class="fs-4">⭐</div>
+														<div>Paseadores verificados</div>
+													</div>
+												</div>
+
+												<div class="col-md-4">
+													<div>
+														<div class="fs-4">📍</div>
+														<div>Disponible en tu zona</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</section>
+
 					<!-- SECCION FORMULARIO PASEADOR -->
 					<section id="sectionFormularioPaseador" class="secciones">
 						<div class="box columna ancho">
@@ -218,91 +163,193 @@ Logout
 
 					<!-- SECCION REGISTRARSE -->
 					<section id="sectionRegistrarse" class="secciones">
-						<div class="box">
-							<h2>Registro de Cliente</h2>
-							<br />
-							<label for="txtNombreCliente">Nombre: </label>
-							<input id="txtNombreCliente" type="text" /><br />
-							<label for="txtUsuarioCliente">Usuario: </label>
-							<input id="txtUsuarioCliente" type="text" /><br />
-							<label for="txtContraseniaCliente">Contraseñia: </label>
-							<input id="txtContraseniaCliente" type="text" /><br />
-							<label for="txtNombrePerroCliente">Nombre de Perro: </label>
-							<input id="txtNombrePerroCliente" type="text" /><br />
-							<label for="selTamanioCliente">Tamaño de Perro: </label>
-							<select id="selTamanioCliente">
-								<option value="" selected>Seleccionar Tamaño</option>
-								<option value="Chico">Chico</option>
-								<option value="Mediano">Mediano</option>
-								<option value="Grande">Grande</option>
-							</select>
-							<br />
-							<input id="btnRegistrarme" type="button" value="Registarme" />
-							<br />
-							<p id="pRegistrarse"></p>
+						<div class="card border-0 shadow-sm">
+							<div class="card-body p-4 p-lg-5">
+								<div class="row justify-content-center">
+									<div class="col-lg-8 col-xl-7">
+										<h2 class="mb-4">🐾 Registro de Cliente</h2>
+
+										<div class="row g-3">
+											<div class="col-md-6">
+												<label for="txtNombreCliente" class="form-label">Nombre</label>
+												<input id="txtNombreCliente" type="text" class="form-control" />
+											</div>
+											<div class="col-md-6">
+												<label for="txtUsuarioCliente" class="form-label">Usuario</label>
+												<input id="txtUsuarioCliente" type="text" class="form-control" />
+											</div>
+											<div class="col-md-6">
+												<label for="txtContraseniaCliente" class="form-label">Contraseña</label>
+												<input id="txtContraseniaCliente" type="text" class="form-control" />
+											</div>
+											<div class="col-md-6">
+												<label for="txtNombrePerroCliente" class="form-label">Nombre del perro</label>
+												<input id="txtNombrePerroCliente" type="text" class="form-control" />
+											</div>
+											<div class="col-md-6">
+												<label for="selTamanioCliente" class="form-label">Tamaño del perro</label>
+												<select id="selTamanioCliente" class="form-select">
+													<option value="" selected>Seleccionar tamaño</option>
+													<option value="Chico">Chico</option>
+													<option value="Mediano">Mediano</option>
+													<option value="Grande">Grande</option>
+												</select>
+											</div>
+											<div class="col-12 mt-2">
+												<input id="btnRegistrarme" type="button" value="Registrarme" class="btn btn-dark px-4" />
+											</div>
+											<div class="col-12">
+												<p id="pRegistrarse" class="mb-0 mt-2 text-danger"></p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</section>
-
-					<!-- SECCION LOGIN USUARIO  -->
 
 					<section id="sectionloginUsuario" class="secciones">
-						<div class="box">
-							<h2>LOGIN USUARIO</h2>
-							<br />
-							<label for="txtUsuario">Usuario: </label>
-							<input id="txtUsuario" type="text" value="FPerdomo" /><br />
-							<label for="txtContrasenia">Contraseña: </label>
-							<input id="txtContrasenia" type="text" value="Fp123!" /><br />
-							<input id="btnLogin" type="button" value="Login" />
-							<p id="pLogin"></p>
+						<div class="card border-0 shadow-sm">
+							<div class="card-body p-4 p-lg-5">
+								<div class="row justify-content-center">
+									<div class="col-md-6 col-lg-5">
+										<h2 class="mb-4 text-center">🐾 Login Usuario</h2>
+
+										<div class="mb-3">
+											<label for="txtUsuario" class="form-label">Usuario</label>
+											<input id="txtUsuario" type="text" class="form-control" value="FPerdomo" />
+										</div>
+
+										<div class="mb-3">
+											<label for="txtContrasenia" class="form-label">Contraseña</label>
+											<input id="txtContrasenia" type="password" class="form-control" value="Fp123!" />
+										</div>
+
+										<div class="d-grid">
+											<input id="btnLogin" type="button" value="Login" class="btn btn-dark" />
+										</div>
+
+										<p id="pLogin" class="mt-3 text-danger text-center"></p>
+									</div>
+								</div>
+							</div>
 						</div>
 					</section>
-					<!-- SECCION USUARIO LOGUEADO -->
-					<section id="sectionUsuarioLogueado" class="secciones">
-						<section class="box">
-							<h1>Bienvenido</h1>
-							<br /><br />
-							<!-- <div id="divMostrarContratado"></div>
-					<p id="pMensajeInicial"></p> -->
-							<div id="menuCliente">
-								<button id="btnVerDisponibles" class="botonesMenu">Paseadores disponibles</button>
-								<button id="btnVerContratacion" class="botonesMenu">Contratacion Pendiente</button>
-								<button id="btnVerActivos" class="botonesMenu">Paseadores activos</button>
-							</div>
-							<div id="mostrarContratacion" class="tablas"></div>
-							<div id="mostrarSelectPaseadores" class="tablas">
-								<div id="divMostrarContratado"></div>
-								<p id="pMensajeInicial"></p>
-								<label for="selPaseadoresParaCliente">Elegir un Paseador:</label>
-								<select id="selPaseadoresParaCliente"></select>
-							</div>
-							<div id="mostrarTablaPaseador" class="tablas"></div>
-							<div id="mostrarMensajeContratacion" class="tablas"></div>
-							<div id="mostraTablaPaseadoresActivos" class="tablas"></div>
-						</section>
-					</section>
 
-					<!-- SECCION PASEADORES  -->
+					<section id="sectionUsuarioLogueado" class="secciones">
+						<div class="card mb-3">
+							<div class="card-body" style="height: 150px"></div>
+						</div>
+
+						<div id="mostrarContratacion" class="tablas"></div>
+
+						<div id="mostrarSelectPaseadores" class="tablas"></div>
+
+						<div id="mostrarTablaPaseador" class="tablas"></div>
+
+						<div id="mostrarMensajeContratacion" class="tablas"></div>
+
+						<div id="mostraTablaPaseadoresActivos" class="tablas"></div>
+					</section>
 
 					<section id="sectionPaseadoresLogueado" class="secciones">
-						<div id="menuPaseador">
-							<button id="btnVerContratacionesPendientesPaseador" class="botonesMenu">Contrataciones</button>
-							<button id="btnVerEstadoPaseador" class="botonesMenu">Estado</button>
-						</div>
 						<div id="mostrarTablaContratacionesPendientes" class="tablas"></div>
+
 						<div id="mostrarEstadoPaseador" class="tablas"></div>
 					</section>
-				</main>
+				</div>
+			</div>
+		</main>
 
-				<!-- SECCION FOOTER -->
+		<br /><br /><br />
+		<hr />
+		<br />
+		<hr />
+		<br /><br />
 
-				<footer id="sectionFooter" class="seccionesFooter"></footer>
-				<footer>INFO EN EL FOOTER</footer>
-				<script src="clases.js"></script>
-				<script src="clasesistema.js"></script>
-				<script src="precarga.js"></script>
-				<script src="ui.js"></script>
-			</body>
-		</html>
+		<!-- SECCION HEADER  -->
+
+		<header id="sectionHeader" class="flex columna seccionesHeader">
+			<div id="mainTitle" class="flex ancho">
+				<img src="Imagenes/logo.png" alt="Logo" width="100px" />
+				<img id="imgTitle" src="Imagenes/slogan.jpg" alt="" />
+				<nav id="navLogin" class="flex">
+					<button id="btnRegistarCliente" href="#" class="navOculto">registrar</button>
+					<button id="btnLoginCliente" class="navOculto">Login</button>
+					<p id="pMostrarlogueado"></p>
+					<button id="btnLogoutCliente" href="#" style="display: none">[logout]</button>
+				</nav>
+			</div>
+			<nav id="navMenu" class="flex ancho">
+				<a id="btnNosotros" href="#">Nosotros</a>
+				<a id="btnPaseadorRegistro" href="#"><!-- Ser un Paseador --></a>
+			</nav>
+		</header>
+
+		<!-- SECCION SOBRE NOSOTROS -->
+		<main>
+			<!-- SECCION FORMULARIO PASEADOR -->
+
+			<!-- SECCION REGISTRARSE -->
+
+			<!-- SECCION LOGIN USUARIO  -->
+
+			<section id="sectionloginUsuario" class="secciones">
+				<div class="box">
+					<h2>LOGIN USUARIO</h2>
+					<br />
+					<label for="txtUsuario">Usuario: </label>
+					<input id="txtUsuario" type="text" value="FPerdomo" /><br />
+					<label for="txtContrasenia">Contraseña: </label>
+					<input id="txtContrasenia" type="text" value="Fp123!" /><br />
+					<input id="btnLogin" type="button" value="Login" />
+					<p id="pLogin"></p>
+				</div>
+			</section>
+			<!-- SECCION USUARIO LOGUEADO -->
+			<section id="sectionUsuarioLogueado" class="secciones">
+				<section class="box">
+					<h1>Bienvenido</h1>
+					<br /><br />
+					<!-- <div id="divMostrarContratado"></div>
+					<p id="pMensajeInicial"></p> -->
+					<div id="menuCliente">
+						<button id="btnVerDisponibles" class="botonesMenu">Paseadores disponibles</button>
+						<button id="btnVerContratacion" class="botonesMenu">Contratacion Pendiente</button>
+						<button id="btnVerActivos" class="botonesMenu">Paseadores activos</button>
+					</div>
+					<div id="mostrarContratacion" class="tablas"></div>
+					<div id="mostrarSelectPaseadores" class="tablas">
+						<div id="divMostrarContratado"></div>
+						<p id="pMensajeInicial"></p>
+						<label for="selPaseadoresParaCliente">Elegir un Paseador:</label>
+						<select id="selPaseadoresParaCliente"></select>
+					</div>
+					<div id="mostrarTablaPaseador" class="tablas"></div>
+					<div id="mostrarMensajeContratacion" class="tablas"></div>
+					<div id="mostraTablaPaseadoresActivos" class="tablas"></div>
+				</section>
+			</section>
+
+			<!-- SECCION PASEADORES  -->
+
+			<section id="sectionPaseadoresLogueado" class="secciones">
+				<div id="menuPaseador">
+					<button id="btnVerContratacionesPendientesPaseador" class="botonesMenu">Contrataciones</button>
+					<button id="btnVerEstadoPaseador" class="botonesMenu">Estado</button>
+				</div>
+				<div id="mostrarTablaContratacionesPendientes" class="tablas"></div>
+				<div id="mostrarEstadoPaseador" class="tablas"></div>
+			</section>
+		</main>
+
+		<!-- SECCION FOOTER -->
+
+		<footer id="sectionFooter" class="seccionesFooter"></footer>
+		<footer>INFO EN EL FOOTER</footer>
+		<script src="clases.js"></script>
+		<script src="clasesistema.js"></script>
+		<script src="precarga.js"></script>
+		<script src="ui.js"></script>
 	</body>
 </html>

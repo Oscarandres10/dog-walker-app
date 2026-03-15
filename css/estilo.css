@@ -323,3 +323,15 @@ article {
 .btn-light:hover {
 	background-color: #199d7c;
 }
+
+.card-hover:hover {
+	transform: translateY(-3px);
+	transition: 0.2s;
+}
+#sectionSobreNosotros h1 {
+	font-weight: 600;
+}
+
+#sectionSobreNosotros {
+	background: #f8f9fa;
+}
