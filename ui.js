@@ -26,7 +26,6 @@ eventos();
 ocultarTodoUI();
 mostrarSobreNosotrosUI();
 
-//primero oculto todo (dejando unicamente el navegador y el footer). Navegador y footer tiene seccionesNavegador y seccionesFooter como class para cuando las querramos ocultar
 function ocultarTodoUI() {
 	let lasSecciones = document.querySelectorAll(".secciones");
 	for (let unaSeccion of lasSecciones) {
@@ -79,7 +78,6 @@ function eliminoMostrarTablaPaseadorUI() {
 	divMostrarTablaPaseador.style.display = "none";
 }
 
-//luego muestro el sobre nostros y los botones para log in y registrarse
 function mostrarSobreNosotrosUI() {
 	ocultarTodoUI();
 	document.querySelector("#sectionSobreNosotros").style.display = "block";
@@ -96,27 +94,23 @@ function mostrarSobreNosotrosUI() {
 	}
 }
 
-/* #### BOTONES NAVEGADOR ####*/
 function serUnPaseadorUI() {
 	ocultarTodoUI();
 	document.querySelector("#sectionFormularioPaseador").style.display = "block";
 }
 
-/* #### REGISTRO ####*/
 function registroInterfazUI() {
 	mostrarNavUI();
 	ocultarTodoUI();
 	document.querySelector("#sectionRegistrarse").style.display = "block";
 }
 
-/* #### LOGIN ####*/
 function loginInterfazUI() {
 	ocultarTodoUI();
 	document.querySelector("#sectionloginUsuario").style.display = "block";
 }
 
 function loginUI() {
-	//console.log("loginUI arrancó con usuario:", usuarioInput.value);
 	let mensaje = "";
 	let usuario = document.querySelector("#txtUsuario").value;
 	let contrasenia = document.querySelector("#txtContrasenia").value;
@@ -150,7 +144,6 @@ function mostrarLogueadoUI() {
 	return `Bienvenido, <strong>${miSistema.logueado.nombre}</strong>`;
 }
 
-/* #### LOGOUT #### */
 function logoutUI() {
 	miSistema.logueado = null;
 
@@ -170,6 +163,7 @@ function logoutUI() {
 }
 
 //#region   ## SECCION CLIENTE
+
 function mostrarSeccionClienteUI() {
 	ocultarTodoUI();
 	document.querySelector("#sectionUsuarioLogueado").style.display = "block";
@@ -212,9 +206,8 @@ function clickEnSolicitarUI(id, idtest) {
 				`<p>Su Contratacion fue realizada Correctamente.</p>`;
 			setTimeout(() => {
 				document.querySelector("#mostrarMensajeContratacion").style.display = "none";
-				//console.log(`ME VOY PARA SECCION CLIENTE`);
 				mostrarSelectPaseadoresUI();
-			}, 3000); // 2 segundos
+			}, 3000);
 		}
 	} else {
 		document.querySelector("#mostrarMensajeContratacion").innerHTML = "No se ha Elegido un Paseador";
@@ -360,11 +353,8 @@ function clickEnAceptarUI() {
 	let valorData = this.getAttribute("data-id");
 	let idContratacionTxt = valorData.substr(15, valorData.length);
 	let idContratacionNum = Number(idContratacionTxt);
-	//console.log(idContratacionNum);
 	miSistema.procesarAceptarContratacion(idContratacionNum);
-
 	miSistema.validoContratacionesPendientesDespuesDeAceptar(idContratacionNum);
-
 	gestionContratacionesProcensandoUI();
 }
 
@@ -386,19 +376,16 @@ function mostrarEstadoPaseadorUI() {
 }
 
 function gestionContratacionesProcensandoUI() {
-	//la primera vez que voy a a procesar las Contrataciones
 	let laTabla = miSistema.armarTablaContratacionesProcesando();
 	document.querySelector("#mostrarTablaContratacionesPendientes").innerHTML = laTabla;
-	//tengo que darle vida a los botones
 	darVidaBotonesTablaContratacionesPendientesUI();
 }
 
 //#endregion
 
-/* #### ALMACENADO DE DATOS ####*/
+//#region  ## ALMACENADO DE DATOS
 
 function almacenarUI() {
-	//let mensaje = ``;
 	let nombre = document.querySelector("#txtNombreCliente").value;
 	let usuario = document.querySelector("#txtUsuarioCliente").value;
 	let contrasenia = document.querySelector("#txtContraseniaCliente").value;
@@ -414,3 +401,5 @@ function almacenarUI() {
 	document.querySelector("#pRegistrarse").innerHTML = miSistema.mensajeRegistro.join("");
 	miSistema.mensajeRegistro = [];
 }
+
+//#endregion
