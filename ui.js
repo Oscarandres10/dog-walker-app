@@ -210,26 +210,20 @@ function mostrarSelectPaseadoresUI() {
 		return loginUI();
 	}
 	ocultarTodoUI();
-	ocultarTablasUI();
 	eliminoMostrarTablaPaseadorUI();
 	document.querySelector("#sectionPaseadoresDisponibles").style.display = "block";
+	mostrarNavUI();
 	let clienteId = miSistema.logueado.id;
-
-	// TIENECONTRATO ACA VA A FUNCIONAR AL REVEZ   !tienecontrato == Verdadero
-	let tieneContrato = miSistema.clienteTieneContratacion(clienteId);
-
-	//console.log("Estoy ACA CON CONTRATO");
-
-	if (!tieneContrato) {
-		let mostrarMensaje = document.querySelector("#mostrarMensajeContratacion");
+	let puedeContratar = miSistema.clienteTieneContratacion(clienteId);
+	if (!puedeContratar) {
+		let mostrarMensaje = document.querySelector("#mostrarMensajePaseadores");
 		mostrarMensaje.style.display = "block";
 		mostrarMensaje.innerHTML = `<p><strong><cite>${miSistema.logueado.perroNombre}</cite></strong> ya tiene un contratacion.</p>`;
+		//console.log("No puede contratar");
 	} else {
 		let selectPaseadores = miSistema.armadoSelectPaseadores();
-
 		document.querySelector("#mostrarSelectPaseadores").style.display = "block";
 		document.querySelector("#mostrarTablaPaseador").style.display = "block";
-
 		let selPaseador = document.querySelector("#selPaseadoresParaCliente");
 		selPaseador.innerHTML = selectPaseadores;
 		selPaseador.selectedIndex = 0; // Pongo el select en 0 para que no me muestre si ya se habia selecccionado
@@ -239,6 +233,8 @@ function mostrarSelectPaseadoresUI() {
 function armarTablaPaseadoresActivosUI() {
 	let laTabla = miSistema.armarTablaPaseadoresActivos();
 	ocultarTablasUI();
+	mostrarNavUI();
+	document.querySelector("#sectionPaseadoresActivos").style.display = "block";
 	document.querySelector("#mostraTablaPaseadoresActivos").style.display = "block";
 	document.querySelector("#mostraTablaPaseadoresActivos").innerHTML = laTabla;
 }
@@ -252,7 +248,8 @@ function mostrarContratacionUI() {
 	ocultarTablasUI();
 	eliminoMostrarTablaPaseadorUI();
 	let clienteId = miSistema.logueado.id;
-
+	document.querySelector("#sectionPaseadoresContratacion").style.display = "block";
+	mostrarNavUI();
 	// TIENECONTRATO ACA VA A FUNCIONAR AL REVEZ   !tienecontrato == Verdadero
 	let tieneContrato = miSistema.clienteTieneContratacion(clienteId);
 
