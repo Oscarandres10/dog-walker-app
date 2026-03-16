@@ -147,7 +147,7 @@ class Sistema {
 		unaTabla += `<div class="col-md-4">
 		<div class="card border-0 shadow-sm h-100 text-center">
 			<div class="card-body">
-				<h4 class="card-title">TOTAL</h4>
+				<h4 class="card-title  fs-6">TOTAL</h4>
 				<p class="display-6 mb-0">${this.logueado.cupo}</p>
 			</div>
 		</div>
@@ -156,7 +156,7 @@ class Sistema {
 		unaTabla += `<div class="col-md-4">
 		<div class="card border-0 shadow-sm h-100 text-center">
 			<div class="card-body">
-				<h4 class="card-title">OCUPADOS</h4>
+				<h4 class="card-title  fs-6">OCUPADOS</h4>
 				<p class="display-6 mb-0">${cupo}</p>
 			</div>
 		</div>
@@ -165,7 +165,7 @@ class Sistema {
 		unaTabla += `<div class="col-md-4">
 		<div class="card border-0 shadow-sm h-100 text-center">
 			<div class="card-body">
-				<h4 class="card-title">PORCENTAJE</h4>
+				<h4 class="card-title fs-6">PORC. %</h4>
 				<p class="display-6 mb-0">${porcentaje}%</p>
 			</div>
 		</div>
