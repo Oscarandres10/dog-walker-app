@@ -325,15 +325,6 @@ function mostrarSeccionPaseadorUI() {
 	if (miSistema.logueado !== null) {
 		ocultarTablasUI();
 		document.querySelector("#sectionPaseadoresLogueado").style.display = "block";
-		// Asigno los eventos a los botones del menú
-		document
-			.querySelector("#btnVerContratacionesPendientesPaseador")
-			.addEventListener("click", mostrarTablaContratacionesPendientesUI);
-
-		/* document
-			.querySelector("#btnVerContratacionesPendientesPaseador")
-			.addEventListener("click", gestionContratacionesProcensandoUI); */
-		document.querySelector("#btnVerEstadoPaseador").addEventListener("click", mostrarEstadoPaseadorUI);
 	} else {
 		loginUI();
 	}

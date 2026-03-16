@@ -565,46 +565,27 @@ class Sistema {
 		let paseadorArrayfiltrados = new Array();
 		let cliente = this.logueado;
 		let cupoNecesario = this.calcularCupoPerro(cliente.tamanioPerro);
-		//console.log(`ESTOY ADENTRO DE FILTRADOS PARA CLIENTE`);
-		//console.log(cupoNecesario);
-
 		for (let i = 0; i < this.paseadores.length; i++) {
 			let paseador = this.paseadores[i];
 			let cupo = this.cupoDisponible(paseador);
 			let cupoValido = cupo >= cupoNecesario;
-			//console.log(cupo + ` Cupo Resto`);
-
 			let verificacionTamanio = this.paseadorComparoTamanio(paseador, cliente.tamanioPerro);
-			//verificacionTamanio = false;
-			//console.log(cupoValido);
-			//console.log(verificacionTamanio);
 			if (cupoValido && verificacionTamanio) {
-				//console.log(`test`);
-				//console.log(paseador);
 				paseadorArrayfiltrados.push(paseador);
 			}
 		}
-		//console.log(paseadorArrayfiltrados);
 		return paseadorArrayfiltrados;
 	}
 
 	paseadorComparoTamanio(paseador, tamanio) {
-		let tamanioValido = true; // Comienzo variable como verdadero
+		let tamanioValido = true;
 		let i = 0;
-		// Paso por Contrataciones y me salgo en cuanto tamanio sea falso.
 		while (i < this.contrataciones.length && tamanioValido) {
 			let contratacion = this.contrataciones[i];
 
 			if (contratacion.Paseador === paseador && contratacion.estado === "aceptada") {
-				//console.log(`Estoy adentro de if  === Paseador && estado aceptada`);
-				`Estoy adentro de if  === Paseador && estado aceptada`;
 				let contratacionCliente = contratacion.Cliente;
-
-				// Si la contratacion aceptada, tiene un perro chico o grande,
-				// opuesto al actual convierto a false
-
 				if (tamanio === "Grande" && contratacionCliente.tamanioPerro === "Chico") {
-					//console.log(`Estoy adentro de if  Grande a Chico`);
 					tamanioValido = false;
 				}
 				if (tamanio === "Chico" && contratacionCliente.tamanioPerro === "Grande") {
