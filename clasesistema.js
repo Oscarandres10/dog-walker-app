@@ -40,7 +40,7 @@ class Sistema {
 		unaContratacion.Paseador = this.obtenerPaseador(idPaseador);
 		unaContratacion.estado = "pendiente";
 		this.contrataciones.push(unaContratacion);
-		return unaContratacion.id; // <--- Agrego Linea para que me retorno el id de la contratacion. cuando la precise
+		return unaContratacion.id;
 	}
 
 	//#endregion
@@ -238,7 +238,6 @@ class Sistema {
 			}
 			x++;
 		}
-		//console.log(logueado);
 		return valido;
 	}
 
@@ -247,7 +246,7 @@ class Sistema {
 	//#region   ## VALIDACIONES DE REGISTRO DE CLIENTES ##
 
 	validacionRegistroCliente(nombre, usuario, contrasenia, perro, tamanio) {
-		this.mensajeRegistro = []; // Pongo el array de mensajes a vacio.
+		this.mensajeRegistro = [];
 
 		let valido = true;
 
@@ -265,7 +264,7 @@ class Sistema {
 	}
 
 	validarNombre(pNombre) {
-		let nombre = pNombre.toLowerCase().trim(); //
+		let nombre = pNombre.toLowerCase().trim();
 		let valido = true;
 
 		if (nombre === "") {
@@ -276,7 +275,7 @@ class Sistema {
 	}
 
 	validarUsuario(pUsuario) {
-		let usuario = pUsuario.toLowerCase().trim(); // Convierto texto a lowercase
+		let usuario = pUsuario.toLowerCase().trim();
 		let valido = true;
 		let i = 0;
 		if (usuario !== "") {
@@ -303,21 +302,15 @@ class Sistema {
 		return valido;
 	}
 
-	///   NO ESTOY SEGURO SI AGREGAR  IDENTIFICAR CUANDO ES SIMBOL
-	// PORQUE TOMA LOS SIMBOLOS COMO MINUSCULAS
 	validarContrasenia(pass) {
 		let verificacion = true;
 		let mayus = 0;
 		let minus = 0;
 		let numero = 0;
-
-		// Verificacion Vacio
 		if (verificacion && pass.length < 5) {
 			verificacion = false;
 			this.mensajeRegistro.push(`<strong>Contraseña</strong> tiene que tener mínimo 5 caracteres<br>`);
 		}
-
-		// Verificacion Letras
 		if (verificacion) {
 			for (let x = 0; x < pass.length; x++) {
 				let letra = pass.charAt(x);
@@ -337,7 +330,6 @@ class Sistema {
 					encontreLetra = true;
 				}
 			}
-			// Verifico que mayus minus y numero  tengan por lo menos 1 character
 			if (minus < 1 || mayus < 1 || numero < 1) {
 				verificacion = false;
 				this.mensajeRegistro.push(
@@ -348,7 +340,6 @@ class Sistema {
 		return verificacion;
 	}
 
-	// Valido Nombre de Perro que sea Unico y no este vacio.
 	validarPerro(nombre) {
 		let validar = true;
 		let x = 0;
@@ -367,7 +358,7 @@ class Sistema {
 				x++;
 			}
 		} else {
-			validar = false; // El input esta vacio
+			validar = false;
 			this.mensajeRegistro.push(`<strong>Nombre de Perro</strong> no puede estar Vacio.<br>`);
 		}
 
@@ -400,9 +391,7 @@ class Sistema {
 			let noTieneContratacion = this.clienteTieneContratacion(idCliente);
 
 			if (noTieneContratacion) {
-				//console.log(`VALIDACION PRECARGA  NO TIENE CONTRATACION`);
 				if (cupo >= this.calcularCupoPerro(elCliente.tamanioPerro)) {
-					//console.log(`test estoy en el if si el cupo es mayor que el cupo perro`);
 					if (this.paseadorComparoTamanio(elPaseador, elCliente.tamanioPerro)) {
 						noModificado = true;
 					} else {
@@ -458,44 +447,26 @@ class Sistema {
 	validoContratacionesPendientesDespuesDeAceptar(id) {
 		let contratacion = this.obtenerContratacion(id); // se obtiene la contratacion
 		let elPaseador = contratacion.Paseador;
-		//console.log(`Paseador ID: ${elPaseador.id}`);
 		let contracionesPaseador = this.obtengoPaseadorContrataciones(elPaseador.id);
-		//console.log(contracionesPaseador);
 		for (let x = 0; x < contracionesPaseador.length; x++) {
 			let laContratacion = contracionesPaseador[x]; // se obtiene la contratacion
 
 			let noModificado = false;
 			if (laContratacion.estado === "pendiente") {
-				// COMIENZO A VALIDAR PARA CADA CONTRATACION PENDIENTE..
 				let perro = this.calcularCupoPerro(laContratacion.Cliente.tamanioPerro); // Tamaño
-
-				// Resto del Cupo Total, el Cupo Ocupado.
 				let cupo = this.cupoDisponible(this.logueado);
-
-				// Busco si cliente tiene contratacion Previa.
 				let noTieneContratacion = this.clienteTieneContratacionAceptada(laContratacion.Cliente.id);
 				let noHayPerroOpuesto = this.validoPerroOpuestoNoExiste(laContratacion.Cliente.tamanioPerro);
 
-				// VALIDO QUE No TENGA CONTRATACION PREVIA
 				if (noTieneContratacion && laContratacion.estado === "pendiente") {
-					//console.log(`No tiene Contratacion Previa.`);
-
-					// VALIDO QUE NO HALLA PERRO OPUESTO
 					if (noHayPerroOpuesto && laContratacion.estado === "pendiente") {
-						//Confirmo si hay Cupo Disponible
-						//console.log(`No hay Perro Opuesto`);
-
-						// VALIDO QUE HALLA SUFICIENTE LUGAR DE CUPO Para El PERRO
 						if (cupo >= perro) {
 							noModificado = true;
-							//console.log(`VALIDO VALIDO EN DESPUES DE PROCESAR`);
 						} else {
 							laContratacion.comentario = `No hay Cupo disponible.`;
 						}
 					} else {
 						let perroTamanio = laContratacion.Cliente.tamanioPerro;
-						//console.log(perroTamanio);
-						//console.log(`Perro Opuesto  Existe`);
 						let perroOpuesto = ``;
 						if (perroTamanio === "Grande") perroOpuesto = "Chico";
 						if (perroTamanio === "Chico") perroOpuesto = "Grande";
@@ -505,7 +476,6 @@ class Sistema {
 					laContratacion.comentario = `Ya tiene Contratacion previa.`;
 				}
 				if (!noModificado) {
-					// si se modifico
 					laContratacion.estado = "denegada";
 				}
 			}
@@ -515,10 +485,7 @@ class Sistema {
 	obtenerContratacionesPaseador(pID) {
 		let lista = new Array();
 		for (let x = 0; x < this.contrataciones.length; x++) {
-			if (
-				this.contrataciones[x].Paseador.id === pID /*&&
-				 (this.contrataciones[x].estado === "aceptada" || this.contrataciones[x].estado === "aceptada") */
-			) {
+			if (this.contrataciones[x].Paseador.id === pID) {
 				lista.push(this.contrataciones[x]);
 			}
 		}
@@ -710,7 +677,6 @@ class Sistema {
 
 	//#region  ## UTILIDADES
 
-	// BUSCO POR CONTRATACIONES PENDIENTES O ACEPTADAS.
 	clienteTieneContratacion(id) {
 		let estado = true;
 		let x = 0;
@@ -724,7 +690,7 @@ class Sistema {
 		}
 		return estado;
 	}
-	// BUSCO POR CONTRATACIONES ACEPTADAS.
+
 	clienteTieneContratacionAceptada(id, tipo) {
 		let estado = true;
 		let x = 0;
@@ -753,11 +719,9 @@ class Sistema {
 		return estado;
 	}
 
-	// Busco el Cliente por ID
 	obtenerCliente(cId) {
 		let elCliente = null;
 		let i = 0;
-		// recorro un while las lista de clientes
 		while (elCliente === null && i < this.clientes.length) {
 			let cliente = this.clientes[i];
 			if (cliente.id === cId) {
@@ -768,11 +732,9 @@ class Sistema {
 		return elCliente;
 	}
 
-	// Busco el Paseador por ID
 	obtenerPaseador(pId) {
 		let elPaseador = null;
 		let i = 0;
-		// recorro un while la lista de paseadores para detener en cuanto se encuentre
 		while (elPaseador === null && i < this.paseadores.length) {
 			let paseadorX = this.paseadores[i];
 			if (paseadorX.id === pId) {
@@ -786,7 +748,6 @@ class Sistema {
 	obtenerContratacion(cId) {
 		let laContratacion = null;
 		let i = 0;
-		// recorro un while la lista de contrataciones para detener en cuanto se encuentre
 		while (laContratacion === null && i < this.contrataciones.length) {
 			let contratacionX = this.contrataciones[i];
 			if (contratacionX.id === cId) {
@@ -797,7 +758,6 @@ class Sistema {
 		return laContratacion;
 	}
 
-	// OBTENGO LA CONTRATACION DEL CLIENTE.
 	obtengoClienteContratacion(clienteId) {
 		let laContratacion = null;
 		let i = 0;
@@ -812,11 +772,9 @@ class Sistema {
 		return laContratacion;
 	}
 
-	// OBTENGO LA CONTRATACION DEL PASEADOR.
 	obtengoPaseadorContrataciones(pId) {
 		let lasContrataciones = new Array();
 		let i = 0;
-		//console.log(this.contrataciones);
 		for (let x = 0; x < this.contrataciones.length; x++) {
 			let contratacionX = this.contrataciones[x];
 			if (contratacionX.Paseador.id === pId) {
@@ -827,14 +785,12 @@ class Sistema {
 	}
 
 	cupoDisponible(paseador) {
-		let cupoMax = paseador.cupo; // Cupo maximo del Paseador
+		let cupoMax = paseador.cupo;
 
-		// Recorro contrataciones.
 		for (let x = 0; x < this.contrataciones.length; x++) {
 			if (paseador === this.contrataciones[x].Paseador && this.contrataciones[x].estado === "aceptada") {
 				let perroTamanio = this.contrataciones[x].Cliente.tamanioPerro;
 				let perroCupo = this.calcularCupoPerro(perroTamanio);
-				// Le voy restando al cupo Maximo del Paseador el cupo del perro si la contratacion.estado es Aceptada.
 				cupoMax -= perroCupo;
 			}
 		}
