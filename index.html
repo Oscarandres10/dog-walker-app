@@ -65,6 +65,17 @@
 								<button id="btnVerActivos" class="navOculto btn btn-outline-secondary rounded-pill py-2">
 									Activos
 								</button>
+
+								<button
+									id="btnVerContratacionesPendientesPaseador"
+									class="paseadorOculto btn btn-outline-secondary rounded-pill py-2"
+								>
+									Contrataciones
+								</button>
+
+								<button id="btnVerEstadoPaseador" class="paseadorOculto btn btn-outline-secondary rounded-pill py-2">
+									Estado
+								</button>
 							</div>
 						</div>
 					</div>
@@ -173,7 +184,7 @@
 							<label for="txtMail">Mail:</label>
 							<input type="text" id="txtMail" />
 							<br />
-							<input id="btnPaseadorRegistro" type="button" value="Enviar" />
+							<input id="btnEnviarFormularioPaseador" type="button" value="Enviar" />
 						</div>
 					</section>
 
@@ -232,7 +243,7 @@
 
 										<div class="mb-3">
 											<label for="txtUsuario" class="form-label">Usuario</label>
-											<input id="txtUsuario" type="text" class="form-control" value="Cliente0" />
+											<input id="txtUsuario" type="text" class="form-control" value="Paseador0" />
 										</div>
 
 										<div class="mb-3">
@@ -309,12 +320,29 @@
 					</section>
 
 					<section id="sectionPaseadoresLogueado" class="secciones">
-						<div id="menuPaseador">
-							<button id="btnVerContratacionesPendientesPaseador" class="botonesMenu">Contrataciones</button>
-							<button id="btnVerEstadoPaseador" class="botonesMenu">Estado</button>
+						<div class="card border-0 shadow-sm">
+							<div class="card-body p-4 p-lg-5">
+								<h2 class="mb-4">🐾 Bienvenido</h2>
+							</div>
 						</div>
-						<div id="mostrarTablaContratacionesPendientes" class="tablas"></div>
-						<div id="mostrarEstadoPaseador" class="tablas"></div>
+					</section>
+
+					<section id="sectionContratacionesPaseador" class="secciones">
+						<div class="card border-0 shadow-sm">
+							<div class="card-body p-4 p-lg-5">
+								<h2 class="mb-4">🐾 Contrataciones pendientes</h2>
+								<div id="mostrarTablaContratacionesPendientes" class="tablas"></div>
+							</div>
+						</div>
+					</section>
+
+					<section id="sectionEstadoPaseador" class="secciones">
+						<div class="card border-0 shadow-sm">
+							<div class="card-body p-4 p-lg-5">
+								<h2 class="mb-4">🐾 Estado del paseador</h2>
+								<div id="mostrarEstadoPaseador" class="tablas"></div>
+							</div>
+						</div>
 					</section>
 				</div>
 			</div>

@@ -51,9 +51,6 @@ class Sistema {
 		let hayContrataciones = false;
 		let unaTabla = `<div class="table-responsive">`;
 		unaTabla += `<table class="table table-bordered table-striped table-hover align-middle text-center tablaContratacionesPendientes">`;
-
-		unaTabla += `<caption class="caption-top fw-bold fs-5 mb-2">Contrataciones Pendientes</caption>`;
-
 		unaTabla += `<thead class="table-dark">`;
 		unaTabla += `<tr>`;
 		unaTabla += `<th>Nombre Perro</th>`;
@@ -96,9 +93,6 @@ class Sistema {
 	armarTablaContratacionesProcesando() {
 		let unaTabla = `<div class="table-responsive">`;
 		unaTabla += `<table class="table table-bordered table-striped table-hover align-middle text-center tablaContratacionesPendientes">`;
-
-		unaTabla += `<caption class="caption-top fw-bold fs-5 mb-2">Contrataciones Pendientes</caption>`;
-
 		unaTabla += `<thead class="table-dark">`;
 		unaTabla += `<tr>`;
 		unaTabla += `<th>Nombre Perro</th>`;
@@ -179,7 +173,7 @@ class Sistema {
 
 		unaTabla += `</div>`;
 
-		unaTabla += `<h2 class="mb-3">Contrataciones</h2>`;
+		unaTabla += `<h2 class="mb-3">Contrataciones Activas</h2>`;
 		unaTabla += `<div class="table-responsive">`;
 		unaTabla += `<table class="table table-bordered table-striped table-hover align-middle text-center">`;
 
