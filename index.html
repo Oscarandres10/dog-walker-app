@@ -41,15 +41,32 @@
 			<div class="row">
 				<!-- SIDEBAR -->
 
+				<!-- <button id="btnVerContratacionesPendientesPaseador" class="btn btn-light">Contrataciones Pendientes</button> -->
+				<!-- <button id="btnVerEstadoPaseador" class="btn btn-light">Estado del Paseador</button> -->
 				<aside class="col-md-4 col-lg-3 bg-white border-end min-vh-100 p-3">
-					<div class="d-grid gap-2">
-						<h2 id="btnVerDashboard" class="navOculto text-center">Dashboard</h2>
-						<button id="btnNosotros" class="btn btn-outline-dark btn-lg">About us</button>
-						<button id="btnVerDisponibles" class="navOculto btn btn-light">Disponibles</button>
-						<button id="btnVerContratacion" class="navOculto btn btn-light">Contratación</button>
-						<button id="btnVerActivos" class="navOculto btn btn-light">Activos</button>
-						<!-- <button id="btnVerContratacionesPendientesPaseador" class="btn btn-light">Contrataciones Pendientes</button> -->
-						<!-- <button id="btnVerEstadoPaseador" class="btn btn-light">Estado del Paseador</button> -->
+					<div class="card border-0 shadow-sm h-100">
+						<div class="card-body p-3">
+							<div class="mb-4 text-center">
+								<h5 class="text-uppercase text-muted mb-1">Menú</h5>
+								<h2 id="btnVerDashboard" class="navOculto fs-3 mb-0">Dashboard</h2>
+							</div>
+
+							<div class="d-grid gap-3">
+								<button id="btnNosotros" class="btn btn-outline-dark rounded-pill py-2">About us</button>
+
+								<button id="btnVerDisponibles" class="navOculto btn btn-outline-secondary rounded-pill py-2">
+									Disponibles
+								</button>
+
+								<button id="btnVerContratacion" class="navOculto btn btn-outline-secondary rounded-pill py-2">
+									Contratación
+								</button>
+
+								<button id="btnVerActivos" class="navOculto btn btn-outline-secondary rounded-pill py-2">
+									Activos
+								</button>
+							</div>
+						</div>
 					</div>
 				</aside>
 
@@ -134,7 +151,7 @@
 					<!-- SECCION FORMULARIO PASEADOR -->
 					<section id="sectionFormularioPaseador" class="secciones">
 						<div class="box columna ancho">
-							<h2>Formulario para ser Paseador</h2>
+							<h2>🐾 Formulario para ser Paseador</h2>
 
 							<label for="txtNombrePaseador">Nombre completo:</label>
 							<input id="txtNombrePaseador" type="text" />
@@ -164,10 +181,9 @@
 					<section id="sectionRegistrarse" class="secciones">
 						<div class="card border-0 shadow-sm">
 							<div class="card-body p-4 p-lg-5">
+								<h2 class="mb-4">🐾 Registro de Cliente</h2>
 								<div class="row justify-content-center">
 									<div class="col-lg-8 col-xl-7">
-										<h2 class="mb-4">🐾 Registro de Cliente</h2>
-
 										<div class="row g-3">
 											<div class="col-md-6">
 												<label for="txtNombreCliente" class="form-label">Nombre</label>
@@ -238,15 +254,25 @@
 					<section id="sectionPaseadoresDisponibles" class="secciones">
 						<div class="card border-0 shadow-sm">
 							<div class="card-body p-4 p-lg-5">
+								<h2 class="mb-4">🐾 Paseadores disponibles</h2>
 								<div class="row justify-content-center">
-									<div id="mostrarSelectPaseadores" class="tablas">
-										<div id="divMostrarContratado"></div>
-										<p id="pMensajeInicial"></p>
-										<label for="selPaseadoresParaCliente">Elegir un Paseador:</label>
-										<select id="selPaseadoresParaCliente"></select>
+									<div class="col-lg-7">
+										<div id="mostrarSelectPaseadores" class="tablas">
+											<div class="p-4 bg-light rounded border shadow-sm">
+												<p id="pMensajeInicial" class="text-muted mb-3"></p>
+
+												<label for="selPaseadoresParaCliente" class="form-label fw-semibold">
+													Elegir un paseador
+												</label>
+
+												<select id="selPaseadoresParaCliente" class="form-select form-select-lg"></select>
+											</div>
+										</div>
+
+										<div id="mostrarTablaPaseador" class="tablas mt-4"></div>
+
+										<div id="mostrarMensajePaseadores" class="tablas mt-3"></div>
 									</div>
-									<div id="mostrarTablaPaseador" class="tablas"></div>
-									<div id="mostrarMensajePaseadores" class="tablas">Test</div>
 								</div>
 							</div>
 						</div>
@@ -255,6 +281,7 @@
 					<section id="sectionPaseadoresContratacion" class="secciones">
 						<div class="card border-0 shadow-sm">
 							<div class="card-body p-4 p-lg-5">
+								<h2 class="mb-4">🐾 Contrataciones</h2>
 								<div class="row justify-content-center">
 									<div id="mostrarContratacion" class="tablas"></div>
 
@@ -267,6 +294,7 @@
 					<section id="sectionPaseadoresActivos" class="secciones">
 						<div class="card border-0 shadow-sm">
 							<div class="card-body p-4 p-lg-5">
+								<h2 class="mb-4">🐾 Paseadores del Disponibles</h2>
 								<div class="row justify-content-center">
 									<div id="mostraTablaPaseadoresActivos" class="tablas"></div>
 								</div>

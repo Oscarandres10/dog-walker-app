@@ -49,46 +49,66 @@ class Sistema {
 
 	armarTablaContrataciones() {
 		let hayContrataciones = false;
-		let unaTabla = `<table border="1px" class="tablaContratacionesPendientes">
-    					<caption>Contrataciones Pendientes</caption>
-					<tr>	
-						<th>Nombre Perro</th>
-						<th>Tamaño</th>
-						<th></th>
-						
-    						<th>Comentario:</th>
-					</tr>`;
+		let unaTabla = `<div class="table-responsive">`;
+		unaTabla += `<table class="table table-bordered table-striped table-hover align-middle text-center tablaContratacionesPendientes">`;
+
+		unaTabla += `<caption class="caption-top fw-bold fs-5 mb-2">Contrataciones Pendientes</caption>`;
+
+		unaTabla += `<thead class="table-dark">`;
+		unaTabla += `<tr>`;
+		unaTabla += `<th>Nombre Perro</th>`;
+		unaTabla += `<th>Tamaño</th>`;
+		unaTabla += `<th>Acción</th>`;
+		unaTabla += `<th>Comentario</th>`;
+		unaTabla += `</tr>`;
+		unaTabla += `</thead>`;
+
+		unaTabla += `<tbody>`;
 
 		for (let i = 0; i < this.contrataciones.length; i++) {
 			let unaContratacion = this.contrataciones[i];
 			let paseador = this.logueado;
-			if (unaContratacion.Paseador === paseador && unaContratacion.estado === `pendiente`) {
+
+			if (unaContratacion.Paseador === paseador && unaContratacion.estado === "pendiente") {
 				unaTabla += `<tr>`;
 				unaTabla += `<td>${unaContratacion.Cliente.perroNombre}</td>`;
 				unaTabla += `<td>${unaContratacion.Cliente.tamanioPerro}</td>`;
-				unaTabla += `<td><input id="btn" type=button data-id="contratacionID-${unaContratacion.id}"  class="botonesTablaContratacionesPendiente" value="Aceptar"></td>`;
-				unaTabla += `<td></td></tr>`;
+				unaTabla += `<td><input type="button" data-id="contratacionID-${unaContratacion.id}" class="botonesTablaContratacionesPendiente btn btn-success btn-sm" value="Aceptar"></td>`;
+				unaTabla += `<td>-</td>`;
+				unaTabla += `</tr>`;
 				hayContrataciones = true;
 			}
 		}
-		if (!hayContrataciones === true) {
+
+		if (!hayContrataciones) {
 			unaTabla += `<tr>`;
-			unaTabla += `<td colspan="4">No hay Contrataciones Pendientes</td></tr>`;
+			unaTabla += `<td colspan="4">No hay contrataciones pendientes</td>`;
+			unaTabla += `</tr>`;
 		}
+
+		unaTabla += `</tbody>`;
 		unaTabla += `</table>`;
+		unaTabla += `</div>`;
 
 		return unaTabla;
 	}
 
 	armarTablaContratacionesProcesando() {
-		let unaTabla = `<table border="1px" class="tablaContratacionesPendientes">
-    					<caption>Contrataciones Pendientes</caption>
-					<tr>	
-						<th>Nombre Perro</th>
-						<th>Tamaño</th>
-						<th></th>
-						<th>Comentario:</th>
-					</tr>`;
+		let unaTabla = `<div class="table-responsive">`;
+		unaTabla += `<table class="table table-bordered table-striped table-hover align-middle text-center tablaContratacionesPendientes">`;
+
+		unaTabla += `<caption class="caption-top fw-bold fs-5 mb-2">Contrataciones Pendientes</caption>`;
+
+		unaTabla += `<thead class="table-dark">`;
+		unaTabla += `<tr>`;
+		unaTabla += `<th>Nombre Perro</th>`;
+		unaTabla += `<th>Tamaño</th>`;
+		unaTabla += `<th>Acción</th>`;
+		unaTabla += `<th>Comentario</th>`;
+		unaTabla += `</tr>`;
+		unaTabla += `</thead>`;
+
+		unaTabla += `<tbody>`;
 
 		for (let i = 0; i < this.contrataciones.length; i++) {
 			let unaContratacion = this.contrataciones[i];
@@ -98,16 +118,26 @@ class Sistema {
 				unaTabla += `<td>${unaContratacion.Cliente.perroNombre}</td>`;
 				unaTabla += `<td>${unaContratacion.Cliente.tamanioPerro}</td>`;
 
-				// SI CONTRATACION SIGUE PENDIENTE DEJO BOTON SINO LO ELIMINO
 				if (unaContratacion.estado === "pendiente") {
-					unaTabla += `<td><input id="btn" type=button data-id="contratacionID-${unaContratacion.id}"  class="botonesTablaContratacionesPendiente" value="Aceptar"></td>`;
+					unaTabla += `<td>
+					<input 
+						type="button" 
+						data-id="contratacionID-${unaContratacion.id}"  
+						class="botonesTablaContratacionesPendiente btn btn-success btn-sm" 
+						value="Aceptar">
+				</td>`;
 				} else {
-					unaTabla += `<td></td>`;
+					unaTabla += `<td>-</td>`;
 				}
-				unaTabla += `<td id="mostrarComentario-${unaContratacion.id}">${unaContratacion.comentario}</td></tr>`;
+
+				unaTabla += `<td id="mostrarComentario-${unaContratacion.id}">${unaContratacion.comentario}</td>`;
+				unaTabla += `</tr>`;
 			}
 		}
+
+		unaTabla += `</tbody>`;
 		unaTabla += `</table>`;
+		unaTabla += `</div>`;
 
 		return unaTabla;
 	}
@@ -115,61 +145,60 @@ class Sistema {
 	armarEstadoPaseador() {
 		let paseadorCupo = this.logueado.cupo;
 		let cupo = paseadorCupo - this.cupoDisponible(this.logueado);
-
-		// No me acorddaba como hacer el redondeo y lo busque.
-		//  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round
-		//
 		let porcentaje = Math.round((cupo * 100) / paseadorCupo);
 		let hayContratacion = this.clienteTieneContratacionAceptada(this.logueado.id, "paseador");
-		let unaTabla = `<div class="flex ancho "><table border="1px" class="tablaEstadoPaseador">
-					<tr>
-					<td><h4>CUPO TOTAL</h4></td>
-					</tr>
-					<tr>
-					<td><p class="cupoPrincipal">
-						${this.logueado.cupo}
-						</p>
-					</td>
-					</tr>
-					<tr><td><br></td></tr>
-					</table>`;
-		unaTabla += `<table border="1px" class="tablaEstadoPaseador">
-					<tr>
-					<td><h4>CUPOS OCUPADOS</h4></td>
-					</tr>
-					<tr>
-					<td><p class="cupoPrincipal">
-					${cupo}
-					</p>
-					</td>
-					</tr>
-					<tr><td><br></td></tr>
-					</table>`;
-		unaTabla += `<table border="1px" class="tablaEstadoPaseador">
-					<tr>
-						<td><h4>PORCENTAJE OCUPADOS</h4></td>
-					</tr>
-					<tr>
-						<td><p class="cupoPorcentaje">
-							${porcentaje} %
-							</p>
-						</td>
-					</tr>
-					<tr><td><br></td></tr>
-				</table></div>`;
 
-		unaTabla += `<div class="flex ancho"><table border="1px" class="tablaEstadolistaPerros">
-				<caption>Contrataciones</caption>
-				<tr>
-					<th>Nombre</th>
-					<th>Tamaño</th>
-				</tr>`;
+		let unaTabla = `<div class="row g-4 mb-4">`;
+
+		unaTabla += `<div class="col-md-4">
+		<div class="card border-0 shadow-sm h-100 text-center">
+			<div class="card-body">
+				<h4 class="card-title">CUPO TOTAL</h4>
+				<p class="display-6 mb-0">${this.logueado.cupo}</p>
+			</div>
+		</div>
+	</div>`;
+
+		unaTabla += `<div class="col-md-4">
+		<div class="card border-0 shadow-sm h-100 text-center">
+			<div class="card-body">
+				<h4 class="card-title">CUPOS OCUPADOS</h4>
+				<p class="display-6 mb-0">${cupo}</p>
+			</div>
+		</div>
+	</div>`;
+
+		unaTabla += `<div class="col-md-4">
+		<div class="card border-0 shadow-sm h-100 text-center">
+			<div class="card-body">
+				<h4 class="card-title">PORCENTAJE OCUPADO</h4>
+				<p class="display-6 mb-0">${porcentaje}%</p>
+			</div>
+		</div>
+	</div>`;
+
+		unaTabla += `</div>`;
+
+		unaTabla += `<h2 class="mb-3">Contrataciones</h2>`;
+		unaTabla += `<div class="table-responsive">`;
+		unaTabla += `<table class="table table-bordered table-striped table-hover align-middle text-center">`;
+
+		unaTabla += `<thead class="table-dark">
+		<tr>
+			<th>Nombre</th>
+			<th>Tamaño</th>
+		</tr>
+	</thead>`;
+
+		unaTabla += `<tbody>`;
+
 		if (hayContratacion) {
-			unaTabla += `<tr><td colspan = "2">No Hay Contrataciones Actuales</td></tr>`;
+			unaTabla += `<tr><td colspan="2">No hay contrataciones actuales</td></tr>`;
 		} else {
 			for (let i = 0; i < this.contrataciones.length; i++) {
 				let unaContratacion = this.contrataciones[i];
 				let paseador = this.logueado;
+
 				if (unaContratacion.Paseador === paseador && unaContratacion.estado === "aceptada") {
 					unaTabla += `<tr>`;
 					unaTabla += `<td>${unaContratacion.Cliente.perroNombre}</td>`;
@@ -180,7 +209,10 @@ class Sistema {
 			}
 		}
 
-		unaTabla += `</table></div>`;
+		unaTabla += `</tbody>`;
+		unaTabla += `</table>`;
+		unaTabla += `</div>`;
+
 		return unaTabla;
 	}
 
@@ -615,44 +647,64 @@ class Sistema {
 	armarTablaPaseador(id) {
 		let paseador = this.obtenerPaseador(id);
 
-		let unaTabla = `<br><br><table class="tablaPaseador" border="1px">`;
+		let unaTabla = `<div class="table-responsive">`;
+		unaTabla += `<table class="table table-bordered table-striped align-middle text-center">`;
+
+		unaTabla += `<thead class="table-dark">`;
 		unaTabla += `<tr>`;
-		unaTabla += `<th colspan="2">Nombre</th>`;
+		unaTabla += `<th>Paseador</th>`;
+		unaTabla += `<th>Acción</th>`;
 		unaTabla += `<th>Comentarios</th>`;
 		unaTabla += `</tr>`;
+		unaTabla += `</thead>`;
+
+		unaTabla += `<tbody>`;
 		unaTabla += `<tr>`;
 		unaTabla += `<td>${paseador.nombre}</td>`;
-		unaTabla += `<td>`;
-		unaTabla += `<input type="button" data-id="paseadorID-${paseador.id}" class="botonesTablaPaseadores" value="Solicitar">`;
-		unaTabla += `</td>`;
-		unaTabla += `<td></td>`;
-		unaTabla += `</tr></table>`;
+		unaTabla += `<td><input type="button" data-id="paseadorID-${paseador.id}" class="botonesTablaPaseadores btn btn-dark btn-sm" value="Solicitar"></td>`;
+		unaTabla += `<td>-</td>`;
+		unaTabla += `</tr>`;
+		unaTabla += `</tbody>`;
+
+		unaTabla += `</table>`;
+		unaTabla += `</div>`;
 
 		return unaTabla;
 	}
 
 	armarTablaContratoCliente(contratacion) {
 		let paseador = contratacion.Paseador;
-		//console.log(contratacion);
-		let unaTabla = `<br><br><table class="tablaPaseador" border="1px">`;
+
+		let unaTabla = `<div class="table-responsive">`;
+		unaTabla += `<table class="table table-bordered table-striped align-middle text-center">`;
+
+		unaTabla += `<thead class="table-dark">`;
 		unaTabla += `<tr>`;
 		unaTabla += `<th colspan="2">Nombre</th>`;
 		unaTabla += `<th>Comentarios</th>`;
 		unaTabla += `</tr>`;
+		unaTabla += `</thead>`;
+
+		unaTabla += `<tbody>`;
 		unaTabla += `<tr>`;
 		unaTabla += `<td>${paseador.nombre}</td>`;
 		unaTabla += `<td>`;
+
 		if (contratacion.estado === "aceptada") {
 			unaTabla += ``;
 			unaTabla += `</td>`;
 			unaTabla += `<td id="contratacionPendientesComentarios">${contratacion.comentario}</td>`;
 		} else {
-			unaTabla += `<input type="button" data-id="contrataID-${contratacion.id}" class="botonesTablaPaseadoresCancelar" value="Cancelar">`;
+			unaTabla += `<input type="button" data-id="contrataID-${contratacion.id}" class="botonesTablaPaseadoresCancelar btn btn-danger btn-sm" value="Cancelar">`;
 			unaTabla += `</td>`;
 			unaTabla += `<td id="contratacionPendientesComentarios">Pendiente</td>`;
 		}
 
-		unaTabla += `</tr></table>`;
+		unaTabla += `</tr>`;
+		unaTabla += `</tbody>`;
+
+		unaTabla += `</table>`;
+		unaTabla += `</div>`;
 
 		return unaTabla;
 	}
@@ -667,17 +719,22 @@ class Sistema {
 	}
 
 	armarTablaPaseadoresActivos() {
-		let unaTabla = `<h2>PASEADORES DEL SISTEMAS CON CONTRATACIONES ACTIVAS</h2>`;
-		unaTabla += `<table class="tablaPaseadoresActivos" border="1px">`;
-		unaTabla += `<tr><th></th><th colspan="3">Perros</th></tr><tr>`;
+		let unaTabla = `<div class="table-responsive">`;
+		unaTabla += `<table class="table table-bordered table-striped table-hover align-middle text-center">`;
+
+		unaTabla += `<thead class="table-dark">`;
+		unaTabla += `<tr><th></th><th colspan="3">Perros</th></tr>`;
+		unaTabla += `<tr>`;
 		unaTabla += `<th>Nombre</th><th>Grande</th><th>Mediano</th><th>Chico</th>`;
 		unaTabla += `</tr>`;
+		unaTabla += `</thead>`;
 
+		unaTabla += `<tbody>`;
 		for (let x = 0; x < this.paseadores.length; x++) {
 			let paseador = this.paseadores[x];
 			let paseadorContrataciones = this.obtenerContratacionesPaseadorAceptadas(paseador.id);
-
 			let cantPerros = this.obtenerCantPerros(paseadorContrataciones);
+
 			unaTabla += `<tr>`;
 			unaTabla += `<td>${paseador.nombre}</td>`;
 			unaTabla += `<td>${cantPerros.grande}</td>`;
@@ -685,8 +742,11 @@ class Sistema {
 			unaTabla += `<td>${cantPerros.chico}</td>`;
 			unaTabla += `</tr>`;
 		}
+		unaTabla += `</tbody>`;
 
 		unaTabla += `</table>`;
+		unaTabla += `</div>`;
+
 		return unaTabla;
 	}
 

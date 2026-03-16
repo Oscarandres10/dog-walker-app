@@ -267,63 +267,6 @@ article {
 	background-color: #199d7c;
 }
 
-#mostrarMensajeContratacion {
-	margin: 50px auto;
-
-	text-align: center;
-}
-
-.mostrarSelectPaseadores {
-	border-top: 2px solid gray;
-	margin: 50px auto;
-	text-align: center;
-}
-
-/* SECCION  PASEADORES CON CONTRATACIONES ACTIVAS */
-
-#mostraTablaPaseadoresActivos {
-	border-top: 2px solid gray;
-	margin: 50px auto;
-	text-align: center;
-}
-
-#mostraTablaPaseadoresActivos h2 {
-	padding: 20px;
-	font-size: 25px;
-}
-
-.tablaPaseadoresActivos {
-	width: 100%;
-	margin: 20px 10px;
-}
-
-.tablaPaseadoresActivos td {
-	text-align: center;
-	padding: 10px;
-}
-
-#mostrarTablaContratacionesPendientes {
-	margin: 25px 0;
-	background-color: rgb(211, 211, 211);
-}
-
-#mostrarEstadoPaseador {
-	background-color: rgb(211, 211, 211);
-}
-
-.btn-light {
-	margin: 10px 10px;
-	padding: 10px;
-	background-color: #20c997;
-	color: white;
-	border-radius: 20px;
-	border: none;
-}
-
-.btn-light:hover {
-	background-color: #199d7c;
-}
-
 .card-hover:hover {
 	transform: translateY(-3px);
 	transition: 0.2s;

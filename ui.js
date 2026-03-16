@@ -232,7 +232,7 @@ function mostrarSelectPaseadoresUI() {
 
 function armarTablaPaseadoresActivosUI() {
 	let laTabla = miSistema.armarTablaPaseadoresActivos();
-	ocultarTablasUI();
+	ocultarTodoUI();
 	mostrarNavUI();
 	document.querySelector("#sectionPaseadoresActivos").style.display = "block";
 	document.querySelector("#mostraTablaPaseadoresActivos").style.display = "block";
@@ -245,7 +245,6 @@ function mostrarContratacionUI() {
 		return loginUI();
 	}
 	ocultarTodoUI();
-	ocultarTablasUI();
 	eliminoMostrarTablaPaseadorUI();
 	let clienteId = miSistema.logueado.id;
 	document.querySelector("#sectionPaseadoresContratacion").style.display = "block";
