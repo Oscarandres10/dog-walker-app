@@ -3,7 +3,7 @@ class Cliente {
 	constructor() {
 		this.id = Cliente.idClientes++;
 		this.nombre = "";
-		this.usuario = ""; //le agregue esto y se que se nos va a complicar, cualquier cosa lo sacamos
+		this.usuario = "";
 		this.contrasenia = "";
 		this.perroNombre = "";
 		this.tamanioPerro = "";
@@ -29,7 +29,7 @@ class Contrataciones {
 		this.id = Contrataciones.idContratacion++;
 		this.Cliente = null;
 		this.Paseador = null;
-		this.estado = ""; // opciones  pendiente, aceptada, denegado
+		this.estado = "";
 		this.comentario = "";
 	}
 }

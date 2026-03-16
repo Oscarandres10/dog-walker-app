@@ -257,12 +257,8 @@ function precargaContrataciones() {
 	for (let i = 0; i < infoContratacion.length; i++) {
 		let cliente = infoContratacion[i].cliente;
 		let paseador = infoContratacion[i].paseador;
-
-		// Aca busco al Cliente y Paseador para Verificar que Existen.
 		let elCliente = miSistema.obtenerCliente(cliente);
 		let elPaseador = miSistema.obtenerPaseador(paseador);
-
-		// VALIDO Y CARGO CONTRATACION
 		if (elCliente !== null && elPaseador !== null) {
 			if (miSistema.validarPrecargaContratacion(cliente, paseador)) {
 				miSistema.cargaUnaContratacion(cliente, paseador);
