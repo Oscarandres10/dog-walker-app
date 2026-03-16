@@ -182,6 +182,7 @@ function mostrarPaseadoreUI() {
 
 	let laTabla = miSistema.armarTablaPaseador(Number(paseador));
 	document.querySelector("#mostrarTablaPaseador").innerHTML = laTabla;
+	document.querySelector("#mostrarTablaPaseador").style.display = "block";
 	darVidaBotonesTablaPaseadoresUI();
 }
 
@@ -235,14 +236,13 @@ function mostrarSelectPaseadoresUI() {
 		let mostrarMensaje = document.querySelector("#mostrarMensajePaseadores");
 		mostrarMensaje.style.display = "block";
 		mostrarMensaje.innerHTML = `<p><strong><cite>${miSistema.logueado.perroNombre}</cite></strong> ya tiene un contratacion.</p>`;
-		//console.log("No puede contratar");
 	} else {
 		let selectPaseadores = miSistema.armadoSelectPaseadores();
 		document.querySelector("#mostrarSelectPaseadores").style.display = "block";
-		document.querySelector("#mostrarTablaPaseador").style.display = "block";
+
 		let selPaseador = document.querySelector("#selPaseadoresParaCliente");
 		selPaseador.innerHTML = selectPaseadores;
-		selPaseador.selectedIndex = 0; // Pongo el select en 0 para que no me muestre si ya se habia selecccionado
+		selPaseador.selectedIndex = 0;
 	}
 }
 
@@ -256,7 +256,6 @@ function armarTablaPaseadoresActivosUI() {
 }
 
 function mostrarContratacionUI() {
-	//console.log("Estoy ACA EN MOSTRARCONTRATACION");
 	if (!miSistema.logueado) {
 		return loginUI();
 	}
@@ -265,18 +264,15 @@ function mostrarContratacionUI() {
 	let clienteId = miSistema.logueado.id;
 	document.querySelector("#sectionPaseadoresContratacion").style.display = "block";
 	mostrarNavUI();
-	// TIENECONTRATO ACA VA A FUNCIONAR AL REVEZ   !tienecontrato == Verdadero
 	let tieneContrato = miSistema.clienteTieneContratacion(clienteId);
 
 	let miContratacion = miSistema.obtengoClienteContratacion(clienteId);
 
 	if (tieneContrato) {
-		//console.log(`Estoy Aca en tiene Contrato :  Mustro Mensaje de que no hay contratacion`);
 		let mostrarMensaje = document.querySelector("#mostrarMensajeContratacion");
 		mostrarMensaje.style.display = "block";
 		mostrarMensaje.innerHTML = `<p><strong><cite>${miSistema.logueado.perroNombre}</cite></strong> no tiene una contratacion pendiente o aceptada.</p>`;
 	} else {
-		//console.log(`Estoy Aca en tiene Contrato:  Armo Tabla`);
 		let contratacionTabla = miSistema.armarTablaContratoCliente(miContratacion);
 		let mostrarContratacion = document.querySelector("#mostrarContratacion");
 		mostrarContratacion.innerHTML = contratacionTabla;
@@ -306,16 +302,14 @@ function clickEnCancelarUI() {
 			contratacion.estado = "denegada";
 			contratacion.comentario = `Cancelada por Cliente`;
 			ocultarTablasUI();
-			//console.log(`ESTOY CANCELANDO`);
 			let mostrarMensaje = document.querySelector("#mostrarMensajeContratacion");
 			mostrarMensaje.style.display = "block";
 			mostrarMensaje.innerHTML = `la Contratacion de ${cliente.perroNombre} se ha Cancelado Correctamente.`;
 			setTimeout(() => {
-				//console.log(`ME VOY PARA SECCION CLIENTE`);
 				document.querySelector("#mostrarMensajeContratacion").innerHTML = ``;
 				document.querySelector("#mostrarMensajeContratacion").style.display = `none`;
 				mostrarSelectPaseadoresUI();
-			}, 3000); // 2 segundos
+			}, 3000);
 		}
 	} else {
 		document.querySelector("#mostrarMensajeContratacion").innerHTML = "No se ha Elegido un Paseador";

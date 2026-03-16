@@ -413,7 +413,7 @@ class Sistema {
 			}
 			if (!noModificado) {
 				// si se modifico
-				//laContratacion.estado = "denegado";
+				//laContratacion.estado = "denegada";
 			}
 		}
 
@@ -449,7 +449,7 @@ class Sistema {
 		}
 
 		if (!noModificado) {
-			laContratacion.estado = "denegado";
+			laContratacion.estado = "denegada";
 		}
 
 		mostrarTablaContratacionesPendientesUI();
@@ -506,7 +506,7 @@ class Sistema {
 				}
 				if (!noModificado) {
 					// si se modifico
-					laContratacion.estado = "denegado";
+					laContratacion.estado = "denegada";
 				}
 			}
 		}
