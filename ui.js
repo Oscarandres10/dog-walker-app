@@ -422,14 +422,7 @@ function almacenarUI() {
 	let validaciones = miSistema.validacionRegistroCliente(nombre, usuario, contrasenia, nombrePerro, tamanioPerro);
 
 	if (validaciones) {
-		let nuevoCliente = new Cliente();
-		nuevoCliente.nombre = nombre;
-		nuevoCliente.usuario = usuario;
-		nuevoCliente.contrasenia = contrasenia;
-		nuevoCliente.perroNombre = nombrePerro;
-		nuevoCliente.tamanioPerro = tamanioPerro;
-
-		miSistema.clientes.push(nuevoCliente);
+		miSistema.cargaUnCliente(nombre, usuario, contrasenia, nombrePerro, tamanioPerro);
 		miSistema.mensajeRegistro.push(`Usuario ${nombre} registro correctamente`);
 	}
 

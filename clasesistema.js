@@ -3,7 +3,7 @@ class Sistema {
 		this.clientes = new Array();
 		this.paseadores = new Array();
 		this.contrataciones = new Array();
-		this.logueado = this.paseadores[1];
+		this.logueado = null;
 		this.mensajeRegistro = [];
 	}
 
@@ -140,7 +140,7 @@ class Sistema {
 		let paseadorCupo = this.logueado.cupo;
 		let cupo = paseadorCupo - this.cupoDisponible(this.logueado);
 		let porcentaje = Math.round((cupo * 100) / paseadorCupo);
-		let hayContratacion = this.clienteTieneContratacionAceptada(this.logueado.id, "paseador");
+		let noHayContratacion = this.clienteTieneContratacionAceptada(this.logueado.id, "paseador");
 
 		let unaTabla = `<div class="row g-4 mb-4">`;
 
@@ -186,7 +186,7 @@ class Sistema {
 
 		unaTabla += `<tbody>`;
 
-		if (hayContratacion) {
+		if (noHayContratacion) {
 			unaTabla += `<tr><td colspan="2">No hay contrataciones actuales</td></tr>`;
 		} else {
 			for (let i = 0; i < this.contrataciones.length; i++) {
@@ -198,7 +198,7 @@ class Sistema {
 					unaTabla += `<td>${unaContratacion.Cliente.perroNombre}</td>`;
 					unaTabla += `<td>${unaContratacion.Cliente.tamanioPerro}</td>`;
 					unaTabla += `</tr>`;
-					hayContratacion = true;
+					noHayContratacion = true;
 				}
 			}
 		}
@@ -421,32 +421,16 @@ class Sistema {
 	}
 
 	procesarAceptarContratacion(id) {
-		let laContratacion = this.obtenerContratacion(id); // se obtiene la contratacion
-		let perro = this.calcularCupoPerro(laContratacion.Cliente.tamanioPerro); // Tamaño
-
-		// Resto del Cupo Total, el Cupo Ocupado.
+		let laContratacion = this.obtenerContratacion(id);
+		let perro = this.calcularCupoPerro(laContratacion.Cliente.tamanioPerro);
 		let cupo = this.cupoDisponible(laContratacion.Paseador);
-		//console.log(laContratacion.Cliente.id);
-
-		// Busco si cliente tiene contratacion Previa.
-		let noTieneContratacion = this.clienteTieneContratacionAceptada(laContratacion.Cliente.id);
+		let noTieneContratacion = this.clienteTieneContratacionAceptada(laContratacion.Cliente.id, "cliente");
 		let noHayPerroOpuesto = this.validoPerroOpuestoNoExiste(laContratacion.Cliente.tamanioPerro);
-		//console.log(`Arriba es Estado`);
-		//console.log(noTieneContratacion);
-		//console.log(`Arriba es Estado`);
 		let noModificado = false;
-		// VALIDO QUE No TENGA CONTRATACION PREVIA
+
 		if (noTieneContratacion && laContratacion.estado === "pendiente") {
-			//console.log(`No tiene Contratacion Previa.`);
-
-			// VALIDO QUE NO HALLA PERRO OPUESTO
 			if (noHayPerroOpuesto) {
-				//Confirmo si hay Cupo Disponible
-				//console.log(`No hay Perro Opuesto`);
-
-				// VALIDO QUE HALLA SUFICIENTE LUGAR DE CUPO Para El PERRO
 				if (cupo >= perro) {
-					//console.log(`Contratacion Aceptada`);
 					laContratacion.estado = "aceptada";
 					laContratacion.comentario = "aceptada";
 					noModificado = true;
@@ -455,8 +439,6 @@ class Sistema {
 				}
 			} else {
 				let perroTamanio = laContratacion.Cliente.tamanioPerro;
-				//console.log(perroTamanio);
-				//console.log(`Perro Opuesto  Existe`);
 				let perroOpuesto = ``;
 				if (perroTamanio === "Grande") perroOpuesto = "Chico";
 				if (perroTamanio === "Chico") perroOpuesto = "Grande";
@@ -467,7 +449,6 @@ class Sistema {
 		}
 
 		if (!noModificado) {
-			// si se modifico
 			laContratacion.estado = "denegado";
 		}
 
