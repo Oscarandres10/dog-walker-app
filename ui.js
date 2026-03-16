@@ -170,9 +170,6 @@ function mostrarSeccionClienteUI() {
 
 	// LIMPIO
 	document.querySelector("#mostrarMensajeContratacion").innerHTML = ``;
-
-	document.querySelector("#menuCliente").style.display = "block";
-
 	let divContratado = document.querySelector("#divMostrarContratado");
 	divContratado.innerHTML = "";
 	divContratado.style.display = "none";
