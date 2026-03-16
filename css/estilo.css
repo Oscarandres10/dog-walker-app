@@ -1,73 +1,18 @@
-:root {
-	--blanco: #fff;
-	--ahover: red;
-}
-
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
 
-/* DESKTOP FIRST */
-
 body {
 	background-color: rgb(253, 253, 253);
-}
-
-.contenedor {
-	width: 1200px;
-}
-
-@media screen and (max-width: 1200px) {
-	body {
-		background-color: rgb(223, 221, 221);
-	}
-}
-
-@media screen and (max-width: 768px) {
-	body {
-		background-color: rgb(202, 202, 202);
-	}
-}
-
-header,
-footer {
-	background-color: lightgray;
-	color: white;
 }
 
 footer {
 	height: 50px;
 }
 
-nav {
-	width: 100%;
-	text-align: center;
-	padding: 10px;
-	justify-content: space-around;
-}
-h1 img {
-	width: 300px;
-	height: auto;
-	display: inline-block;
-	text-align: right;
-	margin-left: 360px;
-}
-
-h4 {
-	font-size: 20px;
-	font-weight: 700;
-}
-section {
-	margin: 0 auto;
-}
-article {
-	margin: 40px auto;
-}
-/* ///////////////////////////// */
-/* ///   CLASES FIJAS ANCHOS /// */
-/* ///////////////////////////// */
+/* UTILIDADES PROPIAS */
 
 .flex {
 	display: flex;
@@ -76,60 +21,11 @@ article {
 .columna {
 	flex-direction: column;
 }
+
 .ancho {
 	max-width: 1280px;
 	width: 80%;
 	min-width: 600px;
-}
-
-/* ============================= */
-/* === Header and Nav Usuario ===*/
-
-#mainTitle {
-	background-color: lightgray;
-	justify-content: space-between;
-	align-items: center;
-	margin: 0 auto;
-}
-
-#navLogin {
-	width: 50%;
-	justify-content: flex-end;
-	gap: 20px;
-}
-
-#imgTitle {
-	height: 100px;
-}
-
-/* ============================= */
-/* ========  Navegacion ======== */
-
-#navMenu {
-	margin: 0 auto;
-	justify-content: flex-start;
-	border-top: 1px solid lightgray;
-	padding: 20px 0;
-	font-size: 20px;
-}
-
-#navMenu a {
-	padding: 0 20px;
-	text-decoration: none;
-	border-top: 2px solid transparent;
-}
-
-#navMenu a:hover {
-	border-top: 2px solid var(--ahover);
-	transition: 3s;
-}
-/* ///////////////////////////// */
-/* ///  NOSOTROS             /// */
-/* ///////////////////////////// */
-
-.nosotros {
-	display: block;
-	margin: 0 auto;
 }
 
 .box {
@@ -138,143 +34,59 @@ article {
 	justify-content: space-between;
 }
 
-.tablaEstadoPaseador {
-	margin: 0 auto;
-	margin-bottom: 20px;
-	border: none;
-	border-collapse: collapse;
-	box-shadow: none;
-}
+/* TITULOS */
 
-.tablaEstadoPaseador th,
-.tablaEstadoPaseador td {
-	border: none;
-	background: none;
-	text-align: center;
-}
-
-.tablaEstadolistaPerros {
-	width: 100%;
-	text-align: center;
-	border: none;
-	border-collapse: collapse;
-	box-shadow: none;
-}
-.tablaEstadolistaPerros caption {
-	margin-bottom: 10px;
+h4 {
 	font-size: 20px;
+	font-weight: 700;
 }
 
-.tablaEstadolistaPerros th,
-.tablaEstadolistaPerros td {
-	width: 50%;
-	border: 2px solid black;
-	background: none;
-	text-align: center;
-}
-
-.cupoPrincipal {
-	display: inline-block;
-	width: 100px;
-	height: 100px;
-	border-radius: 50%;
-	background-color: rgb(165, 40, 40);
-	font-size: 35px;
-	text-align: center;
-	line-height: 100px;
-	color: white;
-}
-
-.cupoPorcentaje {
-	display: inline-block;
-	width: 100px;
-	height: 100px;
-	border-radius: 50%;
-	background-color: rgb(165, 40, 40);
-	font-size: 35px;
-	text-align: center;
-	line-height: 100px;
-	color: white;
-}
-
-.tablaContratacionesPendientes {
-	width: 100%;
-	text-align: center;
-	border: none;
-	border-collapse: collapse;
-	box-shadow: none;
-}
-
-.tablaContratacionesPendientes td {
-	text-align: center;
-	/* border: none; */
-	border-collapse: collapse;
-	box-shadow: none;
-}
-
-.tablaContratacionesPendientes td:nth-child(4) {
-	width: 40%;
-	text-align: center;
-	/* border: none; */
-	border-collapse: collapse;
-	box-shadow: none;
-}
+/* TABLAS QUE AUN CONSERVAN CLASE PROPIA */
 
 .tablaContratacionesPendientes caption {
 	font-size: 20px;
 	font-weight: 700;
 }
 
-/*  */
-/*  */
-/*  */
-
-.tablaPaseador {
-	width: 100%;
-	margin-bottom: 20px;
-	border: none;
-	border-collapse: collapse;
-	box-shadow: none;
+.tablaContratacionesPendientes td:nth-child(4) {
+	width: 40%;
 }
 
-.tablaPaseador td:nth-child(1) {
-	width: 30%;
-}
-.tablaPaseador td:nth-child(2) {
-	width: 30%;
-}
-
-.tablaPaseador th,
-.tablaPaseador td {
-	border: 1px solid red;
-	background: none;
-	text-align: center;
-	padding: 20px;
-	font-size: 20px;
-}
-
-.tablaPaseador input[type="button"] {
-	font-size: 16px;
-	padding: 12px 20px;
-	color: #fff;
-	background-color: #20c997;
-	border-radius: 10px;
-	border: none;
-	transition: background-color 0.3s ease;
-}
-
-.tablaPaseador input[type="button"]:hover {
-	background-color: #199d7c;
-}
+/* EFECTOS */
 
 .card-hover:hover {
 	transform: translateY(-3px);
 	transition: 0.2s;
 }
+
+/* SECCIONES */
+
+#sectionSobreNosotros {
+	background: #f8f9fa;
+}
+
 #sectionSobreNosotros h1 {
 	font-weight: 600;
 }
 
-#sectionSobreNosotros {
-	background: #f8f9fa;
+/* PASEADORES DISPONIBLES */
+
+#mostrarTablaPaseador,
+#mostrarMensajePaseadores,
+#mostrarSelectPaseadores {
+	width: 100%;
+}
+
+/* PASEADORES ACTIVOS */
+
+#mostraTablaPaseadoresActivos {
+	text-align: center;
+	margin: 0 auto;
+	border-top: none;
+}
+
+#mostraTablaPaseadoresActivos h2 {
+	font-size: 25px;
+	padding: 0 0 20px 0;
+	margin-top: 0;
 }

@@ -125,7 +125,7 @@ function loginUI() {
 }
 
 function mostrarLogueadoUI() {
-	let elCliente = `<p>Bienvenido <strong>${miSistema.logueado.nombre}</strong></p>`;
+	let elCliente = `<p><strong>${miSistema.logueado.nombre}</strong></p>`;
 	return elCliente;
 }
 
