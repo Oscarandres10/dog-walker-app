@@ -1,12 +1,24 @@
 function eventos() {
-	document.querySelector("#btnRegistarCliente").addEventListener("click", registroInterfazUI); // Registrarse
+	document.querySelector("#btnRegistarCliente").addEventListener("click", registroInterfazUI);
 	document.querySelector("#btnLoginCliente").addEventListener("click", loginInterfazUI);
 	document.querySelector("#btnNosotros").addEventListener("click", mostrarSobreNosotrosUI);
 	document.querySelector("#btnPaseadorRegistro").addEventListener("click", serUnPaseadorUI);
 	document.querySelector("#btnRegistrarme").addEventListener("click", almacenarUI);
 	document.querySelector("#btnLogin").addEventListener("click", loginUI);
 	document.querySelector("#btnLogoutCliente").addEventListener("click", logoutUI);
+
+	document.querySelector("#btnVerDisponibles").addEventListener("click", mostrarSelectPaseadoresUI);
+	document.querySelector("#btnVerContratacion").addEventListener("click", mostrarContratacionUI);
+	document.querySelector("#btnVerActivos").addEventListener("click", armarTablaPaseadoresActivosUI);
+
+	document.querySelector("#selPaseadoresParaCliente").addEventListener("change", mostrarPaseadoreUI);
+
+	document
+		.querySelector("#btnVerContratacionesPendientesPaseador")
+		.addEventListener("click", mostrarTablaContratacionesPendientesUI);
+	document.querySelector("#btnVerEstadoPaseador").addEventListener("click", mostrarEstadoPaseadorUI);
 }
+
 let miSistema = new Sistema();
 miSistema.precargarTodo();
 
@@ -20,17 +32,15 @@ function ocultarTodoUI() {
 	for (let unaSeccion of lasSecciones) {
 		unaSeccion.style.display = "none";
 	}
-	ocultarNavUI();
-	if (miSistema.logueado) {
-		mostrarNavUI();
-	}
-}
 
-function ocultarNavUI() {
 	let losNavLinks = document.querySelectorAll(".navOculto");
 	for (let unNavLink of losNavLinks) {
 		unNavLink.style.display = "none";
 	}
+
+	ocultarTablasUI();
+
+	document.querySelector("#menuPaseador").style.display = "none";
 }
 
 function mostrarNavUI() {
@@ -54,15 +64,17 @@ function eliminoMostrarTablaPaseadorUI() {
 }
 
 //luego muestro el sobre nostros y los botones para log in y registrarse
-
 function mostrarSobreNosotrosUI() {
 	ocultarTodoUI();
-
 	document.querySelector("#sectionSobreNosotros").style.display = "block";
+
+	if (miSistema.logueado) {
+		mostrarNavUI();
+		document.querySelector("#btnLogoutCliente").style.display = "block";
+	}
 }
 
 /* #### BOTONES NAVEGADOR ####*/
-
 function serUnPaseadorUI() {
 	ocultarTodoUI();
 	document.querySelector("#sectionFormularioPaseador").style.display = "block";
@@ -76,10 +88,8 @@ function registroInterfazUI() {
 }
 
 /* #### LOGIN ####*/
-
 function loginInterfazUI() {
 	ocultarTodoUI();
-	document.querySelector("#btnLoginCliente").style.display = "none";
 	document.querySelector("#sectionloginUsuario").style.display = "block";
 }
 
@@ -94,7 +104,6 @@ function loginUI() {
 		if (miSistema.logueado.tipo === "cliente") {
 			ocultarTodoUI();
 			mostrarSeccionClienteUI();
-			//ocultarNavUI();
 			mostrarNavUI();
 			document.querySelector("#pMostrarlogueado").innerHTML = mostrarLogueadoUI();
 			document.querySelector("#btnLogoutCliente").style.display = `block`;
@@ -102,11 +111,13 @@ function loginUI() {
 		if (miSistema.logueado.tipo === "paseador") {
 			ocultarTodoUI();
 			mostrarSeccionPaseadorUI();
-			//ocultarNavUI();
 			mostrarNavUI();
 			document.querySelector("#pMostrarlogueado").innerHTML = mostrarLogueadoUI();
 			document.querySelector("#btnLogoutCliente").style.display = `block`;
 		}
+		document.querySelector("#btnRegistarCliente").style.display = "none";
+		document.querySelector("#btnLoginCliente").style.display = "none";
+		document.querySelector("#btnLogoutCliente").style.display = "inline-block";
 	} else {
 		mensaje = "Verifique usuario y contraseña...";
 	}
@@ -119,66 +130,35 @@ function mostrarLogueadoUI() {
 }
 
 /* #### LOGOUT #### */
-
 function logoutUI() {
+	miSistema.logueado = null;
+
 	ocultarTodoUI();
-	//mostrarNavUI();
-	ocultarNavUI();
-	ocultarTablasUI();
+
 	eliminoMostrarTablaPaseadorUI();
-	document.querySelector("#pMostrarlogueado").innerHTML = ``;
-	document.querySelector("#btnLogoutCliente").style.display = `none`;
-	miSistema.logueado = null;
+
+	document.querySelector("#pMostrarlogueado").innerHTML = "";
+	document.querySelector("#btnRegistarCliente").style.display = "inline-block";
+	document.querySelector("#btnLoginCliente").style.display = "inline-block";
+	document.querySelector("#btnLogoutCliente").style.display = "none";
+
+	let menuPaseador = document.querySelector("#menuPaseador");
+	if (menuPaseador) {
+		menuPaseador.style.display = "none";
+	}
 
 	document.querySelector("#sectionUsuarioLogueado").style.display = "none";
-
-	document.querySelector("#sectionSobreNosotros").style.display = "block";
-}
-
-/* #### LOGOUT ####*/
-
-function logoutUI() {
-	ocultarTodoUI();
-	mostrarNavUI();
-	ocultarTablasUI();
-	document.querySelector("#pMostrarlogueado").innerHTML = ``;
-	document.querySelector("#btnLogoutCliente").style.display = `none`;
-	miSistema.logueado = null;
-	document.querySelector("#menuCliente").style.display = "none";
-	document.querySelector("#menuPaseador").style.display = "none";
-	document.querySelector("#sectionUsuarioLogueado").style.display = "none";
-
+	document.querySelector("#sectionPaseadoresLogueado").style.display = "none";
+	document.querySelector("#sectionPaseadoresDisponibles").style.display = "none";
 	document.querySelector("#sectionSobreNosotros").style.display = "block";
 }
 
 //#region   ## SECCION CLIENTE
-
 function mostrarSeccionClienteUI() {
-	if (!miSistema.logueado) {
-		return loginUI();
-	}
-	ocultarTablasUI();
-	eliminoMostrarTablaPaseadorUI();
-
-	// Muestro la seccion Cliente
+	ocultarTodoUI();
 	document.querySelector("#sectionUsuarioLogueado").style.display = "block";
-
-	// OCULTO POR LAS DUDAS
-	document.querySelector("#divMostrarContratado").style.display = "none";
-	document.querySelector("#mostrarSelectPaseadores").style.display = "none";
-	document.querySelector("#mostraTablaPaseadoresActivos").style.display = "none";
-
-	// LIMPIO
-	document.querySelector("#mostrarMensajeContratacion").innerHTML = ``;
-	let divContratado = document.querySelector("#divMostrarContratado");
-	divContratado.innerHTML = "";
-	divContratado.style.display = "none";
-	document.querySelector("#btnVerDisponibles").addEventListener("click", mostrarSelectPaseadoresUI);
-	document.querySelector("#btnVerContratacion").addEventListener("click", mostrarContratacionUI);
-	document.querySelector("#btnVerActivos").addEventListener("click", armarTablaPaseadoresActivosUI);
-
-	//Lo siguiente le doy Vida a los select para mostrar la info.
-	document.querySelector("#selPaseadoresParaCliente").addEventListener("change", mostrarPaseadoreUI);
+	mostrarNavUI();
+	document.querySelector("#btnLogoutCliente").style.display = "block";
 }
 
 function mostrarPaseadoreUI() {
@@ -229,8 +209,10 @@ function mostrarSelectPaseadoresUI() {
 	if (!miSistema.logueado) {
 		return loginUI();
 	}
+	ocultarTodoUI();
 	ocultarTablasUI();
 	eliminoMostrarTablaPaseadorUI();
+	document.querySelector("#sectionPaseadoresDisponibles").style.display = "block";
 	let clienteId = miSistema.logueado.id;
 
 	// TIENECONTRATO ACA VA A FUNCIONAR AL REVEZ   !tienecontrato == Verdadero
@@ -266,6 +248,7 @@ function mostrarContratacionUI() {
 	if (!miSistema.logueado) {
 		return loginUI();
 	}
+	ocultarTodoUI();
 	ocultarTablasUI();
 	eliminoMostrarTablaPaseadorUI();
 	let clienteId = miSistema.logueado.id;
